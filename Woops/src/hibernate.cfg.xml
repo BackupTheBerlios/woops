@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration
+PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-2.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+
+
+<!-- REMPLACER SETTINGS ORACLE PAR MYSQL DEBUT -->
+
+		<!-- properties -->
+		<property name="connection.datasource">java:comp/env/jdbc/woopsData</property >
+		<!-- property name="connection.url">jdbc:oracle:thin:@gaamData:1521:WOOPS</property>
+		<property name="connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="connection.username">login</property>
+		<property name="connection.password">pass</property-->
+
+		<property name="dialect">net.sf.hibernate.dialect.Oracle9Dialect</property>
+		<property name="show_sql">true</property>
+
+<!-- REMPLACER SETTINGS ORACLE PAR MYSQL  FIN -->
+
+<!-- mapping files -->
+
+		<mapping resource="business/chocolat/Chocolat.hbm.xml" />
+
+		
+	</session-factory>
+</hibernate-configuration>

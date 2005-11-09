@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+
+   <form-beans >
+   
+      <form-bean name="listerChocolatForm" type="view.chocolat.ListerChocolatForm" />
+	  
+   </form-beans>
+
+   <global-exceptions />
+
+	<global-forwards></global-forwards>
+
+   <action-mappings >
+
+<!-- ================= Lister Chocolat ================ -->  
+      <action path="/html/chocolat/listerChocolat"	 type="view.chocolat.ListerChocolatAction"
+         attribute="listerChocolatForm"
+         input="/html/chocolat/listerChocolat.jsp"
+         name="listerChocolatForm"
+		 validate="false"  
+		 parameter="actionSubmit"       
+         scope="request">
+         <forward name="erreur" path="/html/Accueil.html" />
+         <forward name="success" path="/html/chocolat/listerChocolat.jsp" />
+      </action>
+
+</action-mappings>
+
+<message-resources parameter="ApplicationResources" />
+
+</struts-config>
+
