@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.1">
+	<view uin="Vcqn2tgefx8c14lix3mit">
+		<property name="$metaclass" value="State Diagram"/>
+		<property name="#invoke_inplace" value=""/>
+		<property name="$name" value="Etats de Activity"/>
+	</view>
+</nodeSet>
