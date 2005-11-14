@@ -7,6 +7,7 @@ package business.hibernate.exception;
 public class PersistanceException extends Exception {
 
 	protected String message;
+	static final long serialVersionUID = -3387516993124229948L;
 
 	public PersistanceException(String msg, Exception e){
 		super(msg,e);

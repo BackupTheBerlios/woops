@@ -1,6 +1,5 @@
 package business.activity;
 
-import business.user.User;
 
 /**
  * Defines an interface of interest to clients.
@@ -47,7 +46,15 @@ public class Activity {
 	}
 
 	public void someOperation() {
-		state.process("aaa");
+		state.process();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

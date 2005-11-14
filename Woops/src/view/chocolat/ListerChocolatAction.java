@@ -41,18 +41,18 @@ public class ListerChocolatAction  extends WoopsAction  {
 			
 
 			
-			// récupération de la liste des chocolats en BD
+			// r?cup?ration de la liste des chocolats en BD
 			ArrayList listeChocolatBD = new ArrayList();
 			
 			Chocolat chocolat1 = new Chocolat(1,"Accord parfait",1,"Liegeois");
 			listeChocolatBD.add(chocolat1);
-			Chocolat chocolat2 = new Chocolat(2,"Délices suprêmes",2,"Lindt");
+			Chocolat chocolat2 = new Chocolat(2,"D?lices supr?mes",2,"Lindt");
 			listeChocolatBD.add(chocolat2);
-			Chocolat chocolat3 = new Chocolat(3,"Magie des parfums",3,"Nestlé");
+			Chocolat chocolat3 = new Chocolat(3,"Magie des parfums",3,"Nestl?");
 			listeChocolatBD.add(chocolat3);
-			Chocolat chocolat4 = new Chocolat(4,"Secrète alchimie",4,"Milka");
+			Chocolat chocolat4 = new Chocolat(4,"Secr?te alchimie",4,"Milka");
 			listeChocolatBD.add(chocolat4);
-			Chocolat chocolat5 = new Chocolat(5,"A l'unisson",5,"Côte d'or");
+			Chocolat chocolat5 = new Chocolat(5,"A l'unisson",5,"C?te d'or");
 			listeChocolatBD.add(chocolat5);
 			Chocolat chocolat6 = new Chocolat(6,"Saveurs d'autrefois",6,"Nesquick");
 			listeChocolatBD.add(chocolat6);
@@ -68,8 +68,8 @@ public class ListerChocolatAction  extends WoopsAction  {
 			for(int i=0;i<listeChocolatBD.size();i++) {
 				item = new ListerChocolatFormItem();
 				
-				item.setId(Formatage.integerToString(((Chocolat)listeChocolatBD.get(i)).getId()));
-				item.setCalorie(Formatage.integerToString(((Chocolat)listeChocolatBD.get(i)).getCalorie()));
+				item.setId(Formatage.integerToString(new Integer(((Chocolat)listeChocolatBD.get(i)).getId())));
+				item.setCalorie(Formatage.integerToString(new Integer(((Chocolat)listeChocolatBD.get(i)).getCalorie())));
 				item.setNom(((Chocolat)listeChocolatBD.get(i)).getNom());
 				item.setFabricant(((Chocolat)listeChocolatBD.get(i)).getFabricant());
 				

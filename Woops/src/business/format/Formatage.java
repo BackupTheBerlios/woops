@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
@@ -140,7 +141,7 @@ public class Formatage {
 
 
 	/**
-	 * Retourne le champs completé devant du caractere jusqu'au nombre indiqué 
+	 * Retourne le champs complet? devant du caractere jusqu'au nombre indiqu? 
 	 * @param p_in chaine, char, nbr 
 	 * @return String
 	 */
@@ -158,7 +159,7 @@ public class Formatage {
 
 
 	/**
-	 * Retourne le champs completé apres du caractere jusqu'au nombre indiqué 
+	 * Retourne le champs complet? apres du caractere jusqu'au nombre indiqu? 
 	 * @param p_in chaine, char, nbr 
 	 * @return String
 	 */
@@ -192,7 +193,7 @@ public class Formatage {
 
 	/**
 	 * Remplace toutes les occurences d'une chaine par une autre
-	 * @param p_in chaine, p_old chaines à remplacer, p_new nouvelles chaines
+	 * @param p_in chaine, p_old chaines ? remplacer, p_new nouvelles chaines
 	 * @return String 
 	 */
 
@@ -213,7 +214,7 @@ public class Formatage {
 
 
 	/**
-	 * Remplace les @ (ou autre) par les parametre passés
+	 * Remplace les @ (ou autre) par les parametre pass?s
 	 * @param p_in chaine, p_params 
 	 * @return String 
 	 */
@@ -234,12 +235,12 @@ public class Formatage {
 
 
 	/**
-	 * Retourne un tableau de valeur à partir d'une liste de valeurs
+	 * Retourne un tableau de valeur ? partir d'une liste de valeurs
 	 * @return Vector
 	 */
-	public static ArrayList getListeValeurs(String p_chaine){
+	public static Collection getListeValeurs(String p_chaine){
 
-        ArrayList<String> liste= new ArrayList<String>();
+        Collection liste= new ArrayList();
 
 		if (!Controleur.isVide(p_chaine)){
 			int separ = -1;

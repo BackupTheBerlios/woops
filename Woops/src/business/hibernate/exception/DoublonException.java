@@ -8,6 +8,7 @@ package business.hibernate.exception;
 public class DoublonException extends Exception {
 
 	private String appMessage = null;
+	static final long serialVersionUID = -3387516993124229948L;
 	
 	public DoublonException(String msg, Exception e){
 		super(msg,e);

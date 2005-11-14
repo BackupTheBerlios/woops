@@ -1,5 +1,7 @@
 package business.user;
 
+import java.util.Collection;
+
 public class User {
 
 		/**
@@ -8,5 +10,13 @@ public class User {
 	 * @directed directed
 	 * @supplierCardinality 0..*
 	 */
-	private java.util.Collection linkToActivity = null;
+	private Collection linkToActivity = null;
+
+		public Collection getLinkToActivity() {
+			return linkToActivity;
+		}
+
+		public void setLinkToActivity(Collection linkToActivity) {
+			this.linkToActivity = linkToActivity;
+		}
 }
