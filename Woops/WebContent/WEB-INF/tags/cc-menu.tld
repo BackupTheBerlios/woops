@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+     <tlibversion>1.0.000</tlibversion>
+     <jspversion>1.2</jspversion>
+     <shortname>Menu Tags</shortname>
+     <info>Menu Tags</info>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <ctx> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>ctx</name>
+          <tagclass>com.cc.framework.taglib.menu.ContextTag</tagclass>
+          <bodycontent>empty</bodycontent>
+          <info/>
+          <attribute>
+               <name>filter</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>path</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+     </tag>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <equal> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>equal</name>
+          <tagclass>com.cc.framework.taglib.menu.ContextEqualTag</tagclass>
+          <bodycontent>JSP</bodycontent>
+          <info/>
+          <attribute>
+               <name>filter</name>
+               <required>true</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+     </tag>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <menu> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>menu</name>
+          <tagclass>com.cc.framework.taglib.menu.MenuTag</tagclass>
+          <bodycontent>JSP</bodycontent>
+          <info/>
+          <attribute>
+               <name>action</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>height</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>id</name>
+               <required>true</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>imagemap</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>name</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>permission</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>type</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>width</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+     </tag>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <menuitem> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>menuitem</name>
+          <tagclass>com.cc.framework.taglib.menu.MenuItemTag</tagclass>
+          <bodycontent>JSP</bodycontent>
+          <info/>
+          <attribute>
+               <name>action</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>filter</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>id</name>
+               <required>true</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>imageref</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>permission</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>shortcut</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>state</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>tag</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>target</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>text</name>
+               <required>true</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>tooltip</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>width</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+     </tag>
+</taglib>

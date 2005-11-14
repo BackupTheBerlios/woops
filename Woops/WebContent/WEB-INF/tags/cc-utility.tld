@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+     <tlibversion>1.0.000</tlibversion>
+     <jspversion>1.2</jspversion>
+     <shortname>Utility Tags</shortname>
+     <info>Utility Tags</info>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <base> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>base</name>
+          <tagclass>com.cc.framework.taglib.util.BaseTag</tagclass>
+          <bodycontent>JSP</bodycontent>
+          <info/>
+          <attribute>
+               <name>contextPath</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>host</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>port</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+     </tag>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <decorator> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>decorator</name>
+          <tagclass>com.cc.framework.taglib.util.DecoratorTag</tagclass>
+          <bodycontent>empty</bodycontent>
+          <info/>
+     </tag>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <filter> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>filter</name>
+          <tagclass>com.cc.framework.taglib.util.FilterTag</tagclass>
+          <bodycontent>JSP</bodycontent>
+          <info/>
+          <attribute>
+               <name>result</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+     </tag>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <imagemap> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>imagemap</name>
+          <tagclass>com.cc.framework.taglib.util.ImageMapTag</tagclass>
+          <bodycontent>JSP</bodycontent>
+          <info/>
+          <attribute>
+               <name>base</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>name</name>
+               <required>true</required>
+               <rtexprvalue>false</rtexprvalue>
+          </attribute>
+     </tag>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <imagemapping> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>imagemapping</name>
+          <tagclass>com.cc.framework.taglib.util.ImageMappingTag</tagclass>
+          <bodycontent>empty</bodycontent>
+          <info/>
+          <attribute>
+               <name>alt</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>height</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>rule</name>
+               <required>true</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>src</name>
+               <required>true</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+          <attribute>
+               <name>width</name>
+               <required>false</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+     </tag>
+     <!--
+     + - - - - - - - - - - - - - - - -
+     |       <jsp> Tag
+     + - - - - - - - - - - - - - - - -
+     -->
+     <tag>
+          <name>jsp</name>
+          <tagclass>com.cc.framework.taglib.util.JspTag</tagclass>
+          <bodycontent>empty</bodycontent>
+          <info/>
+          <attribute>
+               <name>directive</name>
+               <required>true</required>
+               <rtexprvalue>true</rtexprvalue>
+          </attribute>
+     </tag>
+</taglib>
