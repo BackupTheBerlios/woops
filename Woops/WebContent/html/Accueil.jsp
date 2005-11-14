@@ -12,9 +12,9 @@
 
 <body>
 
-Voici le lien vers la première JSP du projet WOOPS : <br><br>
+Voici le lien vers la premi?re JSP du projet WOOPS : <br><br>
 
-<a href="./html/chocolat/listerChocolat.do?actionSubmit=lister"> Lister mes chocolats </a>
+<a href="listerChocolat.do?actionSubmit=lister"> Lister mes chocolats </a>
 
 </body>
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tomcatProjectProperties>
     <rootDir>/WebContent</rootDir>
-    <exportSource>false</exportSource>
+    <exportSource>true</exportSource>
     <reloadable>true</reloadable>
-    <redirectLogger>false</redirectLogger>
+    <redirectLogger>true</redirectLogger>
     <updateXml>true</updateXml>
-    <warLocation></warLocation>
+    <warLocation>/users/iupisi/m1isb1/install/apache-tomcat-5.5.12/webapps/woops.war</warLocation>
     <extraInfo></extraInfo>
     <webPath>/Woops</webPath>
 </tomcatProjectProperties>

@@ -7,7 +7,6 @@ package business.hibernate.exception;
 public class ForeignKeyException extends Exception {
 
 	private String appMessage = null;
-	static final long serialVersionUID = -3387516993124229948L;
 	
 	public ForeignKeyException(String msg, Exception e){
 		super(msg,e);
