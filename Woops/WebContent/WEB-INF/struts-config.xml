@@ -15,7 +15,7 @@
    <action-mappings >
 
 <!-- ================= Lister Chocolat ================ -->  
-      <action path="/listerChocolat"	 type="view.chocolat.ListerChocolatAction"
+      <action path="/html/chocolat/listerChocolat"	 type="view.chocolat.ListerChocolatAction"
          attribute="listerChocolatForm"
          input="/html/chocolat/listerChocolat.jsp"
          name="listerChocolatForm"

@@ -14,7 +14,7 @@
 
 Voici le lien vers la premi?re JSP du projet WOOPS : <br><br>
 
-<a href="listerChocolat.do?actionSubmit=lister"> Lister mes chocolats </a>
+<a href="./html/chocolat/listerChocolat.do?actionSubmit=lister"> Lister mes chocolats </a>
 
 </body>
 

@@ -1,8 +1,12 @@
-  import javax.servlet.ServletException 
-  import org.apache.struts.action.ActionServlet; 
-  import com.cc.framework.ui.painter.PainterFactory 
-  import com.cc.framework.ui.painter.def.DefPainterFactory; 
-  import com.cc.framework.ui.painter.html.HtmlPainterFactory; 
+package view;
+
+import javax.servlet.ServletException;
+
+import org.apache.struts.action.ActionServlet;
+
+import com.cc.framework.ui.painter.PainterFactory;
+import com.cc.framework.ui.painter.def.DefPainterFactory;
+import com.cc.framework.ui.painter.html.HtmlPainterFactory;
   
   public class WoopsFrontController extends ActionServlet { 
   	public void init() throws ServletException { 
