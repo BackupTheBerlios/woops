@@ -5,6 +5,7 @@
    <form-beans >
    
       <form-bean name="listerChocolatForm" type="view.chocolat.ListerChocolatForm" />
+      <form-bean name="createActivityForm" type="view.activity.CreateActivityForm" />
 	  
    </form-beans>
 
@@ -25,6 +26,19 @@
          <forward name="erreur" path="/html/Accueil.jsp" />
          <forward name="success" path="/html/chocolat/listerChocolat.jsp" />
       </action>
+
+<!-- ================= Create Activity ================ -->  
+      <action path="/html/activity/createActivity"	 type="view.activity.CreateActivityAction"
+         attribute="createActivityForm"
+         input="/html/activity/createActivity.jsp"
+         name="createActivityForm"
+		 validate="false"  
+		 parameter="actionSubmit"       
+         scope="request">
+         <forward name="erreur" path="/html/Accueil.jsp" />
+         <forward name="success" path="/html/activity/createActivity.jsp" />
+      </action>
+
 
 </action-mappings>
 

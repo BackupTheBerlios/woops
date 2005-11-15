@@ -1,5 +1,7 @@
 package business.activity;
 
+import java.util.Collection;
+
 
 /**
  * Defines an interface of interest to clients.
@@ -10,6 +12,7 @@ package business.activity;
 public class Activity {
 
 	private String name;
+	private String description;
 
 	/**
 	 * @associates business.activity.ActivitySequence
@@ -57,4 +60,27 @@ public class Activity {
 		this.name = name;
 	}
 
+	public Activity(String name, String description, Collection linkToPredecessor, Collection linkToSuccessor) {
+		this.name = name;
+		this.description = description;
+		this.linkToPredecessor = linkToPredecessor;
+		this.linkToSuccessor = linkToSuccessor;
+		this.state = new CreatedActivity();
+	}
+
+	
+	/**
+	 * @return Returns the description.
+	 */
+	public String getDescription() {
+
+		return description;
+	}
+	/**
+	 * @param description The description to set.
+	 */
+	public void setDescription(String description) {
+
+		this.description = description;
+	}
 }
