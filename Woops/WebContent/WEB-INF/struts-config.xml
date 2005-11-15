@@ -22,7 +22,7 @@
 		 validate="false"  
 		 parameter="actionSubmit"       
          scope="request">
-         <forward name="erreur" path="/html/Accueil.html" />
+         <forward name="erreur" path="/html/Accueil.jsp" />
          <forward name="success" path="/html/chocolat/listerChocolat.jsp" />
       </action>
 

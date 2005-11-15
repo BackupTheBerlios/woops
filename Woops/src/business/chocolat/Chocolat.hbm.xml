@@ -4,7 +4,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
 
 <hibernate-mapping>
-	<class name="business.chocolat.Chocolat" >
+	<class name="business.chocolat.Chocolat" table="chocolat">
 		<id
 			column="ID"
 			name="id"
@@ -15,7 +15,7 @@
 		
 		<property
 			column="NOM"
-			length="50"
+			length="45"
 			name="nom"
 			not-null="false"
 			type="string"
@@ -23,7 +23,7 @@
 		
 		<property
 			column="FABRICANT"
-			length="50"
+			length="45"
 			name="fabricant"
 			not-null="false"
 			type="string"

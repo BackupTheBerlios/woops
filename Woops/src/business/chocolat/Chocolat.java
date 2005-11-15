@@ -1,26 +1,14 @@
 package business.chocolat;
 
+import business.hibernate.ObjetHistorise;
 
-public class Chocolat {
-	private int id;
+
+public class Chocolat extends ObjetHistorise {
+	private Integer id;
 	private String nom;
 	private int calorie;
 	private String fabricant;
 	
-	public Chocolat(int i, String n, int c, String f) {
-		this.id = i;
-		this.nom = n;
-		this.calorie = c;
-		this.fabricant = f;
-	}
-	
-	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public int getCalorie() {
 		return calorie;
 	}
@@ -40,5 +28,21 @@ public class Chocolat {
 		this.nom = nom;
 	}
 
+	
+	public String toString() {
+		String ret = "Chocolat : [ "+ id + " | " + nom + " ]"; 
+		return ret;
+	}
+
+	public Object getId() {
+		return id;
+	}
+
+	public void setId(Object id) {
+		this.id = (Integer) id;
+	}
+	
+	
+	
 	
 }
