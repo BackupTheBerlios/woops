@@ -1,0 +1,88 @@
+
+
+body  {
+	font-family:verdana,Helvetica, sans, serif; 
+        font-size: 11px; 
+        color: #645F83;
+	text-decoration: none;
+}
+
+Table {
+        font-size: 11px; 
+}
+
+
+INPUT,TEXTAREA,FILE {
+        font-family:verdana,Helvetica, sans, serif; 
+        font-size: 12px;
+        border:1px solid black;
+        background-color:#BEB5CC;
+        color:black;
+}
+
+TEXTAREA:hover {
+        background-color:white;
+        color:black;
+}
+
+INPUT:hover {
+        background-color:white;
+        color:black;
+}
+
+FILE:hover {
+        background-color:white;
+        color:black;
+}
+      
+      
+A{
+        text-decoration: none;
+        color:black;
+}
+
+
+
+TABLE.tableau {
+        border:1px #BEB5CC solid ; 
+        margin: 0px;
+        padding: 0px;
+}
+
+TABLE.tableau tr.entete {
+        background:#BEB5CC;
+        font-weight: bold;
+        cursor: default;
+        padding: 0px;
+}
+
+TABLE.tableau tr:hover {
+        background:#D6CFDE;
+        cursor: pointer;
+}
+
+TABLE.tableau td {
+        width:100px;
+}
+
+
+DIV.titreMenu {
+        font-size: 12px; text-decoration: none; color:#645F83; font-weight: bold;
+        width:170px;
+}
+
+DIV.rubrique:hover {
+        background:#D6CFDE;
+}
+
+DIV.rubrique {
+        width:170px;
+}
+
+DIV.titrePAge {
+        font-size: 16px; text-decoration: none; color:#645F83; font-weight: bold;
+
+}
+
+
+
