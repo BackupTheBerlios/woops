@@ -1,0 +1,83 @@
+<%@ taglib uri="/WEB-INF/tags/cc-template.tld" prefix="template" %>
+
+
+
+<html>
+
+<head>
+<title>woops</title>
+<meta http-equiv="Content-Type" content="text/html;">
+<link href="../images/css.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<center>
+<table border="0" cellpadding="0" cellspacing="0" width="1022">
+
+  <tr>
+   <td rowspan="2"><img name="logo" src="../images/logo.jpg" width="224" height="132" border="0" alt=""></td>
+   <td valign="top" width="798" height="57" style="padding-left: 20px ;padding-top: 24px ; background:url('../images/titre.jpg') no-repeat ;" >
+   
+  
+  <!-------###########------->
+  <!-------DEBUT TITRE------->
+ <template:get name="title"/>
+  <!-------FIN TITRE------->
+  <!-------#########------->
+  
+  </td>
+  </tr>
+  <tr>
+   <td valign="top" rowspan="3" width="798"  style=" padding-left: 20px ;padding-top: 10px ;background:url('../images/contenu.jpg') repeat-y ;" >
+   
+   
+  <!-------#############------->
+  <!-------DEBUT CONTENU------->
+  
+<template:get name="contents"/>
+  
+  <!-------FIN CONTENU------->
+  <!-------###########------->
+  
+  
+  </td>
+  </tr>
+  <tr>
+   <td valign="top" width="224"  height="59" style="padding-left: 25px ; background:url('../images/entetemenu.jpg') no-repeat; " >
+   
+   
+  <!-------#################------->
+  <!-------DEBUT ENTETE MENU------->
+<template:get name="menuHaut"/>
+  <!-------FIN ENTETE MENU------->
+  <!-------###############------->
+  
+  
+  </td>
+  </tr>
+  <tr>
+   <td valign="top" height="300" width="224"  style="padding-left: 25px ; background:url('../images/menu.jpg') repeat-y ; ">
+   
+   
+  <!-------#################------->
+  <!-------DEBUT MENU------->
+  
+  <template:get name="menu"/>
+  
+  <!-------FIN MENU------->
+  <!-------########------->
+  
+  
+  
+  </td>
+  </tr>
+  <tr>
+   <td><img name="basmenu" src="../images/basmenu.jpg" width="224" height="30" border="0" alt=""></td>
+   <td><img name="bascontenu" src="../images/bascontenu.jpg" width="798" height="30" border="0" alt=""></td>
+  </tr>
+
+</table>
+</center>
+
+</body>
+</html>
