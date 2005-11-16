@@ -28,7 +28,7 @@
       </action>
 
 <!-- ================= Create Activity ================ -->  
-      <action path="/html/activity/createActivity"	 type="view.activity.CreateActivityAction"
+      <action path="/createActivity"	 type="view.activity.CreateActivityAction"
          attribute="createActivityForm"
          input="/html/activity/createActivity.jsp"
          name="createActivityForm"
@@ -40,12 +40,13 @@
       </action>
 
 <!-- ================= List Activities ================ -->  
-      <action path="/html/activity/listActivities"	 type="view.activities.ListActivitiesAction"
+      <action path="/listActivities"	 type="view.activities.ListActivitiesAction"
+      	 attribute="listActivitiesForm"
          name="listActivitiesForm"
 		 validate="false"      
          scope="request">
          <forward name="erreur" path="/html/Accueil.jsp" />
-         <forward name="success" path="/html/activity/listActivitiesTable.jsp" />
+         <forward name="success" path="/html/activity/listActivities.jsp" />
       </action>
 
 
