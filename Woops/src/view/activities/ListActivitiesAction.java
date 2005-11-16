@@ -3,23 +3,17 @@ package view.activities;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 
 import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
-
 import org.apache.struts.action.ActionForward;
-
-import business.chocolat.Chocolat;
-import business.format.Formatage;
-
-import com.cc.framework.adapter.struts.ActionContext;
-import com.cc.framework.common.DisplayObject;
 
 import view.PresentationConstantes;
 import view.WoopsCCAction;
-import view.chocolat.ListerChocolatFormItem;
+
+import com.cc.framework.adapter.struts.ActionContext;
+import com.cc.framework.common.DisplayObject;
 
 public class ListActivitiesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ListActivitiesAction.class);    
@@ -32,26 +26,30 @@ public class ListActivitiesAction extends WoopsCCAction {
 		ActivityItem item = null;
 		ActionForward retour = null;
     	
+		if (context.form()==null) {
+			context.request().setAttribute(context.mapping().getAttribute(), new ListActivitiesForm());
+		}
 		try {
 	    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
-			
 	    	// Get the Displaydata for our List
 	    	// listActivitiesMgr = ActivitytManager.getInstance().getActivities()
 	    	
 //			Iterator iter = listActivitiesMgr.iterator();
 //			while (iter.hasNext()) {
 //				Activity activity = (Activity)iter.next();
-//				
+				
 				item = new ActivityItem();
 				
 				item.setName("Liste");
 				item.setDescription("Liste");
 				
+				listActivitiesItems = new ArrayList();
 				listActivitiesItems.add(item);
 //			}
 			
 			// Convert the List into DisplayObject tab
-			DisplayObject[] data = (ActivityItem[]) listActivitiesItems.toArray(new DisplayObject[0]);
+			DisplayObject[] data = new ActivityItem[listActivitiesItems.size()];
+			data = (ActivityItem[]) listActivitiesItems.toArray(data);
 			
 			/* Create the ListControl and populate it.
 			with the Data to be displayed */
