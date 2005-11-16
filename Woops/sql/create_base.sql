@@ -1,4 +1,6 @@
-CREATE TABLE woops.User (
+CREATE DATABASE IF NOT EXISTS woops;
+
+CREATE TABLE IF NOT EXISTS woops.User (
        id INT NOT NULL AUTO_INCREMENT
      , firstName VARCHAR(50) NOT NULL
      , lastName VARCHAR(50) NOT NULL
@@ -8,16 +10,17 @@ CREATE TABLE woops.User (
      , PRIMARY KEY (id)
 )TYPE=InnoDB;
 
-CREATE TABLE woops.ActivitySequenceType (
+CREATE TABLE IF NOT EXISTS woops.ActivitySequenceType (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(15) NOT NULL
      , UNIQUE UQ_ActivitySequenceType_name (name)
      , PRIMARY KEY (id)
 )TYPE=InnoDB;
 
-CREATE TABLE woops.Activity (
+CREATE TABLE IF NOT EXISTS woops.Activity (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(50) NOT NULL
+     , details TEXT
      , user INT NOT NULL
      , UNIQUE UQ_Activity_name (name)
      , PRIMARY KEY (id)
@@ -27,7 +30,7 @@ CREATE TABLE woops.Activity (
 )TYPE=InnoDB;
 CREATE INDEX IX_Activity_name ON woops.Activity (name ASC);
 
-CREATE TABLE woops.ActivitySequence (
+CREATE TABLE IF NOT EXISTS woops.ActivitySequence (
        id INT NOT NULL AUTO_INCREMENT
      , sucessor INT NOT NULL
      , predecessor INT NOT NULL
