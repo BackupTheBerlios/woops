@@ -47,7 +47,7 @@ public class ChocolatManager extends ObjetPersistantManager {
 		HibernateSessionFactory.init(f);
 		
 		try {
-			Chocolat chocolat = ChocolatManager.getInstance().getChocolat(2);
+			Chocolat chocolat = ChocolatManager.getInstance().getChocolat(new Integer(2));
 			chocolat.toString();
 		}
 		catch (PersistanceException pe) {

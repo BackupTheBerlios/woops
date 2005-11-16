@@ -106,9 +106,7 @@ public class Formatage {
 	    if (!Controleur.isVide(s))
 	    	try {
 	    		ret = Double.valueOf(s);
-	    	} catch (NumberFormatException e) {
-				ret = Double.valueOf(0);
-            }
+	    	} catch (NumberFormatException e) {}
 		return ret;
 	}	
 	
