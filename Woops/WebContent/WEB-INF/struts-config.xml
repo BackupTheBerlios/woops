@@ -6,7 +6,7 @@
    
       <form-bean name="listerChocolatForm" type="view.chocolat.ListerChocolatForm" />
       <form-bean name="createActivityForm" type="view.activity.CreateActivityForm" />
-	  
+	  <form-bean name="listActivitiesForm" type="view.activities.ListActivitiesForm" />
    </form-beans>
 
    <global-exceptions />
@@ -37,6 +37,15 @@
          scope="request">
          <forward name="erreur" path="/html/Accueil.jsp" />
          <forward name="success" path="/html/activity/createActivity.jsp" />
+      </action>
+
+<!-- ================= List Activities ================ -->  
+      <action path="/html/activity/listActivities"	 type="view.activities.ListActivitiesAction"
+         name="listActivitiesForm"
+		 validate="false"      
+         scope="request">
+         <forward name="erreur" path="/html/Accueil.jsp" />
+         <forward name="success" path="/html/activity/listActivitiesTable.jsp" />
       </action>
 
 
