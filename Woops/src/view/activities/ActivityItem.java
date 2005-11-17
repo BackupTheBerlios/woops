@@ -5,20 +5,20 @@ import com.cc.framework.common.DisplayObject;
 
 public class ActivityItem implements DisplayObject{
 	private String name;
-	private String description;
+	private String details;
 	
 	/**
-	 * @return Returns the description.
+	 * @return Returns the details.
 	 */
-	public String getDescription() {
-		return description;
+	public String getDetails() {
+		return details;
 	}
 	
 	/**
-	 * @param description The description to set.
+	 * @param details The details to set.
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDetails(String details) {
+		this.details = details;
 	}
 	
 

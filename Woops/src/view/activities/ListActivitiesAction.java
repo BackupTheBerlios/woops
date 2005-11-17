@@ -38,20 +38,24 @@ public class ListActivitiesAction extends WoopsCCAction {
 	    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
 	    	logger.debug("apres context.form()");
 	    	//Get the Display data for our List
+	    	logger.debug("avant ActivityManager.getInstance()");
 	    	listActivitiesMgr = ActivityManager.getInstance().listActivities(new Integer(1));
+	    	logger.debug("apres ActivityManager.getInstance()");
 	    	
 			Iterator iter = listActivitiesMgr.iterator();
 			listActivitiesItems = new ArrayList();
+			logger.debug("avant le while");
 	    	while (iter.hasNext()) {
-//	    		Activity activity = (Activity)iter.next();
-//				
-//				item = new ActivityItem();
-//				
-//				item.setName(activity.getName());
-//				item.setDescription(activity.getDescription());
-//				
-//				listActivitiesItems.add(item);
+	    		Activity activity = (Activity)iter.next();
+				
+				item = new ActivityItem();
+				
+				item.setName(activity.getName());
+				item.setDetails(activity.getDetails());
+				
+				listActivitiesItems.add(item);
 			}
+	    	logger.debug("apres le while");
 			
 			// Convert the List into DisplayObject tab
 			DisplayObject[] data = new ActivityItem[listActivitiesItems.size()];
