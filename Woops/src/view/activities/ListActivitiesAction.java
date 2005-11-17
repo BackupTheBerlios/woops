@@ -3,6 +3,7 @@ package view.activities;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 
@@ -11,6 +12,8 @@ import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
 import view.WoopsCCAction;
+import business.activity.Activity;
+import business.activity.ActivityManager;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
@@ -26,26 +29,29 @@ public class ListActivitiesAction extends WoopsCCAction {
 		ActivityItem item = null;
 		ActionForward retour = null;
     	
+		logger.debug("avant setAttribute.form()");
 		if (context.form()==null) {
 			context.request().setAttribute(context.mapping().getAttribute(), new ListActivitiesForm());
 		}
 		try {
+			logger.debug("avant context.form()");
 	    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
-	    	// Get the Displaydata for our List
-	    	// listActivitiesMgr = ActivitytManager.getInstance().getActivities()
+	    	logger.debug("apres context.form()");
+	    	//Get the Display data for our List
+	    	listActivitiesMgr = ActivityManager.getInstance().listActivities(new Integer(1));
 	    	
-//			Iterator iter = listActivitiesMgr.iterator();
-//			while (iter.hasNext()) {
-//				Activity activity = (Activity)iter.next();
-				
-				item = new ActivityItem();
-				
-				item.setName("Liste");
-				item.setDescription("Liste");
-				
-				listActivitiesItems = new ArrayList();
-				listActivitiesItems.add(item);
-//			}
+			Iterator iter = listActivitiesMgr.iterator();
+			listActivitiesItems = new ArrayList();
+	    	while (iter.hasNext()) {
+//	    		Activity activity = (Activity)iter.next();
+//				
+//				item = new ActivityItem();
+//				
+//				item.setName(activity.getName());
+//				item.setDescription(activity.getDescription());
+//				
+//				listActivitiesItems.add(item);
+			}
 			
 			// Convert the List into DisplayObject tab
 			DisplayObject[] data = new ActivityItem[listActivitiesItems.size()];

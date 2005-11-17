@@ -17,8 +17,8 @@
 title="User List" width="500" rows="15" refreshButton="true" createButton="false"> 
 
 
-		<ctrl:columndrilldown title="Name" property="name" width="350"/>
-		<ctrl:columntext title="Description" property="description" width="350"/>
+		<ctrl:columndrilldown title="Name" property="name" width="150"/>
+		<ctrl:columntext title="Details" property="details" width="350"/>
 		
 		<ctrl:columnedit title="Edit"/> 
 		<ctrl:columndelete title="Delete"/>

@@ -12,7 +12,7 @@ import java.util.Collection;
 public class Activity {
 
 	private String name;
-	private String description;
+	private String details;
 
 	/**
 	 * @associates business.activity.ActivitySequence

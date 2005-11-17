@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+	<class name="business.activity.Activity" table="activity">
+		<id
+			column="id"
+			name="id"
+			type="integer"
+		>
+		<generator class="assigned" />
+		</id>
+		
+		<property
+			column="name"
+			length="50"
+			name="name"
+			not-null="true"
+			type="string"
+		 />	
+		 
+		 <property
+			column="details"
+			name="details"
+			not-null="true"
+			type="string"
+		 />	
+		
+
+	</class>	
+</hibernate-mapping>
