@@ -11,6 +11,31 @@ import java.util.Collection;
 
 public class Activity {
 
+	private Integer id;
+	/**
+	 * @return Returns the details.
+	 */
+	public String getDetails() {
+		return details;
+	}
+	/**
+	 * @param details The details to set.
+	 */
+	public void setDetails(String details) {
+		this.details = details;
+	}
+	/**
+	 * @return Returns the id.
+	 */
+	public Integer getId() {
+		return id;
+	}
+	/**
+	 * @param id The id to set.
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	private String name;
 	private String details;
 
@@ -59,28 +84,20 @@ public class Activity {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Activity(String name, String description, Collection linkToPredecessor, Collection linkToSuccessor) {
+	
+	public Activity() {
+		this.name = null;
+		this.details = null;
+		this.linkToPredecessor = null;
+		this.linkToSuccessor = null;
+		this.state = null;
+	}
+	
+	public Activity(String name, String details, Collection linkToPredecessor, Collection linkToSuccessor) {
 		this.name = name;
-		this.description = description;
+		this.details = details;
 		this.linkToPredecessor = linkToPredecessor;
 		this.linkToSuccessor = linkToSuccessor;
 		this.state = new CreatedActivity();
-	}
-
-	
-	/**
-	 * @return Returns the description.
-	 */
-	public String getDescription() {
-
-		return description;
-	}
-	/**
-	 * @param description The description to set.
-	 */
-	public void setDescription(String description) {
-
-		this.description = description;
 	}
 }
