@@ -8,11 +8,9 @@ import business.hibernate.exception.PersistanceException;
 public class ActivityDAO extends ObjetPersistantDAO {
 
 	public Collection getListActivitiesByUser(Integer idUser) throws PersistanceException {
-		
-		Object[] params = new Integer[1];
-		params[0] = idUser;
 
-		return executeQuery("SELECT name,details FROM Activity WHERE user=?",params);
+		return executeQuery("FROM Activity as act WHERE act.user=" + idUser.toString());
 	}
+	
 	
 }
