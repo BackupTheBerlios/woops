@@ -2,6 +2,8 @@ package business.activity;
 
 import java.util.Collection;
 
+import business.user.User;
+
 
 /**
  * Defines an interface of interest to clients.
@@ -11,6 +13,8 @@ import java.util.Collection;
 
 public class Activity {
 
+	private User user;
+	
 	private Integer id;
 	/**
 	 * @return Returns the details.
@@ -93,11 +97,18 @@ public class Activity {
 		this.state = null;
 	}
 	
-	public Activity(String name, String details, Collection linkToPredecessor, Collection linkToSuccessor) {
+	public Activity(String name, String details, Collection linkToPredecessor, Collection linkToSuccessor, User user) {
 		this.name = name;
 		this.details = details;
 		this.linkToPredecessor = linkToPredecessor;
 		this.linkToSuccessor = linkToSuccessor;
+		this.user = user;
 		this.state = new CreatedActivity();
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User property1) {
+		this.user = property1;
 	}
 }

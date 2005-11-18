@@ -10,7 +10,7 @@
 			name="id"
 			type="integer"
 		>
-		<generator class="assigned" />
+			<generator class="assigned" />
 		</id>
 		
 		<property
@@ -24,10 +24,17 @@
 		 <property
 			column="details"
 			name="details"
-			not-null="true"
+			not-null="false"
 			type="string"
 		 />	
 		
+		<many-to-one
+			class="business.user.User"
+			name="user"
+			not-null="true"
+			>
+			<column name="user" />
+		</many-to-one>
 
 	</class>	
 </hibernate-mapping>

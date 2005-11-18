@@ -9,8 +9,6 @@ public class ActivityDAO extends ObjetPersistantDAO {
 
 	public Collection getListActivitiesByUser(Integer idUser) throws PersistanceException {
 
-		return executeQuery("FROM Activity as act WHERE act.user=" + idUser.toString());
-	}
-	
-	
+		return executeQuery("FROM Activity as act WHERE act.user.id=" + idUser.toString());
+	}	
 }
