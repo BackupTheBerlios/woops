@@ -11,15 +11,15 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
 		<property name="connection.url">jdbc:mysql://localhost:3306/woops</property>
 		<property name="connection.driver_class">org.gjt.mm.mysql.Driver</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password">root</property>
+		<property name="connection.password">mysql</property>
 
 		<property name="dialect">net.sf.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
 
 <!-- mapping files -->
 
-		<mapping resource="business/chocolat/Chocolat.hbm.xml" />
 		<mapping resource="business/activity/Activity.hbm.xml" />
+		<mapping resource="business/user/User.hbm.xml" />
 		
 	</session-factory>
 </hibernate-configuration>
