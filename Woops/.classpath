@@ -31,6 +31,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/common-controls-trial-1.2.075.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/ecs-1.4.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jakarta-regexp-1.4.jar"/>
-	<classpathentry kind="lib" path="sql/mysql-connector-java-3.1.11-bin.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-3.1.11-bin.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
