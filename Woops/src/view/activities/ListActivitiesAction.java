@@ -29,21 +29,20 @@ public class ListActivitiesAction extends WoopsCCAction {
 		ActivityItem item = null;
 		ActionForward retour = null;
     	
-		logger.debug("avant setAttribute.form()");
 		if (context.form()==null) {
 			context.request().setAttribute(context.mapping().getAttribute(), new ListActivitiesForm());
 		}
 		try {
-			logger.debug("avant context.form()");
 	    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
-	    	logger.debug("apres context.form()");
+
 	    	//Get the Display data for our List
 	    	logger.debug("avant ActivityManager.getInstance()");
 	    	listActivitiesMgr = ActivityManager.getInstance().listActivities(new Integer(1));
-	    	logger.debug("apres ActivityManager.getInstance()");
-	    	
-			Iterator iter = listActivitiesMgr.iterator();
+	    	logger.debug("apres ActivityManager.getInstance()");   	
+			
+	    	Iterator iter = listActivitiesMgr.iterator();
 			listActivitiesItems = new ArrayList();
+
 			logger.debug("avant le while");
 	    	while (iter.hasNext()) {
 	    		Activity activity = (Activity)iter.next();
