@@ -36,14 +36,11 @@ public class ListActivitiesAction extends WoopsCCAction {
 	    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
 
 	    	//Get the Display data for our List
-	    	logger.debug("avant ActivityManager.getInstance()");
-	    	listActivitiesMgr = ActivityManager.getInstance().listActivities(new Integer(1));
-	    	logger.debug("apres ActivityManager.getInstance()");   	
+	    	listActivitiesMgr = ActivityManager.getInstance().listActivities(new Integer(11));  	
 			
 	    	Iterator iter = listActivitiesMgr.iterator();
 			listActivitiesItems = new ArrayList();
 
-			logger.debug("avant le while");
 	    	while (iter.hasNext()) {
 	    		Activity activity = (Activity)iter.next();
 				
@@ -54,8 +51,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 				
 				listActivitiesItems.add(item);
 			}
-	    	logger.debug("apres le while");
-			
+
 			// Convert the List into DisplayObject tab
 			DisplayObject[] data = new ActivityItem[listActivitiesItems.size()];
 			data = (ActivityItem[]) listActivitiesItems.toArray(data);
@@ -64,10 +60,6 @@ public class ListActivitiesAction extends WoopsCCAction {
 			with the Data to be displayed */
 			ListActivitiesModel model = new ListActivitiesModel(data);
 			listActivitiesForm.setDataModel(model);
-		
-			/* Put the ListControl into the Session-Object
-			The ListControl is a statefull Object.*/
-			//ctx.session().setAttribute("activities", listActivitiesForm);
 			
 			retour = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCES);
 	        
