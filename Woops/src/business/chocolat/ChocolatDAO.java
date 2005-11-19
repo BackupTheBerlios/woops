@@ -14,12 +14,7 @@ public class ChocolatDAO extends ObjetPersistantDAO {
 	}	
 
 	public Collection getListeChocolats() throws PersistanceException {
-		/*StringBuffer req = new StringBuffer("from Chocolat") ;
-
-	    ArrayList list = (ArrayList) executeQuery(req.toString());
-	    
-	    return list; */
-	    
+   
 		List liste = getListe("Chocolat");
 		return liste;
 	}
