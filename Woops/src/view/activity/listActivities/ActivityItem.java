@@ -4,6 +4,7 @@ import com.cc.framework.common.DisplayObject;
 
 
 public class ActivityItem implements DisplayObject{
+	private Integer id;
 	private String name;
 	private String details;
 	
@@ -28,6 +29,14 @@ public class ActivityItem implements DisplayObject{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 }

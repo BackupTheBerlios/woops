@@ -11,7 +11,7 @@ public class ListActivitiesModel extends WoopsListDataModel {
 	}
 
 	public String getUniqueKey(int index) {
-		return ((ActivityItem)data[index]).getName();
+		return (((ActivityItem)data[index]).getId()).toString();
 	}
 
 }

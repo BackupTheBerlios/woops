@@ -46,6 +46,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 				
 				item = new ActivityItem();
 				
+				item.setId(activity.getId());
 				item.setName(activity.getName());
 				item.setDetails(activity.getDetails());
 				
