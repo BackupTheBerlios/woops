@@ -1,4 +1,4 @@
-package view.activities;
+package view.activity.listActivities;
 
 import com.cc.framework.common.DisplayObject;
 

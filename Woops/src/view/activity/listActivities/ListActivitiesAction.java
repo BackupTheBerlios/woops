@@ -1,4 +1,4 @@
-package view.activities;
+package view.activity.listActivities;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 	    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
 
 	    	//Get the Display data for our List
-	    	listActivitiesMgr = ActivityManager.getInstance().listActivities(new Integer(11));  	
+	    	listActivitiesMgr = ActivityManager.getInstance().listActivities(new Integer(1));  	
 			
 	    	Iterator iter = listActivitiesMgr.iterator();
 			listActivitiesItems = new ArrayList();

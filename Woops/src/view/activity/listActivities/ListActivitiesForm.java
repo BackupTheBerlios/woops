@@ -1,4 +1,4 @@
-package view.activities;
+package view.activity.listActivities;
 
 import com.cc.framework.adapter.struts.FWActionForm;
 import com.cc.framework.ui.control.SimpleListControl;

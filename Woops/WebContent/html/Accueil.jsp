@@ -16,7 +16,6 @@ Voici le lien vers la premi?re JSP du projet WOOPS : <br><br>
 
 <a href="./html/chocolat/listerChocolat.do?actionSubmit=lister"> Lister mes chocolats </a><br><br>
 <a href="listActivities.do"> WOOPS </a><br><br>
-<a href="./html/activity/manageActivity.do?actionSubmit=create"> Create an Activity </a><br><br>
 
 </body>
 
