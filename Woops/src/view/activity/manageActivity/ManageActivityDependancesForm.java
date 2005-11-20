@@ -7,7 +7,7 @@ import com.cc.framework.ui.model.ListDataModel;
 public class ManageActivityDependancesForm extends FWActionForm {
 	
 	/* Liste représentant toutes les activités dont l'activité peut dépendre */
-	private SimpleListControl possibleDependancesOptions;
+	private SimpleListControl possibleDependancesOptions = new SimpleListControl();
 	
 	/* Liste représentant les clés des dépendances sélectionnées */
 	private String[] realDependancesKey = new String[0];

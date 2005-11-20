@@ -34,26 +34,26 @@
 					<property name="location_set_by_user" value="true"/>
 				</reference>
 			</reference>
+			<reference referencedUin="jdt:l_ast:src:business.activity.Activity:state">
+				<property name="sourceAnchor" value="273,125"/>
+				<property name="targetAnchor" value="400,92"/>
+			</reference>
 			<reference referencedUin="jdt:l_dpn:src:business.activity.Activity:lnkIActivityState">
-				<property name="sourceAnchor" value="213,39"/>
-				<property name="targetAnchor" value="340,39"/>
+				<property name="sourceAnchor" value="273,122"/>
+				<property name="targetAnchor" value="400,89"/>
 				<reference referencedUin="label:supplierRole:jdt:l_dpn:src:business.activity.Activity:lnkIActivityState">
 					<property name="bounds" value="220,0,88,17"/>
 					<property name="weight" value="0.05511811023622047"/>
 					<property name="location_set_by_user" value="true"/>
 				</reference>
 			</reference>
-			<reference referencedUin="jdt:l_ast:src:business.activity.Activity:state">
-				<property name="sourceAnchor" value="213,31"/>
-				<property name="targetAnchor" value="340,31"/>
-			</reference>
 			<reference referencedUin="jdt:e_field:src:business.activity.Activity.linkToSuccessor">
 			</reference>
 			<reference referencedUin="property:e_property:jdt=e_class=src=business.activity.Activity:state">
 			</reference>
 			<reference referencedUin="jdt:l_ast:src:business.activity.Activity:linkToSuccessor">
-				<property name="sourceAnchor" value="40,156"/>
-				<property name="targetAnchor" value="40,259"/>
+				<property name="sourceAnchor" value="152,221"/>
+				<property name="targetAnchor" value="152,324"/>
 				<property name="location_set_by_user" value="true"/>
 				<reference referencedUin="label:$associationRoleClientInplace:jdt:l_ast:src:business.activity.Activity:linkToSuccessor">
 					<property name="bounds" value="-48,240,79,17"/>
@@ -70,18 +70,18 @@
 					<property name="weight" value="0.8613138686131386"/>
 					<property name="location_set_by_user" value="true"/>
 				</reference>
-				<reference referencedUin="label:$clientQualifier:jdt:l_ast:src:business.activity.Activity:linkToSuccessor">
-				</reference>
 				<reference referencedUin="label:clientCardinality:jdt:l_ast:src:business.activity.Activity:linkToSuccessor">
 					<property name="bounds" value="48,160,10,17"/>
 					<property name="weight" value="0.05000000074505806"/>
 					<property name="location_set_by_user" value="true"/>
 				</reference>
+				<reference referencedUin="label:$clientQualifier:jdt:l_ast:src:business.activity.Activity:linkToSuccessor">
+				</reference>
 			</reference>
 			<reference referencedUin="jdt:l_ast:src:business.activity.Activity:linkToPredecessor">
 				<property name="location_set_by_user" value="true"/>
-				<property name="sourceAnchor" value="160,156"/>
-				<property name="targetAnchor" value="160,259"/>
+				<property name="sourceAnchor" value="144,221"/>
+				<property name="targetAnchor" value="144,324"/>
 				<reference referencedUin="label:$associationRoleSupplierInplace:jdt:l_ast:src:business.activity.Activity:linkToPredecessor">
 					<property name="weight" value="0.05000000074505806"/>
 					<property name="bounds" value="173,160,63,17"/>
@@ -92,14 +92,14 @@
 					<property name="weight" value="0.8155339805825242"/>
 					<property name="location_set_by_user" value="true"/>
 				</reference>
-				<reference referencedUin="label:clientCardinality:jdt:l_ast:src:business.activity.Activity:linkToPredecessor">
-					<property name="bounds" value="143,160,10,17"/>
-					<property name="weight" value="0.05000000074505806"/>
-					<property name="location_set_by_user" value="true"/>
-				</reference>
 				<reference referencedUin="label:supplierCardinality:jdt:l_ast:src:business.activity.Activity:linkToPredecessor">
 					<property name="bounds" value="120,240,24,17"/>
 					<property name="weight" value="0.8155339805825242"/>
+					<property name="location_set_by_user" value="true"/>
+				</reference>
+				<reference referencedUin="label:clientCardinality:jdt:l_ast:src:business.activity.Activity:linkToPredecessor">
+					<property name="bounds" value="143,160,10,17"/>
+					<property name="weight" value="0.05000000074505806"/>
 					<property name="location_set_by_user" value="true"/>
 				</reference>
 			</reference>
@@ -117,42 +117,42 @@
 				<property name="$hidden" value="true"/>
 			</reference>
 			<reference referencedUin="jdt:l_ast:src:business.activity.ActivitySequence:linkType">
-				<property name="sourceAnchor" value="186,299"/>
-				<property name="targetAnchor" value="293,299"/>
+				<property name="sourceAnchor" value="246,362"/>
+				<property name="targetAnchor" value="341,362"/>
 			</reference>
 		</reference>
 		<reference referencedUin="jdt:e_class:src:business.activity.IActivityState">
 			<property name="bounds" value="395,36,92,80"/>
 			<property name="location_set_by_user" value="true"/>
 			<reference referencedUin="label:$name:jdt:e_class:src:business.activity.IActivityState">
-				<property name="bounds" value="386,70,0,0"/>
+				<property name="bounds" value="446,131,0,0"/>
 			</reference>
 		</reference>
 		<reference referencedUin="jdt:e_class:src:business.activity.CreatedActivity">
 			<property name="bounds" value="561,0,101,80"/>
 			<property name="location_set_by_user" value="true"/>
+			<reference referencedUin="jdt:l_impl:src:business.activity.CreatedActivity:IActivityState">
+				<property name="sourceAnchor" value="566,63"/>
+				<property name="targetAnchor" value="492,63"/>
+			</reference>
 			<reference referencedUin="jdt:e_method:src:business.activity.CreatedActivity.process:process">
 				<property name="bounds" value="-14,-4,99,13"/>
-			</reference>
-			<reference referencedUin="jdt:l_impl:src:business.activity.CreatedActivity:IActivityState">
-				<property name="sourceAnchor" value="506,2"/>
-				<property name="targetAnchor" value="432,2"/>
 			</reference>
 		</reference>
 		<reference referencedUin="jdt:e_class:src:business.activity.InProgressActivity">
 			<property name="bounds" value="561,100,118,80"/>
 			<property name="location_set_by_user" value="true"/>
 			<reference referencedUin="jdt:l_impl:src:business.activity.InProgressActivity:IActivityState">
-				<property name="sourceAnchor" value="506,52"/>
-				<property name="targetAnchor" value="432,52"/>
+				<property name="sourceAnchor" value="566,113"/>
+				<property name="targetAnchor" value="492,113"/>
 			</reference>
 		</reference>
 		<reference referencedUin="jdt:e_class:src:business.activity.FinishedActivity">
 			<property name="bounds" value="561,220,102,80"/>
 			<property name="location_set_by_user" value="true"/>
 			<reference referencedUin="jdt:l_impl:src:business.activity.FinishedActivity:IActivityState">
-				<property name="sourceAnchor" value="519,164"/>
-				<property name="targetAnchor" value="423,60"/>
+				<property name="sourceAnchor" value="579,225"/>
+				<property name="targetAnchor" value="483,121"/>
 			</reference>
 		</reference>
 		<reference referencedUin="jdt:e_class:src:business.activity.ActivitySequenceType">
