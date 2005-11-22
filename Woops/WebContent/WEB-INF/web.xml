@@ -116,8 +116,8 @@
 		</taglib>
 		 
 		<taglib> 
-			<taglib-uri>/cc-utility.tld</taglib-uri> 
-			<taglib-location>/WEB-INF/tlds/cc-utility.tld</taglib-location> 
+			<taglib-uri>/cc-utility</taglib-uri> 
+			<taglib-location>/WEB-INF/tags/cc-utility.tld</taglib-location> 
 		</taglib>
 	</jsp-config>
 
