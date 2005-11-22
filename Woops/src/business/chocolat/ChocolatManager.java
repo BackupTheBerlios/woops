@@ -38,6 +38,11 @@ public class ChocolatManager extends ObjetPersistantManager {
 		return liste;
 	}	
 	
+	public Chocolat jeVeuxQueLeNomEtLesCaloriesDuChocolatPourFairePlaisirAJulien(Integer ID) throws PersistanceException {
+		Chocolat chocolat = dao.getjeVeuxQueLeNomEtLesCaloriesDuChocolatPourFairePlaisirAJulien(ID);		
+		return chocolat;
+	}	
+
 	
 
 	// TESTS //
@@ -47,7 +52,7 @@ public class ChocolatManager extends ObjetPersistantManager {
 		HibernateSessionFactory.init(f);
 		
 		try {
-			Chocolat chocolat = ChocolatManager.getInstance().getChocolat(new Integer(2));
+			Chocolat chocolat = ChocolatManager.getInstance().jeVeuxQueLeNomEtLesCaloriesDuChocolatPourFairePlaisirAJulien(new Integer(2));
 			chocolat.toString();
 		}
 		catch (PersistanceException pe) {

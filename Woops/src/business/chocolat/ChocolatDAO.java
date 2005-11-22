@@ -1,5 +1,6 @@
 package business.chocolat;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,6 +20,26 @@ public class ChocolatDAO extends ObjetPersistantDAO {
 		return liste;
 	}
 
+	public Chocolat getjeVeuxQueLeNomEtLesCaloriesDuChocolatPourFairePlaisirAJulien(Integer ID) throws PersistanceException {
+		Object toto[] = null; 
+		
+		StringBuffer req = new StringBuffer("select choc.nom, choc.calorie from Chocolat as choc ") ;
+        req.append("where ");
+        req.append("choc.id=" + ID);
+		
+	    ArrayList list = (ArrayList) executeQuery(req.toString());
+	    
+	    if (list.size()!=0) {
+	    	toto = (Object[]) list.get(0);
+	    }
+		
+	    Chocolat chocolat = new Chocolat();
+	    chocolat.setNom((String) toto[0]);
+	    chocolat.setCalorie(((Integer) toto[1]).intValue());
+	    
+		return chocolat;
+	}	
+	
 }
 
 
