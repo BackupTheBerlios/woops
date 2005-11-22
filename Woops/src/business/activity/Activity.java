@@ -5,45 +5,15 @@ import java.util.Collection;
 import business.user.User;
 
 
-/**
- * Defines an interface of interest to clients.
- *  Maintains an instance of a ConcreteState subclass
- *  that defines the current state.
- */
-
 public class Activity {
-
-	private User user;
+	private	Integer			id; /** identifiant de l'activité */
+	private String 			name; /** nom de l'activité */
+	private	String			details; /** description de l'activité */
+	private User 			user; /** Participant responsable de la réalisation de l'activité */
+	private IActivityState	state; /** Etat actuel de l'activité
 	
-	private Integer id;
 	/**
-	 * @return Returns the details.
-	 */
-	public String getDetails() {
-		return details;
-	}
-	/**
-	 * @param details The details to set.
-	 */
-	public void setDetails(String details) {
-		this.details = details;
-	}
-	/**
-	 * @return Returns the id.
-	 */
-	public Integer getId() {
-		return id;
-	}
-	/**
-	 * @param id The id to set.
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	private String name;
-	private String details;
-
-	/**
+	 * Liste des activités dont dépend l'activité
 	 * @associates business.activity.ActivitySequence
 	 * @clientCardinality 1
 	 * @clientRole linkToPredecessor
@@ -51,9 +21,10 @@ public class Activity {
 	 * @supplierCardinality 0..*
 	 * @supplierRole predecessor
 	 */
-	public java.util.Collection linkToPredecessor = null;
-
+	private Collection 		linkToPredecessor;
+	
 	/**
+	 * Liste des activités qui dépendent de l'activité
 	 * @associates business.activity.ActivitySequence
 	 * @clientCardinality 1
 	 * @clientRole linkToSuccessor
@@ -62,33 +33,11 @@ public class Activity {
 	 * @supplierCardinality 0..*
 	 * @supplierRole successor
 	 */
-	public java.util.Collection linkToSuccessor = null;
-
-	private IActivityState state;
-
-	/**
-	 * @link
-	 * @shapeType PatternLink
-	 * @pattern gof.State
-	 * @supplierRole State Abstraction
-	 */
-	/*# private IActivityState lnkIActivityState;*/
-	public void setState(IActivityState newState) {
-		this.state = newState;
-	}
-
-	public void someOperation() {
-		state.process();
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	private Collection 		linkToSuccessor;
 	
+	/**
+	 * Constructeur par défaut
+	 */
 	public Activity() {
 		this.name = null;
 		this.details = null;
@@ -97,7 +46,16 @@ public class Activity {
 		this.state = null;
 	}
 	
-	public Activity(String name, String details, Collection linkToPredecessor, Collection linkToSuccessor, User user) {
+	/**
+	 * Construteur permettant d'initialiser chaque caractéristique d'une activité
+	 * @param name nom de l'activité
+	 * @param details description de l'activité
+	 * @param linkToPredecessor liste des activités dont dépend l'activité
+	 * @param linkToSuccessor liste des activités qui dépendent de l'activité
+	 * @param user participant responsable de la réalisation de l'activité
+	 */
+	public Activity(String name, String details, Collection linkToPredecessor,
+			Collection linkToSuccessor, User user) {
 		this.name = name;
 		this.details = details;
 		this.linkToPredecessor = linkToPredecessor;
@@ -105,10 +63,94 @@ public class Activity {
 		this.user = user;
 		this.state = new CreatedActivity();
 	}
+	
+	/**
+	 * Récupération de l'identifiant de l'activité nécessaire pour la persistence
+	 * @return identifiant de l'activité
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * Modification de l'identifiant de l'activité
+	 * @param id identifiant de l'activité à modifier
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * Récupération du nom de l'activité
+	 * @return nom de l'activité
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Modification du nom de l'activité 
+	 * @param name nom de l'activité
+	 */ 
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Récupération du participant responsable de la réalisation de l'activité
+	 * @return participant
+	 */
 	public User getUser() {
 		return user;
 	}
-	public void setUser(User property1) {
-		this.user = property1;
+
+	/**
+	 * Modification du participant responsable de la réalisation de l'activité
+	 * @param  participant
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
+
+	/**
+	 * Récupération du descriptif de l'activité
+	 * @return description de l'activité
+	 */
+	public String getDetails() {
+		return details;
+	}
+
+	/**
+	 * Modification du descriptif de l'activité
+	 * @param details description de l'activité
+	 */
+	public void setDetails(String details) {
+		this.details = details;
+	}
+	
+	/**
+	 * Modification de l'état de l'activité
+	 * @shapeType PatternLink
+	 * @pattern gof.State
+	 * @supplierRole State Abstraction
+	 * @param newState nouvel état
+	 */
+	public void setState(IActivityState newState) {
+		this.state = newState;
+	}
+
+	/**
+	 * Opération qui déclenche la modification de l'état de l'activité
+	 */
+	public void someOperation() {
+		state.process();
+	}
+
+
+
+
+
+
+
+
 }

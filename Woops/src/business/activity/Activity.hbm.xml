@@ -5,12 +5,15 @@
 
 <hibernate-mapping>
 	<class name="business.activity.Activity" table="activity">
+		
+		<!-- identifiant d'une occurrence dans la table -->
 		<id
 			column="id"
 			name="id"
 			type="integer"
 		>
-			<generator class="assigned" />
+			<!--identifiant auto-incrementé --> 
+			<generator class="identity" />
 		</id>
 		
 		<property
@@ -28,6 +31,7 @@
 			type="string"
 		 />	
 		
+		<!-- Une activité est réalisé par un utilisateur -->
 		<many-to-one
 			class="business.user.User"
 			name="user"
