@@ -1,5 +1,5 @@
-<%@ taglib uri="/WEB-INF/tags/cc-utility.tld" prefix="util" %>
-<%@ taglib uri="/WEB-INF/tags/cc-controls.tld" prefix="ctrl" %> 
+<%@ taglib uri="/cc-utility" prefix="util" %>
+<%@ taglib uri="/cc-controls" prefix="ctrl" %> 
 
 
 
@@ -11,7 +11,7 @@
   
   <body leftmargin="0" topmargin="0" onload="init();"> 
 
-
+	<forms:message formid="frmError" caption="title.error" severity="error" width="350"/>
 
 	<ctrl:list id="list" action="/listActivities.do" name="listActivitiesForm" property="listActivities" 
 title="User List" width="500" rows="15" refreshButton="true" createButton="false"> 
