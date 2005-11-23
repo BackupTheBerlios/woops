@@ -3,9 +3,9 @@
 
 <template:insert template="../template.jsp">
 
-    <template:put  name="title"     content="Gérer les dépendances des activités" direct="true"/>
+    <template:put  name="title"     content="G?rer les d?pendances des activit?s" direct="true"/>
     <template:put  name="menuHaut"  content="./identifications.jsp" />
     <template:put  name="menu"  	content="./menu.jsp" />
-    <template:put  name="contents"  content="./activity/manageActivityDependancesContent.jsp.jsp"/>
+    <template:put  name="contents"  content="./activity/manageActivityDependancesContent.jsp"/>
     
 </template:insert>
