@@ -1,14 +1,14 @@
-<%@ taglib uri="/WEB-INF/tlds/struts-html.tld" prefix="html" %>
-<%@ taglib uri="/WEB-INF/tlds/cc-forms.tld"    prefix="forms" %>
-<%@ taglib uri="/WEB-INF/tlds/cc-base.tld"     prefix="base" %>
+<%@ taglib uri="/struts-html" prefix="html" %>
+<%@ taglib uri="/cc-forms"    prefix="forms" %>
+<%@ taglib uri="/cc-base"     prefix="base" %>
 
 <html:form action="/manageActivityDependances">
 
-    <forms:form type="edit" name="manageActivityDependancesForm" caption="Gérer les dépendances d'une activité" formid="frmActivityDependances" width="550">
+    <forms:form type="edit" name="manageActivityDependancesForm" caption="G?rer les d?pendances d'une activit?" formid="frmActivityDependances" width="550">
 
         <forms:swapselect
             property="realDependancesList"
-            label="Liste des activités dépendantes"
+            label="Liste des activit?s d?pendantes"
             orientation="horizontal"
             labelLeft="Possibles"
             labelRight="Effectifs"
