@@ -6,11 +6,11 @@ import com.cc.framework.ui.model.ListDataModel;
 
 public class ManageActivityDependancesForm extends FWActionForm {
 	
-	/* Liste représentant toutes les activités dont l'activité peut dépendre */
+	/* Liste repr?sentant toutes les activit?s dont l'activit? peut d?pendre */
 	private SimpleListControl possibleDependancesOptions = new SimpleListControl();
 	
-	/* Liste représentant les clés des dépendances sélectionnées */
-	private String[] realDependancesKey = new String[0];
+	/* Liste repr?sentant les cl?s des d?pendances s?lectionn?es */
+	private String[] realDependancesKeys = new String[0];
 	
 
 	public ListDataModel getPossibleDependancesOptions() {
@@ -21,12 +21,12 @@ public class ManageActivityDependancesForm extends FWActionForm {
 		possibleDependancesOptions.setDataModel(dataModel);
 	}
 
-	public String[] getRealDependancesKey() {
-		return realDependancesKey;
+	public String[] getRealDependancesKeys() {
+		return realDependancesKeys;
 	}
 
-	public void setRealDependancesKey(String[] realDependancesKey) {
-		this.realDependancesKey = realDependancesKey;
+	public void setRealDependancesKeys(String[] realDependancesKeys) {
+		this.realDependancesKeys = realDependancesKeys;
 	}
 	
 }
