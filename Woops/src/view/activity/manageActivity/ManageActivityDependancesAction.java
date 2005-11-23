@@ -7,19 +7,20 @@ import java.util.Collection;
 import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
+import org.apache.struts.action.ActionForward;
+
+import view.PresentationConstantes;
+import view.WoopsCCAction;
+import view.activity.listActivities.ActivityItem;
+import view.activity.listActivities.ListActivitiesModel;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
-import com.cc.framework.ui.model.ListDataModel;
-
-import view.WoopsCCAction;
-import view.activity.listActivities.ActivityItem;
-import view.activity.listActivities.ListActivitiesAction;
-import view.activity.listActivities.ListActivitiesForm;
-import view.activity.listActivities.ListActivitiesModel;
 
 public class ManageActivityDependancesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ManageActivityDependancesAction.class);   
+	
+	ActionForward forward = null;
 	
 	public ManageActivityDependancesAction() {
 		super();
@@ -32,7 +33,8 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			logger.debug("context.form()==null");
 			context.request().setAttribute(context.mapping().getAttribute(), new ManageActivityDependancesForm());
 		}
-		
+	
+	try {
 		ManageActivityDependancesForm madForm = (ManageActivityDependancesForm) context.form();
 		
 		Collection possibleActivitiesList = new ArrayList();
@@ -52,7 +54,14 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		ListActivitiesModel model = new ListActivitiesModel(data);
 		madForm.setPossibleDependancesOptions(model);
 		
-		context.forwardToInput();
+		forward = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCES);
+        
+	} catch (Throwable t) {
+		context.addGlobalError("action.activities.error");
+	}
+
+	/* Display the Page with the UserList */
+    context.forward(forward); 
 	}
 	
 	
