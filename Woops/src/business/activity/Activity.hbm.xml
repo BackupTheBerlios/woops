@@ -4,8 +4,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
 
 <hibernate-mapping>
-	<class name="business.activity.Activity" table="activity">
-		
+	<class name="business.activity.Activity" table="Activity">
 		<!-- identifiant d'une occurrence dans la table -->
 		<id
 			column="id"
