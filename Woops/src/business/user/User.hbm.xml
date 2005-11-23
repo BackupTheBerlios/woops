@@ -4,7 +4,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
 
 <hibernate-mapping>
-	<class name="business.user.User" table="user">
+	<class name="business.user.User" table="User">
 		<id
 			column="id"
 			name="id"
