@@ -4,15 +4,16 @@
 **
 ** USER...........: P001001
 ** PAINTER........: def2
-** BUILD-FACTORY..: v1.2.001
-** BUILD-DATE.....: Wed Jan 14 19:37:22 CET 2004
+** BUILD-FACTORY..: v1.4.055
+** BUILD-DATE.....: Wed Feb 16 18:52:14 CET 2005
 ** BUILD-DIRECTORY: C:\eclipse\workspace\cc-framework
-** BUILD-FILE.....: C:\eclipse\workspace\cc-framework/build/resources/resources-def2.xml
+** BUILD-FILE.....: C:\eclipse\workspace\cc-framework\build\resources\resources.xml
 **
 ** DO NOT MODIFY!
 ** ==========================================
 */
 
+/* Import the framework default styles */
 @import "menu.css";
 @import "controls.css";
 @import "forms.css";

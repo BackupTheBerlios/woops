@@ -54,9 +54,12 @@ function checkInt(value) {
 function spinUp(obj) {
 	if ( checkInt (obj.value) ){
 		obj.value = parseInt(obj.value) + 1;
+		// TODO obj.fireEvent("onchange");
 	} else {
 		alert(">" + obj.value +"< ist not a valid Number!");
 	}
+
+	return false;
 }
 
 /*
@@ -76,9 +79,12 @@ function spinUp(obj) {
 function spinDown(obj) {
 	if ( checkInt (obj.value) ){
 		obj.value = parseInt(obj.value) - 1;
+		// TODO obj.fireEvent("onchange");
 	} else {
 		alert(">" + obj.value +"< ist not a valid Number!");
 	}
+
+	return false;
 }
 
 

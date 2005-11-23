@@ -1,6 +1,34 @@
-/***********************************************************************
- * (C) SCC Informationssysteme GmBH 2000 - 2003                        *
- ***********************************************************************/
+/*
+ * $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/woops/Repository/Woops/WebContent/fw/def2/jscript/tabset.js,v 1.2 2005/11/23 11:53:01 sregg Exp $
+ * $Revision: 1.2 $
+ * $Date: 2005/11/23 11:53:01 $
+ *
+ * ====================================================================
+ *
+ * Copyright (c) 2000 - 2004 SCC Informationssysteme GmbH. All rights
+ * reserved.
+ * Vendor URL : http://www.scc-gmbh.com
+ * Product URL: http://www.common-controls.com
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL SCC INFORMATIONSSYSTEME GMBH OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ *
+ * Note: This file belongs to the Common Controls Presentation
+ *       Framework. Permission is given to use this script only
+ *       together with the Common Controls Presentation Framework
+ *
+ * ====================================================================
+ */
 
 /***********************************************************************
  * Name:
@@ -12,22 +40,19 @@
  * Author:
  *        G Schulz
  *
- * Status:
- *        Version 1, Release 1
- *
  * Environment:
  *        This is a PLATFORM-INDEPENDENT source file. As such it may
  *        contain no dependencies on any specific operating system
  *        environment or hardware platform.
  *
  * Description:
- *        ...
  *
  * TESTED ON:  - InternetExplorer   > 5.0
  *             - Netscape Navigator > 7.0
+ *             - Mozilla            > 1.6
+ *             - Safari             > 1.2
  *
  ***********************************************************************/
-
 
 /*
 + ---------------------------------------------------------------------------------+
@@ -35,9 +60,12 @@
 |
 | Datum       Author            Bemerkung
 | ----------  ----------------  ----------------------------------------------------
-| 04.03.2003  G.Schulz (SCC)    first version
+| 04.03.2003  G.Schulz (SCC)    Initial version
 | 27.12.2003  G.Schulz (SCC)    Height, Width for the additinal icon added
-|
+| 22.04.2004  G.Schulz (SCC)    NS hand cursor problem fixed. 
+|								TabsetImages were not displayed in NS (runAt=client)
+| 01.08.2004  G.Schulz (SCC)    Problems with style.cursor = 'pointer' in IE fixed
+| 13.10.2004  G.Schulz (SCC)    TabSet supports now the "formElement" attribute
 + ---------------------------------------------------------------------------------+
 */
 function Tab(id, label, selected, tooltip, disabled, icon, iconwidth, iconheight) {
@@ -64,8 +92,14 @@ function Tab_getTooltip() {
 function Tab_isDisabled() {
 	return this.disabled;
 }
+function Tab_setDisabled(disabled) {
+	this.disabled = disabled;
+}
 function Tab_isSelected() {
 	return this.selected;
+}
+function Tab_setSelected(selected) {
+	this.selected = selected;
 }
 function Tab_setParent(obj) {
 	if (obj instanceof TabSet) {
@@ -90,8 +124,10 @@ Tab.prototype.getId        = Tab_getId;
 Tab.prototype.getLabel     = Tab_getLabel;
 Tab.prototype.getTooltip   = Tab_getTooltip;
 Tab.prototype.isSelected   = Tab_isSelected;
+Tab.prototype.setSelected  = Tab_setSelected;
 Tab.prototype.setParent    = Tab_setParent;
 Tab.prototype.isDisabled   = Tab_isDisabled;
+Tab.prototype.setDisabled  = Tab_setDisabled;
 Tab.prototype.toString     = Tab_toString;
 
 
@@ -106,11 +142,12 @@ Tab.prototype.toString     = Tab_toString;
 |
 + ---------------------------------------------------------------------------------+
 */
-function TabSet(id) {
-	this.id        = id;                       // Id of the TabSets
-	this.tabs      = new Array();              // Buffer to hold the tab pages
-	this.length    = 0;                        // number of tap pages
-	this.runAt     = RunAt.SERVER;             // indicates if a click on a tab page should make a server roundtrip or not.
+function TabSet(id, formElement) {
+	this.id          = id;                                               // Id of the TabSets
+	this.tabs        = new Array();                                      // Collection for the tab pages
+	this.length      = 0;                                                // total number of tab pages
+	this.runAt       = RunAt.SERVER;                                     // indicates if a click on a tab page should make a server roundtrip or not.
+	this.formElement = (arguments.length >= 2) ? formElement : false;    // indicates if the TabSet should act as a form element.
 }
 function TabSet_getId() {
 	return this.id;
@@ -118,7 +155,7 @@ function TabSet_getId() {
 function TabSet_addTab(obj, label, selected, tooltip, disabled, icon, iconwidth, iconheight) {
 	var tab = null;
 
-	// Workaround for Function Overloading in JS
+	// workaround for function overloading in JS
 	if (obj instanceof Tab) {
 		tab = obj;
 	} else {
@@ -126,7 +163,6 @@ function TabSet_addTab(obj, label, selected, tooltip, disabled, icon, iconwidth,
 		tab = new Tab(id, label, selected, tooltip, disabled, icon, iconwidth, iconheight)
 	}
 	
-//	this.tabs.push(tab);
 	this.tabs[this.tabs.length] = tab;
 	tab.setParent(this);
 	this.length = this.tabs.length;
@@ -138,6 +174,16 @@ function TabSet_getTab(index) {
 	} else {
 		return this.tabs[index];
 	}
+}
+function TabSet_getTabById(id) {
+
+	for (var i=0; i < this.length; i++) {
+		if (this.tabs[i]['id'] == id) {
+			return this.tabs[i];
+		}
+	}
+	
+	return null;
 }
 function TabSet_selectTab(index) {
 	// check Index
@@ -163,12 +209,20 @@ function TabSet_getSelectedIndex() {
 function TabSet_setRunAt(obj) {
 	this.runAt = obj;
 }
+function TabSet_isFormElement() {
+	return this.formElement;
+}
+function TabSet_setFormElement(formElement) {
+	this.formElement = formElement;
+}
 function TabSet_toString() {
 	var out = '';
 	out += '******* TabSet *********' + LF
-	out += 'Id.........: ' + this.id + LF;
-	out += 'Length.....: ' + this.length + LF;
-	out += 'RunAt......: ' + this.runAt;
+	out += 'Id.............: ' + this.id + LF;
+	out += 'Length.........: ' + this.length + LF;
+	out += 'RunAt..........: ' + this.runAt + LF;
+	out += 'SelectedIndex..: ' + this.getSelectedIndex();
+	out += 'FormElement....: ' + this.formElement;
 	return out;
 }
 new TabSet();
@@ -178,7 +232,10 @@ TabSet.prototype.selectTabById		= TabSet_selectTabById;
 TabSet.prototype.getSelectedIndex	= TabSet_getSelectedIndex;
 TabSet.prototype.addTab				= TabSet_addTab;
 TabSet.prototype.getTab				= TabSet_getTab;
+TabSet.prototype.getTabById         = TabSet_getTabById;
 TabSet.prototype.setRunAt			= TabSet_setRunAt;
+TabSet.prototype.setFormElement     = TabSet_setFormElement;
+TabSet.prototype.isFormElement      = TabSet_isFormElement;
 TabSet.prototype.toString			= TabSet_toString;
 
 
@@ -193,46 +250,54 @@ TabSet.prototype.toString			= TabSet_toString;
 |
 + ---------------------------------------------------------------------------------+
 */
-function TabSetPainterData(tabSet, resPath, bgColor, maxVisibleTabs, maxLabelLength) {
-	this.TAB_BGCOLOR	    = bgColor;	//'C4C8C9'; see stylesheet
-	RESPATH                 = resPath;  //'fw/def/image/tab/';
-	LABEL_SUFFIX            = '..';
-	// Prefix for DIV-Tag
-	DIV_PREVIX              = 'tabset_';
-	// StyleSheet
-	CSS_TABLE	= 'tsc';
-	// Scroll Butttons
-	ARROW_LEFT              = RESPATH + 'btnArrow_left1.gif';
-	ARROW_RIGHT             = RESPATH + 'btnArrow_right1.gif';
-	// Scroll Buttons deaktiviert
-	ARROW_LEFT_DISABLED     = RESPATH + 'btnArrow_left2.gif';
-	ARROW_RIGHT_DISABLED    = RESPATH + 'btnArrow_right2.gif';
-	// More-Tabs Image
-	TAB_PREV                = RESPATH + 'tabMoreL.gif';
-	TAB_PREV_EMPTY          = RESPATH + 'tabMoreL_empty.gif';
-	TAB_NEXT                = RESPATH + 'tabMoreR.gif';
-	// Tab unselektiert
-	TAB_L                   = RESPATH + 'tabL.gif';
-	TAB_R                   = RESPATH + 'tabR.gif';
-	TAB_BG                  = RESPATH + 'tabBg.gif';
-	// Tab selektiert
-	this.TAB_LSEL           = RESPATH + 'tabLSel_'  + this.TAB_BGCOLOR + '.gif';
-	this.TAB_RSEL           = RESPATH + 'tabRSel_'  + this.TAB_BGCOLOR + '.gif';
-	this.TAB_BGSEL          = RESPATH + 'tabBgSel_' + this.TAB_BGCOLOR + '.gif';
-	// Tab disabled
-	TAB_DISL                = RESPATH + 'tabDisL.gif';
-	TAB_DISR                = RESPATH + 'tabDisR.gif';
-	TAB_DISBG               = RESPATH + 'tabDisBg.gif';
-
+function TabSetPainterData(tabSet, type, contextPath, arr_imageRes, arr_stringRes, bgColor, maxVisibleTabs, maxLabelLength, styleClass) {
 	this.tabSet             = tabSet;               // TabSet object containing the tab pages
+	this.contextPath        = contextPath;          // Needed for SSL problem IE
+	this.arr_imageRes       = arr_imageRes;	        // array including all the images to paint the tabset
+	this.arr_stringsRes     = arr_stringRes;        // array including string resources
+	this.TAB_BGCOLOR	    = bgColor;	            // background-color for this tabset
 	this.maxVisibleTabs     = maxVisibleTabs;       // maximal number of tabpages to show
 	this.maxLabelLength     = maxLabelLength;       // maximal length of the labels on the tab page
-	this.currentPos         = -1;                   // actual position when browsing the tabset
+
+	this.currentPos         = -1;                                        // actual position while browsing the tabset
+	CSS_TABLE               = 'tsc';
+	LABEL_SUFFIX            = '..';
+	DIV_PREVIX              = 'tabset_';                                 // Prefix for DIV-Tag which embbedds the tabset
 	
-	// Init-Block. Only initialize when
-	// the Object is realy used.
+	// Init-Block. Only initialize when the Object is realy used.
 	if (null != tabSet) {
+		this.isTabset           = (type.toUpperCase() == 'TABSET') ? true : false;
 		
+		// Scroll buttons
+		this.ARROW_LEFT              = this.isTabset ? arr_imageRes[BUTTON_TABSET_PREVIOUS_1] : arr_imageRes[BUTTON_TABBAR_PREVIOUS_1];
+		this.ARROW_LEFT_DISABLED     = this.isTabset ? arr_imageRes[BUTTON_TABSET_PREVIOUS_2] : arr_imageRes[BUTTON_TABBAR_PREVIOUS_2];
+		this.ARROW_RIGHT             = this.isTabset ? arr_imageRes[BUTTON_TABSET_NEXT_1]     : arr_imageRes[BUTTON_TABBAR_NEXT_1];
+		this.ARROW_RIGHT_DISABLED    = this.isTabset ? arr_imageRes[BUTTON_TABSET_NEXT_2]     : arr_imageRes[BUTTON_TABBAR_NEXT_2];
+	
+		// More-Tabs Image
+		this.TAB_PREV                = this.isTabset ? arr_imageRes[BUTTON_TABSET_MORE_PREVIOUS] : arr_imageRes[BUTTON_TABBAR_MORE_PREVIOUS];
+		this.TAB_PREV_EMPTY          = this.isTabset ? arr_imageRes[BUTTON_TABSET_MORE_EMPTY]    : arr_imageRes[BUTTON_TABBAR_MORE_EMPTY];
+		this.TAB_NEXT                = this.isTabset ? arr_imageRes[BUTTON_TABSET_MORE_NEXT]     : arr_imageRes[BUTTON_TABBAR_MORE_NEXT];
+
+	
+		// selected tab images
+		this.TAB_LSEL                = this.isTabset ? arr_imageRes[TABSET_TABSEL_L_COLOR]  : arr_imageRes[TABBAR_TABSEL_L_COLOR];
+		this.TAB_RSEL                = this.isTabset ? arr_imageRes[TABSET_TABSEL_R_COLOR]  : arr_imageRes[TABBAR_TABSEL_R_COLOR];
+		this.TAB_BGSEL               = this.isTabset ? arr_imageRes[TABSET_TABSEL_BG_COLOR] : arr_imageRes[TABBAR_TABSEL_BG_COLOR];
+	
+		// unselected tab images
+		this.TAB_L                   = this.isTabset ? arr_imageRes[TABSET_TABUNSEL_L]  : arr_imageRes[TABBAR_TABUNSEL_L];
+		this.TAB_R                   = this.isTabset ? arr_imageRes[TABSET_TABUNSEL_R]  : arr_imageRes[TABBAR_TABUNSEL_R];
+		this.TAB_BG                  = this.isTabset ? arr_imageRes[TABSET_TABUNSEL_BG] : arr_imageRes[TABBAR_TABUNSEL_BG];
+	
+		// disabled tab images
+		this.TAB_DISL                = this.isTabset ? arr_imageRes[TABSET_TABDISABLED_L]  : arr_imageRes[TABBAR_TABDISABLED_L];
+		this.TAB_DISR                = this.isTabset ? arr_imageRes[TABSET_TABDISABLED_R]  : arr_imageRes[TABBAR_TABDISABLED_R];
+		this.TAB_DISBG               = this.isTabset ? arr_imageRes[TABSET_TABDISABLED_BG] : arr_imageRes[TABBAR_TABDISABLED_BG];
+	
+		// String ressource
+		this.TEXT_RANGE              = this.isTabset ? arr_stringRes[FW_TABSET_RANGE] : arr_stringRes[FW_TABBAR_RANGE];
+
 		// Bei RunAtClient
 		this.currentPos     = (-1 == tabSet.getSelectedIndex()) ? 0 : tabSet.getSelectedIndex();
 		// Bei RunAtServer
@@ -276,9 +341,9 @@ function TabSetPainter_render(tspData) {
 	var maxLabelLength	= tspData['maxLabelLength'];
 	var tabSet			= tspData['tabSet'];
 	var	currentPos		= tspData['currentPos'];
-	
+
 	// create Documentfragment
-	var doc = document.createDocumentFragment();
+	var doc = document.createElement('SPAN');
 	
 	//create Table
 	var table = document.createElement('Table');
@@ -308,7 +373,6 @@ function TabSetPainter_render(tspData) {
 	}
 	
 	this.createImgNodeMore(row, tspData, 'R');
-	//this.createScrollButtons(row, tspData, 'R');
 	this.createDetailNode(row, tspData);
 	
 	// get the DIV-Element from the form, where the
@@ -316,15 +380,17 @@ function TabSetPainter_render(tspData) {
 	var div = this.getTabSetNode(tabSet.getId());
 	if ( div.hasChildNodes() ) {
 		//	div.replaceChild(doc, div.childNodes[0]);  // Problems if used with SSL and IE
-		div.innerHTML = "";
+		div.innerHTML = '';
 		div.appendChild(table);
 	} else {
 		div.appendChild(table);
 	}
-	
-	// Falls das Tabset nur ClientSeitig arbeiten soll
-	// muessen noch alle uebrigen Tabs ausgeblendt werden.
-	if (tabSet.runAt == RunAt.CLIENT) {
+
+	// If our tabset works on the client side
+	// only dispay the content for the selected tab (span)
+	// and hide all other html span elements.
+	// First check if a tabset was selected
+	if (tabSet.runAt == RunAt.CLIENT || tabSet.getSelectedIndex() >= 0) {
 		TabSetPainter.displayTab(tabSet.getId(), tabSet.getTab(tabSet.getSelectedIndex()).getId());
 	}
 }
@@ -333,15 +399,22 @@ function TabSetPainter_createTabNode(row, tab, tspData) {
 	var bgImage = '';
 	var className = '';
 	var maxLabelLength = tspData['maxLabelLength'];
-	
+
 	if (tab.isDisabled()) {
-		bgImage = TAB_DISBG;
+		bgImage = tspData.TAB_DISBG.src;
 		className = 'disabled';
 	} else {
-		bgImage = tab.isSelected() ? tspData['TAB_BGSEL'] : TAB_BG;
 		className = tab.isSelected() ? 'sel' : 'unsel';
+		bgImage = tab.isSelected() ? tspData.TAB_BGSEL.src.replace('{0}', tspData.TAB_BGCOLOR) : tspData.TAB_BG.src;
+
+		// problem in IE under https
+		if(ie & HTTPUtil.isSecure()) {
+			var host = window.location.host;
+			bgImage = 'https://' + host +  tspData.contextPath + '/' + bgImage;
+		}	
+
 	}
-	
+
 	// Draw an optional icon in front of the Text in the Tab
 	if (null != tab['icon']) {
 		cell = row.insertCell(row.cells.length);
@@ -349,62 +422,96 @@ function TabSetPainter_createTabNode(row, tab, tspData) {
 		var width = tab['iconwidth'];
 		var height = tab['iconheight'];
 
-		var img = document.createElement('Image');
-		img.setAttribute('src', icon);
-		img.setAttribute('border', 0);
-		img.setAttribute('width', width);
-		img.setAttribute('height', height);
+		var img = document.createElement('Img');
+		img.src = icon;
+		img.border = 0;
+		img.width = width;
+		img.height = height;
+		
 		cell.setAttribute('background', bgImage);
-		cell.setAttribute('align', 'middle');
+		cell.setAttribute('valign', 'middle');
+		cell.setAttribute('vspace', 0);
+		cell.style.paddingRight='5px';	// matchs &nbsp;
 		cell.appendChild(img);
-		cell.style.paddingRight='3px';	// matchs &nbsp;
 	}
-	
+
 	// Draw the Label
 	cell = row.insertCell(row.cells.length);
 	cell.setAttribute('background', bgImage);
-	cell.noWrap = true;
+	cell.noWrap = true;	
 	cell.className = className;
 
 	var span = document.createElement('Span');
+	if (!ie) {
+		span.style.cursor = 'pointer';
+	} 
+	span.style.cursor = 'hand';
 	span.title = (tab.getTooltip()!= null) ? tab.getTooltip() : tab.getLabel();
-	span.onclick = function() {
+
+	// Add the onclick handler only if the Tab is enabled
+	if (!tab.isDisabled()) {
+		span.onclick = function() {
 			var tabSet = tspData['tabSet'];
 			var tabSetId = tab.parent.getId();
-			// Hidden Field fuer eventuellen ServerRoundtrip updaten
-			var hidden = document.getElementById(tabSetId);
-			if (null != hidden) {
-				hidden.value= tab.getId(); // + '.' + tspData['currentPos'];
-			}
 
-			// Aktuelle Position in Hidden Field ablegen, damit
-			// die neu selektierte Tabe an der gleichen stelle 
-			// geoffnet werden kann.
-			// ToDo .... 
+			// if a server roundtrip is required, we must submit the Form.
+			// Therefore search the form which embbeds this TabSet and submit the form.
+			var form = TabSetPainter.getFormElement(document.getElementById(DIV_PREVIX + tabSetId));
+
+// -------------- 
+			// Set the tabsets property to the selected page
+			if ((form != null) && (tabSet.id != null)) {
+
+				var field = form[tabSet.id];
+				
+				if (field != null) {
+					field.value = tab.id;
+				}
+			}
+// -------------- 
 
 			if (tabSet.runAt == RunAt.SERVER) {
-				// if a server roundtrip is required, we must submit the Form
-				var form = TabSetPainter.getFormElement(document.getElementById(DIV_PREVIX + tabSetId));
-				
-				if (null != form) {
-					// set the request parameter to identify the tab, so that the
-					// eventhandler can be called
-					form.action += '?ctrl=' + tabSet.getId() + '&action=TabClick&param=' + tab.getId();
-					form.submit();
-				} else {
+
+				if (null == form) {
 					var msg = ''
 					msg += 'Error: TabSet ' + tabSet.getId() + ' is not embedded in a form!\n';
 					msg += 'If you want to use the client side scrolling feature you must\n';
 					msg += 'embedd the TabSetControl in a HTML-Form!';
 					alert(msg);
+					return;
 				}
+				
+				if (tabSet.isFormElement()) {
+				
+				} else {
+					// Set the request parameter to identify the tab, 
+					// so that the event handler can be called.
+					form.action += '?ctrl=' + tabSet.getId() + '&action=TabClick&param=' + tab.getId();
+					form.submit();
+				}			
 			} else if (tabSet.runAt == RunAt.CLIENT) {
-				// TabSetLeiste neu zeichnen und nicht
-				// angezeigte Tabs ausblenden
+		
+				// paint the TabSet again using the selected index
 				tabSet.selectTabById(tab.getId());
 				TabSetPainter.render(tspData);
+					
+				if (null != form) {
+					var param = tabSet.getId() + '=TabClick=' + tab.getId();
+				
+					var ctrla = document.getElementById('ctrla');
+					if (ctrla == null) {
+						var hidden = CCUtility.createHidden('ctrla', param);
+						form.appendChild(hidden);
+						
+					} else {
+						ctrla.value = param;
+					}
+				}
+				
 			}
 		};
+	}	
+
 	span.appendChild(document.createTextNode(this.clipLabel(tab, maxLabelLength)));
 	cell.appendChild(span);
 }
@@ -417,27 +524,27 @@ function TabSetPainter_clipLabel(tab, maxLabelLength) {
 	return label;
 }
 function TabSetPainter_createImgNode(row, tab, tspData, side) {
-	var img = document.createElement('Img');
+	var img = null;
 
 	if (side.toUpperCase() == 'R' && tab.isDisabled()) {
-		img.src = TAB_DISR;
+		img = this.createImage(tspData.TAB_DISR);
 	}
 	else if (side.toUpperCase() == 'L' && tab.isDisabled()) {
-		img.src = TAB_DISL;
+		img = this.createImage(tspData.TAB_DISL);
 	}
 	else if (side.toUpperCase() == 'R' && tab.isSelected()) {
-		img.src = tspData['TAB_RSEL'];
+		img = this.createImage(tspData.TAB_RSEL, tspData.TAB_BGCOLOR);
 	}
 	else if (side.toUpperCase() == 'R' && !tab.isSelected()) {
-		img.src = TAB_R;
+		img = this.createImage(tspData.TAB_R);
 	}
 	else if (side.toUpperCase() == 'L' && tab.isSelected()) {
-		img.src = tspData['TAB_LSEL'];
+		img = this.createImage(tspData.TAB_LSEL, tspData.TAB_BGCOLOR);
 	}
 	else if (side.toUpperCase() == 'L' && !tab.isSelected()) {
-		img.src = TAB_L;
+		img = this.createImage(tspData.TAB_L);
 	}
-	
+
 	row.insertCell(row.cells.length).appendChild(img);
 }
 function TabSetPainter_createScrollButtons(row, tspData, side) {
@@ -449,32 +556,37 @@ function TabSetPainter_createScrollButtons(row, tspData, side) {
 	var imgBtn = document.createElement('Img');
 
 	pos = (tabSet.length <= maxVisibleTabs) ? 0 : currentPos;
-//	if (tabSet.length <= maxVisibleTabs) return;
 
 	if (side.toUpperCase() == 'L' && pos > 0) {
-		imgBtn.src = ARROW_LEFT;
+		imgBtn.src = tspData.ARROW_LEFT.src;
 		imgBtn.border = 0;
 		imgBtn.id = 'btnNextTab_' + tabSet.getId();
 		imgBtn.onclick = function() { TabSetPainter.browse(tspData, 'PREV'); };
+		if (!ie) {
+			imgBtn.style.cursor = 'pointer';
+		}
 		imgBtn.style.cursor = 'hand';
 		row.insertCell(row.cells.length).appendChild(imgBtn);
 	} else if (side.toUpperCase() == 'L' &&  maxVisibleTabs < tabSet.length){
-		imgBtn.src = ARROW_LEFT_DISABLED;
+		imgBtn.src = tspData.ARROW_LEFT_DISABLED.src;
 		imgBtn.border = 0;
 		row.insertCell(row.cells.length).appendChild(imgBtn);
 	}
 	
 	if ((side.toUpperCase() == 'R') && (currentPos + maxVisibleTabs < tabSet.length) ) {
-		imgBtn.src = ARROW_RIGHT;
+		imgBtn.src = tspData.ARROW_RIGHT.src;
 		imgBtn.border = 0;
 		imgBtn.id = 'btnPrevTab_' + tabSet.getId();
 		imgBtn.onclick = function() { TabSetPainter.browse(tspData, 'NEXT'); };
+		if (!ie) {
+			imgBtn.style.cursor = 'pointer';
+		}
 		imgBtn.style.cursor = 'hand';
 		var cell = row.insertCell(row.cells.length);
 		cell.style.paddingLeft = '1px';
 		cell.appendChild(imgBtn);
 	} else if (side.toUpperCase() == 'R' && pos > 0) {
-		imgBtn.src = ARROW_RIGHT_DISABLED;
+		imgBtn.src = tspData.ARROW_RIGHT_DISABLED.src;
 		imgBtn.border = 0;
 		var cell = row.insertCell(row.cells.length);
 		cell.style.paddingLeft = '1px';
@@ -492,20 +604,20 @@ function TabSetPainter_createImgNodeMore(row, tspData, side) {
 	pos = (tabSet.length <= maxVisibleTabs) ? 0 : currentPos;
 
 	if (side.toUpperCase() == 'L' && pos > 0) {
-		imgTab.src = TAB_PREV;
+		imgTab.src = tspData.TAB_PREV.src;
 		imgTab.border = 0;
 		var cell = row.insertCell(row.cells.length);
 		cell.className = 'tabScrollBtnL';
 		cell.appendChild(imgTab);
 	} else if (side.toUpperCase() == 'L' &&  maxVisibleTabs < tabSet.length) {
-		imgTab.src = TAB_PREV_EMPTY;
+		imgTab.src = tspData.TAB_PREV_EMPTY.src;
 		imgTab.border = 0;
 		var cell = row.insertCell(row.cells.length);
 		cell.appendChild(imgTab);
 	}
 	
 	if ((side.toUpperCase() == 'R') && (currentPos + maxVisibleTabs < tabSet.length) ) {
-		imgTab.src = TAB_NEXT;
+		imgTab.src = tspData.TAB_NEXT.src;
 		imgTab.border = 0;
 		var cell = row.insertCell(row.cells.length);
 		cell.className = 'tabScrollBtnR';
@@ -517,9 +629,13 @@ function TabSetPainter_createDetailNode(row, tspData) {
 	var maxVisibleTabs = tspData['maxVisibleTabs'];
 	var currentPos = tspData['currentPos'];
 	
-	var start = currentPos + 1;
-	var end = (currentPos + maxVisibleTabs > tabSet.length) ? tabSet.length : currentPos + maxVisibleTabs;
-	var detail = start + '...' + end +' from ' + tabSet.length;
+	var start  = currentPos + 1;
+	var end    = (currentPos + maxVisibleTabs > tabSet.length) ? tabSet.length : currentPos + maxVisibleTabs;
+	var detail = tspData.TEXT_RANGE;
+
+	detail = detail.replace('{0}', start);
+	detail = detail.replace('{1}', end);
+	detail = detail.replace('{2}', tabSet.length);
 	
 	if (tabSet.length <= maxVisibleTabs) return;
 	
@@ -559,9 +675,15 @@ function TabSetPainter_displayTab(tabSetId, tabId) {
 		}
 	}
 }
-function TabSetPainter_addOnClickHandler() {
-
+function TabSetPainter_createImage(image, bgColor) {
+	if (null != bgColor) {
+		// change the image src from tabLSel_{0} to the selected bgcolor
+		image.src = image.src.replace('{0}', bgColor);
+	}
+	
+	return image.create();
 }
+
 new TabSetPainter();
 TabSetPainter.browse               = TabSetPainter_browse;
 TabSetPainter.render               = TabSetPainter_render;
@@ -574,3 +696,5 @@ TabSetPainter.getTabSetNode        = TabSetPainter_getTabSetNode;
 TabSetPainter.createDetailNode     = TabSetPainter_createDetailNode;
 TabSetPainter.getFormElement       = TabSetPainter_getFormElement;
 TabSetPainter.displayTab           = TabSetPainter_displayTab;
+TabSetPainter.createImage          = TabSetPainter_createImage;
+

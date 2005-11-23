@@ -4,27 +4,31 @@
 **
 ** USER...........: P001001
 ** PAINTER........: def
-** BUILD-FACTORY..: v1.2.001
-** BUILD-DATE.....: Wed Jan 14 19:37:22 CET 2004
+** BUILD-FACTORY..: v1.4.055
+** BUILD-DATE.....: Wed Feb 16 18:52:12 CET 2005
 ** BUILD-DIRECTORY: C:\eclipse\workspace\cc-framework
-** BUILD-FILE.....: C:\eclipse\workspace\cc-framework/build/resources/resources-def.xml
+** BUILD-FILE.....: C:\eclipse\workspace\cc-framework\build\resources\resources.xml
 **
 ** DO NOT MODIFY!
 ** ==========================================
 */
 
 /* ==========================================
-** Panel-Download / Panel-About
+** Panel Control
 **
 ** Acronym's
 ** ------------------------------------------
-** ah  : Applicationheader
-** ahl : Applicationheader Label
+** pc     : panel control
+** img    : image
+** text   : text
+** line   : line
+** header : Panel header
+** body   : Panel Body
 ** ==========================================
 */
 
-.pd_header, .pa_header {
-	font-family: Arial;
+.pc .header {
+	font-family: Arial, Helvetica, Sans-Serif;
 	font-size: 10pt;
 	font-weight: bold;
 	background-color: #C1D6DB;
@@ -36,30 +40,39 @@
 	color: #005A6B;
 }
 
-.pd_body, .pa_body {
-	font-family: Arial;
+.pc .header SPAN {
+	font-family: Arial, Helvetica, Sans-Serif;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+.pc .body {
+	font-family: Arial, Helvetica, Sans-Serif;
 	font-size: 8pt;
 	background-color: #DCE8EB;
 	border: 2px solid #DCE8EB;
 }
 
-.pd_img {
+.pc .img {
 	padding-top:  6px;
 	padding-left: 2px;
 }
 
-.pd_text, .pa_text {
+.pc .text {
 	padding-left: 2px;
 	padding-top: 2px;
 }
 
-.pd_line {
+.pc .line {
 	 height : 1px;
 	 border-bottom: 1px solid #808080;
 	 padding-top: 2px;
 }
 
-.pa_text_h1 {
-	padding-left: 2px;
-	padding-top: 6px;
+/* Hyperlinks */
+.pc .body tr td a {
+	font-family : Arial, Helvetica, Sans-Serif;
+	font-size : 8pt;
+	text-decoration : none;
+	color : #0000FF;
 }
