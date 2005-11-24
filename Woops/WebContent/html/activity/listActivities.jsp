@@ -1,4 +1,4 @@
-<%@ taglib uri="/WEB-INF/tags/cc-template.tld" prefix="template" %>
+<%@ taglib uri="/cc-template" prefix="template" %>
 
 
 <template:insert template="../template.jsp">
