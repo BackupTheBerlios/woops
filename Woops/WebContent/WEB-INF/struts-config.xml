@@ -60,8 +60,7 @@
          name="loginForm"
 		 validate="true"      
          scope="request"
-         input="/html/user/loginUser.jsp"
-         >
+         input="/html/user/loginUser.jsp">
          
          <forward name="erreur" path="/html/user/loginUser.jsp" />
          <forward name="success" path="/html/activity/listActivities.jsp" />
