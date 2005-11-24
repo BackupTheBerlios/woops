@@ -8,6 +8,11 @@
       <form-bean name="createActivityForm" type="view.activity.CreateActivityForm" />
 	  <form-bean name="listActivitiesForm" type="view.activity.listActivities.ListActivitiesForm" />
 	  <form-bean name="manageActivityDependancesForm" type="view.activity.manageActivity.ManageActivityDependancesForm" />
+	  
+	  <form-bean name="loginForm" type="view.LoginForm" />
+
+  
+  
    </form-beans>
 
    <global-exceptions />
@@ -48,6 +53,21 @@
          <forward name="success" path="/html/activity/manageActivityDependances.jsp" />
       </action>
 
+
+<!-- ================= Login form ================ -->  
+      <action path="/login"	 type="view.LoginAction"
+      	 attribute="loginForm"
+         name="loginForm"
+		 validate="true"      
+         scope="request"
+         input="/html/user/loginUser.jsp"
+         >
+         
+         <forward name="erreur" path="/html/user/loginUser.jsp" />
+         <forward name="success" path="/html/activity/listActivities.jsp" />
+      </action>
+      
+      
 
 </action-mappings>
 
