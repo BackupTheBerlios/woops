@@ -144,7 +144,7 @@ public class ObjetPersistantDAO  {
 	}		
 	
 	
-	protected List getListe(String table) throws PersistanceException {
+	protected List getList(String table) throws PersistanceException {
 		
 		List liste = executeQuery("from " + table);
 
@@ -281,39 +281,13 @@ public class ObjetPersistantDAO  {
 	}	
 	
 
-	protected List listerTable(String table, Class classe) throws PersistanceException {
-		
-		Session session = null ;
-		List liste =null;
-		try {
-			session = HibernateSessionFactory.currentSession();
-			
-			String req = "select {"+table+ ".*} from {"+ table +"}" ;
-
-			Query sqlQuery = session.createSQLQuery(req, table , classe);
-			liste = sqlQuery.list();
-			
-		} catch (HibernateException he) {
-			throw new PersistanceException(he.getMessage(),he);
-		} finally {
-			try {
-				if (session!=null && session.isOpen()) HibernateSessionFactory.closeSession();				
-			} catch (HibernateException he) {
-				throw new PersistanceException(he.getMessage(),he);
-			}
-		}
-
-		return liste;
-	
-	}		
-	
 
 	/**
 	 * Execute a query. 
 	 * @param query a query expressed in Hibernate's query language
 	 * @return a distinct list of instances (or arrays of instances)
 	 */
-	public List executeQuery(String query)  throws PersistanceException {
+	public List executeQuery(String query) throws PersistanceException {
 		List liste =null;
 		Session session = null ;
 	
@@ -333,20 +307,25 @@ public class ObjetPersistantDAO  {
 		}
 
 		return liste;
-	}	
+	}
 	
 	
-    public List executeQuery(String req, Object[] params ) throws PersistanceException {
+	/**
+	 * Execute a query with parameters. 
+	 * @param query a query expressed in Hibernate's query language
+	 * @return a distinct list of instances (or arrays of instances)
+	 */
+    public List executeQuery(String query, Object[] params) throws PersistanceException {
         
         Session session = null ;
-        List liste =null;
+        List list = null;
         try {
             session = HibernateSessionFactory.currentSession();
             
-            Query sqlQuery = session.createQuery(req);
-            for(int i=0;i<params.length;i++)
-                setParameterValue(sqlQuery,i,params[i]);
-            liste = sqlQuery.list();
+            Query sqlQuery = session.createQuery(query);
+            for(int i=0; i<params.length; i++)
+                setParameterValue(sqlQuery, i, params[i]);
+            list = sqlQuery.list();
             
         } catch (HibernateException he) {
             throw new PersistanceException(he.getMessage(),he);
@@ -358,31 +337,32 @@ public class ObjetPersistantDAO  {
             }
         }
 
-        return liste;
-    
+        return list;
     }
 
 	
 	/**
 	 * Permet un simple select d'un element en base
 	 */
-	protected ObjetPersistant get(String table, Object id, Class classe) throws PersistanceException {
+	protected ObjetPersistant get(String beanClass, String keyId, Object valueId) throws PersistanceException {
 		
 		Session session = null ;
-		List liste =null;
-		ObjetPersistant objet = null;
+		List list = null;
+		ObjetPersistant object = null;
+		
 		try {
 			session = HibernateSessionFactory.currentSession();
 			
-			String req = "select obj from "+ table +" obj where obj.id = :id" ;
+			String req = "FROM " + beanClass +" obj WHERE obj." + keyId + "= :id" ;
 
 			Query query = session.createQuery(req);
-			setParameterValue(query,"id",id);
-			liste = query.list();
+			setParameterValue(query, "id", valueId);
 			
-			Iterator iter = liste.iterator();
+			list = query.list();
+			
+			Iterator iter = list.iterator();
 			if ( iter.hasNext() ) {
-			    objet = (ObjetPersistant) iter.next(); 
+			    object = (ObjetPersistant) iter.next(); 
 			}
 			
 		} catch (HibernateException he) {
@@ -395,7 +375,7 @@ public class ObjetPersistantDAO  {
 			}
 		}
 
-		return objet;
+		return object;
 	
 	}		
 	
@@ -475,30 +455,6 @@ public class ObjetPersistantDAO  {
         } else if (value instanceof Short) {
             query.setShort(key, ((Short) value).shortValue());
         }
-    }    
-    
-    protected List executeSql(String req ) throws PersistanceException {
-        
-        Session session = null ;
-        List liste =null;
-        try {
-            session = HibernateSessionFactory.currentSession();
-            
-            Query sqlQuery = session.createQuery(req);
-            liste = sqlQuery.list();
-            
-        } catch (HibernateException he) {
-            throw new PersistanceException(he.getMessage(),he);
-        } finally {
-            try {
-                if (session!=null && session.isOpen()) HibernateSessionFactory.closeSession();              
-            } catch (HibernateException he) {
-                throw new PersistanceException(he.getMessage(),he);
-            }
-        }
-
-        return liste;
-    
     }    
     
     /**
