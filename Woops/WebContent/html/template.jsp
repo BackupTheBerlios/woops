@@ -1,4 +1,5 @@
-<%@ taglib uri="/WEB-INF/tags/cc-template.tld" prefix="template" %>
+<%@ taglib uri="/cc-template" prefix="template" %>
+<%@ taglib uri="/cc-utility" prefix="util" %>
 
 
 
@@ -8,9 +9,13 @@
 <title>woops</title>
 <meta http-equiv="Content-Type" content="text/html;">
 <link href="./html/images/css.css" rel="stylesheet" type="text/css">
+
+<util:jsp directive="includes"/>
+ 
 </head>
 
-<body>
+<body leftmargin="0" topmargin="0" onload="init();">
+
 <center>
 <table border="0" cellpadding="0" cellspacing="0" width="1022">
 
@@ -79,5 +84,7 @@
 </table>
 </center>
 
+  <util:jsp directive="endofpage"/> 
+  
 </body>
 </html>
