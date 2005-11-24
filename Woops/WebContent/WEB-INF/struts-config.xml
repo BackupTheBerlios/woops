@@ -9,7 +9,7 @@
 	  <form-bean name="listActivitiesForm" type="view.activity.listActivities.ListActivitiesForm" />
 	  <form-bean name="manageActivityDependancesForm" type="view.activity.manageActivity.ManageActivityDependancesForm" />
 	  
-	  <form-bean name="loginForm" type="view.LoginForm" />
+	  <form-bean name="loginForm" type="view.user.LoginForm" />
 
   
   
@@ -55,7 +55,7 @@
 
 
 <!-- ================= Login form ================ -->  
-      <action path="/login"	 type="view.LoginAction"
+      <action path="/login"	 type="view.user.LoginAction"
       	 attribute="loginForm"
          name="loginForm"
 		 validate="true"      
