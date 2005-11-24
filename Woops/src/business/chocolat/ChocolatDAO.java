@@ -16,7 +16,7 @@ public class ChocolatDAO extends ObjetPersistantDAO {
 
 	public Collection getListeChocolats() throws PersistanceException {
    
-		List liste = getListe("Chocolat");
+		List liste = getList("Chocolat");
 		return liste;
 	}
 
