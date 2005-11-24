@@ -12,5 +12,21 @@
 		>
 		<generator class="assigned" />
 		</id>
+		
+		<property
+			column="login"
+			length="30"
+			name="login"
+			not-null="true"
+			type="string"
+		 />	
+		 
+		 <property
+			column="password"
+			length="15"
+			name="password"
+			not-null="true"
+			type="string"
+		 />	
 	</class>	
 </hibernate-mapping>
