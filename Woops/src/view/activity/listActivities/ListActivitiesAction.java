@@ -16,6 +16,7 @@ import view.activity.ActivityItem;
 import view.activity.ListActivitiesModel;
 import business.activity.Activity;
 import business.activity.ActivityManager;
+import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
@@ -29,7 +30,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 		Collection listActivitiesMgr = null;
 		Collection listActivitiesItems = null;
 		ActivityItem item = null;
-		ActionForward retour = null;
+		ActionForward forward = null;
     	
 		if (context.form()==null) {
 			context.request().setAttribute(context.mapping().getAttribute(), new ListActivitiesForm());
@@ -64,13 +65,16 @@ public class ListActivitiesAction extends WoopsCCAction {
 			ListActivitiesModel model = new ListActivitiesModel(data);
 			listActivitiesForm.setDataModel(model);
 			
-			retour = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCES);
-	        
+			
+		} catch (PersistanceException pe) {
+			context.addGlobalError("errors.persistance.select");
 		} catch (Throwable t) {
-			context.addGlobalError("action.activities.error");
+			context.addGlobalError("errors.global");
 		}
 
+		forward = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCES);
+        
 		/* Display the Page with the UserList */
-        context.forward(retour); 		
+        context.forward(forward); 		
 	}
 }
