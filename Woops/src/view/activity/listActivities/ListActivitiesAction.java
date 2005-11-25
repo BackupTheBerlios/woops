@@ -12,6 +12,8 @@ import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
 import view.WoopsCCAction;
+import view.activity.ActivityItem;
+import view.activity.ListActivitiesModel;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 
@@ -46,7 +48,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 				
 				item = new ActivityItem();
 				
-				item.setId(activity.getId());
+				item.setId(activity.getId().toString());
 				item.setName(activity.getName());
 				item.setDetails(activity.getDetails());
 				
