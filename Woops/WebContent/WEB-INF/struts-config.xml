@@ -63,7 +63,7 @@
          input="/html/user/loginUser.jsp">
          
          <forward name="erreur" path="/html/user/loginUser.jsp" />
-         <forward name="success" path="/html/activity/listActivities.jsp" />
+         <forward name="success" path="/listActivities.do"/>
       </action>
       
       
