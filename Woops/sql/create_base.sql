@@ -1,11 +1,9 @@
-CREATE DATABASE IF NOT EXISTS woops;
+DROP TABLE ActivitySequence;
+DROP TABLE Activity;
+DROP TABLE ActivitySequenceType;
+DROP TABLE User;
 
-DROP TABLE woops.ActivitySequence;
-DROP TABLE woops.Activity;
-DROP TABLE woops.ActivitySequenceType;
-DROP TABLE woops.User;
-
-CREATE TABLE woops.User (
+CREATE TABLE User (
        id INT NOT NULL AUTO_INCREMENT
      , firstName VARCHAR(50) NOT NULL
      , lastName VARCHAR(50) NOT NULL
@@ -15,14 +13,14 @@ CREATE TABLE woops.User (
      , PRIMARY KEY (id)
 )TYPE=InnoDB;
 
-CREATE TABLE woops.ActivitySequenceType (
+CREATE TABLE ActivitySequenceType (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(15) NOT NULL
      , UNIQUE UQ_ActivitySequenceType_name (name)
      , PRIMARY KEY (id)
 )TYPE=InnoDB;
 
-CREATE TABLE woops.Activity (
+CREATE TABLE Activity (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(50) NOT NULL
      , details TEXT
@@ -31,25 +29,30 @@ CREATE TABLE woops.Activity (
      , PRIMARY KEY (id)
      , INDEX (user)
      , CONSTRAINT FK_Activity_user FOREIGN KEY (user)
-                  REFERENCES woops.User (id)
+                  REFERENCES User (id)
 )TYPE=InnoDB;
---CREATE INDEX IX_Activity_name ON woops.Activity (name ASC);
+--CREATE INDEX IX_Activity_name ON Activity (name ASC);
 
-CREATE TABLE woops.ActivitySequence (
+CREATE TABLE ActivitySequence (
        id INT NOT NULL AUTO_INCREMENT
-     , sucessor INT NOT NULL
+     , successor INT NOT NULL
      , predecessor INT NOT NULL
      , linkType INT NOT NULL
-     , UNIQUE UQ_ActivitySequence_successor_predecessor (sucessor, predecessor)
+     , UNIQUE UQ_ActivitySequence_successor_predecessor (successor, predecessor)
      , PRIMARY KEY (id)
      , INDEX (linkType)
      , CONSTRAINT FK_ActivitySequence_linkType FOREIGN KEY (linkType)
-                  REFERENCES woops.ActivitySequenceType (id)
-     , INDEX (sucessor)
-     , CONSTRAINT FK_ActivitySequence_successor FOREIGN KEY (sucessor)
-                  REFERENCES woops.Activity (id)
+                  REFERENCES ActivitySequenceType (id)
+     , INDEX (successor)
+     , CONSTRAINT FK_ActivitySequence_successor FOREIGN KEY (successor)
+                  REFERENCES Activity (id)
      , INDEX (predecessor)
      , CONSTRAINT FK_ActivitySequence_predecessor FOREIGN KEY (predecessor)
-                  REFERENCES woops.Activity (id)
+                  REFERENCES Activity (id)
 )TYPE=InnoDB;
 
+-- Insertions intiales
+INSERT INTO ActivitySequenceType(name) VALUES ('finishToStart');
+INSERT INTO ActivitySequenceType(name) VALUES ('finishToFinish');
+INSERT INTO ActivitySequenceType(name) VALUES ('StartToStart');
+INSERT INTO ActivitySequenceType(name) VALUES ('StartToFinish');
