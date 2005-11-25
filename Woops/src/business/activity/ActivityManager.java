@@ -42,4 +42,17 @@ public class ActivityManager extends ObjetPersistantManager {
 		Collection list = activityDAO.getActivitiesByUser(userId);
 		return list;
 	}
+	
+	public Collection getPossibleActivityDependances(Integer activityId)
+			throws PersistanceException {
+		Collection list = activityDAO.getPossibleActivityDependances(activityId);
+		return list;
+	}
+	
+	public Collection getActivityDependances(Integer activityId) 
+			throws PersistanceException {
+		Collection list = activityDAO.getActivityDependances(activityId);
+		return list;
+	}
+	
 }

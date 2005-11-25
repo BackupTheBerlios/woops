@@ -22,7 +22,7 @@ public class ActivityDAO extends ObjetPersistantDAO {
 		Activity activity;
 		
 		/* Récupération de l'idetifiant, le nom et le détail de chaque activité du participant */
-		listResultQuery = executeQuery("SELECT act.id, act.name, act.details FROM Activity as act WHERE act.user.id = 1");
+		listResultQuery = executeQuery("SELECT act.id, act.name, act.details FROM Activity as act WHERE act.userId = 1");
 		
 		listActivities = new ArrayList();
 
@@ -40,5 +40,26 @@ public class ActivityDAO extends ObjetPersistantDAO {
 			listActivities.add(activity);
 		}
 		return listActivities;
-	}	
+	}
+	
+	
+	public Collection getPossibleActivityDependances(Integer activityId) 
+			throws PersistanceException {
+		return executeQuery("FROM Activity as act WHERE act.id <> "+activityId);
+	}
+	
+	public Collection getActivityDependances(Integer activityId) 
+		throws PersistanceException {
+		
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT actSeq.predecessor ");
+		query.append("FROM ActivitySequence as actSeq "); 
+		query.append("WHERE actSeq.successor.id = "+activityId);
+		
+		return executeQuery(query.toString());
+			
+	}
+	
+	
+	
 }

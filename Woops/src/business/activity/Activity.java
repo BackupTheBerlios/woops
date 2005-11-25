@@ -2,14 +2,12 @@ package business.activity;
 
 import java.util.Collection;
 
-import business.user.User;
-
 
 public class Activity {
 	private	Integer			id; /** identifiant de l'activité */
 	private String 			name; /** nom de l'activité */
 	private	String			details; /** description de l'activité */
-	private User 			user; /** Participant responsable de la réalisation de l'activité */
+	private Integer 		userId; /** Id du participant responsable de la réalisation de l'activité */
 	private IActivityState	state; /** Etat actuel de l'activité
 	
 	/**
@@ -24,25 +22,12 @@ public class Activity {
 	private Collection 		linkToPredecessor;
 	
 	/**
-	 * Liste des activités qui dépendent de l'activité
-	 * @associates business.activity.ActivitySequence
-	 * @clientCardinality 1
-	 * @clientRole linkToSuccessor
-	 * @directed directed
-	 * @link association
-	 * @supplierCardinality 0..*
-	 * @supplierRole successor
-	 */
-	private Collection 		linkToSuccessor;
-	
-	/**
 	 * Constructeur par défaut
 	 */
 	public Activity() {
 		this.name = null;
 		this.details = null;
 		this.linkToPredecessor = null;
-		this.linkToSuccessor = null;
 		this.state = null;
 	}
 	
@@ -52,15 +37,14 @@ public class Activity {
 	 * @param details description de l'activité
 	 * @param linkToPredecessor liste des activités dont dépend l'activité
 	 * @param linkToSuccessor liste des activités qui dépendent de l'activité
-	 * @param user participant responsable de la réalisation de l'activité
+	 * @param userId participant responsable de la réalisation de l'activité
 	 */
 	public Activity(String name, String details, Collection linkToPredecessor,
-			Collection linkToSuccessor, User user) {
+			 Integer userId) {
 		this.name = name;
 		this.details = details;
 		this.linkToPredecessor = linkToPredecessor;
-		this.linkToSuccessor = linkToSuccessor;
-		this.user = user;
+		this.userId = userId;
 		this.state = new CreatedActivity();
 	}
 	
@@ -98,18 +82,18 @@ public class Activity {
 
 	/**
 	 * Récupération du participant responsable de la réalisation de l'activité
-	 * @return participant
+	 * @return : l'id du participant
 	 */
-	public User getUser() {
-		return user;
+	public Integer getUserId() {
+		return userId;
 	}
 
 	/**
 	 * Modification du participant responsable de la réalisation de l'activité
 	 * @param  participant
 	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	/**

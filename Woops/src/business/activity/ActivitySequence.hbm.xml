@@ -4,7 +4,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
 
 <hibernate-mapping>
-	<class name="business.activity.Activity" table="Activity">
+	<class name="business.activity.ActivitySequence" table="ActivitySequence">
 		<!-- identifiant d'une occurrence dans la table -->
 		<id
 			column="id"
@@ -15,27 +15,25 @@
 			<generator class="identity" />
 		</id>
 		
-		<property
-			column="name"
-			length="50"
-			name="name"
+		<!--  -->
+		<many-to-one
+			class="business.activity.Activity"
+			name="predecessor"
 			not-null="true"
-			type="string"
-		 />	
-		 
-		 <property
-			column="details"
-			name="details"
-			not-null="false"
-			type="string"
-		 />	
+			>
+			<column name="predecessor" />
+		</many-to-one>
 		
-		<property
-			column="user"
-			name="userId"
-			not-null="false"
-			type="integer"
-		 />
+		<!--  -->
+		<many-to-one
+			class="business.activity.Activity"
+			name="successor"
+			not-null="true"
+			>
+			<column name="successor" />
+		</many-to-one>
+		
+		
 
 	</class>	
 </hibernate-mapping>
