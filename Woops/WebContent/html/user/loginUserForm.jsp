@@ -9,7 +9,7 @@
         <forms:text			label="button.title.login"	property="login"    	required="true"/>
         <forms:password    	label="button.title.login"	property="password"   	required="true"/>
 
-       <forms:buttonsection default="btnLogin">  
+       <forms:buttonsection>  
                <forms:button
                 name="btnLogin"
                 title="button.title.login"
