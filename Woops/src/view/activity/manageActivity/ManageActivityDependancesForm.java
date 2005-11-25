@@ -24,7 +24,7 @@ public class ManageActivityDependancesForm extends FWActionForm {
 	public String[] getRealDependancesKeys() {
 		return realDependancesKeys;
 	}
-
+	
 	public void setRealDependancesKeys(String[] realDependancesKeys) {
 		this.realDependancesKeys = realDependancesKeys;
 	}

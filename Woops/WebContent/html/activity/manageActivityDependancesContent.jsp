@@ -3,16 +3,6 @@
 <%@ taglib uri="/cc-base"     prefix="base" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
 
-
-<html>
-
-<head>
- <util:jsp directive="includes"/>
- </head> 
-  
-  <body leftmargin="0" topmargin="0" onload="init();"> 
-
-
 <html:form action="/manageActivityDependances">
 
 	<forms:message formid="frmActivityDependances" caption="Information" severity="information" width="350"/>
@@ -37,21 +27,12 @@
         
         </forms:swapselect>
         
-        <forms:buttonsection default="btnSave">
+        <forms:buttonsection>
 			<forms:button
 				name="btnSave"
-				text="Valider" 
-			    width="100"/>
+				text="Valider"/>
 		</forms:buttonsection>
         
     </forms:form>
-
+    
 </html:form>
-
-
-
-  <util:jsp directive="endofpage"/> 
-  
-  </BODY>
-  
- </html>
