@@ -18,7 +18,7 @@
 <table border="0" cellpadding="0" cellspacing="0" >
 
 <tr>
-  <td width="227" height="100%" >
+  <td width="227" height="100%" valign="top">
   
   
  <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
@@ -64,7 +64,7 @@
   <tr>
     <td  width="35" height="100%" style="background-image: url('./html/images/menuGauche.jpg');">
     </td>
-      <td width="171" valign="top" height="100%" style="background-image: url('images/menu.jpg');" >
+      <td width="171" valign="top" height="100%" style="background-image: url('./html/images/menu.jpg');" >
       
       
   <!-------#################------->

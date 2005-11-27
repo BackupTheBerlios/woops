@@ -76,10 +76,11 @@ DIV.rubrique:hover {
 }
 
 DIV.rubrique {
+		cursor: pointer;
         width:170px;
 }
 
-DIV.titrePAge {
+DIV.titrePage {
         font-size: 16px; text-decoration: none; color:#645F83; font-weight: bold;
 
 }
