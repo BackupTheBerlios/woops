@@ -8,14 +8,14 @@
 	<forms:message formid="frmError" caption="title.error" severity="error" width="350"/>
 	<forms:message formid="frmActivityDependances" caption="Information" severity="information" width="350"/>
 
-    <forms:form type="edit" name="manageActivityDependancesForm" caption="G?rer les d?pendances d'une activit?" formid="frmActivityDependances" width="550">
+    <forms:form type="edit" name="manageActivityDependancesForm" caption="table.title.manageActivityDependances" formid="frmActivityDependances" width="550">
 
         <forms:swapselect
             property="realDependancesKeys"
-            label="Liste des activit?s d?pendantes"
+            label="table.field.manageActivityDependances"
             orientation="horizontal"
-            labelLeft="Possibles"
-            labelRight="Effectifs"
+            labelLeft="table.field.manageActivityDependances.toAdd"
+            labelRight="table.field.manageActivityDependances.added"
             valign="top"
             size="10"
             width="100%"

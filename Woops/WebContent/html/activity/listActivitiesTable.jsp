@@ -9,18 +9,20 @@
 		action="/listActivities.do" 
 		name="listActivitiesForm" 
 		property="listActivities" 
-		title="User List" 
+		title="table.title.listActivities" 
 		width="500" 
 		rows="15" 
 		refreshButton="true" 
-		createButton="false"> 
-
-
-			<ctrl:columndrilldown title="Name" property="name" width="150"/>
-			<ctrl:columntext title="Details" property="details" width="350"/>
+		createButton="true"
+		rows="10"
 		
-			<ctrl:columnedit title="Edit"/> 
-			<ctrl:columndelete title="Delete"/>
+		> 
+
+			<ctrl:columndrilldown title="table.field.listActivities.name" property="name" width="150"/>
+			<ctrl:columntext title="table.field.listActivities.details" property="details" width="350"/>
+			<ctrl:columnbutton title="table.field.listActivities.state"/> 
+			<ctrl:columnedit title="table.field.listActivities.edit"/> 
+			<ctrl:columndelete  title="table.field.listActivities.delete"/>
 
 	</ctrl:list>
  
