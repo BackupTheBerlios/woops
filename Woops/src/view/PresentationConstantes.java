@@ -25,7 +25,8 @@ public interface PresentationConstantes {
 	//constantes de clés en session
 	public static final String KEY_FORM="FORM";
 	public static final String KEY_USER="USER";
-
+	public static final String KEY_OLD_DEPENDANCES_KEYS="OLD_DEPENDANCES_KEYS";
+	public static final String KEY_POSSIBLE_DEPENDANCES_OPTIONS="POSSIBLE_DEPENDANCES_OPTIONS";
 	
 	public static final String LIBELLE_OUI="O";
 	public static final String LIBELLE_NON="N";

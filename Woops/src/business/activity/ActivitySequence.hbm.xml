@@ -33,7 +33,14 @@
 			<column name="successor" />
 		</many-to-one>
 		
-		
+		<!--  -->
+		<many-to-one
+			class="business.activity.ActivitySequenceType"
+			name="linkType"
+			not-null="true"
+			>
+			<column name="linkType" />
+		</many-to-one>
 
 	</class>	
 </hibernate-mapping>

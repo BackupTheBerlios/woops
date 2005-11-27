@@ -10,8 +10,9 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
 		<!-- <property name="connection.datasource">jdbc:mysql://localhost:3306/woops</property > -->
 		<property name="connection.url">jdbc:mysql://localhost:3306/woops</property>
 		<property name="connection.driver_class">org.gjt.mm.mysql.Driver</property>
-		<property name="connection.username">root</property>
-		<property name="connection.password">root</property>
+		<property name="connection.username">woops</property>
+		<property name="connection.password">wo!o!ps</property>
+
 
 		<property name="dialect">net.sf.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
@@ -21,6 +22,7 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
 		<mapping resource="business/activity/Activity.hbm.xml" />
 		<mapping resource="business/user/User.hbm.xml" />
 		<mapping resource="business/activity/ActivitySequence.hbm.xml" />
+		<mapping resource="business/activity/ActivitySequenceType.hbm.xml" />
 		
 	</session-factory>
 </hibernate-configuration>

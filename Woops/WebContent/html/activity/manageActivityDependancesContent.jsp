@@ -5,6 +5,7 @@
 
 <html:form action="/manageActivityDependances">
 
+	<forms:message formid="frmError" caption="title.error" severity="error" width="350"/>
 	<forms:message formid="frmActivityDependances" caption="Information" severity="information" width="350"/>
 
     <forms:form type="edit" name="manageActivityDependancesForm" caption="G?rer les d?pendances d'une activit?" formid="frmActivityDependances" width="550">

@@ -2,8 +2,10 @@ package business.activity;
 
 import java.util.Collection;
 
+import business.hibernate.ObjetHistorise;
 
-public class Activity {
+
+public class Activity extends ObjetHistorise{	
 	private	Integer			id; /** identifiant de l'activité */
 	private String 			name; /** nom de l'activité */
 	private	String			details; /** description de l'activité */
@@ -52,7 +54,7 @@ public class Activity {
 	 * Récupération de l'identifiant de l'activité nécessaire pour la persistence
 	 * @return identifiant de l'activité
 	 */
-	public Integer getId() {
+	public Object getId() {
 		return id;
 	}
 
@@ -60,8 +62,8 @@ public class Activity {
 	 * Modification de l'identifiant de l'activité
 	 * @param id identifiant de l'activité à modifier
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Object id) {
+		this.id = (Integer) id;
 	}
 
 	/**

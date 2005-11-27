@@ -8,21 +8,7 @@ import java.util.List;
 import business.hibernate.ObjetPersistantDAO;
 import business.hibernate.exception.PersistanceException;
 
-public class ActivityDAO extends ObjetPersistantDAO {
-	
-	/**
-	 * 
-	 * @param activityId : l'id de l'activité que l'on veut récupérer
-	 * @return l'activité
-	 * @throws PersistanceException
-	 */
-	public Activity getActivityById(Integer activityId) throws PersistanceException {
-		List res = executeQuery("FROM Activity as act WHERE act.id = "+activityId);
-		return (Activity)res.get(0);
-		//return (Activity)get(Activity.class,activityId);
-	}
-	
-	
+public class ActivitySequenceDAO extends ObjetPersistantDAO {
 	/**
 	 * Récupération des activités pour lesquelles le participant a la responsabilité
 	 * @param userId : identifiant du participant
