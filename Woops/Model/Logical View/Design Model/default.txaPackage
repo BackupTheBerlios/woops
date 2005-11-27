@@ -4,10 +4,10 @@
 <nodeSet  version="1.1">
 	<node uin="6swdlegflib6h-w519n5">
 		<property name="$metaclass" value="Object"/>
-		<property name="$name" value="ActionServlet"/>
 		<property name="$uml_representation" value="ActionServlet"/>
 		<property name="@stereotype" value="Control"/>
-		<property name="incomingMessagesHistory" value="design:link:::ieje0regb8x3xk-r57knt:-w2q8ptegb8ugclq67uz8;design:link:::ieje0regbas1ql7cb1sr:-w2q8pteg8ilifub6t6qa"/>
+		<property name="$name" value="WoopsFrontControler"/>
+		<property name="incomingMessagesHistory" value="design:link:::ieje0regb8x3xk-r57knt:-w2q8ptegb8ugclq67uz8;design:link:::ieje0regbas1ql7cb1sr:-w2q8pteg8ilifub6t6qa;design:link:::ieje0regjt8g46-1h878n:-w2q8ptegjsbu6w-lkmk5p"/>
 		<node uin="d2t9qegflib6xsjv0wi">
 			<property name="$metaclass" value="Activation"/>
 			<property name="$name" value="Activation1"/>
@@ -36,17 +36,49 @@
 			<property name="$name" value="Activation2"/>
 			<property name="messageUid" value="design:link:::3xaccegflli69iv24ie:57hu2egflli69cxflz9"/>
 		</node>
-		<link uin="j36sgegflib6x-xpp102">
+		<link uin="ieje0regjs4rhm-skrymj">
 			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjs4rly-2do3dt:-w2q8ptegjs3rjsk7l0g5"/>
 			<property name="normalizedIndex" value="0.9000001"/>
-			<property name="$name" value="forward"/>
+			<property name="$name" value="forward()"/>
 			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Client"></participant>
-			<participant referencedUin="design:node:::8j5ubegfllayp-8kknwe" role="Supplier"></participant>
+			<participant referencedUin="design:node:::-w2q8ptegjs3rjsk7l0g5" role="Supplier"></participant>
 		</link>
-		<link uin="8nor2egflib6x-x8plr7">
+		<link uin="ieje0regjs4rih-cbvcry">
 			<property name="$metaclass" value="Messages Link"/>
 			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Client"></participant>
-			<participant referencedUin="design:node:::8j5ubegfllayp-8kknwe" role="Supplier"></participant>
+			<participant referencedUin="design:node:::-w2q8ptegjs3rjsk7l0g5" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjsumtenuhvoa">
+			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjsumup5574ce:-w2q8ptegjsbu6w-lkmk5p"/>
+			<property name="$name" value="doExecute"/>
+			<property name="normalizedIndex" value="0.33333334"/>
+			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Client"></participant>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjsumte9pipxc">
+			<property name="$metaclass" value="Messages Link"/>
+			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Client"></participant>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Supplier"></participant>
+		</link>
+		<node uin="-4aytaiegjt8g51-l1rd3g">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation3"/>
+			<property name="messageUid" value="design:link:::ieje0regjt8g46-1h878n:-w2q8ptegjsbu6w-lkmk5p"/>
+		</node>
+		<link uin="ieje0regjtbsit-b61qi7">
+			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjtbskz-oicnfk:-w2q8ptegjta04of3pvhw"/>
+			<property name="$name" value="forward()"/>
+			<property name="normalizedIndex" value="0.91666657"/>
+			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Client"></participant>
+			<participant referencedUin="design:node:::-w2q8ptegjta04of3pvhw" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjtbsitvieacg">
+			<property name="$metaclass" value="Messages Link"/>
+			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Client"></participant>
+			<participant referencedUin="design:node:::-w2q8ptegjta04of3pvhw" role="Supplier"></participant>
 		</link>
 	</node>
 	<node uin="gi6kpegflintch72ecu">
@@ -54,19 +86,29 @@
 		<property name="$name" value="Activity"/>
 		<property name="$uml_representation" value="Activity"/>
 		<property name="@stereotype" value="Entity"/>
-		<property name="incomingMessagesHistory" value="design:link:::hfp19egfliwu06ibxxc:au3m6egfliwu0-baa67l"/>
+		<property name="incomingMessagesHistory" value="design:link:::hfp19egfliwu06ibxxc:au3m6egfliwu0-baa67l;design:link:::ieje0regjsotdhnm5ij0:au3m6egfliwu0-baa67l;design:link:::ieje0regjssjbivtf27a:au3m6egfliwu0-baa67l"/>
 		<node uin="dzbg7egflintcurzie1">
 			<property name="$metaclass" value="Activation"/>
 			<property name="$name" value="Activation1"/>
 			<property name="messageUid" value="design:link:::hfp19egfliwu06ibxxc:au3m6egfliwu0-baa67l"/>
 		</node>
+		<node uin="-4aytaiegjsotec4w1zr0">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation2"/>
+			<property name="messageUid" value="design:link:::ieje0regjsotdhnm5ij0:au3m6egfliwu0-baa67l"/>
+		</node>
+		<node uin="-4aytaiegjssjce-dupwm1">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation3"/>
+			<property name="messageUid" value="design:link:::ieje0regjssjbivtf27a:au3m6egfliwu0-baa67l"/>
+		</node>
 	</node>
 	<node uin="au3m6egfliwu0-baa67l">
 		<property name="$metaclass" value="Object"/>
-		<property name="$name" value="ActivityMgr"/>
 		<property name="$uml_representation" value="ActivityMgr"/>
 		<property name="@stereotype" value="Mgr"/>
-		<property name="incomingMessagesHistory" value="design:link:::6bhmegflli69trqltp:57hu2egflli69cxflz9"/>
+		<property name="$name" value="ActivityManager"/>
+		<property name="incomingMessagesHistory" value="design:link:::6bhmegflli69trqltp:57hu2egflli69cxflz9;design:link:::ieje0regjsmqwxiidga7:-w2q8ptegjsbu6w-lkmk5p;design:link:::ieje0regjsqg8edg4m2x:-w2q8ptegjsbu6w-lkmk5p"/>
 		<link uin="hfkcwegfliwu0hdtzo5">
 			<property name="$metaclass" value="Association Link"/>
 			<participant referencedUin="design:node:::au3m6egfliwu0-baa67l" role="Client"></participant>
@@ -81,12 +123,38 @@
 			<property name="$metaclass" value="Message Link"/>
 			<property name="activationUid" value="design:node:::-4aytaiegbajg31-zid2yf:-w2q8pteg8ip009-y84jgh"/>
 			<property name="$name" value="getActivityByUser(user)"/>
-			<property name="normalizedIndex" value="0.70000005"/>
+			<property name="normalizedIndex" value="0.25"/>
 			<participant referencedUin="design:node:::au3m6egfliwu0-baa67l" role="Client"></participant>
 			<participant referencedUin="design:node:::gi6kpegflintch72ecu" role="Supplier"></participant>
 		</link>
 		<link uin="h13auegfliwu03utd1n">
 			<property name="$metaclass" value="Messages Link"/>
+			<participant referencedUin="design:node:::au3m6egfliwu0-baa67l" role="Client"></participant>
+			<participant referencedUin="design:node:::gi6kpegflintch72ecu" role="Supplier"></participant>
+		</link>
+		<node uin="-4aytaiegjsmqxs-jvsn7">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation2"/>
+			<property name="messageUid" value="design:link:::ieje0regjsmqwxiidga7:-w2q8ptegjsbu6w-lkmk5p"/>
+		</node>
+		<link uin="ieje0regjsotdhnm5ij0">
+			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjsotec4w1zr0:gi6kpegflintch72ecu"/>
+			<property name="normalizedIndex" value="0.5833333"/>
+			<property name="$name" value="getPossibleActivityDependances(int activityID)"/>
+			<participant referencedUin="design:node:::au3m6egfliwu0-baa67l" role="Client"></participant>
+			<participant referencedUin="design:node:::gi6kpegflintch72ecu" role="Supplier"></participant>
+		</link>
+		<node uin="-4aytaiegjsqg8tylvcyc">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation3"/>
+			<property name="messageUid" value="design:link:::ieje0regjsqg8edg4m2x:-w2q8ptegjsbu6w-lkmk5p"/>
+		</node>
+		<link uin="ieje0regjssjbivtf27a">
+			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjssjce-dupwm1:gi6kpegflintch72ecu"/>
+			<property name="normalizedIndex" value="0.74999994"/>
+			<property name="$name" value="getActivityDependances(int activityID)"/>
 			<participant referencedUin="design:node:::au3m6egfliwu0-baa67l" role="Client"></participant>
 			<participant referencedUin="design:node:::gi6kpegflintch72ecu" role="Supplier"></participant>
 		</link>
@@ -100,13 +168,6 @@
 			<property name="$name" value="Activation1"/>
 			<property name="messageUid" value="design:link:::d5de6egflli69xiaod3:57hu2egflli69cxflz9"/>
 		</node>
-	</node>
-	<node uin="8j5ubegfllayp-8kknwe">
-		<property name="$metaclass" value="Object"/>
-		<property name="$uml_representation" value="ListActivities"/>
-		<property name="$name" value="ListActivities"/>
-		<property name="@stereotype" value="View"/>
-		<property name="incomingMessagesHistory" value="design:link:::ieje0regbay7ho-yt6oak:-w2q8pteg8ikx42-3235ir"/>
 	</node>
 	<node uin="57hu2egflli69cxflz9">
 		<property name="$metaclass" value="Object"/>
@@ -211,7 +272,7 @@
 			<property name="$metaclass" value="Message Link"/>
 			<property name="activationUid" value="design:node:::-4aytaiegb8x3xz-s7swe9:-w2q8pteg8ikx42-3235ir"/>
 			<property name="$name" value="request"/>
-			<property name="normalizedIndex" value="0.2"/>
+			<property name="normalizedIndex" value="0.16666667"/>
 			<participant referencedUin="design:node:::jq0qdegfllsm4-udwzh3" role="Client"></participant>
 			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Supplier"></participant>
 		</link>
@@ -235,7 +296,7 @@
 			<property name="$metaclass" value="Message Link"/>
 			<property name="activationUid" value="design:node:::6rxkpegfllsm4-9voefk:jq0qdegfllsm4-udwzh3"/>
 			<property name="$name" value="listActivities"/>
-			<property name="normalizedIndex" value="0.1"/>
+			<property name="normalizedIndex" value="0.083333336"/>
 			<participant referencedUin="design:node:::gsmazegfllwtl84g0nf" role="Client"></participant>
 			<participant referencedUin="design:node:::jq0qdegfllsm4-udwzh3" role="Supplier"></participant>
 		</link>
@@ -249,5 +310,92 @@
 			<participant referencedUin="design:node:::gsmazegfllwtl84g0nf" role="Client"></participant>
 			<participant referencedUin="design:node:::jq0qdegfllsm4-udwzh3" role="Supplier"></participant>
 		</link>
+	</node>
+	<node uin="-w2q8ptegjs3rjsk7l0g5">
+		<property name="$metaclass" value="Object"/>
+		<property name="$name" value="ListActivities.jsp"/>
+		<property name="incomingMessagesHistory" value="design:link:::ieje0regjs4rhm-skrymj:6swdlegflib6h-w519n5"/>
+		<node uin="-4aytaiegjs4rly-2do3dt">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation1"/>
+			<property name="messageUid" value="design:link:::ieje0regjs4rhm-skrymj:6swdlegflib6h-w519n5"/>
+		</node>
+	</node>
+	<node uin="-w2q8ptegjsbu6w-lkmk5p">
+		<property name="$metaclass" value="Object"/>
+		<property name="$name" value="ManageActivityDependancesAction"/>
+		<property name="incomingMessagesHistory" value="design:link:::ieje0regjsumtenuhvoa:6swdlegflib6h-w519n5"/>
+		<link uin="ieje0regjsmqwxiidga7">
+			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjsmqxs-jvsn7:au3m6egfliwu0-baa67l"/>
+			<property name="normalizedIndex" value="0.5"/>
+			<property name="$name" value="getPossibleActivityDependances(int activityID)"/>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Client"></participant>
+			<participant referencedUin="design:node:::au3m6egfliwu0-baa67l" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjsmqwx7rsfp">
+			<property name="$metaclass" value="Messages Link"/>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Client"></participant>
+			<participant referencedUin="design:node:::au3m6egfliwu0-baa67l" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjsqg8edg4m2x">
+			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjsqg8tylvcyc:au3m6egfliwu0-baa67l"/>
+			<property name="normalizedIndex" value="0.6666666"/>
+			<property name="$name" value="getActivityDependances(int activityID)"/>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Client"></participant>
+			<participant referencedUin="design:node:::au3m6egfliwu0-baa67l" role="Supplier"></participant>
+		</link>
+		<node uin="-4aytaiegjsumup5574ce">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation1"/>
+			<property name="messageUid" value="design:link:::ieje0regjsumtenuhvoa:6swdlegflib6h-w519n5"/>
+		</node>
+		<link uin="ieje0regjt8g46-1h878n">
+			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjt8g51-l1rd3g:6swdlegflib6h-w519n5"/>
+			<property name="$name" value="forward(&quot;ManageActivityDependances.jsp&quot;)"/>
+			<property name="normalizedIndex" value="0.83333325"/>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Client"></participant>
+			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjt8g4m-8nlpo3">
+			<property name="$metaclass" value="Messages Link"/>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Client"></participant>
+			<participant referencedUin="design:node:::6swdlegflib6h-w519n5" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjtebkl-83pnkv">
+			<property name="$metaclass" value="Message Link"/>
+			<property name="activationUid" value="design:node:::-4aytaiegjteblgemmc6b:-w2q8ptegjsho15-td62z0"/>
+			<property name="normalizedIndex" value="0.4166667"/>
+			<property name="$name" value="form()"/>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Client"></participant>
+			<participant referencedUin="design:node:::-w2q8ptegjsho15-td62z0" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjtebl1-obebkb">
+			<property name="$metaclass" value="Messages Link"/>
+			<participant referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p" role="Client"></participant>
+			<participant referencedUin="design:node:::-w2q8ptegjsho15-td62z0" role="Supplier"></participant>
+		</link>
+	</node>
+	<node uin="-w2q8ptegjsho15-td62z0">
+		<property name="$metaclass" value="Object"/>
+		<property name="$name" value="ManageActivityDependancesForm"/>
+		<property name="incomingMessagesHistory" value="design:link:::ieje0regjtebkl-83pnkv:-w2q8ptegjsbu6w-lkmk5p"/>
+		<node uin="-4aytaiegjteblgemmc6b">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation1"/>
+			<property name="messageUid" value="design:link:::ieje0regjtebkl-83pnkv:-w2q8ptegjsbu6w-lkmk5p"/>
+		</node>
+	</node>
+	<node uin="-w2q8ptegjta04of3pvhw">
+		<property name="$metaclass" value="Object"/>
+		<property name="$name" value="ManageActivityDependances.jsp"/>
+		<property name="incomingMessagesHistory" value="design:link:::ieje0regjtbsit-b61qi7:6swdlegflib6h-w519n5"/>
+		<node uin="-4aytaiegjtbskz-oicnfk">
+			<property name="$metaclass" value="Activation"/>
+			<property name="$name" value="Activation1"/>
+			<property name="messageUid" value="design:link:::ieje0regjtbsit-b61qi7:6swdlegflib6h-w519n5"/>
+		</node>
 	</node>
 </nodeSet>

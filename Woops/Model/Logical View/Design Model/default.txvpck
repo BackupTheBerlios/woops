@@ -5,7 +5,19 @@
 	<view uin="V574ng9egflegj6-unolwe">
 		<property name="$defaultDiagram" value="true"/>
 		<property name="$metaclass" value="Package Diagram"/>
-		<reference referencedUin="design:view:::V21xx84egflerxb-b8p8ms">
+		<reference referencedUin="design:view:::V21xx84eggfw94h-43cwne">
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::-w2q8ptegjs3rjsk7l0g5">
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::-w2q8ptegjsbu6w-lkmk5p">
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::-w2q8ptegjsho15-td62z0">
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::-w2q8ptegjta04of3pvhw">
 			<property name="$shortcutReference" value="true"/>
 		</reference>
 	</view>
