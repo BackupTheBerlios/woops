@@ -15,7 +15,7 @@
 
 <body>
 
-<table border="0" cellpadding="0" cellspacing="0" >
+<table border="0" cellpadding="0" cellspacing="0" height="400" >
 
 <tr>
   <td width="227" height="100%" valign="top">
