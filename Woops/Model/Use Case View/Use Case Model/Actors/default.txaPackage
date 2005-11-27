@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.1">
+	<node uin="11kb11egjru0vnwhteaw">
+		<property name="$metaclass" value="Actor"/>
+		<property name="$name" value="Participant"/>
+		<link uin="ieje0regjrvzln-7ab10t">
+			<property name="$metaclass" value="Association Link"/>
+			<property name="@stereotype" value="communicate"/>
+			<participant referencedUin="design:node:::11kb11egjru0vnwhteaw" role="Client"></participant>
+			<participant referencedUin="design:node:::e0tg6egjrqpyexzf8st" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjrx9am1fpc40">
+			<property name="$metaclass" value="Association Link"/>
+			<property name="@stereotype" value="communicate"/>
+			<participant referencedUin="design:node:::11kb11egjru0vnwhteaw" role="Client"></participant>
+			<participant referencedUin="design:node:::-4lk713egjrrqfcvdrxkl" role="Supplier"></participant>
+		</link>
+		<link uin="ieje0regjrxfzi-s1wko9">
+			<property name="$metaclass" value="Association Link"/>
+			<property name="@stereotype" value="communicate"/>
+			<participant referencedUin="design:node:::11kb11egjru0vnwhteaw" role="Client"></participant>
+			<participant referencedUin="design:node:::-4lk713egjrs82rg7k94h" role="Supplier"></participant>
+		</link>
+	</node>
+	<node uin="11kb11egjrusnn-qk0s0u">
+		<property name="$metaclass" value="Actor"/>
+		<property name="$name" value="Administrateur"/>
+	</node>
+</nodeSet>

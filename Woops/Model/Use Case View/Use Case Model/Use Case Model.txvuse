@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.1">
+	<view uin="V-rqmxokegjrna7z-6ca9yd">
+		<property name="$metaclass" value="Use Case Diagram"/>
+		<property name="$name" value="Use Case Model"/>
+		<reference referencedUin="design:node:::e0tg6egjrqpyexzf8st">
+			<property name="bounds" value="275,155,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::11kb11egjru0vnwhteaw">
+			<property name="bounds" value="42,123,50,89"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+			<reference referencedUin="design:link:::ieje0regjrvzln-7ab10t:11kb11egjru0vnwhteaw">
+				<property name="sourceAnchor" value="97,171"/>
+				<property name="targetAnchor" value="280,171"/>
+			</reference>
+			<reference referencedUin="design:link:::ieje0regjrxfzi-s1wko9:11kb11egjru0vnwhteaw">
+				<property name="sourceAnchor" value="97,181"/>
+				<property name="targetAnchor" value="304,261"/>
+			</reference>
+			<reference referencedUin="design:link:::ieje0regjrx9am1fpc40:11kb11egjru0vnwhteaw">
+				<property name="sourceAnchor" value="97,161"/>
+				<property name="targetAnchor" value="302,81"/>
+			</reference>
+		</reference>
+		<reference referencedUin="design:node:::-4lk713egjrrqfcvdrxkl">
+			<property name="bounds" value="275,55,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::-4lk713egjrs82rg7k94h">
+			<property name="bounds" value="275,255,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+	</view>
+</nodeSet>
