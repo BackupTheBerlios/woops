@@ -11,46 +11,37 @@
 <link href="./html/images/css.css" rel="stylesheet" type="text/css">
 
 <util:jsp directive="includes"/>
- 
 </head>
 
-<body leftmargin="0" topmargin="0" onload="init();">
+<body>
 
-<center>
-<table border="0" cellpadding="0" cellspacing="0" width="1022">
+<table border="0" cellpadding="0" cellspacing="0" >
 
+<tr>
+  <td width="227" height="100%" >
+  
+  
+ <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+  
   <tr>
-   <td rowspan="2"><img name="logo" src="./html/images/logo.jpg" width="224" height="132" border="0" alt=""></td>
-   <td valign="top" width="798" height="57" style="padding-left: 20px ;padding-top: 24px ; background:url('./html/images/titre.jpg') no-repeat ;" >
-   
-  
-  <!-------###########------->
-  <!-------DEBUT TITRE------->
- <template:get name="title"/>
-  <!-------FIN TITRE------->
-  <!-------#########------->
-  
-  </td>
+    <td colspan="3" height="122" style="background-image: url('./html/images/logo.jpg');">
+
+    </td>
   </tr>
-  <tr>
-   <td valign="top" rowspan="3" width="798"  style=" padding-left: 20px ;padding-top: 10px ;background:url('./html/images/contenu.jpg') repeat-y ;" >
-   
-   
-  <!-------#############------->
-  <!-------DEBUT CONTENU------->
   
-<template:get name="contents"/>
-  
-  <!-------FIN CONTENU------->
-  <!-------###########------->
-  
-  
-  </td>
+    <tr>
+    <td colspan="3" height="23" style="background-image: url('./html/images/menuHaut.jpg');" >
+
+    </td>
   </tr>
+  
   <tr>
-   <td valign="top" width="224"  height="59" style="padding-left: 25px ; background:url('./html/images/entetemenu.jpg') no-repeat; " >
-   
-   
+    <td width="35" height="35" style="background-image: url('./html/images/idGauche.jpg');">
+
+    </td>
+      <td width="171" height="35" style="background-image: url('./html/images/id.jpg');">
+      
+      
   <!-------#################------->
   <!-------DEBUT ENTETE MENU------->
 <template:get name="menuHaut"/>
@@ -58,12 +49,24 @@
   <!-------###############------->
   
   
-  </td>
+    </td>
+    <td width="21" height="35" style="background-image: url('./html/images/idDroit.jpg');" >
+
+    </td>
   </tr>
+  
   <tr>
-   <td valign="top" height="300" width="224"  style="padding-left: 25px ; background:url('./html/images/menu.jpg') repeat-y ; ">
-   
-   
+    <td colspan="3" height="15" style="background-image: url('./html/images/sousId.jpg');" >
+
+    </td>
+  </tr>
+  
+  <tr>
+    <td  width="35" height="100%" style="background-image: url('./html/images/menuGauche.jpg');">
+    </td>
+      <td width="171" valign="top" height="100%" style="background-image: url('images/menu.jpg');" >
+      
+      
   <!-------#################------->
   <!-------DEBUT MENU------->
   
@@ -72,19 +75,83 @@
   <!-------FIN MENU------->
   <!-------########------->
   
+    </td>
+    <td width="21" height="100%" style="background-image: url('./html/images/menuDroit.jpg');" >
+    </td>
+  </tr>
+  
+
+  
+  <tr>
+    <td colspan="3" height="36" style="background-image: url('./html/images/menuBas.jpg');" >
+
+    </td>
+  </tr>
+  
+</table>
+  
+  
   
   
   </td>
-  </tr>
+  
+  <td width="801" valign="top">
+  
+  
+   <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+  
   <tr>
-   <td><img name="basmenu" src="./html/images/basmenu.jpg" width="224" height="30" border="0" alt=""></td>
-   <td><img name="bascontenu" src="./html/images/bascontenu.jpg" width="798" height="30" border="0" alt=""></td>
+    <td width="805" height="36" style="background-image: url('./html/images/contenuHaut.jpg');">
+
+    </td>
   </tr>
+  
+  <tr>
+    <td height="27" style="background-image: url('./html/images/titre.jpg');padding:0 0 5 20;" >
+    
+    
+  <!-------###########------->
+  <!-------DEBUT TITRE------->
+ <template:get name="title"/>
+  <!-------FIN TITRE------->
+  <!-------#########------->
+  
+  
+    </td>
+  </tr>
+  
+  <tr>
+    <td valign="top" width="805"  height="100%" style="background-image: url('./html/images/contenu.jpg'); padding:0 0 0 20;" >
+    
+    
+  <!-------#############------->
+  <!-------DEBUT CONTENU------->
+  
+<template:get name="contents"/>
+  
+  <!-------FIN CONTENU------->
+  <!-------###########------->
+ 
+  
+
+    </td>
+  </tr>
+  
+  <tr>
+    <td height="36" style="background-image: url('./html/images/contenuBas.jpg');" >
+
+    </td>
+  </tr>
+  
+  
+  </td>
+</tr>
+
+
 
 </table>
-</center>
 
-  <util:jsp directive="endofpage"/> 
-  
+
+  <util:jsp directive="endofpage"/>  
 </body>
 </html>
