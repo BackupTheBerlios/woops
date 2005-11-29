@@ -2,6 +2,8 @@ DROP TABLE ActivitySequence;
 DROP TABLE Activity;
 DROP TABLE ActivitySequenceType;
 DROP TABLE User;
+DROP TABLE ActivityState;
+
 
 CREATE TABLE User (
        id INT NOT NULL AUTO_INCREMENT
@@ -20,16 +22,27 @@ CREATE TABLE ActivitySequenceType (
      , PRIMARY KEY (id)
 )TYPE=InnoDB;
 
+CREATE TABLE ActivityState (
+       id INT NOT NULL AUTO_INCREMENT
+     , name VARCHAR(50) NOT NULL
+     , progress INT DEFAULT 0
+     , PRIMARY KEY (id)
+     , INDEX (id)
+)TYPE=InnoDB;
+
 CREATE TABLE Activity (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(50) NOT NULL
      , details TEXT
      , user INT NOT NULL
+     , state INT NOT NULL
      , UNIQUE UQ_Activity_name (name)
      , PRIMARY KEY (id)
      , INDEX (user)
      , CONSTRAINT FK_Activity_user FOREIGN KEY (user)
                   REFERENCES User (id)
+     , CONSTRAINT FK_Activity_state FOREIGN KEY (state)
+                  REFERENCES ActivityState (id)            
 )TYPE=InnoDB;
 --CREATE INDEX IX_Activity_name ON Activity (name ASC);
 
@@ -51,8 +64,13 @@ CREATE TABLE ActivitySequence (
                   REFERENCES Activity (id)
 )TYPE=InnoDB;
 
+
+
 -- Insertions intiales
 INSERT INTO ActivitySequenceType(name) VALUES ('finishToStart');
 INSERT INTO ActivitySequenceType(name) VALUES ('finishToFinish');
 INSERT INTO ActivitySequenceType(name) VALUES ('StartToStart');
 INSERT INTO ActivitySequenceType(name) VALUES ('StartToFinish');
+INSERT INTO ActivityState(name) VALUES ('createdState');
+INSERT INTO ActivityState(name) VALUES ('inPogressState');
+INSERT INTO ActivityState(name) VALUES ('finishedState');
