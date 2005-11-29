@@ -6,30 +6,30 @@
 		<property name="$defaultDiagram" value="true"/>
 		<property name="$metaclass" value="Package Diagram"/>
 		<reference referencedUin="design:view:::V574ng9efx8es2nseecmp">
-			<property name="bounds" value="150,5,80,83"/>
+			<property name="bounds" value="150,5,80,84"/>
 			<property name="location_set_by_user" value="true"/>
 		</reference>
 		<reference referencedUin="design:view:::V574ng9efx8es33n3v80c">
-			<property name="bounds" value="5,145,132,151"/>
+			<property name="bounds" value="5,145,130,165"/>
 			<property name="location_set_by_user" value="true"/>
 		</reference>
 		<reference referencedUin="jdt:e_class:src:business.BusinessConstantes">
-			<property name="bounds" value="5,5,125,82"/>
+			<property name="bounds" value="5,5,119,82"/>
 			<property name="location_set_by_user" value="true"/>
 			<reference referencedUin="label:$name:jdt:e_class:src:business.BusinessConstantes">
-				<property name="bounds" value="72,102,0,0"/>
+				<property name="bounds" value="69,102,0,0"/>
 			</reference>
 		</reference>
 		<reference referencedUin="design:view:::V574ng9efx8es3y-s1ceq4">
-			<property name="bounds" value="155,215,80,70"/>
+			<property name="bounds" value="155,215,96,97"/>
 			<property name="location_set_by_user" value="true"/>
 		</reference>
 		<reference referencedUin="design:view:::e1ucqefy0qm4tec39ky">
-			<property name="bounds" value="149,0,119,148"/>
+			<property name="bounds" value="149,0,119,149"/>
 			<property name="location_set_by_user" value="true"/>
 		</reference>
 		<reference referencedUin="design:view:::V574ng9efy3972w-2vb37x">
-			<property name="bounds" value="315,12,80,70"/>
+			<property name="bounds" value="315,12,80,97"/>
 			<property name="location_set_by_user" value="true"/>
 		</reference>
 	</view>

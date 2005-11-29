@@ -20,5 +20,8 @@
 		<reference referencedUin="design:node:::-w2q8ptegjta04of3pvhw">
 			<property name="$shortcutReference" value="true"/>
 		</reference>
+		<reference referencedUin="design:view:::V21xx84eglhbsyo-horh8f">
+			<property name="$shortcutReference" value="true"/>
+		</reference>
 	</view>
 </nodeSet>
