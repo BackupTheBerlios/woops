@@ -36,6 +36,14 @@
 			not-null="false"
 			type="integer"
 		 />
+		 
+		<many-to-one
+			class="business.activity.state.IActivityState"
+			name="state"
+			not-null="true"
+			>
+			<column name="state" />
+		</many-to-one>
 
 	</class>	
 </hibernate-mapping>

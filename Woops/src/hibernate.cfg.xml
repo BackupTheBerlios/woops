@@ -23,6 +23,6 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
 		<mapping resource="business/user/User.hbm.xml" />
 		<mapping resource="business/activity/ActivitySequence.hbm.xml" />
 		<mapping resource="business/activity/ActivitySequenceType.hbm.xml" />
-		
+		<mapping resource="business/activity/ActivityState.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

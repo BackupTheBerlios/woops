@@ -1,5 +1,7 @@
 package view.activity;
 
+
+
 import com.cc.framework.common.DisplayObject;
 
 
@@ -7,6 +9,7 @@ public class ActivityItem implements DisplayObject{
 	private String id;
 	private String name;
 	private String details;
+	private String state;
 	
 	/**
 	 * @return Returns the details.
@@ -37,6 +40,14 @@ public class ActivityItem implements DisplayObject{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 }

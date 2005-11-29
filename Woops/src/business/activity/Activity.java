@@ -2,6 +2,7 @@ package business.activity;
 
 import java.util.Collection;
 
+import business.activity.state.IActivityState;
 import business.hibernate.ObjetHistorise;
 
 
@@ -31,23 +32,6 @@ public class Activity extends ObjetHistorise{
 		this.details = null;
 		this.linkToPredecessor = null;
 		this.state = null;
-	}
-	
-	/**
-	 * Construteur permettant d'initialiser chaque caractéristique d'une activité
-	 * @param name nom de l'activité
-	 * @param details description de l'activité
-	 * @param linkToPredecessor liste des activités dont dépend l'activité
-	 * @param linkToSuccessor liste des activités qui dépendent de l'activité
-	 * @param userId participant responsable de la réalisation de l'activité
-	 */
-	public Activity(String name, String details, Collection linkToPredecessor,
-			 Integer userId) {
-		this.name = name;
-		this.details = details;
-		this.linkToPredecessor = linkToPredecessor;
-		this.userId = userId;
-		this.state = new CreatedActivity();
 	}
 	
 	/**
@@ -115,6 +99,14 @@ public class Activity extends ObjetHistorise{
 	}
 	
 	/**
+	 * Récupération de l'état de l'activité
+	 * @return état de l'activité
+	 */
+	public IActivityState getState() {
+		return state;
+	}
+	
+	/**
 	 * Modification de l'état de l'activité
 	 * @shapeType PatternLink
 	 * @pattern gof.State
@@ -129,8 +121,10 @@ public class Activity extends ObjetHistorise{
 	 * Opération qui déclenche la modification de l'état de l'activité
 	 */
 	public void someOperation() {
-		state.process();
+		state.process(this);
 	}
+
+
 
 
 
