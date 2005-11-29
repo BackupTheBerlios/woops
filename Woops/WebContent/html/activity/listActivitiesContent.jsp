@@ -20,7 +20,7 @@
 
 			<ctrl:columndrilldown title="table.field.listActivities.name" property="name" width="150"/>
 			<ctrl:columntext title="table.field.listActivities.details" property="details" width="350"/>
-			<ctrl:columnbutton title="table.field.listActivities.state"/> 
+			<ctrl:columntext title="table.field.listActivities.state" property="state" width="150"/> 
 			<ctrl:columnedit title="table.field.listActivities.edit"/> 
 			<ctrl:columndelete  title="table.field.listActivities.delete"/>
 
