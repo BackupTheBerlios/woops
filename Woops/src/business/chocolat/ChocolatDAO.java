@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import business.hibernate.ObjetPersistantDAO;
+import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
-public class ChocolatDAO extends ObjetPersistantDAO {
+public class ChocolatDAO extends PersistentObjectDAO {
 
 	public Chocolat get(Integer ID) throws PersistanceException {
 		Chocolat chocolat = (Chocolat) get(Chocolat.class,ID);

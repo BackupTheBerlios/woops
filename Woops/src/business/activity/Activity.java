@@ -3,10 +3,10 @@ package business.activity;
 import java.util.Collection;
 
 import business.activity.state.IActivityState;
-import business.hibernate.ObjetHistorise;
+import business.hibernate.HistorizedObject;
 
 
-public class Activity extends ObjetHistorise{	
+public class Activity extends HistorizedObject{	
 	private	Integer			id; /** identifiant de l'activité */
 	private String 			name; /** nom de l'activité */
 	private	String			details; /** description de l'activité */

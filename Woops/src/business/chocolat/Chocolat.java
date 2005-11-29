@@ -1,9 +1,9 @@
 package business.chocolat;
 
-import business.hibernate.ObjetHistorise;
+import business.hibernate.HistorizedObject;
 
 
-public class Chocolat extends ObjetHistorise {
+public class Chocolat extends HistorizedObject {
 	private Integer id;
 	private String nom;
 	private int calorie;

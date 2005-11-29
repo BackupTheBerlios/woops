@@ -6,7 +6,7 @@ import java.io.Serializable;
  * @author Nicolas Ricard
  * 
  */
-public interface ObjetPersistant extends Serializable {
+public interface PersistentObject extends Serializable {
 	
 	public Object getId();
 	public void setId(Object id);

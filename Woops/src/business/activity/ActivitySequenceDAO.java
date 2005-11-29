@@ -5,10 +5,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import business.hibernate.ObjetPersistantDAO;
+import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
-public class ActivitySequenceDAO extends ObjetPersistantDAO {
+public class ActivitySequenceDAO extends PersistentObjectDAO {
 	/**
 	 * Récupération des activités pour lesquelles le participant a la responsabilité
 	 * @param userId : identifiant du participant

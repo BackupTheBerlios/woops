@@ -1,9 +1,9 @@
 package business.activity;
 
-import business.hibernate.ObjetPersistantManager;
+import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.PersistanceException;
 
-public class ActivitySequenceTypeManager extends ObjetPersistantManager {
+public class ActivitySequenceTypeManager extends PersistentObjectManager {
 	
 	/** Instance permettant d'assurer la persistance d'un type de suequence d'activité */
 	private ActivitySequenceTypeDAO activitySequenceTypeDAO = new ActivitySequenceTypeDAO();

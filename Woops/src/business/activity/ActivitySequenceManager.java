@@ -1,12 +1,12 @@
 package business.activity;
 
-import business.hibernate.ObjetPersistant;
-import business.hibernate.ObjetPersistantManager;
+import business.hibernate.PersistentObject;
+import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 
-public class ActivitySequenceManager extends ObjetPersistantManager {
+public class ActivitySequenceManager extends PersistentObjectManager {
 	
 	/** Instance permettant d'assurer la persistance d'une activité */
 	private ActivitySequenceDAO activitySequenceDAO = new ActivitySequenceDAO();
@@ -41,7 +41,7 @@ public class ActivitySequenceManager extends ObjetPersistantManager {
 		newActivitySequence.setSuccessor(successor);
 		newActivitySequence.setLinkType(linkType);
 		
-		activitySequenceDAO.insert((ObjetPersistant)newActivitySequence);
+		activitySequenceDAO.insert((PersistentObject)newActivitySequence);
 	}
 	
 	public void removeActivitySequence(Activity predecessor, Activity successor, ActivitySequenceType linkType ) 
@@ -51,7 +51,7 @@ public class ActivitySequenceManager extends ObjetPersistantManager {
 		oldActivitySequence.setSuccessor(successor);
 		oldActivitySequence.setLinkType(linkType);
 		
-		activitySequenceDAO.delete((ObjetPersistant)oldActivitySequence);
+		activitySequenceDAO.delete((PersistentObject)oldActivitySequence);
 	}
 	
 }

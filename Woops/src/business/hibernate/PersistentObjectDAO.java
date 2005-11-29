@@ -24,10 +24,10 @@ import business.hibernate.exception.PersistanceException;
  * @author Nicolas Ricard
  * 
  */
-public class ObjetPersistantDAO  {
+public class PersistentObjectDAO  {
 
     
-	public void insert(ObjetPersistant objet) throws PersistanceException,DoublonException {
+	public void insert(PersistentObject objet) throws PersistanceException,DoublonException {
 		
         Session session = null ;
         Transaction transaction = null;
@@ -57,11 +57,11 @@ public class ObjetPersistantDAO  {
 		}
 	}
 
-    public void insert(ObjetPersistant objet, Session session) throws HibernateException {
+    public void insert(PersistentObject objet, Session session) throws HibernateException {
         session.save(objet);
     }    
 	
-	public void update(ObjetPersistant objet) throws PersistanceException {
+	public void update(PersistentObject objet) throws PersistanceException {
 		
         Session session = null ;
         Transaction transaction = null;
@@ -87,18 +87,18 @@ public class ObjetPersistantDAO  {
 	}	
 	
 
-    public void update(ObjetPersistant objet, Session session) throws HibernateException {
+    public void update(PersistentObject objet, Session session) throws HibernateException {
             session.update(objet);
     }    
     
 	
-	protected ObjetPersistant getForUpdate(Class classe, Serializable id) throws PersistanceException {
+	protected PersistentObject getForUpdate(Class classe, Serializable id) throws PersistanceException {
 		
 		Session session = null ;
-		ObjetPersistant objet =null;
+		PersistentObject objet =null;
 		try {
 			session = HibernateSessionFactory.currentSession();
-			objet = (ObjetPersistant) session.get(classe, id, LockMode.UPGRADE);
+			objet = (PersistentObject) session.get(classe, id, LockMode.UPGRADE);
 			
 		} catch (HibernateException he) {
 			throw new PersistanceException(he.getMessage(),he);
@@ -121,13 +121,13 @@ public class ObjetPersistantDAO  {
 	 * @return
 	 * @throws PersistanceException
 	 */
-	protected ObjetPersistant get(Class classe, Serializable id) throws PersistanceException {
+	protected PersistentObject get(Class classe, Serializable id) throws PersistanceException {
 		
 		Session session = null ;
-		ObjetPersistant objet =null;
+		PersistentObject objet =null;
 		try {
 			session = HibernateSessionFactory.currentSession();
-			objet = (ObjetPersistant) session.get(classe, id);
+			objet = (PersistentObject) session.get(classe, id);
 			
 		} catch (HibernateException he) {
 			throw new PersistanceException(he.getMessage(),he);
@@ -162,7 +162,7 @@ public class ObjetPersistantDAO  {
 	 * @throws SQLException
 	 * @throws HibernateException
 	 */
-	public void delete(ObjetPersistant objet) throws PersistanceException, ForeignKeyException {
+	public void delete(PersistentObject objet) throws PersistanceException, ForeignKeyException {
 		
 		Session session = null ;
 		Transaction transaction = null;
@@ -199,7 +199,7 @@ public class ObjetPersistantDAO  {
 	 * @throws PersistanceException
 	 * @throws ForeignKeyException
 	 */
-	public void delete(ObjetPersistant objet, Session session) throws HibernateException, ForeignKeyException{
+	public void delete(PersistentObject objet, Session session) throws HibernateException, ForeignKeyException{
         try {
             session.delete(objet);
         } catch (GenericJDBCException se) {
@@ -255,7 +255,7 @@ public class ObjetPersistantDAO  {
     }    
     
     
-	public void saveOrUpdate(ObjetPersistant objet) throws PersistanceException {
+	public void saveOrUpdate(PersistentObject objet) throws PersistanceException {
 		
 		Session session = null ;
 		
@@ -344,11 +344,11 @@ public class ObjetPersistantDAO  {
 	/**
 	 * Permet un simple select d'un element en base
 	 */
-	protected ObjetPersistant get(String beanClass, String keyId, Object valueId) throws PersistanceException {
+	protected PersistentObject get(String beanClass, String keyId, Object valueId) throws PersistanceException {
 		
 		Session session = null ;
 		List list = null;
-		ObjetPersistant object = null;
+		PersistentObject object = null;
 		
 		try {
 			session = HibernateSessionFactory.currentSession();
@@ -362,7 +362,7 @@ public class ObjetPersistantDAO  {
 			
 			Iterator iter = list.iterator();
 			if ( iter.hasNext() ) {
-			    object = (ObjetPersistant) iter.next(); 
+			    object = (PersistentObject) iter.next(); 
 			}
 			
 		} catch (HibernateException he) {

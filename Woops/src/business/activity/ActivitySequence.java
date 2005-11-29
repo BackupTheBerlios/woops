@@ -1,8 +1,8 @@
 package business.activity;
 
-import business.hibernate.ObjetHistorise;
+import business.hibernate.HistorizedObject;
 
-public class ActivitySequence extends ObjetHistorise {
+public class ActivitySequence extends HistorizedObject {
 	private Integer id;
 	private Activity successor;
 	private Activity predecessor;

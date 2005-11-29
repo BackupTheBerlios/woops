@@ -2,10 +2,10 @@ package business.user;
 
 import java.util.ArrayList;
 
-import business.hibernate.ObjetPersistantDAO;
+import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
-public class UserDAO extends ObjetPersistantDAO {
+public class UserDAO extends PersistentObjectDAO {
 
 	public User get(String login) throws PersistanceException {
 		StringBuffer req = new StringBuffer("select u.login from User as u ") ;

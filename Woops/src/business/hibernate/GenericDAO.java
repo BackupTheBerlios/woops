@@ -10,9 +10,9 @@ import business.hibernate.exception.PersistanceException;
  */
 public interface GenericDAO {
 	
-	public void save(ObjetPersistant objet) throws PersistanceException ;
-	public void update(ObjetPersistant objet) throws PersistanceException;	
-	public ObjetPersistant getForUpdate(Class classe, Serializable id) throws PersistanceException;		
-	public void delete(ObjetPersistant objet) throws PersistanceException ;
+	public void save(PersistentObject objet) throws PersistanceException ;
+	public void update(PersistentObject objet) throws PersistanceException;	
+	public PersistentObject getForUpdate(Class classe, Serializable id) throws PersistanceException;		
+	public void delete(PersistentObject objet) throws PersistanceException ;
 	
 }

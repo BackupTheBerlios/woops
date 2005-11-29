@@ -10,9 +10,9 @@ import business.hibernate.exception.PersistanceException;
  * @author Nicolas Ricard
  * 
  */
-public class ObjetPersistantManager {
+public class PersistentObjectManager {
 
-    private ObjetPersistantDAO dao = new ObjetPersistantDAO();  
+    private PersistentObjectDAO dao = new PersistentObjectDAO();  
     
     /*private static ObjetPersistantManager instance;
     
@@ -39,28 +39,28 @@ public class ObjetPersistantManager {
             HibernateSessionFactory.closeSession();
     }    
     
-    public void ajouter(ObjetPersistant objet) throws PersistanceException,DoublonException {
+    public void insert(PersistentObject objet) throws PersistanceException,DoublonException {
         dao.insert(objet);
     }
 
-    public void ajouter(ObjetPersistant objet, Session session) throws HibernateException  {
+    public void insert(PersistentObject objet, Session session) throws HibernateException  {
         dao.insert(objet,session);
     }    
   
     
-    public void modifier(ObjetPersistant objet) throws PersistanceException {
+    public void update(PersistentObject objet) throws PersistanceException {
         dao.update(objet);
     }
 
-    public void modifier(ObjetPersistant objet, Session session) throws HibernateException  {
+    public void update(PersistentObject objet, Session session) throws HibernateException  {
         dao.update(objet,session);
     }    
     
-    public void supprimer(ObjetPersistant objet) throws PersistanceException, ForeignKeyException {
+    public void delete(PersistentObject objet) throws PersistanceException, ForeignKeyException {
         dao.delete(objet);
     }
     
-    public void supprimer(ObjetPersistant objet, Session session) throws HibernateException, ForeignKeyException {
+    public void delete(PersistentObject objet, Session session) throws HibernateException, ForeignKeyException {
         dao.delete(objet,session);
     }
 

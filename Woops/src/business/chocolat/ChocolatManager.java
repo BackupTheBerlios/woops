@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.Collection;
 
 import business.hibernate.HibernateSessionFactory;
-import business.hibernate.ObjetPersistantManager;
+import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.PersistanceException;
 
-public class ChocolatManager extends ObjetPersistantManager {
+public class ChocolatManager extends PersistentObjectManager {
 	
 	private ChocolatDAO dao = new ChocolatDAO();	
 	

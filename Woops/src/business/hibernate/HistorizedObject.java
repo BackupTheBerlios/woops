@@ -3,7 +3,7 @@ package business.hibernate;
 import java.util.Date;
 
 
-public class ObjetHistorise implements ObjetPersistant, Cloneable{
+public class HistorizedObject implements PersistentObject, Cloneable{
     
     
     protected String userCreation;

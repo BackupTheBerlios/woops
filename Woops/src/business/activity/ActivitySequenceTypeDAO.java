@@ -2,10 +2,10 @@ package business.activity;
 
 import java.util.List;
 
-import business.hibernate.ObjetPersistantDAO;
+import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
-public class ActivitySequenceTypeDAO extends ObjetPersistantDAO {
+public class ActivitySequenceTypeDAO extends PersistentObjectDAO {
 	
 	public ActivitySequenceType getActivitySequenceTypeById(Integer activitySequenceTypeId)
 	throws PersistanceException {

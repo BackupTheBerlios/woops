@@ -5,11 +5,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import business.hibernate.ObjetPersistantDAO;
+import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
-public class ActivityDAO extends ObjetPersistantDAO {
-	
+public class ActivityDAO extends PersistentObjectDAO {
 	/**
 	 * 
 	 * @param activityId : l'id de l'activité que l'on veut récupérer

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import business.hibernate.ObjetPersistantManager;
+import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 
-public class ActivityManager extends ObjetPersistantManager {
+
+
+public class ActivityManager extends PersistentObjectManager {
 	
 	/** Instance permettant d'assurer la persistance d'une activité */
 	private ActivityDAO activityDAO = new ActivityDAO();
