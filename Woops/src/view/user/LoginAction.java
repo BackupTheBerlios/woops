@@ -3,8 +3,6 @@ package view.user;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
 
 import view.PresentationConstantes;
 import view.WoopsCCAction;

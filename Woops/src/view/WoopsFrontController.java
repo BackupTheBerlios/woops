@@ -2,7 +2,6 @@ package view;
 
 import javax.servlet.ServletException;
 
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionServlet;
 
 import com.cc.framework.ui.painter.PainterFactory;

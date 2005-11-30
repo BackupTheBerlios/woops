@@ -3,10 +3,10 @@ package view;
 
 import javax.servlet.http.HttpSession;
 
+import business.hibernate.PersistentObject;
+
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FWAction;
-
-import business.hibernate.PersistentObject;
 
 public abstract class WoopsCCAction extends FWAction {
     

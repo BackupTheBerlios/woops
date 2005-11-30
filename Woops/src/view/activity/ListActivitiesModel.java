@@ -1,8 +1,8 @@
 package view.activity;
 
-import com.cc.framework.common.DisplayObject;
-
 import view.WoopsListDataModel;
+
+import com.cc.framework.common.DisplayObject;
 
 public class ListActivitiesModel extends WoopsListDataModel {
 
