@@ -23,8 +23,6 @@ import business.hibernate.exception.PersistanceException;
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
-import com.cc.framework.ui.model.ListDataModel;
-import com.cc.framework.util.StringHelp;
 
 
 /**
@@ -87,11 +85,16 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		Collection possibleActivityDependancesItems = null;
 		ActivityItem item = null;
 		
-		/**
-		 * Récupération de la liste des dépendances possible de l'activité via le manager 
-		 */
 		ManageActivityDependancesForm madForm = (ManageActivityDependancesForm) context.form();
-		possibleActivityDependancesMgr = ActivityManager.getInstance().getPossibleActivityDependances(new Integer(2));  	
+		
+		/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans la requete*/
+		Integer activityId = new Integer(context.request().getParameter(PresentationConstantes.PARAM_ACTIVITY_ID));
+		
+		/* Sauvegarde dans le form */
+		madForm.setActivityId(activityId.toString());
+		
+		/* Récupération de la liste des dépendances possible de l'activité via le manager */
+		possibleActivityDependancesMgr = ActivityManager.getInstance().getPossibleActivityDependances(activityId);  	
 		
 		/**
 		 * Conversion de la liste d'Activity retournée par getPossibleActivityDependances
@@ -143,7 +146,10 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 
 		ManageActivityDependancesForm madForm = (ManageActivityDependancesForm) context.form();
 		
-		activityDependances = ActivityManager.getInstance().getActivityDependances(new Integer(2));  	
+		/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans le form 
+		 * (il a été mis à jour dans la methode précédente : setPossibleDependancesOptions */
+		Integer activityId = new Integer(madForm.getActivityId());
+		activityDependances = ActivityManager.getInstance().getActivityDependances(activityId);  	
 		
 		
 		/**
@@ -185,54 +191,42 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		 * depuis la session
 		 */
 		String [] oldActivityDependancesKeys = (String [])context.session().getAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
-		
-		/**
-		 * String msg1 = (realDepedancesKeys.length == 0) ? "rien" : "["+StringHelp.join(realDepedancesKeys, ',')+"]";
-		 * msg1 += (oldActivityDependancesKeys.length == 0) ? "rien" : "  ["+StringHelp.join(oldActivityDependancesKeys, ',')+"]";
-		 * context.addGlobalMessage("message.insert.ok",msg1);
-		 */
-
+	
 		/**
 		 * Sauvegarde des dépendances
 		 */
 		try {
-			ActivityManager.getInstance().saveActivityDependances(new Integer(2),oldActivityDependancesKeys,realDepedancesKeys);
-			context.addGlobalMessage("message.insert.ok","");
+			/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans le form 
+			 * (il a été mis à jour dans la methode précédente : setPossibleDependancesOptions */
+			Integer activityId = new Integer(form.getActivityId());
+			ActivityManager.getInstance().saveActivityDependances(activityId,oldActivityDependancesKeys,realDepedancesKeys);
+			
+			/**
+			 * Suppression des attributs de la session
+			 */
+			context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
+			context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
+			
+			/** Appel de la page de garde **/
+			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
 		} catch (PersistanceException e) {
 			context.addGlobalError("errors.persistance.global");
+			/** Rappel du formulaire avec le message d'erreur **/
+			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 		} catch (DoublonException e) {
 			// Ne doit pas passer par là
 			e.printStackTrace();
 		} catch (ForeignKeyException e) {
 			// Ne doit pas passer par là
 			e.printStackTrace();
+		} finally {
+			context.forward(forward);
 		}
 		
 		
-		/**
-		 * Récupération des options possibles
-		 */
-		ListDataModel possibleDependancesOptions = (ListDataModel)context.session().getAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
-
-		/**
-		 * Remise à jour des 2 selects du swap select
-		 * --> Remise à jour du Form
-		 */
-		form.setPossibleDependancesOptions(possibleDependancesOptions);
-		form.setRealDependancesKeys(realDepedancesKeys);
 		
-		/**
-		 * Suppression des attributs de la session
-		 * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		 * !!!!!!!! A ne pas faire ici si l'utilisateur veut refaire une modif	!!!
-		 * !!!!!!!! A faire quand l'utilisateur veut quitter la page			!!!
-		 * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		 * context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
-		 * context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
-		 */
 		
-		/** Raffiche la page avec le message d'insertion **/
-	    context.forward(context.mapping().findForward(PresentationConstantes.FORWARD_SUCCES)); 
+		
 	}
 
 }

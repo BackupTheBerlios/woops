@@ -12,8 +12,8 @@
 		title="table.title.listActivities" 
 		width="500" 
 		rows="15" 
-		refreshButton="true" 
-		createButton="true"
+		refreshButton="false" 
+		createButton="false"
 		rows="10"
 		
 		> 

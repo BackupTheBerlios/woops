@@ -4,7 +4,8 @@
 <%@ taglib uri="/cc-utility" prefix="util" %>
 
 <html:form action="/manageActivityDependances">
-
+	
+	
 	<forms:message formid="frmError" caption="title.error" severity="error" width="350"/>
 	<forms:message formid="frmActivityDependances" caption="Information" severity="information" width="350"/>
 
@@ -18,7 +19,7 @@
             labelRight="table.field.manageActivityDependances.added"
             valign="top"
             size="10"
-            width="100%"
+            style="width: 100;"
             align="center"
             filter="false"
             required="false"
@@ -33,6 +34,8 @@
 				name="btnSave"
 				text="Valider"/>
 		</forms:buttonsection>
+        
+        <html:hidden property="activityId"/>
         
     </forms:form>
     

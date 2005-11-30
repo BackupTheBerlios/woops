@@ -93,11 +93,13 @@ public class ActivityManager extends PersistentObjectManager {
 	throws PersistanceException, DoublonException, ForeignKeyException {
 		Collection oldDendancesKeysList = new ArrayList();
 		for(int i=0; i < oldDependancesKeys.length; i++)
-			oldDendancesKeysList.add(new Integer(oldDependancesKeys[i]));
+			if(!oldDependancesKeys[i].equals(""))
+				oldDendancesKeysList.add(new Integer(oldDependancesKeys[i]));
 		
 		Collection newDendancesKeysList = new ArrayList();
 		for(int i=0; i < newDependancesKeys.length; i++)
-			newDendancesKeysList.add(new Integer(newDependancesKeys[i]));
+			if(!newDependancesKeys[i].equals(""))
+				newDendancesKeysList.add(new Integer(newDependancesKeys[i]));
 		
 		Collection dependancesToAddList = new ArrayList(newDendancesKeysList);
 		dependancesToAddList.removeAll(oldDendancesKeysList);
@@ -110,25 +112,27 @@ public class ActivityManager extends PersistentObjectManager {
 		ActivitySequenceTypeManager activitySequenceTypeManager = ActivitySequenceTypeManager.getInstance();
 		
 		
-		Activity successor= getActivityById(activityId);
-		Activity predecessor;
-		ActivitySequenceType linkType;
+		
+		Activity successor= new Activity();
+		successor.setId(activityId);
+		Activity predecessor = new Activity();
+		ActivitySequenceType linkType = new ActivitySequenceType();
+		linkType.setId(new Integer(1));
 		/**
 		 * Attention : id du activitySequenceType en DUR 
 		 */
-		linkType = activitySequenceTypeManager.getActivitySequenceTypeById(new Integer(1));
 		
 		Iterator dependancesToAddIter = dependancesToAddList.iterator();
 		while(dependancesToAddIter.hasNext())
 		{
-			predecessor = getActivityById((Integer)dependancesToAddIter.next());
+			predecessor.setId(dependancesToAddIter.next());
 			activitySequenceManager.addActivitySequence(predecessor,successor,linkType);
 		}
 		
 		Iterator dependancesToRemoveIter = dependancesToRemoveList.iterator();
 		while(dependancesToRemoveIter.hasNext())
 		{
-			predecessor = getActivityById((Integer)dependancesToRemoveIter.next());
+			predecessor.setId(dependancesToRemoveIter.next());
 			activitySequenceManager.removeActivitySequence(predecessor,successor,linkType);
 		}
 	}

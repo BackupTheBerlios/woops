@@ -46,12 +46,12 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 	
 	public void removeActivitySequence(Activity predecessor, Activity successor, ActivitySequenceType linkType ) 
 	throws PersistanceException, ForeignKeyException {
-		ActivitySequence oldActivitySequence = new ActivitySequence();
-		oldActivitySequence.setPredecessor(predecessor);
-		oldActivitySequence.setSuccessor(successor);
-		oldActivitySequence.setLinkType(linkType);
-		
-		activitySequenceDAO.delete((PersistentObject)oldActivitySequence);
+		StringBuffer query = new StringBuffer();
+		query.append("FROM ActivitySequence actSeq");
+		query.append(" WHERE actSeq.successor.id = "+successor.getId().toString());
+		query.append(" AND actSeq.predecessor.id = "+predecessor.getId().toString());
+		query.append(" AND actSeq.linkType.id ="+linkType.getId().toString());
+		activitySequenceDAO.delete(query.toString());
 	}
 	
 }

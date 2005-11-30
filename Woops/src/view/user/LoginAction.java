@@ -41,16 +41,16 @@ public class LoginAction extends WoopsCCAction {
 					}
 					else {
 						context.addGlobalError("errors.login.invalide");
-						retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERREUR);
+						retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 					}
 				} catch (PersistanceException pe) {
-					retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERREUR);
+					retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
                     pe.printStackTrace();
                     context.addGlobalError("errors.persistance.global");
 				}	
 
 	        } else {
-	        	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERREUR);
+	        	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 	        }
 		    
 		    context.forward(retour);

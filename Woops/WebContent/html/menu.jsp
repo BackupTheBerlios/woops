@@ -4,5 +4,5 @@
   
    <a href="listActivities.do"><div class="rubrique">Lister les activites</div></a>
    
-   <a href="manageActivityDependances.do"><div class="rubrique">Gérer les dependances</div></a><br>
+   <a href="manageActivityDependances.do?activityId=2"><div class="rubrique">Gérer les dependances</div></a><br>
    

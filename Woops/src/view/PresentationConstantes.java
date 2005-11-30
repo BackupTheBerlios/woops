@@ -7,7 +7,8 @@ package view;
 public interface PresentationConstantes {
 
 	public static final String FORWARD_SUCCES="success";
-	public static final String FORWARD_ERREUR="erreur";
+	public static final String FORWARD_ERROR="error";
+	public static final String FORWARD_ACTION="action";
 	public static final String FORWARD_SUPPRIMER="supprimer";	
 	public static final String FORWARD_CREER="creer";
 	public static final String FORWARD_RETOUR="retour";
@@ -17,7 +18,8 @@ public interface PresentationConstantes {
 	//Constantes de parametres de request
 	public static final String PARAM_ACTION_SUBMIT="actionSubmit";
 	public static final String PARAM_MODE="mode";
-
+	public static final String PARAM_ACTIVITY_ID="activityId";
+	
 	//constantes relatives aux Styles
 	public static final String STYLE_FOND1="fond1";
 	public static final String STYLE_FOND2="fond2";

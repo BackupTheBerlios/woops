@@ -29,7 +29,7 @@
 		 validate="false"  
 		 parameter="actionSubmit"       
          scope="request">
-         <forward name="erreur" path="/html/Accueil.jsp" />
+         <forward name="error" path="/html/Accueil.jsp" />
          <forward name="success" path="/html/chocolat/listerChocolat.jsp" />
       </action>
 
@@ -39,7 +39,7 @@
          name="listActivitiesForm"
 		 validate="false"      
          scope="request">
-         <forward name="erreur" path="/html/Accueil.jsp" />
+         <forward name="error" path="/html/Accueil.jsp" />
          <forward name="success" path="/html/activity/listActivities.jsp" />
       </action>
       
@@ -49,8 +49,9 @@
          name="manageActivityDependancesForm"
 		 validate="false"      
          scope="request">
-         <forward name="erreur" path="/html/Accueil.jsp" />
          <forward name="success" path="/html/activity/manageActivityDependances.jsp" />
+         <forward name="error" path="/html/activity/manageActivityDependances.jsp" />
+         <forward name="action" path="/listActivities.do"/>
       </action>
 
 
@@ -62,7 +63,7 @@
          scope="request"
          input="/html/user/loginUser.jsp">
          
-         <forward name="erreur" path="/html/user/loginUser.jsp" />
+         <forward name="error" path="/html/user/loginUser.jsp" />
          <forward name="success" path="/listActivities.do"/>
       </action>
       
