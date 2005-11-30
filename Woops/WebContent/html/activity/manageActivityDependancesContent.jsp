@@ -9,14 +9,14 @@
 	<forms:message formid="frmError" caption="title.error" severity="error" width="350"/>
 	<forms:message formid="frmActivityDependances" caption="Information" severity="information" width="350"/>
 
-    <forms:form type="edit" name="manageActivityDependancesForm" caption="table.title.manageActivityDependances" formid="frmActivityDependances" width="550">
+    <forms:form type="edit" name="manageActivityDependancesForm" caption="form.title.manageActivityDependances" formid="frmActivityDependances" width="550">
 
         <forms:swapselect
             property="realDependancesKeys"
-            label="table.field.manageActivityDependances"
+            label="form.field.manageActivityDependances"
             orientation="horizontal"
-            labelLeft="table.field.manageActivityDependances.toAdd"
-            labelRight="table.field.manageActivityDependances.added"
+            labelLeft="form.field.manageActivityDependances.toAdd"
+            labelRight="form.field.manageActivityDependances.added"
             valign="top"
             size="10"
             style="width: 100;"
@@ -32,7 +32,7 @@
         <forms:buttonsection>
 			<forms:button
 				name="btnSave"
-				text="Valider"/>
+				text="form.button.manageActivityDependances.submit"/>
 		</forms:buttonsection>
         
         <html:hidden property="activityId"/>
