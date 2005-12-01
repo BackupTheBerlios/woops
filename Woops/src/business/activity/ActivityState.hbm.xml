@@ -33,7 +33,7 @@
 		 
 		<!-- différents états possibles -->
 		<subclass name="CreatedActivityState" discriminator-value="createdState" />
-		<subclass name="InProgressActivityState" discriminator-value="inPogressState">
+		<subclass name="InProgressActivityState" discriminator-value="inProgressState">
 			<property name="progress" column="progress" type="integer"/>
 		</subclass>
 		<subclass name="FinishedActivityState" discriminator-value="finishedState" />
