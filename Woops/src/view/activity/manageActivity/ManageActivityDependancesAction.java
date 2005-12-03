@@ -94,7 +94,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		madForm.setActivityId(activityId.toString());
 		
 		/* Récupération de la liste des dépendances possible de l'activité via le manager */
-		possibleActivityDependancesMgr = ActivityManager.getInstance().getPossibleActivityDependances(activityId);  	
+		possibleActivityDependancesMgr = ActivityManager.getInstance().getPossibleActivityPredecessors(activityId);  	
 		
 		/**
 		 * Conversion de la liste d'Activity retournée par getPossibleActivityDependances
@@ -149,7 +149,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans le form 
 		 * (il a été mis à jour dans la methode précédente : setPossibleDependancesOptions */
 		Integer activityId = new Integer(madForm.getActivityId());
-		activityDependances = ActivityManager.getInstance().getActivityDependances(activityId);  	
+		activityDependances = ActivityManager.getInstance().getPredecessors(activityId);  	
 		
 		
 		/**
