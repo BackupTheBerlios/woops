@@ -12,13 +12,12 @@ public class FinishedActivityState extends IActivityState {
 		super();
 	}
 
-	public void process(Activity activity) {
-		// TODO Auto-generated method stub
-		
+	public boolean process(Activity activity) {
+		return false;
 	}
 
-	public void checkBeforeChange() {
+	public boolean checkBeforeChange(Activity activity) {
+		return false;
 		// TODO Auto-generated method stub
-		
 	}
 }
