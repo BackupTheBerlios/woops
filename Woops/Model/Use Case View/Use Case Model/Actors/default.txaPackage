@@ -23,6 +23,12 @@
 			<participant referencedUin="design:node:::11kb11egjru0vnwhteaw" role="Client"></participant>
 			<participant referencedUin="design:node:::-4lk713egjrs82rg7k94h" role="Supplier"></participant>
 		</link>
+		<link uin="ieje0regp0ooav445u9e">
+			<property name="$metaclass" value="Association Link"/>
+			<property name="@stereotype" value="communicate"/>
+			<participant referencedUin="design:node:::11kb11egjru0vnwhteaw" role="Client"></participant>
+			<participant referencedUin="design:node:::-4lk713egp0o67e-r60sch" role="Supplier"></participant>
+		</link>
 	</node>
 	<node uin="11kb11egjrusnn-qk0s0u">
 		<property name="$metaclass" value="Actor"/>

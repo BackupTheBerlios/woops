@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.1">
+	<node uin="-4lk713egp0o67e-r60sch">
+		<property name="$metaclass" value="Use Case"/>
+		<property name="$name" value="CU_part_5_2"/>
+	</node>
+</nodeSet>

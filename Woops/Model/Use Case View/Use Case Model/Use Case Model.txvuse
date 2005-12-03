@@ -22,6 +22,10 @@
 				<property name="sourceAnchor" value="97,181"/>
 				<property name="targetAnchor" value="304,261"/>
 			</reference>
+			<reference referencedUin="design:link:::ieje0regp0ooav445u9e:11kb11egjru0vnwhteaw">
+				<property name="sourceAnchor" value="96,210"/>
+				<property name="targetAnchor" value="181,339"/>
+			</reference>
 			<reference referencedUin="design:link:::ieje0regjrx9am1fpc40:11kb11egjru0vnwhteaw">
 				<property name="sourceAnchor" value="97,161"/>
 				<property name="targetAnchor" value="302,81"/>
@@ -34,6 +38,11 @@
 		</reference>
 		<reference referencedUin="design:node:::-4lk713egjrs82rg7k94h">
 			<property name="bounds" value="275,255,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::-4lk713egp0o67e-r60sch">
+			<property name="bounds" value="135,334,100,23"/>
 			<property name="location_set_by_user" value="true"/>
 			<property name="$shortcutReference" value="true"/>
 		</reference>

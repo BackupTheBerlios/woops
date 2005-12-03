@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-
-<nodeSet  version="1.1">
-	<view uin="V21xx84eglhbsyo-horh8f">
-		<property name="$metaclass" value="Sequence Diagram"/>
-		<property name="$name" value="CU_part_5_1"/>
-	</view>
-</nodeSet>
