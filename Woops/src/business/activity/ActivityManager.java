@@ -62,21 +62,38 @@ public class ActivityManager extends PersistentObjectManager {
 	 * @return la liste des activité dont peut dépendre l'activité passée en parametre
 	 * @throws PersistanceException
 	 */
-	public Collection getPossibleActivityDependances(Integer activityId)
+	public Collection getPossibleActivityPredecessors(Integer activityId)
 			throws PersistanceException {
-		Collection list = activityDAO.getPossibleActivityDependances(activityId);
+		Collection list = activityDAO.getPossiblePredecessors(activityId);
 		return list;
 	}
 	
 	/**
 	 * 
-	 * @param activityId : l'activité dont on veut connaitre ses dépendances
+	 * @param activityId : l'activité dont on veut connaitre ses prédécesseurs
 	 * @return la liste des activité dont depend l'activité passée en parametre
 	 * @throws PersistanceException
 	 */
-	public Collection getActivityDependances(Integer activityId) 
+	public Collection getPredecessors(Integer activityId) 
 			throws PersistanceException {
-		Collection list = activityDAO.getActivityDependances(activityId);
+//		Collection listActivitySequences = activityDAO.getActivitySequenceDependances(activityId);
+//		
+//		Collection listPredecessors = list;
+//		//Iterator iter = listPredecessors.
+//		//while(pred)
+//		return list;
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param activityId : l'activité dont on veut connaitre ses dépendances
+	 * @return la liste des séquence d'activité dont l'activité passée en parametre et le successeur
+	 * @throws PersistanceException
+	 */
+	public Collection getActivitySequences(Integer activityId) 
+			throws PersistanceException {
+		Collection list = activityDAO.getActivitySequences(activityId);
 		return list;
 	}
 	
@@ -135,6 +152,12 @@ public class ActivityManager extends PersistentObjectManager {
 			predecessor.setId(dependancesToRemoveIter.next());
 			activitySequenceManager.removeActivitySequence(predecessor,successor,linkType);
 		}
+	}
+	
+	public Activity getActivityWithDependances(Integer activityId) throws PersistanceException {
+		Activity activity = activityDAO.getActivityById(activityId);
+		activity.setListActivitiesSequences(ActivityManager.getInstance().getActivitySequences(activityId));
+		return activity;
 	}
 	
 }

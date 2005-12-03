@@ -3,6 +3,7 @@ package business.activity;
 import java.util.Collection;
 import java.util.List;
 
+import business.BusinessConstantes;
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
@@ -32,28 +33,30 @@ public class ActivityDAO extends PersistentObjectDAO {
 	}
 	
 	/**
-	 * @param activityId : l'activité dont on veut connaitre des dépendances possibles
-	 * @return la liste des activité dont peut dépendre l'activité passée en parametre
+	 * @param activityId : l'activité dont on veut connaitre des prédécesseurs possibles
+	 * @return la liste des activités dont peut dépendre l'activité passée en parametre
 	 * @throws PersistanceException
 	 */
-	public Collection getPossibleActivityDependances(Integer activityId) 
+	public Collection getPossiblePredecessors(Integer activityId) 
 			throws PersistanceException {
-		return executeQuery("FROM Activity as act WHERE act.id <> "+activityId);
+		StringBuffer query = new StringBuffer();
+		query.append("FROM Activity as act WHERE act.id <> "+activityId);
+
+		return executeQuery(query.toString());
 	}
 	
 	
 	/**
 	 * @param activityId : l'activité dont on veut connaitre ses dépendances
-	 * @return la liste des activité dont depend l'activité passée en parametre
+	 * @return la liste des séquence d'activité dont l'activité passée en parametre et le successeur
 	 * @throws PersistanceException
 	 */
-	public Collection getActivityDependances(Integer activityId) 
+	public Collection getActivitySequences(Integer successorId) 
 		throws PersistanceException {
 		
 		StringBuffer query = new StringBuffer();
-		query.append("SELECT actSeq.predecessor ");
 		query.append("FROM ActivitySequence as actSeq "); 
-		query.append("WHERE actSeq.successor.id = "+activityId);
+		query.append("WHERE actSeq.successor.id = "+successorId);
 		
 		return executeQuery(query.toString());
 			

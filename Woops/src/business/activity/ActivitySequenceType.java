@@ -37,4 +37,7 @@ public class ActivitySequenceType extends HistorizedObject {
 		this.name = name;
 	}
 	
+	public boolean equals(String link) {
+		return this.name.equals(link);
+	}
 }

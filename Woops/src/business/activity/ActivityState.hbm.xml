@@ -32,11 +32,11 @@
 		 />	
 		 
 		<!-- différents états possibles -->
-		<subclass name="CreatedActivityState" discriminator-value="createdState" />
-		<subclass name="InProgressActivityState" discriminator-value="inProgressState">
+		<subclass name="CreatedActivityState" discriminator-value="created" />
+		<subclass name="InProgressActivityState" discriminator-value="inProgress">
 			<property name="progress" column="progress" type="integer"/>
 		</subclass>
-		<subclass name="FinishedActivityState" discriminator-value="finishedState" />
+		<subclass name="FinishedActivityState" discriminator-value="finished" />
 	
 	</class>	
 </hibernate-mapping>

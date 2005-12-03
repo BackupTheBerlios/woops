@@ -22,15 +22,17 @@ public class Activity extends HistorizedObject{
 	 * @supplierCardinality 0..*
 	 * @supplierRole predecessor
 	 */
-	private Collection 		linkToPredecessor;
+	private Collection 		listActivitiesSequences;
 	
 	/**
 	 * Constructeur par défaut
 	 */
 	public Activity() {
+		this.id = null;
 		this.name = null;
 		this.details = null;
-		this.linkToPredecessor = null;
+		//this.listActivitiesSequences = null;
+		this.userId = null;
 		this.state = null;
 	}
 	
@@ -98,6 +100,15 @@ public class Activity extends HistorizedObject{
 		this.details = details;
 	}
 	
+	
+	public Collection getListActivitiesSequences() {
+		return listActivitiesSequences;
+	}
+
+	public void setListActivitiesSequences(Collection listActivitiesSequences) {
+		this.listActivitiesSequences = listActivitiesSequences;
+	}
+
 	/**
 	 * Récupération de l'état de l'activité
 	 * @return état de l'activité
@@ -120,8 +131,8 @@ public class Activity extends HistorizedObject{
 	/**
 	 * Opération qui déclenche la modification de l'état de l'activité
 	 */
-	public void someOperation() {
-		state.process(this);
+	public boolean process() {
+		return state.process(this);
 	}
 
 
