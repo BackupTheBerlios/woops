@@ -19,7 +19,9 @@ import business.activity.ActivityManager;
 import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;
+import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
+import com.cc.framework.ui.control.ControlActionContext;
 
 public class ListActivitiesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ListActivitiesAction.class);    
@@ -43,7 +45,6 @@ public class ListActivitiesAction extends WoopsCCAction {
 			
 	    	Iterator iter = listActivitiesMgr.iterator();
 			listActivitiesItems = new ArrayList();
-
 	    	while (iter.hasNext()) {
 	    		Activity activity = (Activity)iter.next();
 				
@@ -76,5 +77,29 @@ public class ListActivitiesAction extends WoopsCCAction {
         
 		/* Display the Page with the UserList */
         context.forward(forward); 		
+	}
+	
+	public void listActivities_onChange(ControlActionContext context, String key) throws IOException, ServletException {
+				Integer activityId = new Integer(key);
+				ActionForward forward = null;
+				
+				try {
+   					Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
+   					
+   					if (!activity.process()) {
+   						context.addGlobalError("msg.error.activity.change.state", activity.getName());
+   					} else {
+   						context.addGlobalMessage("msg.info.activity.change.state", activity.getName());
+   					}
+   					forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
+				} catch (PersistanceException pe) {
+					context.addGlobalError("errors.persistance.select");
+				} catch (Throwable t) {
+					context.addGlobalError("errors.global");
+				}
+				
+				/* Display the Page with the UserList */
+		        context.forward(forward); 		
+
 	}
 }
