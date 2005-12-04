@@ -5,6 +5,7 @@
 	<view uin="bzcmego5fuwpvu2aw1">
 		<property name="$metaclass" value="Sequence Diagram"/>
 		<property name="$name" value="CU_part_3"/>
+		<property name="@url" value="element://model:project::Woops/design:node:::e0tg6egjrqpyexzf8st"/>
 		<reference referencedUin="design:node:::2p3hqego5h0m0-qx6xex">
 			<property name="location_set_by_user" value="true"/>
 			<property name="$shortcutReference" value="true"/>

@@ -5,5 +5,17 @@
 	<node uin="e0tg6egjrqpyexzf8st">
 		<property name="$metaclass" value="Use Case"/>
 		<property name="$name" value="CU_part_3"/>
+		<property name="@url" value="element://model:project::Woops/design:view:::bzcmego5fuwpvu2aw1"/>
+		<property name="@url" value="platform:/resource//Woops/Model/Use Case View/Use Case Model/CU_part_3/CU_part_3.doc"/>
+	</node>
+	<node uin="2xnuhegtkdog7jdzeux">
+		<property name="$metaclass" value="Note"/>
+		<property name="$name" value="Note1"/>
+		<property name="$note_text" value="Afficher la liste de ses activités restant à réaliser"/>
+		<link uin="ieje0regtkduje9er0k0">
+			<property name="$metaclass" value="Note Link"/>
+			<participant referencedUin="design:node:::2xnuhegtkdog7jdzeux" role="Client"></participant>
+			<participant referencedUin="design:node:::e0tg6egjrqpyexzf8st" role="Supplier"></participant>
+		</link>
 	</node>
 </nodeSet>

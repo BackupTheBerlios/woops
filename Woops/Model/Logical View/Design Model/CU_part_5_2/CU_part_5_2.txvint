@@ -6,6 +6,7 @@
 		<property name="$metaclass" value="Sequence Diagram"/>
 		<property name="$name" value="CU_part_5_2"/>
 		<property name="visibility" value="private"/>
+		<property name="@url" value="element://model:project::Woops/design:node:::-4lk713egp0o67e-r60sch"/>
 		<reference referencedUin="design:node:::-w2q8ptegp0qmplpqv61f">
 			<property name="location_set_by_user" value="true"/>
 			<property name="$shortcutReference" value="true"/>
@@ -143,15 +144,15 @@
 				<property name="seq_bounds" value="18,216,14,154"/>
 				<property name="location_set_by_user" value="true"/>
 			</reference>
-			<reference referencedUin="design:node:::-4aytaiegp33e0tuqdxk2:-w2q8ptegp2zif7-4w447b">
-				<property name="seq_bounds" value="18,181,14,20"/>
-				<property name="location_set_by_user" value="true"/>
-			</reference>
 			<reference referencedUin="design:link:::ieje0regp3q69g9xcmfo:-w2q8ptegp2zif7-4w447b">
 				<property name="sendingInstant" value="320"/>
 				<property name="processingDuration" value="96"/>
 				<property name="seq_sourceAnchor" value="1080,326"/>
 				<property name="seq_targetAnchor" value="909,326"/>
+			</reference>
+			<reference referencedUin="design:node:::-4aytaiegp33e0tuqdxk2:-w2q8ptegp2zif7-4w447b">
+				<property name="seq_bounds" value="18,181,14,20"/>
+				<property name="location_set_by_user" value="true"/>
 			</reference>
 		</reference>
 		<reference referencedUin="design:node:::-w2q8ptegp3njyh-7t4jg7">

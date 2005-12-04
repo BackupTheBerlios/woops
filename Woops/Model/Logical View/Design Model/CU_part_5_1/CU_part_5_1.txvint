@@ -5,6 +5,7 @@
 	<view uin="V21xx84egpfh1dkw5x7q5">
 		<property name="$metaclass" value="Sequence Diagram"/>
 		<property name="$name" value="CU_part_5_1"/>
+		<property name="@url" value="element://model:project::Woops/design:node:::-4lk713egjrs82rg7k94h"/>
 		<reference referencedUin="design:node:::-w2q8ptegpgclz4mam3u3">
 			<property name="$shortcutReference" value="true"/>
 			<property name="seq_bounds" value="443,25,98,556"/>
