@@ -3,7 +3,6 @@ package business.activity;
 import java.util.Collection;
 import java.util.List;
 
-import business.BusinessConstantes;
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
