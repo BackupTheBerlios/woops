@@ -17,7 +17,7 @@ public class Activity extends HistorizedObject{
 	 * Liste des activités dont dépend l'activité
 	 * @associates business.activity.ActivitySequence
 	 * @clientCardinality 1
-	 * @clientRole linkToPredecessor
+	 * @clientRole listActivitiesSequences
 	 * @directed directed
 	 * @supplierCardinality 0..*
 	 * @supplierRole predecessor
@@ -134,14 +134,5 @@ public class Activity extends HistorizedObject{
 	public boolean process() {
 		return state.process(this);
 	}
-
-
-
-
-
-
-
-
-
 
 }

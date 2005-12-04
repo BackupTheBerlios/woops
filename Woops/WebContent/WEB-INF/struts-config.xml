@@ -42,12 +42,14 @@
          <forward name="error" path="/html/activity/listActivities.jsp" />
          <forward name="success" path="/html/activity/listActivities.jsp" />
          <forward name="action" path="/listActivities.do"/>
+         <forward name="edit" path="/manageActivityDependances.do?activityId={0}"/>
       </action>
       
 <!-- ================= Manage Activity Dependances ================ -->  
       <action path="/manageActivityDependances"	 type="view.activity.manageActivity.ManageActivityDependancesAction"
       	 attribute="manageActivityDependancesForm"
          name="manageActivityDependancesForm"
+         parameter="activityId"
 		 validate="false"      
          scope="request">
          <forward name="success" path="/html/activity/manageActivityDependances.jsp" />

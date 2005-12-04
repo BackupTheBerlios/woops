@@ -76,13 +76,17 @@ public class ActivityManager extends PersistentObjectManager {
 	 */
 	public Collection getPredecessors(Integer activityId) 
 			throws PersistanceException {
-//		Collection listActivitySequences = activityDAO.getActivitySequenceDependances(activityId);
-//		
-//		Collection listPredecessors = list;
-//		//Iterator iter = listPredecessors.
-//		//while(pred)
-//		return list;
-		return null;
+		Collection listActivitySequences = activityDAO.getActivitySequences(activityId);
+		
+		Collection listPredecessors = new ArrayList();
+		Iterator iter = listActivitySequences.iterator();
+		
+		while(iter.hasNext())
+		{
+			listPredecessors.add(((ActivitySequence)iter.next()).getPredecessor());
+		}
+		
+		return listPredecessors;
 	}
 	
 	/**

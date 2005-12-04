@@ -44,7 +44,6 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 
 
 	
-	
 	/**
 	 * @param context : contexte de l'action. Contient le form, la requette, ...
 	 * @throws IOException, ServletException
@@ -67,6 +66,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			context.addGlobalError("errors.persistance.global");
 		} catch (Throwable t) {
 			context.addGlobalError("errors.global");
+			t.printStackTrace();
 		}
 		
 		/** Affiche la page avec le swap select **/

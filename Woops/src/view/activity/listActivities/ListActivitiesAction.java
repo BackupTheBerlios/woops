@@ -16,10 +16,10 @@ import view.activity.ActivityItem;
 import view.activity.ListActivitiesModel;
 import business.activity.Activity;
 import business.activity.ActivityManager;
+import business.activity.state.CreatedActivityState;
 import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;
-import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
 import com.cc.framework.ui.control.ControlActionContext;
 
@@ -102,4 +102,29 @@ public class ListActivitiesAction extends WoopsCCAction {
 		        context.forward(forward); 		
 
 	}
+	
+	public void listActivities_onEdit(ControlActionContext context, String activityIdString) throws IOException, ServletException {
+		Integer activityId = new Integer(activityIdString);
+		//ActionForward forward = new ActionForward();
+		
+		try {
+				Activity activity = ActivityManager.getInstance().getActivityById(activityId);
+				
+				if ( activity.getState() instanceof CreatedActivityState ) {
+					context.forwardByName(PresentationConstantes.FORWARD_EDIT,activityId);
+					//forward = context.mapping().
+				}
+				else
+				{
+					context.addGlobalError("errors.manageActivityDependances");
+					context.forwardByName(PresentationConstantes.FORWARD_ERROR);
+				}
+		} catch (PersistanceException pe) {
+			context.addGlobalError("errors.persistance.select");
+		} catch (Throwable t) {
+			context.addGlobalError("errors.global");
+		}
+		
+	}
+	
 }
