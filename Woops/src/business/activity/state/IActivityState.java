@@ -2,6 +2,7 @@ package business.activity.state;
 
 import business.activity.Activity;
 import business.hibernate.HistorizedObject;
+import business.hibernate.exception.PersistanceException;
 
 
 /**
