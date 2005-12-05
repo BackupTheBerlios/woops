@@ -1,6 +1,7 @@
 package business.activity.state;
 
 import business.activity.Activity;
+import business.hibernate.HistorizedObject;
 
 
 /**
@@ -8,7 +9,7 @@ import business.activity.Activity;
  */
 
 
-public abstract class IActivityState {
+public abstract class IActivityState extends HistorizedObject {
 	protected	Integer	id;
 	protected	String name;
 	
@@ -16,6 +17,13 @@ public abstract class IActivityState {
 	 * Constructeur par défaut appelé par Hibernate
 	 */
 	public IActivityState() {}
+	
+	/**
+	 * Constructeur 
+	 */
+	public IActivityState(Integer identifiant) {
+		this.id = identifiant;
+	}
 	
 	/**
 	 * Récupération de l'identifiant de l'état

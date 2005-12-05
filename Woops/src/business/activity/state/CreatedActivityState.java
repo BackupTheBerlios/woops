@@ -4,7 +4,9 @@ import java.util.Iterator;
 
 import business.BusinessConstantes;
 import business.activity.Activity;
+import business.activity.ActivityManager;
 import business.activity.ActivitySequence;
+import business.hibernate.exception.PersistanceException;
 
 /**
  * Implements a behavior associated with a state of the Context.
@@ -15,11 +17,18 @@ public class CreatedActivityState extends IActivityState {
 	public CreatedActivityState() {
 		super();
 	}
+	
+	public CreatedActivityState(Integer id) {
+		super(id);
+	}
 
 	public boolean process(Activity activity) {
 		boolean result = false;
 		if (checkBeforeChange(activity)) {
-			activity.setState(new InProgressActivityState());
+			/** TODO integer parametre à remplacer */
+			InProgressActivityState inProg = new InProgressActivityState(2);
+
+			activity.setState(inProg);
 			result = true;
 		}
 		return result;

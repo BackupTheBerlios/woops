@@ -108,7 +108,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
 			
 			if (!activity.process()) {
-				ActivityManager.getInstance().update(activity);
+				//ActivityManager.getInstance().update(activity);
 				context.addGlobalError("msg.error.activity.change.state", activity.getName());
 		} else {
 			ActivityManager.getInstance().update(activity);

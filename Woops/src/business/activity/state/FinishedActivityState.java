@@ -12,6 +12,10 @@ public class FinishedActivityState extends IActivityState {
 		super();
 	}
 
+	public FinishedActivityState(Integer id) {
+		super(id);
+	}
+
 	public boolean process(Activity activity) {
 		return false;
 	}

@@ -16,11 +16,18 @@ public class InProgressActivityState extends IActivityState {
 	public InProgressActivityState() {
 		super();
 	}
+	
+	public InProgressActivityState(Integer id) {
+		super(id);
+	}
 
 	public boolean process(Activity activity) {
 		boolean result = false;
 		if (checkBeforeChange(activity)) {
-			activity.setState(new FinishedActivityState());
+			/** TODO integer parametre à remplacer */
+			FinishedActivityState finished = new FinishedActivityState(3);
+			
+			activity.setState(finished);
 			result = true;
 		}
 		return result;
