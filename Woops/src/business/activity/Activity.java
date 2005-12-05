@@ -7,6 +7,7 @@ import business.hibernate.HistorizedObject;
 
 
 public class Activity extends HistorizedObject{	
+	private static final long serialVersionUID = 1L;
 	private	Integer			id; /** identifiant de l'activité */
 	private String 			name; /** nom de l'activité */
 	private	String			details; /** description de l'activité */
@@ -134,5 +135,4 @@ public class Activity extends HistorizedObject{
 	public boolean process() {
 		return state.process(this);
 	}
-
 }
