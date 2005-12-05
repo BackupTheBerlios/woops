@@ -17,7 +17,9 @@ import view.activity.ListActivitiesModel;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
+import business.activity.state.InProgressActivityState;
 import business.hibernate.exception.PersistanceException;
+import business.user.User;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
@@ -25,7 +27,7 @@ import com.cc.framework.ui.control.ControlActionContext;
 
 public class ListActivitiesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ListActivitiesAction.class);    
-    
+
 	public void doExecute(ActionContext context) throws IOException, ServletException {
 		logger.debug("ListActivitiesAction");
 		
@@ -33,74 +35,93 @@ public class ListActivitiesAction extends WoopsCCAction {
 		Collection listActivitiesItems = null;
 		ActivityItem item = null;
 		ActionForward forward = null;
+		User user = null;
     	
 		if (context.form()==null) {
 			context.request().setAttribute(context.mapping().getAttribute(), new ListActivitiesForm());
 		}
+		
 		try {
+			// Récupération du form bean nécessaire pour fournir les informations à la JSP
 	    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
 
-	    	//Get the Display data for our List
-	    	listActivitiesMgr = ActivityManager.getInstance().getActivitiesByUser(new Integer(1));  	
-			
-	    	Iterator iter = listActivitiesMgr.iterator();
-			listActivitiesItems = new ArrayList();
-	    	while (iter.hasNext()) {
-	    		Activity activity = (Activity)iter.next();
+	    	// Récupération de l'identifiant du participant connecté
+	    	user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+	    	if (user == null) {
+	    		forward = context.mapping().findForward(PresentationConstantes.FORWARD_INDEX);	
+	    	} else {
+	    		listActivitiesMgr = ActivityManager.getInstance().getActivitiesByUser(user.getId());  	
+	
+	    		Iterator iter = listActivitiesMgr.iterator();
+	    		listActivitiesItems = new ArrayList();
+	    		while (iter.hasNext()) {
+	    			Activity activity = (Activity)iter.next();
 				
-				item = new ActivityItem();
-				
-				item.setId(activity.getId().toString());
-				item.setName(activity.getName());
-				item.setDetails(activity.getDetails());
-				item.setState(activity.getState().toString());
-				listActivitiesItems.add(item);
-			}
+					item = new ActivityItem();
+					
+					item.setId(activity.getId().toString());
+					item.setName(activity.getName());
+					item.setDetails(activity.getDetails());
+					item.setState(activity.getState().toString());
+					if (activity.getState() instanceof CreatedActivityState) {
+						item.setAction(PresentationConstantes.ACTIVITY_START);
+					}
+					else if (activity.getState() instanceof InProgressActivityState) {
+							item.setAction(PresentationConstantes.ACTIVITY_FINISH);
+					}
+					listActivitiesItems.add(item);
+	    		}
 
-			// Convert the List into DisplayObject tab
-			DisplayObject[] data = new ActivityItem[listActivitiesItems.size()];
-			data = (ActivityItem[]) listActivitiesItems.toArray(data);
+				// Conversion de la liste en tableau d'items
+				DisplayObject[] data = new ActivityItem[listActivitiesItems.size()];
+				data = (ActivityItem[]) listActivitiesItems.toArray(data);
+				
+				// Création de la liste initialisée avec les valeurs à afficher
+				ListActivitiesModel model = new ListActivitiesModel(data);
+				listActivitiesForm.setDataModel(model);
 			
-			/* Create the ListControl and populate it.
-			with the Data to be displayed */
-			ListActivitiesModel model = new ListActivitiesModel(data);
-			listActivitiesForm.setDataModel(model);
+				forward = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS);
+	    	}
+	    } catch (PersistanceException pe) {
+			context.addGlobalError("errors.persistance.select");
+			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);  
+		} catch (Throwable t) {
+			context.addGlobalError("errors.global");
+			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);  
+		} finally {
+			context.forward(forward); 
+		}		
+	}
+	
+	/**
+	 * 
+	 * @param context
+	 * @param key
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+	public void listActivities_onChange(ControlActionContext context, String key) throws IOException, ServletException {
+		Integer activityId = new Integer(key);
+		ActionForward forward = null;
+		
+		try {
+			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
 			
-			
+			if (!activity.process()) {
+				ActivityManager.getInstance().update(activity);
+				context.addGlobalError("msg.error.activity.change.state", activity.getName());
+		} else {
+			ActivityManager.getInstance().update(activity);
+			context.addGlobalMessage("msg.info.activity.change.state", activity.getName());
+		}
 		} catch (PersistanceException pe) {
 			context.addGlobalError("errors.persistance.select");
 		} catch (Throwable t) {
 			context.addGlobalError("errors.global");
+		} finally {
+			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
+			context.forward(forward); 
 		}
-
-		forward = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCES);
-        
-		/* Display the Page with the UserList */
-        context.forward(forward); 		
-	}
-	
-	public void listActivities_onChange(ControlActionContext context, String key) throws IOException, ServletException {
-				Integer activityId = new Integer(key);
-				ActionForward forward = null;
-				
-				try {
-   					Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
-   					
-   					if (!activity.process()) {
-   						context.addGlobalError("msg.error.activity.change.state", activity.getName());
-   					} else {
-   						context.addGlobalMessage("msg.info.activity.change.state", activity.getName());
-   					}
-   					forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
-				} catch (PersistanceException pe) {
-					context.addGlobalError("errors.persistance.select");
-				} catch (Throwable t) {
-					context.addGlobalError("errors.global");
-				}
-				
-				/* Display the Page with the UserList */
-		        context.forward(forward); 		
-
 	}
 	
 	public void listActivities_onEdit(ControlActionContext context, String activityIdString) throws IOException, ServletException {
@@ -128,3 +149,4 @@ public class ListActivitiesAction extends WoopsCCAction {
 	}
 	
 }
+
