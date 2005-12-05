@@ -6,10 +6,11 @@ import com.cc.framework.common.DisplayObject;
 
 
 public class ActivityItem implements DisplayObject{
-	private String id;
+	private	String id;
 	private String name;
 	private String details;
 	private String state;
+	private String action;
 	
 	/**
 	 * @return Returns the details.
@@ -48,6 +49,14 @@ public class ActivityItem implements DisplayObject{
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
 	
 }
