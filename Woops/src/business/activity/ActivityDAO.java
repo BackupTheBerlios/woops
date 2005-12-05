@@ -26,8 +26,19 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * @return : Liste des activités du particpant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la récupération des données
 	 */
-	public Collection getActivitiesByUser(Integer userId) throws PersistanceException {
-		List listActivities = executeQuery("FROM Activity as act WHERE act.userId = "+ userId);
+	public Collection getActivitiesByUserWithStates(Integer userId, String[] states) throws PersistanceException {
+		// Constitution de la requête en tenant compte du participant passé en paramètre 
+		StringBuffer query = new StringBuffer();
+		query.append("FROM Activity as act WHERE act.userId = " + userId + " AND ");
+		
+		// Sélection des états à prendre en compte
+		for(int i = 0; i < states.length; i++) {
+			query.append("act.state.name=' ? '");
+			if (i != states.length-1) query.append(" OR ");
+		}
+		
+		// Récupération des données
+		List listActivities = executeQuery(query.toString(), states);
 		return listActivities;
 	}
 	

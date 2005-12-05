@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import business.BusinessConstantes;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
@@ -52,7 +53,10 @@ public class ActivityManager extends PersistentObjectManager {
 	 */
 	public Collection getActivitiesByUser(Integer userId)
 			throws PersistanceException {
-		Collection list = activityDAO.getActivitiesByUser(userId);
+		String[] states = new String[2];
+		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
+		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
+		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states);
 		return list;
 	}
 	
@@ -130,10 +134,7 @@ public class ActivityManager extends PersistentObjectManager {
 		
 		
 		ActivitySequenceManager activitySequenceManager = ActivitySequenceManager.getInstance();
-		ActivitySequenceTypeManager activitySequenceTypeManager = ActivitySequenceTypeManager.getInstance();
-		
-		
-		
+	
 		Activity successor= new Activity();
 		successor.setId(activityId);
 		Activity predecessor = new Activity();
