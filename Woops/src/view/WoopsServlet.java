@@ -15,7 +15,7 @@ import business.hibernate.HibernateSessionFactory;
  * 
  */
 public class WoopsServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 
 	public void destroy() {
 		super.destroy(); 

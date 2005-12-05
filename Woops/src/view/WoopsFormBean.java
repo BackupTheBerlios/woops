@@ -13,8 +13,8 @@ import business.format.Controleur;
  * 
  */
 public class WoopsFormBean extends ActionForm {
-
-    protected String fonction;
+	private static final long serialVersionUID = 1L;
+	protected String fonction;
     protected String titre;
     protected String actionSubmit;
     protected String mode;

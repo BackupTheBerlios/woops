@@ -4,6 +4,7 @@ import business.hibernate.HistorizedObject;
 
 
 public class ActivitySequenceType extends HistorizedObject {
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 	

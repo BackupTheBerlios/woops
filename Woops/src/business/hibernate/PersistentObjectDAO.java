@@ -68,7 +68,7 @@ public class PersistentObjectDAO  {
         try {
             session = HibernateSessionFactory.currentSession();
             transaction = session.beginTransaction();
-
+            
             session.update(objet);
             
             transaction.commit();

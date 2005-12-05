@@ -9,7 +9,9 @@ import com.cc.framework.ui.painter.def.DefPainterFactory;
 import com.cc.framework.ui.painter.html.HtmlPainterFactory;
   
   public class WoopsFrontController extends ActionServlet { 
-  	public void init() throws ServletException { 
+	private static final long serialVersionUID = 1L;
+
+	public void init() throws ServletException { 
   	super.init(); 
   	/* Autorisation de l'internationalisation */ 
   	getServletContext().setAttribute( com.cc.framework.Globals.LOCALENAME_KEY, "true");

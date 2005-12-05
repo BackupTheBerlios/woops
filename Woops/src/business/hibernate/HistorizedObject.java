@@ -4,9 +4,8 @@ import java.util.Date;
 
 
 public class HistorizedObject implements PersistentObject, Cloneable{
-    
-    
-    protected String userCreation;
+	private static final long serialVersionUID = 1L;
+	protected String userCreation;
     protected Date dateCreation;
     protected String userModification;    
     protected Date dateModification;

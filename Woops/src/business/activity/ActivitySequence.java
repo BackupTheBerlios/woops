@@ -3,6 +3,7 @@ package business.activity;
 import business.hibernate.HistorizedObject;
 
 public class ActivitySequence extends HistorizedObject {
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Activity successor;
 	private Activity predecessor;
