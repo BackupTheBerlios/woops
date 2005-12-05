@@ -3,12 +3,11 @@
 <%@ taglib uri="/cc-base"     prefix="base" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
 
-<html:form action="/manageActivityDependances">
+<html:form action="manageActivityDependances.do">
 	
 	
-	<forms:message formid="frmError" caption="title.error" severity="error" width="350"/>
-	<forms:message formid="frmActivityDependances" caption="Information" severity="information" width="350"/>
-
+	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
+	
     <forms:form type="edit" name="manageActivityDependancesForm" caption="form.title.manageActivityDependances" formid="frmActivityDependances" width="550">
 
         <forms:swapselect
@@ -25,9 +24,12 @@
             required="false"
             disabled="false">
             
-            <base:options property="possibleDependancesOptions"  keyProperty="id" labelProperty="name"/>
+            <base:options 
+            	property="possibleDependancesOptions"  
+            	keyProperty="id" 
+            	labelProperty="name"/>
         
-        </forms:swapselect>
+		</forms:swapselect>
         
         <forms:buttonsection>
 			<forms:button
