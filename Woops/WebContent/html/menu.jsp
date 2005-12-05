@@ -1,4 +1,4 @@
-  <a href="login.do"><div class="rubrique">Se déconnecter</div></a><br>
+  <a href="loginUser.do"><div class="rubrique">Se déconnecter</div></a><br>
   
   <div class="titreMenu">Gestion d'activités</div><br>
   
