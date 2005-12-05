@@ -6,16 +6,13 @@ package view;
  */
 public interface PresentationConstantes {
 
-	public static final String FORWARD_SUCCES="success";
+	public static final String FORWARD_SUCCESS="success";
 	public static final String FORWARD_ERROR="error";
 	public static final String FORWARD_ACTION="action";
-	public static final String FORWARD_SUPPRIMER="supprimer";	
-	public static final String FORWARD_CREER="creer";
-	public static final String FORWARD_RETOUR="retour";
-    public static final String FORWARD_DECONNECTER="deconnecter"; 
+	public static final String FORWARD_BACK="back"; 
+	public static final String FORWARD_INDEX="index"; 
     public static final String FORWARD_EDIT="edit";
-	
-
+    
 	//Constantes de parametres de request
 	public static final String PARAM_ACTION_SUBMIT="actionSubmit";
 	public static final String PARAM_MODE="mode";
@@ -33,5 +30,9 @@ public interface PresentationConstantes {
 	
 	public static final String LIBELLE_OUI="O";
 	public static final String LIBELLE_NON="N";
+	
+	//Constantes permettant de modifier l'état d'une activié
+    public static final String ACTIVITY_START = "start";
+    public static final String ACTIVITY_FINISH = "finish";
 	
 }
