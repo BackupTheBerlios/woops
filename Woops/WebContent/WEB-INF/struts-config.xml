@@ -49,7 +49,7 @@
     <action path="/manageActivityDependances" type="view.activity.manageActivity.ManageActivityDependancesAction"
     	attribute="manageActivityDependancesForm"
         name="manageActivityDependancesForm"
-		parameter="activityId
+		parameter="activityId"
 		validate="false"      
         scope="request">
         <forward name="success" path="/html/activity/manageActivityDependances.jsp" />
