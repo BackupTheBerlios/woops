@@ -64,7 +64,7 @@ public class ListerChocolatAction  extends WoopsAction  {
 				listeForm.setListeItems(liste);
 	
         		
-				retour = mapping.findForward(PresentationConstantes.FORWARD_SUCCES);
+				retour = mapping.findForward(PresentationConstantes.FORWARD_SUCCESS);
         	}
         	catch (PersistanceException pe) {
         		retour = mapping.findForward(PresentationConstantes.FORWARD_ERROR);
