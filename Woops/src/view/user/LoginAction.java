@@ -35,7 +35,7 @@ public class LoginAction extends WoopsCCAction {
 						//on met en session l'utilisateur
 						httpSession.setAttribute(PresentationConstantes.KEY_USER,user);
 						
-						retour = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCES);
+						retour = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS);
 					}
 					else {
 						context.addGlobalError("errors.login.invalide");
