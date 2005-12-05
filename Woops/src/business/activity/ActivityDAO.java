@@ -33,12 +33,12 @@ public class ActivityDAO extends PersistentObjectDAO {
 		
 		// Sélection des états à prendre en compte
 		for(int i = 0; i < states.length; i++) {
-			query.append("act.state.name=' ? '");
+			query.append("act.state.name='"+ states[i] +"'");
 			if (i != states.length-1) query.append(" OR ");
 		}
 		
 		// Récupération des données
-		List listActivities = executeQuery(query.toString(), states);
+		List listActivities = executeQuery(query.toString());
 		return listActivities;
 	}
 	
