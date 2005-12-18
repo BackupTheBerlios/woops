@@ -2,7 +2,6 @@
 <%@ taglib uri="/cc-utility" prefix="util" %>
 
 
-
 <html>
 
 <head>
@@ -10,18 +9,25 @@
 <meta http-equiv="Content-Type" content="text/html;">
 <link href="./html/images/css.css" rel="stylesheet" type="text/css">
 
+
+  <!-------##############------->
+  <!-------DEB INCLUSIONS------->
 <util:jsp directive="includes"/>
+  <!-------FIN INCLUSIONS------->
+  <!-------##############------->
+  
 </head>
 
-<body>
-
-<table border="0" cellpadding="0" cellspacing="0" height="400" >
+<body bgcolor="#DED9E6">
+<center>
+<table border="0" cellpadding="0" cellspacing="0"  >
 
 <tr>
   <td width="227" height="100%" valign="top">
   
   
- <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+ <table border="0" cellpadding="0" cellspacing="0" width="227" height="100%">
+
   
   <tr>
     <td colspan="3" height="122" style="background-image: url('./html/images/logo.jpg');">
@@ -34,6 +40,7 @@
 
     </td>
   </tr>
+
   
   <tr>
     <td width="35" height="35" style="background-image: url('./html/images/idGauche.jpg');">
@@ -47,6 +54,7 @@
 <template:get name="menuHaut"/>
   <!-------FIN ENTETE MENU------->
   <!-------###############------->
+
   
   
     </td>
@@ -60,6 +68,7 @@
 
     </td>
   </tr>
+
   
   <tr>
     <td  width="35" height="100%" style="background-image: url('./html/images/menuGauche.jpg');">
@@ -67,15 +76,16 @@
       <td width="171" valign="top" height="100%" style="background-image: url('./html/images/menu.jpg');" >
       
       
-  <!-------#################------->
+  <!-------##########------->
   <!-------DEBUT MENU------->
   
-  <template:get name="menu"/>
+<template:get name="menu"/>
   
   <!-------FIN MENU------->
   <!-------########------->
   
     </td>
+
     <td width="21" height="100%" style="background-image: url('./html/images/menuDroit.jpg');" >
     </td>
   </tr>
@@ -89,30 +99,32 @@
   </tr>
   
 </table>
+
   
   
   
   
   </td>
   
-  <td width="801" valign="top">
+  <td width="736" valign="top">
   
   
    <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
   
   <tr>
-    <td width="805" height="36" style="background-image: url('./html/images/contenuHaut.jpg');">
+    <td width="736" height="36" style="background-image: url('./html/images/contenuHaut.jpg');">
 
     </td>
   </tr>
   
   <tr>
+
     <td height="27" style="background-image: url('./html/images/titre.jpg');padding:0 0 5 20;" >
     
     
   <!-------###########------->
   <!-------DEBUT TITRE------->
- <template:get name="title"/>
+<template:get name="title"/>
   <!-------FIN TITRE------->
   <!-------#########------->
   
@@ -121,14 +133,15 @@
   </tr>
   
   <tr>
-    <td valign="top" width="805"  height="100%" style="background-image: url('./html/images/contenu.jpg'); padding:0 0 0 20;" >
+
+    <td valign="top" width="736"  height="100%" style="background-image: url('./html/images/contenu.jpg'); padding:0 30 0 20;" >
     
     
   <!-------#############------->
   <!-------DEBUT CONTENU------->
   
 <template:get name="contents"/>
-  
+ 
   <!-------FIN CONTENU------->
   <!-------###########------->
  
@@ -136,6 +149,7 @@
 
     </td>
   </tr>
+
   
   <tr>
     <td height="36" style="background-image: url('./html/images/contenuBas.jpg');" >
@@ -150,8 +164,11 @@
 
 
 </table>
+</center>
 
 
-  <util:jsp directive="endofpage"/>  
+      <util:jsp directive="endofpage"/>  
+      
+      
 </body>
 </html>
