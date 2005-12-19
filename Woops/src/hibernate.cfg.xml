@@ -8,7 +8,7 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
 
 		<!-- properties -->
 		<!-- <property name="connection.datasource">jdbc:mysql://localhost:3306/woops</property > -->
-		<property name="connection.url">jdbc:mysql://localhost:3306/woops</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/woops?autoReconnect=true</property>
 		<property name="connection.driver_class">org.gjt.mm.mysql.Driver</property>
 		<property name="connection.username">woops</property>
 		<property name="connection.password">wo!o!ps</property>
@@ -16,13 +16,32 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
 
 		<property name="dialect">net.sf.hibernate.dialect.MySQLDialect</property>
 		<property name="show_sql">true</property>
+		
+		<!--### Apache DBCP Connection Pool ###-->
+	    <!--connection pool-->
+	    <property name="hibernate.dbcp.maxActive">10</property>
+	    <property name="hibernate.dbcp.whenExhaustedAction">1</property>
+	    <property name="hibernate.dbcp.maxWait">20000</property>
+	    <property name="hibernate.dbcp.maxIdle">10</property>
+	
+		<!-- prepared statement cache-->
+	    <property name="hibernate.dbcp.ps.maxActive">10</property>
+	    <property name="hibernate.dbcp.ps.whenExhaustedAction">1</property>
+	    <property name="hibernate.dbcp.ps.maxWait">20000</property>
+	    <property name="hibernate.dbcp.ps.maxIdle">10</property>
+	
+	    <!-- optional query to validate pooled connections:-->
+	    <property name="hibernate.dbcp.validationQuery">select 1</property>
+	    <property name="hibernate.dbcp.testOnBorrow">true</property>
+	    <property name="hibernate.dbcp.testOnReturn">true</property> 
 
-<!-- mapping files -->
 
+		<!-- mapping files -->
 		<mapping resource="business/activity/Activity.hbm.xml" />
 		<mapping resource="business/user/User.hbm.xml" />
 		<mapping resource="business/activity/ActivitySequence.hbm.xml" />
 		<mapping resource="business/activity/ActivitySequenceType.hbm.xml" />
 		<mapping resource="business/activity/ActivityState.hbm.xml" />
+	
 	</session-factory>
 </hibernate-configuration>
