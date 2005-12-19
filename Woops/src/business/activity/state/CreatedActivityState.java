@@ -4,15 +4,14 @@ import java.util.Iterator;
 
 import business.BusinessConstantes;
 import business.activity.Activity;
-import business.activity.ActivityManager;
 import business.activity.ActivitySequence;
-import business.hibernate.exception.PersistanceException;
 
 /**
  * Implements a behavior associated with a state of the Context.
  */
 
 public class CreatedActivityState extends IActivityState {
+	private static final long serialVersionUID = 1L;
 
 	public CreatedActivityState() {
 		super();
@@ -26,7 +25,7 @@ public class CreatedActivityState extends IActivityState {
 		boolean result = false;
 		if (checkBeforeChange(activity)) {
 			/** TODO integer parametre à remplacer */
-			InProgressActivityState inProg = new InProgressActivityState(2);
+			InProgressActivityState inProg = new InProgressActivityState(new Integer(2));
 
 			activity.setState(inProg);
 			result = true;

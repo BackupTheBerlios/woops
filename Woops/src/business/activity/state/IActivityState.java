@@ -2,7 +2,6 @@ package business.activity.state;
 
 import business.activity.Activity;
 import business.hibernate.HistorizedObject;
-import business.hibernate.exception.PersistanceException;
 
 
 /**
@@ -30,7 +29,7 @@ public abstract class IActivityState extends HistorizedObject {
 	 * Récupération de l'identifiant de l'état
 	 * @return identifiant de l'état
 	 */
-	public Integer getId() {
+	public Object getId() {
 		return id;
 	}
 

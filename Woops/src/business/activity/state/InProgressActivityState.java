@@ -11,6 +11,8 @@ import business.activity.ActivitySequence;
  */
 
 public class InProgressActivityState extends IActivityState {
+	private static final long serialVersionUID = 1L;
+	
 	private Integer progress;
 	
 	public InProgressActivityState() {
@@ -25,7 +27,7 @@ public class InProgressActivityState extends IActivityState {
 		boolean result = false;
 		if (checkBeforeChange(activity)) {
 			/** TODO integer parametre à remplacer */
-			FinishedActivityState finished = new FinishedActivityState(3);
+			FinishedActivityState finished = new FinishedActivityState(new Integer(3));
 			
 			activity.setState(finished);
 			result = true;

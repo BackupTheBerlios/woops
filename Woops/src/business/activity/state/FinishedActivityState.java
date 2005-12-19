@@ -8,6 +8,8 @@ import business.activity.Activity;
 
 public class FinishedActivityState extends IActivityState {
 
+	private static final long serialVersionUID = 1L;
+
 	public FinishedActivityState() {
 		super();
 	}
