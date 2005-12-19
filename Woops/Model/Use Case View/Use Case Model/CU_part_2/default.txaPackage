@@ -6,7 +6,6 @@
 		<property name="$metaclass" value="Use Case"/>
 		<property name="$name" value="CU_part_2"/>
 		<property name="@url" value="platform:/resource///Woops/Model/Use Case View/Use Case Model/CU_part_2/CU_part_2 .doc"/>
-		<property name="@url" value="element://model:project::Woops/design:view:::V21xx84egp4utfxad2co4"/>
 	</node>
 	<node uin="is3hzegtkbb6r-6f6aad">
 		<property name="$metaclass" value="Note"/>

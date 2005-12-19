@@ -5,5 +5,13 @@
 	<view uin="V574ng9egbbdq1qs9wg5z">
 		<property name="$defaultDiagram" value="true"/>
 		<property name="$metaclass" value="Package Diagram"/>
+		<reference referencedUin="jdt:e_class:src:view.activity.manageActivity.ManageActivityDependancesForm">
+			<property name="bounds" value="5,5,200,109"/>
+			<property name="location_set_by_user" value="true"/>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:view.activity.manageActivity.ManageActivityDependancesAction">
+			<property name="bounds" value="5,145,200,161"/>
+			<property name="location_set_by_user" value="true"/>
+		</reference>
 	</view>
 </nodeSet>

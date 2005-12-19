@@ -6,7 +6,7 @@
 		<property name="$defaultDiagram" value="true"/>
 		<property name="$metaclass" value="Package Diagram"/>
 		<reference referencedUin="design:view:::bzcmego5fuwpvu2aw1">
-			<property name="bounds" value="5,5,114,152"/>
+			<property name="bounds" value="5,5,114,178"/>
 			<property name="location_set_by_user" value="true"/>
 		</reference>
 	</view>

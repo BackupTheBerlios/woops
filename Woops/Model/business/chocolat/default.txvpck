@@ -6,9 +6,27 @@
 		<property name="$defaultDiagram" value="true"/>
 		<property name="$metaclass" value="Package Diagram"/>
 		<reference referencedUin="jdt:e_class:src:business.chocolat.Chocolat">
-			<property name="bounds" value="5,5,91,121"/>
+			<property name="bounds" value="5,9,88,151"/>
 			<property name="location_set_by_user" value="true"/>
 			<property name="collapsedCompartments" value=""/>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:business.chocolat.ChocolatManager">
+			<property name="bounds" value="331,0,200,161"/>
+			<property name="location_set_by_user" value="true"/>
+			<reference referencedUin="jdt:l_ast:src:business.chocolat.ChocolatManager:dao">
+				<property name="sourceAnchor" value="336,47"/>
+				<property name="targetAnchor" value="317,47"/>
+			</reference>
+			<reference referencedUin="jdt:l_ast:src:business.chocolat.ChocolatManager:instance">
+				<property name="sourceAnchor" value="536,162"/>
+				<property name="targetAnchor" value="532,166"/>
+				<property name="bendpoints" value="565,162,565,195,532,195"/>
+				<property name="smooth_bendpoints" value="565,162,565,195,532,195"/>
+			</reference>
+		</reference>
+		<reference referencedUin="jdt:e_class:src:business.chocolat.ChocolatDAO">
+			<property name="bounds" value="112,0,200,93"/>
+			<property name="location_set_by_user" value="true"/>
 		</reference>
 	</view>
 </nodeSet>

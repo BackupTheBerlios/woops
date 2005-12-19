@@ -7,6 +7,8 @@
 		<property name="$metaclass" value="Package Diagram"/>
 		<reference referencedUin="design:view:::V21xx84egp4utfxad2co4">
 			<property name="$shortcutReference" value="true"/>
+			<property name="bounds" value="5,5,182,152"/>
+			<property name="location_set_by_user" value="true"/>
 		</reference>
 	</view>
 </nodeSet>
