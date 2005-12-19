@@ -28,5 +28,21 @@
 			not-null="true"
 			type="string"
 		 />	
+		 
+		 <property
+			column="firstName"
+			length="50"
+			name="firstName"
+			not-null="true"
+			type="string"
+		 />	
+		 
+		 <property
+			column="lastName"
+			length="50"
+			name="lastName"
+			not-null="true"
+			type="string"
+		 />	
 	</class>	
 </hibernate-mapping>
