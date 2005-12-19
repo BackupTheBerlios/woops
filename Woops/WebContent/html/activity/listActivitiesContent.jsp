@@ -20,7 +20,7 @@
 			<ctrl:columndrilldown 
 				title="table.field.listActivities.name" 
 				property="name" 
-				width="150"/>
+				width="250"/>
 			
 			<ctrl:columntext 
 				title="table.field.listActivities.details"
@@ -37,10 +37,7 @@
 			
 			<ctrl:columnedit 
 				title="table.field.listActivities.edit"/> 
-			
-			<ctrl:columndelete  
-				title="table.field.listActivities.delete"/>
-			
+
 			<ctrl:columnbutton 
 				title="table.field.listActivities.action" 
 				text="@{bean.action}" 
