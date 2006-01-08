@@ -144,8 +144,8 @@
    <login-config>
    <auth-method>FORM</auth-method>
    <form-login-config>
-         <form-login-page>/html/user/login.jsp</form-login-page>
-         <form-error-page>/html/user/login.jsp</form-error-page>
+         <form-login-page>/html/user/loginUser.jsp</form-login-page>
+         <form-error-page>/html/user/loginUser.jsp</form-error-page>
    </form-login-config>
 	</login-config> 
     
