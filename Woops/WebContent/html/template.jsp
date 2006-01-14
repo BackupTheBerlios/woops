@@ -7,7 +7,7 @@
 <head>
 <title>woops</title>
 <meta http-equiv="Content-Type" content="text/html;">
-<link href="./html/images/css.css" rel="stylesheet" type="text/css">
+<link href="./images/css.css" rel="stylesheet" type="text/css">
 
 
   <!-------##############------->
