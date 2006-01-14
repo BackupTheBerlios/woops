@@ -41,7 +41,7 @@
       	 attribute="listActivitiesForm"
          name="listActivitiesForm"
 		 validate="false"      
-         scope="request">
+         scope="session">
          <forward name="error" path="/html/activity/listActivities.jsp" />
          <forward name="success" path="/html/activity/listActivities.jsp" />
          <forward name="action" path="/listActivities.do"/>
