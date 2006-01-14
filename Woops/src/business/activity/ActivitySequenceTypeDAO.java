@@ -11,6 +11,11 @@ public class ActivitySequenceTypeDAO extends PersistentObjectDAO {
 	throws PersistanceException {
 		List res = executeQuery("FROM ActivitySequenceType as actSeqTyp WHERE actSeqTyp.id = "+activitySequenceTypeId);
 		return (ActivitySequenceType)res.get(0);
-		//return (ActivitySequenceType)get(ActivitySequenceType.class,activitySequenceTypeId);
+	}
+	
+	public ActivitySequenceType getActivitySequenceTypeByName(String activitySequenceTypeName)
+	throws PersistanceException {
+		List res = executeQuery("FROM ActivitySequenceType as actSeqTyp WHERE actSeqTyp.name = \""+activitySequenceTypeName+"\"");
+		return (ActivitySequenceType)res.get(0);
 	}
 }

@@ -35,4 +35,9 @@ public class ActivitySequenceTypeManager extends PersistentObjectManager {
 	throws PersistanceException {
 			return activitySequenceTypeDAO.getActivitySequenceTypeById(activitySequenceTypeId);
 	}
+	
+	public ActivitySequenceType getActivitySequenceTypeByName(String activitySequenceTypeName)
+	throws PersistanceException {
+		return activitySequenceTypeDAO.getActivitySequenceTypeByName(activitySequenceTypeName);
+	}
 }
