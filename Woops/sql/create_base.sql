@@ -13,37 +13,35 @@ CREATE TABLE User (
      , password VARCHAR(10) NOT NULL
      , UNIQUE UQ_User_login (login)
      , PRIMARY KEY (id)
-)TYPE=InnoDB;
+)ENGINE=InnoDB;
 
 CREATE TABLE ActivitySequenceType (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(15) NOT NULL
      , UNIQUE UQ_ActivitySequenceType_name (name)
      , PRIMARY KEY (id)
-)TYPE=InnoDB;
+)ENGINE=InnoDB;
 
 CREATE TABLE ActivityState (
-       id INT NOT NULL AUTO_INCREMENT
-     , name VARCHAR(50) NOT NULL
+       name VARCHAR(50) NOT NULL
      , progress INT DEFAULT 0
-     , PRIMARY KEY (id)
-     , INDEX (id)
-)TYPE=InnoDB;
+     , PRIMARY KEY (name)
+)ENGINE=InnoDB;
 
 CREATE TABLE Activity (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(50) NOT NULL
      , details TEXT
      , user INT NOT NULL
-     , state INT NOT NULL
+     , state VARCHAR(50) NOT NULL
      , UNIQUE UQ_Activity_name (name)
      , PRIMARY KEY (id)
      , INDEX (user)
      , CONSTRAINT FK_Activity_user FOREIGN KEY (user)
                   REFERENCES User (id)
      , CONSTRAINT FK_Activity_state FOREIGN KEY (state)
-                  REFERENCES ActivityState (id)            
-)TYPE=InnoDB;
+                  REFERENCES ActivityState (name)            
+)ENGINE=InnoDB;
 --CREATE INDEX IX_Activity_name ON Activity (name ASC);
 
 CREATE TABLE ActivitySequence (
@@ -62,7 +60,7 @@ CREATE TABLE ActivitySequence (
      , INDEX (predecessor)
      , CONSTRAINT FK_ActivitySequence_predecessor FOREIGN KEY (predecessor)
                   REFERENCES Activity (id)
-)TYPE=InnoDB;
+)ENGINE=InnoDB;
 
 
 

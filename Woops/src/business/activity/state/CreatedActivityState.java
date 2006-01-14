@@ -14,18 +14,14 @@ public class CreatedActivityState extends IActivityState {
 	private static final long serialVersionUID = 1L;
 
 	public CreatedActivityState() {
-		super();
-	}
-	
-	public CreatedActivityState(Integer id) {
-		super(id);
+		super(BusinessConstantes.ACTIVITY_STATE_CREATED);
 	}
 
 	public boolean process(Activity activity) {
 		boolean result = false;
 		if (checkBeforeChange(activity)) {
 			/** TODO integer parametre à remplacer */
-			InProgressActivityState inProg = new InProgressActivityState(new Integer(2));
+			InProgressActivityState inProg = new InProgressActivityState();
 
 			activity.setState(inProg);
 			result = true;

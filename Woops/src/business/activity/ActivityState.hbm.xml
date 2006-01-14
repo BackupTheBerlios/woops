@@ -5,32 +5,23 @@
 
 <hibernate-mapping package="business.activity.state">
 	<class name="IActivityState" table="ActivityState">
-		<!-- identifiant d'une occurrence dans la table -->
-		<id
-			column="id"
-			name="id"
-			type="integer"
-		>
-			<!--identifiant auto-incrementé --> 
-			<generator class="identity" />
-		</id>
 		
 
 		
-		<!-- colonne permettant d'identifier l'état -->
-		<discriminator column="name" type="string"/>
-		
 		<!-- nom de l'état : cet attribut est manipulé par Hibernate pour distinguer un état  -->
 		<!-- et ne peut don pas être modifié -->
-		<property
+		<id
 			column="name"
 			name="name"
-			not-null="true"
-			type="string"
-			insert="false"
-			update="false"
-		 />	
-		 
+			type="string" 
+		>
+			<!--identifiant auto-incrementé --> 
+			<generator class="assigned" />
+		</id>
+		
+		<!-- colonne permettant d'identifier l'état -->
+		<discriminator column="name" type="string" insert="false" />
+		
 		<!-- différents états possibles -->
 		<subclass name="CreatedActivityState" discriminator-value="created" />
 		<subclass name="InProgressActivityState" discriminator-value="inProgress">

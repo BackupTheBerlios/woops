@@ -10,7 +10,6 @@ import business.hibernate.HistorizedObject;
 
 
 public abstract class IActivityState extends HistorizedObject {
-	protected	Integer	id;
 	protected	String name;
 	
 	/**
@@ -21,24 +20,8 @@ public abstract class IActivityState extends HistorizedObject {
 	/**
 	 * Constructeur 
 	 */
-	public IActivityState(Integer identifiant) {
-		this.id = identifiant;
-	}
-	
-	/**
-	 * Récupération de l'identifiant de l'état
-	 * @return identifiant de l'état
-	 */
-	public Object getId() {
-		return id;
-	}
-
-	/**
-	 * Modification de l'identifiant de l'état
-	 * @param id : identifiant de l'état
-	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public IActivityState(String name) {
+		this.name = name;
 	}
 
 	public String getName() {

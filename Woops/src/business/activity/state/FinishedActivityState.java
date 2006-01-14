@@ -1,5 +1,6 @@
 package business.activity.state;
 
+import business.BusinessConstantes;
 import business.activity.Activity;
 
 /**
@@ -11,11 +12,7 @@ public class FinishedActivityState extends IActivityState {
 	private static final long serialVersionUID = 1L;
 
 	public FinishedActivityState() {
-		super();
-	}
-
-	public FinishedActivityState(Integer id) {
-		super(id);
+		super(BusinessConstantes.ACTIVITY_STATE_FINISHED);
 	}
 
 	public boolean process(Activity activity) {

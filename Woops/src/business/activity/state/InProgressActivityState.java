@@ -13,21 +13,16 @@ import business.activity.ActivitySequence;
 public class InProgressActivityState extends IActivityState {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer progress;
+	private Integer progress;	/** Indique la progression de l'activité */
 	
 	public InProgressActivityState() {
-		super();
+		super(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS);
 	}
 	
-	public InProgressActivityState(Integer id) {
-		super(id);
-	}
-
 	public boolean process(Activity activity) {
 		boolean result = false;
 		if (checkBeforeChange(activity)) {
-			/** TODO integer parametre à remplacer */
-			FinishedActivityState finished = new FinishedActivityState(new Integer(3));
+			FinishedActivityState finished = new FinishedActivityState();
 			
 			activity.setState(finished);
 			result = true;
