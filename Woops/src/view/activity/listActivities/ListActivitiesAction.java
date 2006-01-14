@@ -17,6 +17,7 @@ import view.activity.ListActivitiesModel;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
+import business.activity.state.FinishedActivityState;
 import business.activity.state.InProgressActivityState;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -90,7 +91,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);  
 		} finally {
 			context.forward(forward); 
-		}		
+		}	
 	}
 	
 	/**
@@ -108,12 +109,20 @@ public class ListActivitiesAction extends WoopsCCAction {
 			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
 			
 			if (!activity.process()) {
-				//ActivityManager.getInstance().update(activity);
-				context.addGlobalError("msg.error.activity.change.state", activity.getName());
-		} else {
-			ActivityManager.getInstance().update(activity);
-			context.addGlobalMessage("msg.info.activity.change.state", activity.getName());
-		}
+				//Les règles de dépendance ne permettent pas de changer l'état de l'activité
+				if (activity.getState() instanceof CreatedActivityState) {
+					context.addGlobalError("msg.error.activity.change.state.created", activity.getName());
+				} else if (activity.getState() instanceof InProgressActivityState) {
+					context.addGlobalError("msg.error.activity.change.state.inprogress", activity.getName());
+				}	
+			} else {
+				ActivityManager.getInstance().update(activity);
+				if (activity.getState() instanceof InProgressActivityState) {
+					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());
+				} else if (activity.getState() instanceof FinishedActivityState) {
+					context.addGlobalMessage("msg.info.activity.change.state.finished", activity.getName());
+				}
+			}
 		} catch (PersistanceException pe) {
 			context.addGlobalError("errors.persistance.select");
 		} catch (Throwable t) {
