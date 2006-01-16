@@ -11,17 +11,18 @@ import business.user.User;
 import business.user.UserManager;
 
 import com.cc.framework.adapter.struts.ActionContext;
+import com.cc.framework.security.SecurityUtil;
+import com.cc.framework.ui.painter.PainterFactory;
 
 public class LoginAction extends WoopsCCAction {
 
 	public void doExecute(ActionContext context) {
-
+		ActionForward retour = null;
+		HttpSession httpSession = context.request().getSession(false);
+		
+		if ((context.request().getParameter(PresentationConstantes.PARAM_ACTION_SUBMIT)==null)||(!context.request().getParameter(PresentationConstantes.PARAM_ACTION_SUBMIT).equals(PresentationConstantes.FORWARD_DECONNECTER))) {
 			LoginForm loginForm = (LoginForm) context.form();
 
-			ActionForward retour = null;
-			
-			HttpSession httpSession = context.request().getSession(false);
-			
 			// controle de la validation du formulaire
 			context.addErrors(loginForm.validate(context.mapping(),context.request()));
 			
@@ -50,9 +51,20 @@ public class LoginAction extends WoopsCCAction {
 	        } else {
 	        	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 	        }
-		    
-		    context.forward(retour);
 		}
+		else {
+			httpSession.removeAttribute(PresentationConstantes.KEY_USER);
+			
+			PainterFactory.resetSessionPainter(context.session());
+			SecurityUtil.unregisterPrincipal(context.session());
+			
+			context.session().invalidate();
+              
+            retour = context.mapping().findForward(PresentationConstantes.FORWARD_DECONNECTER); 
+		}
+		
+		context.forward(retour);
+	}
 }
 	
 	

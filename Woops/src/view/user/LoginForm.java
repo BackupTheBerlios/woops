@@ -12,6 +12,8 @@ import business.format.Controleur;
 public class LoginForm extends ActionForm {
 	private String password;
 	private String login;
+	
+	private String actionSubmit; 
 
 	/** 
 	 * Method validate
@@ -29,7 +31,7 @@ public class LoginForm extends ActionForm {
 			errors.add("erreur",new ActionMessage("errors.champ.obligatoire","login"));
 		}
 		if (Controleur.isVide(password)){
-			errors.add("erreur",new ActionMessage("errors.champ.obligatoire","password"));
+			errors.add("erreur",new ActionMessage("errors.champ.obligatoire","mot de passe"));
 		}
 		
 		return errors;
@@ -51,5 +53,15 @@ public class LoginForm extends ActionForm {
 	public void setLogin(String login) {
 		this.login = login;
 	}
+
+	public String getActionSubmit() {
+		return actionSubmit;
+	}
+
+	public void setActionSubmit(String actionSubmit) {
+		this.actionSubmit = actionSubmit;
+	}
+	
+	
 
 }

@@ -2,85 +2,72 @@
 <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
 <struts-config>
 
-   <form-beans >
+<form-beans >
    
-      <form-bean name="listerChocolatForm" type="view.chocolat.ListerChocolatForm" />
-      <form-bean name="createActivityForm" type="view.activity.CreateActivityForm" />
-	  <form-bean name="listActivitiesForm" type="view.activity.listActivities.ListActivitiesForm" />
-	  <form-bean name="manageActivityDependancesForm" type="view.activity.manageActivity.ManageActivityDependancesForm" />
-	  <form-bean name="manageDependancesTypesForm" type="view.activity.manageActivity.ManageDependancesTypesForm" />
-	  
-	  <form-bean name="loginForm" type="view.user.LoginForm" />
+	<form-bean name="listerChocolatForm" type="view.chocolat.ListerChocolatForm" />
+    <form-bean name="createActivityForm" type="view.activity.CreateActivityForm" />
+	<form-bean name="listActivitiesForm" type="view.activity.listActivities.ListActivitiesForm" />
+	<form-bean name="manageActivityDependancesForm" type="view.activity.manageActivity.ManageActivityDependancesForm" />
+	<form-bean name="loginForm" type="view.user.LoginForm" />
 
-  
-  
-   </form-beans>
+</form-beans>
 
-   <global-exceptions />
+<global-exceptions/>
 
-	<global-forwards>
-		<forward name="index" path="/index.jsp"/>
-	</global-forwards>
+<global-forwards>
+	<forward name="index" path="/index.jsp"/>
+</global-forwards>	
 
-   <action-mappings >
+   
+<action-mappings >
 
 <!-- ================= Lister Chocolat ================ -->  
-      <action path="/html/chocolat/listerChocolat"	 type="view.chocolat.ListerChocolatAction"
-         attribute="listerChocolatForm"
-         input="/html/chocolat/listerChocolat.jsp"
-         name="listerChocolatForm"
-		 validate="false"  
-		 parameter="actionSubmit"       
-         scope="request">
-         <forward name="error" path="/html/Accueil.jsp" />
-         <forward name="success" path="/html/chocolat/listerChocolat.jsp" />
-      </action>
+	<action path="/html/chocolat/listerChocolat" type="view.chocolat.ListerChocolatAction"
+    	attribute="listerChocolatForm"
+        input="/html/chocolat/listerChocolat.jsp"
+        name="listerChocolatForm"
+		validate="false"  
+		parameter="actionSubmit"       
+        scope="request">
+        <forward name="error" path="/html/Accueil.jsp" />
+        <forward name="success" path="/html/chocolat/listerChocolat.jsp" />
+    </action>
 
 <!-- ================= List Activities ================ -->  
-      <action path="/listActivities"	 type="view.activity.listActivities.ListActivitiesAction"
-      	 attribute="listActivitiesForm"
-         name="listActivitiesForm"
-		 validate="false"      
-         scope="session">
-         <forward name="error" path="/html/activity/listActivities.jsp" />
-         <forward name="success" path="/html/activity/listActivities.jsp" />
-         <forward name="action" path="/listActivities.do"/>
-         <forward name="edit" path="/manageActivityDependances.do?activityId={0}"/>
-      </action>
+    <action path="/listActivities" type="view.activity.listActivities.ListActivitiesAction"
+      	attribute="listActivitiesForm"
+        name="listActivitiesForm"
+		validate="false"      
+        scope="request">
+        <forward name="error" path="/html/activity/listActivities.jsp" />
+        <forward name="success" path="/html/activity/listActivities.jsp" />
+        <forward name="action" path="/listActivities.do"/>
+		<forward name="edit" path="/manageActivityDependances.do?activityId={0}"/>
+    </action>
       
 <!-- ================= Manage Activity Dependances ================ -->  
-      <action path="/manageActivityDependances"	 type="view.activity.manageActivity.ManageActivityDependancesAction"
-      	 attribute="manageActivityDependancesForm"
-         name="manageActivityDependancesForm"
-         parameter="activityId"
-		 validate="false"      
-         scope="request">
-         <forward name="success" path="/html/activity/manageActivityDependances.jsp" />
-         <forward name="error" path="/html/activity/manageActivityDependances.jsp" />
-         <forward name="action" path="/listActivities.do"/>
-      </action>
-
-
-<!-- ================= Manage Dependances Types ================ -->  
-      <action path="/manageDependancesTypes"	 type="view.activity.manageActivity.ManageDependancesTypesAction"
-      	 attribute="manageDependancesTypesForm"
-         name="manageDependancesTypesForm"
-         parameter="activityId"
-		 validate="false"      
-         scope="request">
-         <forward name="success" path="/html/activity/manageDependancesTypes.jsp" />
-         <forward name="error" path="/html/activity/manageDependancesTypes.jsp" />
-      </action>
+    <action path="/manageActivityDependances" type="view.activity.manageActivity.ManageActivityDependancesAction"
+    	attribute="manageActivityDependancesForm"
+        name="manageActivityDependancesForm"
+		parameter="activityId"
+		validate="false"      
+        scope="request">
+        <forward name="success" path="/html/activity/manageActivityDependances.jsp" />
+        <forward name="error" path="/html/activity/manageActivityDependances.jsp" />
+        <forward name="action" path="/listActivities.do"/>
+     </action>
 
 
 <!-- ================= Login form ================ -->  
-      <action path="/loginUser"	 type="view.user.LoginAction"
+     <action path="/loginUser"	 type="view.user.LoginAction"
      	attribute="loginForm"
         name="loginForm"
-		validate="true"      
+        parameter="actionSubmit"
+		validate="false"      
         scope="request"
         input="/html/user/loginUser.jsp">
         <forward name="error" path="/html/user/loginUser.jsp" />
+        <forward name="deconnecter" path="/html/user/loginUser.jsp" />
         <forward name="success" path="/listActivities.do"/>
      </action>  
       
