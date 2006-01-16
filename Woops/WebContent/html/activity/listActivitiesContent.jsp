@@ -12,15 +12,16 @@
 		property="listActivities" 
 		title="table.title.listActivities" 
 		width="500" 
-		rows="15" 
+		rows="2" 
 		refreshButton="false" 
 		createButton="false"
-		rows="10">
+		>
 
 			<ctrl:columndrilldown 
 				title="table.field.listActivities.name" 
 				property="name" 
-				width="250"/>
+				width="250"
+				sortable="true"/>
 			
 			<ctrl:columntext 
 				title="table.field.listActivities.details"
@@ -29,7 +30,8 @@
 				
 			<ctrl:columnhtml id="activity"
 				title="table.field.listActivities.state"
-				width="150">
+				width="150"
+				>
 					<bean:message
 						name="activity"
 						property="state"/>
