@@ -67,8 +67,8 @@ CREATE TABLE ActivitySequence (
 -- Insertions intiales
 INSERT INTO ActivitySequenceType(name) VALUES ('finishToStart');
 INSERT INTO ActivitySequenceType(name) VALUES ('finishToFinish');
-INSERT INTO ActivitySequenceType(name) VALUES ('StartToStart');
-INSERT INTO ActivitySequenceType(name) VALUES ('StartToFinish');
+INSERT INTO ActivitySequenceType(name) VALUES ('startToStart');
+INSERT INTO ActivitySequenceType(name) VALUES ('startToFinish');
 INSERT INTO ActivityState(name) VALUES ('created');
 INSERT INTO ActivityState(name) VALUES ('inProgress');
 INSERT INTO ActivityState(name) VALUES ('finished');
