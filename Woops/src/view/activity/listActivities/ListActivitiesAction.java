@@ -8,7 +8,6 @@ import java.util.Iterator;
 import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
 import view.WoopsCCAction;
@@ -24,114 +23,180 @@ import business.user.User;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
+import com.cc.framework.common.SortOrder;
 import com.cc.framework.ui.control.ControlActionContext;
+
 
 public class ListActivitiesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ListActivitiesAction.class);    
 
+	/**
+	 * Constructeur par défaut
+	 */
+	public ListActivitiesAction() {
+		super();
+	}
+
+	/**
+	 * @see com.cc.framework.adapter.struts.FrameworkAction#doExecute(com.cc.framework.adapter.struts.ActionContext)
+	 */
 	public void doExecute(ActionContext context) throws IOException, ServletException {
-		logger.debug("ListActivitiesAction");
-		
-		Collection listActivitiesMgr = null;
-		Collection listActivitiesItems = null;
-		ActivityItem item = null;
-		ActionForward forward = null;
-		User user = null;
-    	
-		if (context.form()==null) {
-			context.request().setAttribute(context.mapping().getAttribute(), new ListActivitiesForm());
-		}
-		
 		try {
-			// Récupération du form bean nécessaire pour fournir les informations à la JSP
-	    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
-
-	    	// Récupération de l'identifiant du participant connecté
-	    	user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-	    	if (user == null) {
-	    		forward = context.mapping().findForward(PresentationConstantes.FORWARD_INDEX);	
-	    	} else {
-	    		listActivitiesMgr = ActivityManager.getInstance().getActivitiesByUser(user.getId());  	
-	
-	    		Iterator iter = listActivitiesMgr.iterator();
-	    		listActivitiesItems = new ArrayList();
-	    		while (iter.hasNext()) {
-	    			Activity activity = (Activity)iter.next();
-				
-					item = new ActivityItem();
-					
-					item.setId(activity.getId().toString());
-					item.setName(activity.getName());
-					item.setDetails(activity.getDetails());
-					item.setState(activity.getState().toString());
-					if (activity.getState() instanceof CreatedActivityState) {
-						item.setAction(PresentationConstantes.ACTIVITY_START);
-					}
-					else if (activity.getState() instanceof InProgressActivityState) {
-							item.setAction(PresentationConstantes.ACTIVITY_FINISH);
-					}
-					listActivitiesItems.add(item);
-	    		}
-
-				// Conversion de la liste en tableau d'items
-				DisplayObject[] data = new ActivityItem[listActivitiesItems.size()];
-				data = (ActivityItem[]) listActivitiesItems.toArray(data);
-				
-				// Création de la liste initialisée avec les valeurs à afficher
-				ListActivitiesModel model = new ListActivitiesModel(data);
-				listActivitiesForm.setDataModel(model);
-			
-				forward = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS);
-	    	}
+			this.loadList(context);
+			context.forwardToInput();
 	    } catch (PersistanceException pe) {
+	    	logger.error(pe);
 			context.addGlobalError("errors.persistance.select");
-			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);  
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
 		} catch (Throwable t) {
+			logger.error(t);
 			context.addGlobalError("errors.global");
-			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);  
-		} finally {
-			context.forward(forward); 
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
 		}	
 	}
 	
 	/**
-	 * 
-	 * @param context
-	 * @param key
-	 * @throws IOException
-	 * @throws ServletException
+	 * Cette méthode constitue la liste à partir de la BD
+	 * @param contexte	contexte d'execution de la servlet
+	 * @throws Exception	indique q'une erreur s'est produite pendant du traitement
+	 */
+	private void loadList(ActionContext context) throws Exception {
+		logger.debug("ListActivitiesAction");
+		
+		Collection dbData = null;
+		Collection listActivitiesItems = null;
+		ActivityItem activityItem = null;
+		User sessionUser = null;
+		
+		// Initialisation du form si celui-ci est nul
+		if (context.form()==null) {
+			context.session().setAttribute(context.mapping().getAttribute(), new ListActivitiesForm());
+		}
+		
+		// Récupération du form bean nécessaire pour fournir les informations à la JSP
+    	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
+
+    	// Récupération de l'identifiant du participant connecté
+    	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+    	dbData = ActivityManager.getInstance().getActivitiesByUser(sessionUser.getId());  	
+
+    	// Constitue une liste d'ActivityItems à partir des données stockées en BD  
+    	Iterator iter = dbData.iterator();
+    	listActivitiesItems = new ArrayList();
+    	while (iter.hasNext()) {
+    		Activity activity = (Activity) iter.next();
+    		activityItem = new ActivityItem();
+			
+    		activityItem.setId(activity.getId().toString());
+    		activityItem.setName(activity.getName());
+    		activityItem.setDetails(activity.getDetails());
+    		activityItem.setState(activity.getState().toString());
+			if (activity.getState() instanceof CreatedActivityState) {
+				activityItem.setAction(PresentationConstantes.ACTIVITY_START);
+			}
+			else if (activity.getState() instanceof InProgressActivityState) {
+				activityItem.setAction(PresentationConstantes.ACTIVITY_FINISH);
+			}
+			listActivitiesItems.add(activityItem);
+    	}
+
+		// Conversion de la liste en tableau d'items
+		DisplayObject[] result = new ActivityItem[listActivitiesItems.size()];
+		listActivitiesItems.toArray(result);
+		
+		// Création de la liste initialisée avec les valeurs à afficher
+		ListActivitiesModel model = new ListActivitiesModel(result);
+		listActivitiesForm.setDataModel(model);
+	}
+
+	
+	
+	
+	// ------------------------------------------------
+	//          List-Control  Event Handler
+    // ------------------------------------------------
+
+	/**
+	 * Cette méthode est appelée lorsque l'utilisateur demande un rafraîchissement de la liste 
+	 * @param	context		contexte d'execution de la servlet
+	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
+	 */
+	public void listActivities_onRefresh(ControlActionContext ctx) throws Exception {
+		try {
+			this.loadList(ctx);
+		} catch (Throwable t) {
+			logger.error(t);
+			ctx.addGlobalError("errors.global");
+		}
+	}
+
+	
+	/**
+	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
+	 * @param context	contexte d'execution de la servlet
+	 * @param column	colonne à trier
+	 * @param direction	direction (ASC, DESC)
+	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
+	 */
+	public void listActivities_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
+		// Récupération de la liste dans le contexte
+		ListActivitiesModel model = (ListActivitiesModel) context.control().getDataModel();
+		
+		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
+		model.sortByColumn(column, direction);		
+		context.control().execute(context, column,  direction);
+	}
+	
+	
+	/**
+	 * Cette est appelée si le participant souhaite commencer ou terminer une activité
+	 * @param context	contexte d'execution de la servlet
+	 * @param key	identifiant d'une activité
+	 * @throws IOException	indique qu'une erreur au niveau des entrées/sorties s'est produite 
+	 * @throws ServletException	indique que le traitement demandé a généré une exception
 	 */
 	public void listActivities_onChange(ControlActionContext context, String key) throws IOException, ServletException {
 		Integer activityId = new Integer(key);
-		ActionForward forward = null;
 		
 		try {
 			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
 			
+			/* Test si le changement peut être effectué : ce traitement implique la vérification 
+			des dépendances relatives à l'activité sélectionnée */
 			if (!activity.process()) {
-				//Les règles de dépendance ne permettent pas de changer l'état de l'activité
+				/* Informe l'utilisateur : le message affiché au participant est fonction de l'action
+				qu'il avait demandée */
 				if (activity.getState() instanceof CreatedActivityState) {
 					context.addGlobalError("msg.error.activity.change.state.created", activity.getName());
 				} else if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalError("msg.error.activity.change.state.inprogress", activity.getName());
-				}	
+				}
 			} else {
+				// Met à jour en BD l'état de l'activité 
 				ActivityManager.getInstance().update(activity);
+				// Informe le participant que sa demande a été prise en compte
 				if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());
 				} else if (activity.getState() instanceof FinishedActivityState) {
-					context.addGlobalMessage("msg.info.activity.change.state.finished", activity.getName());
+					context.addGlobalError("msg.error.activity.change.state.finished", activity.getName());
 				}
 			}
 		} catch (PersistanceException pe) {
+			logger.error(pe);
 			context.addGlobalError("errors.persistance.select");
 		} catch (Throwable t) {
+			logger.error(t);
 			context.addGlobalError("errors.global");
-		} finally {
-			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
-			context.forward(forward); 
 		}
+		context.forwardToInput();
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	public void listActivities_onEdit(ControlActionContext context, String activityIdString) throws IOException, ServletException {
 		Integer activityId = new Integer(activityIdString);

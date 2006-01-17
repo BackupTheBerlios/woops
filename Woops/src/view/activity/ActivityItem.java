@@ -12,21 +12,18 @@ public class ActivityItem implements DisplayObject{
 	private String state;
 	private String action;
 	
-	/**
-	 * @return Returns the details.
-	 */
+	public ActivityItem() {
+		super();
+	}
+	
 	public String getDetails() {
 		return details;
 	}
-	
-	/**
-	 * @param details The details to set.
-	 */
+
 	public void setDetails(String details) {
 		this.details = details;
 	}
 	
-
 	public String getName() {
 		return name;
 	}

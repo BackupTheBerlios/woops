@@ -5,21 +5,21 @@ import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class ListActivitiesForm extends FWActionForm {
+	private static final long serialVersionUID = 1L;
 	
-	/** * Instance of our list control to display the activities list */ 
+	/** * Liste de contrôle que l'on souhaite afficher au participant */ 
 	private SimpleListControl listActivities = new SimpleListControl();
 	
-	/** Returns the activities list
-	 ** @return The list control */
+	/** Retourne la liste des activités. 
+	 * 	Cet accesseur permet à la JSP d'accéder à la liste
+	 ** @return liste du contrôleur */
 	public SimpleListControl getListActivities() {
 		return listActivities;
 	}
 	
-	/** * Sets the data for the user list
-	 * @param dataModel The datamodel for the control */
+	/** * Modifie les données de la liste des activités du participant
+	 * @param dataModel modèle de données pour le contrôleur */
 	public void setDataModel(ListDataModel dataModel) {
 		listActivities.setDataModel(dataModel);
 	}
-
-
 }
