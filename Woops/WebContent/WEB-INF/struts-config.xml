@@ -75,13 +75,14 @@
       	<action path="/loginUser"	 type="view.user.LoginAction"
      		attribute="loginForm"
         	name="loginForm"
-			validate="true"      
+        	parameter="actionSubmit"
+			validate="false"      
         	scope="request"
-        	input="/html/user/loginUser.jsp"
-        >
+        	input="/html/user/loginUser.jsp">
         	<forward name="error" path="/html/user/loginUser.jsp" />
+        	<forward name="deconnecter" path="/html/user/loginUser.jsp" />
         	<forward name="success" path="/listActivities.do"/>
-     	</action>  
+     </action>  
    
 </action-mappings>
 
