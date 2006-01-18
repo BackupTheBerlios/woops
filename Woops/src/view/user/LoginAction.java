@@ -47,7 +47,6 @@ public class LoginAction extends WoopsCCAction {
                     pe.printStackTrace();
                     context.addGlobalError("errors.persistance.global");
 				}	
-
 	        } else {
 	        	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 	        }
