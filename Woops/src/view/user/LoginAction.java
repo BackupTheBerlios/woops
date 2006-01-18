@@ -47,12 +47,13 @@ public class LoginAction extends WoopsCCAction {
                     pe.printStackTrace();
                     context.addGlobalError("errors.persistance.global");
 				}	
+
 	        } else {
 	        	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 	        }
 		}
 		else {
-			httpSession.removeAttribute(PresentationConstantes.KEY_USER);
+			/*httpSession.removeAttribute(PresentationConstantes.KEY_USER);*/
 			
 			PainterFactory.resetSessionPainter(context.session());
 			SecurityUtil.unregisterPrincipal(context.session());
