@@ -34,7 +34,6 @@ CREATE TABLE Activity (
      , details TEXT
      , user INT NOT NULL
      , state VARCHAR(50) NOT NULL
-     , UNIQUE UQ_Activity_name (name)
      , PRIMARY KEY (id)
      , INDEX (user)
      , CONSTRAINT FK_Activity_user FOREIGN KEY (user)
