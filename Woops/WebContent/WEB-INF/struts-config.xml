@@ -91,7 +91,7 @@
         	scope="request"
         	input="/html/user/loginUser.jsp">
         	<forward name="error" path="/html/user/loginUser.jsp" />
-        	<forward name="deconnecter" path="/html/user/loginUser.jsp" />
+        	<forward name="deconnect" path="/html/user/loginUser.jsp" />
         	<forward name="success" path="/listActivities.do"/>
      </action>  
    

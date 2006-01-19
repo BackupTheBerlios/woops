@@ -12,7 +12,7 @@ public interface PresentationConstantes {
 	public static final String FORWARD_SUPPRIMER="supprimer";	
 	public static final String FORWARD_CREER="creer";
 	public static final String FORWARD_RETOUR="retour";
-    public static final String FORWARD_DECONNECTER="deconnecter"; 
+    public static final String FORWARD_DECONNECTER="deconnect"; 
     public static final String FORWARD_EDIT="edit";
     public static final String FORWARD_BACK="back"; 
 	public static final String FORWARD_INDEX="index"; 

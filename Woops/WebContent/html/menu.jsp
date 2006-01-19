@@ -1,4 +1,4 @@
-  <a href="loginUser.do?actionSubmit=deconnecter"><div class="rubrique">Se déconnecter</div></a><br>
+  <a href="loginUser.do?actionSubmit=deconnect"><div class="rubrique">Se déconnecter</div></a><br>
   
   <div class="titreMenu">Gestion d'activités</div><br>
   
