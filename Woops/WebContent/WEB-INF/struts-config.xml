@@ -24,6 +24,7 @@
    	<!-- Global Forwards -->
    	<global-forwards>
 		<forward name="index" path="/index.jsp"/>
+		<forward name="nosession" path="/html/user/loginUser.jsp"/>
    	</global-forwards>
 
 

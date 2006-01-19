@@ -10,7 +10,20 @@ import com.cc.framework.adapter.struts.FWAction;
 
 public abstract class WoopsCCAction extends FWAction {
     
-    
+    public boolean doPreExecute(ActionContext context) {
+    	boolean resultat = true;
+    	String formActif = context.form().toString();
+    	
+    	if (formActif.indexOf("LoginForm")==-1) {
+	    	if (context.session().getAttribute(PresentationConstantes.KEY_USER)==null){
+	    		resultat = false;
+	    		context.forwardByName(PresentationConstantes.FORWARD_NOSESSION); 
+	    	}
+    	}
+    	
+    	return resultat;
+    }
+	
     public void saveInSession(PersistentObject objet, ActionContext context){
         HttpSession httpSession = context.session();
         if (httpSession!=null){
