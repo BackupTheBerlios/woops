@@ -28,10 +28,10 @@ public class LoginForm extends ActionForm {
 		ActionErrors errors = new ActionErrors();
 		
 		if (Controleur.isVide(login)){
-			errors.add("erreur",new ActionMessage("errors.champ.obligatoire","login"));
+			errors.add("login",new ActionMessage("errors.champ.obligatoire","login"));
 		}
 		if (Controleur.isVide(password)){
-			errors.add("erreur",new ActionMessage("errors.champ.obligatoire","mot de passe"));
+			errors.add("password",new ActionMessage("errors.champ.obligatoire","mot de passe"));
 		}
 		
 		return errors;
