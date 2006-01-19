@@ -3,7 +3,9 @@ package business.activity;
 import java.util.Collection;
 import java.util.List;
 
+import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectDAO;
+import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 
 public class ActivityDAO extends PersistentObjectDAO {
@@ -71,4 +73,6 @@ public class ActivityDAO extends PersistentObjectDAO {
 		return executeQuery(query.toString());
 			
 	}
+	
+
 }

@@ -2,9 +2,15 @@ package business.activity;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
 import business.BusinessConstantes;
+import business.activity.state.CreatedActivityState;
+import business.activity.state.IActivityState;
+import business.activity.Activity;
+import business.activity.ActivityManager;
+import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
@@ -17,9 +23,14 @@ public class ActivityManager extends PersistentObjectManager {
 	/** Instance permettant d'assurer la persistance d'une activité */
 	private ActivityDAO activityDAO = new ActivityDAO();
 	
-	/** Instance privée de la la classe */
+	/** Instance privée de la classe */
 	private static ActivityManager activityManager;
 
+	
+	/** Instance permettant d'assurer la persistance d'une activité */
+	private ActivityDAO ActivityDAO= new ActivityDAO();
+	
+	
 	/**
 	 * Implémentation du pattern Singleton : constructeur privé
 	 */
@@ -164,5 +175,10 @@ public class ActivityManager extends PersistentObjectManager {
 		activity.setListActivitiesSequences(ActivityManager.getInstance().getActivitySequences(activityId));
 		return activity;
 	}
+	
+	
+	
+	
+	
 	
 }
