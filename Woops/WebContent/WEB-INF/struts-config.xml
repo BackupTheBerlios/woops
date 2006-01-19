@@ -5,8 +5,8 @@
 	<!-- Form Beans -->
    	<form-beans >
    
-    	<form-bean name="createActivityForm" type="view.activity.CreateActivityForm" />
 		<form-bean name="listActivitiesForm" type="view.activity.listActivities.ListActivitiesForm" />
+		<form-bean name="manageActivityCreationForm" type="view.activity.manageActivity.ManageActivityCreationForm" />
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manageActivity.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manageActivity.ManageDependancesTypesForm" />
 	  
@@ -70,6 +70,17 @@
          	<forward name="error" path="/html/user/loginUser.jsp" />
       	</action>
 
+
+<!-- ================= Manage Activity Creation ================ -->  
+    <action path="/manageActivityCreation" type="view.activity.manageActivity.ManageActivityCreationAction"
+    	attribute="manageActivityCreationForm"
+        name="manageActivityCreationForm"
+		validate="false"      
+        scope="request">
+        <forward name="success" path="/html/activity/manageActivityCreation.jsp" />
+        <forward name="error" path="/html/activity/listActivities.jsp" />
+        <forward name="action" path="/listActivities.do"/>
+     </action>
 
 <!-- ================= Login form ================ -->  
       	<action path="/loginUser"	 type="view.user.LoginAction"
