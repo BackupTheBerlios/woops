@@ -7,7 +7,7 @@
 <head>
 <title>woops</title>
 <meta http-equiv="Content-Type" content="text/html;">
-<link href="./images/css.css" rel="stylesheet" type="text/css">
+<link href="/Woops/images/css.css" rel="stylesheet" type="text/css">
 
 
   <!-------##############------->
@@ -30,23 +30,23 @@
 
   
   <tr>
-    <td colspan="3" height="122" style="background-image: url('./images/logo.jpg');">
+    <td colspan="3" height="122" style="background-image: url('/Woops/images/logo.jpg');">
 
     </td>
   </tr>
   
     <tr>
-    <td colspan="3" height="23" style="background-image: url('./images/menuHaut.jpg');" >
+    <td colspan="3" height="23" style="background-image: url('/Woops/images/menuHaut.jpg');" >
 
     </td>
   </tr>
 
   
   <tr>
-    <td width="35" height="35" style="background-image: url('./images/idGauche.jpg');">
+    <td width="35" height="35" style="background-image: url('/Woops/images/idGauche.jpg');">
 
     </td>
-      <td width="171" height="35" style="background-image: url('./images/id.jpg');">
+      <td width="171" height="35" style="background-image: url('/Woops/images/id.jpg');">
       
       
   <!-------#################------->
@@ -58,22 +58,22 @@
   
   
     </td>
-    <td width="21" height="35" style="background-image: url('./images/idDroit.jpg');" >
+    <td width="21" height="35" style="background-image: url('/Woops/images/idDroit.jpg');" >
 
     </td>
   </tr>
   
   <tr>
-    <td colspan="3" height="15" style="background-image: url('./images/sousId.jpg');" >
+    <td colspan="3" height="15" style="background-image: url('/Woops/images/sousId.jpg');" >
 
     </td>
   </tr>
 
   
   <tr>
-    <td  width="35" height="100%" style="background-image: url('./images/menuGauche.jpg');">
+    <td  width="35" height="100%" style="background-image: url('/Woops/images/menuGauche.jpg');">
     </td>
-      <td width="171" valign="top" height="100%" style="background-image: url('./images/menu.jpg');" >
+      <td width="171" valign="top" height="100%" style="background-image: url('/Woops/images/menu.jpg');" >
       
       
   <!-------##########------->
@@ -86,14 +86,14 @@
   
     </td>
 
-    <td width="21" height="100%" style="background-image: url('./images/menuDroit.jpg');" >
+    <td width="21" height="100%" style="background-image: url('/Woops/images/menuDroit.jpg');" >
     </td>
   </tr>
   
 
   
   <tr>
-    <td colspan="3" height="36" style="background-image: url('./images/menuBas.jpg');" >
+    <td colspan="3" height="36" style="background-image: url('/Woops/images/menuBas.jpg');" >
 
     </td>
   </tr>
@@ -112,14 +112,14 @@
    <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
   
   <tr>
-    <td width="736" height="36" style="background-image: url('./images/contenuHaut.jpg');">
+    <td width="736" height="36" style="background-image: url('/Woops/images/contenuHaut.jpg');">
 
     </td>
   </tr>
   
   <tr>
 
-    <td height="27" style="background-image: url('./images/titre.jpg');padding:0 0 5 20;" >
+    <td height="27" style="background-image: url('/Woops/images/titre.jpg');padding:0 0 5 20;" >
     
     
   <!-------###########------->
@@ -134,7 +134,7 @@
   
   <tr>
 
-    <td valign="top" width="736"  height="100%" style="background-image: url('./images/contenu.jpg'); padding:0 30 0 20;" >
+    <td valign="top" width="736"  height="100%" style="background-image: url('/Woops/images/contenu.jpg'); padding:0 30 0 20;" >
     
     
   <!-------#############------->
@@ -152,7 +152,7 @@
 
   
   <tr>
-    <td height="36" style="background-image: url('./images/contenuBas.jpg');" >
+    <td height="36" style="background-image: url('/Woops/images/contenuBas.jpg');" >
 
     </td>
   </tr>
