@@ -16,7 +16,7 @@
 		width="500" 
 		rows="5" 
 		refreshButton="false" 
-		createButton="false"
+		createButton="true"
 		>
 
 			<ctrl:columndrilldown 

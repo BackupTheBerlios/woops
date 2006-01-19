@@ -24,6 +24,7 @@
        	<forms:buttonsection>  
         	<forms:button
             	name="btnLogin"
+            	default="true"
                 title="button.title.login"
                 text="button.title.login"
                 width="100"/>     
