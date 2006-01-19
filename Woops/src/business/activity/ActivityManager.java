@@ -51,8 +51,7 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 
 	
-	public Activity getActivityById(Integer activityId)
-			throws PersistanceException {
+	public Activity getActivityById(Integer activityId) throws PersistanceException {
 		return activityDAO.getActivityById(activityId);
 	}
 	

@@ -6,6 +6,11 @@ import com.cc.framework.ui.model.ListDataModel;
 
 public class ManageActivityDependancesForm extends FWActionForm {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/* Represente l'id de l'activité dont on veut gérer ses dépendances */
 	private String activityId; 
 	

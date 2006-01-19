@@ -40,7 +40,7 @@
          	<forward name="error" path="/html/user/loginUser.jsp" />
          	<forward name="success" path="/html/activity/listActivities.jsp" />
          	<forward name="action" path="/listActivities.do"/>
-         	<forward name="edit" path="/manageActivityDependances.do?activityId={0}"/>
+         	<forward name="edit" path="/manageActivityCreation.do"/>
       	</action>
       
 <!-- ================= Manage Activity Dependances ================ -->  
@@ -79,7 +79,7 @@
 		validate="false"      
         scope="request">
         <forward name="success" path="/html/activity/manageActivityCreation.jsp" />
-        <forward name="error" path="/html/activity/listActivities.jsp" />
+        <forward name="error" path="/html/activity/manageActivityCreation.jsp" />
         <forward name="action" path="/listActivities.do"/>
      </action>
 

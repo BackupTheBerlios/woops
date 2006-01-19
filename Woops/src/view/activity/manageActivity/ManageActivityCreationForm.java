@@ -1,7 +1,17 @@
 package view.activity.manageActivity;
 
 import java.sql.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
 import business.activity.state.IActivityState;
+import business.format.Controleur;
+
 import com.cc.framework.adapter.struts.FWActionForm;
 import com.cc.framework.adapter.struts.FWActionForm;
 import com.cc.framework.ui.control.SimpleListControl;
@@ -19,16 +29,10 @@ public class ManageActivityCreationForm extends FWActionForm {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private	Integer			id; 			// identifiant de l'activité 
-	private String 			name; 			// nom de l'activité 
-	private	String			details; 		// description de l'activité 
-	private Integer 		userId; 		// Id du participant responsable de la réalisation de l'activité 
-	private IActivityState	state; 			// Etat actuel de l'activité 
-	private Date			beginDate; 		// Date de creation de l'activité 
-	private Date			finishDate; 	// Date de fin de l'activité 
-	
-	
-
+	private	String	activityId; 	// identifiant de l'activité 
+	private String 	name; 			// nom de l'activité 
+	private	String	details; 		// description de l'activité 
+	private String	actionSubmit;	// mode du formulaire ( insert ou update )	
 	
 	public ManageActivityCreationForm() {
 		super();
@@ -39,19 +43,17 @@ public class ManageActivityCreationForm extends FWActionForm {
 	 * Getters et setters generes
 	 *
 	 */
-	
-
 	public String getDetails() {
 		return details;
 	}
 	public void setDetails(String details) {
 		this.details = details;
 	}
-	public Integer getId() {
-		return id;
+	public String getActivityId() {
+		return activityId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setActivityId(String activityId) {
+		this.activityId = activityId;
 	}
 	public String getName() {
 		return name;
@@ -59,32 +61,24 @@ public class ManageActivityCreationForm extends FWActionForm {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public IActivityState getState() {
-		return state;
+	public String getActionSubmit() {
+		return actionSubmit;
 	}
-	public void setState(IActivityState state) {
-		this.state = state;
-	}
-	public Integer getUserId() {
-		return userId;
-	}
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setActionSubmit(String actionSubmit) {
+		this.actionSubmit = actionSubmit;
 	}
 
 
-	public Date getBeginDate() {
-		return beginDate;
-	}
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
-	}
-	public Date getFinishDate() {
-		return finishDate;
-	}
-	public void setFinishDate(Date finishDate) {
-		this.finishDate = finishDate;
-	}
+	public ActionErrors validate(ActionMapping mapping,HttpServletRequest request) {
+
+			ActionErrors errors = new ActionErrors();
+			
+			if (Controleur.isVide(name)){
+				errors.add("name", new ActionMessage("errors.champ.obligatoire","name"));
+			}
+			
+			return errors;
+		}
 	
 	
 	

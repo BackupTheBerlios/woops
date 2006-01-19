@@ -199,27 +199,16 @@ public class ListActivitiesAction extends WoopsCCAction {
 	
 	
 	public void listActivities_onEdit(ControlActionContext context, String activityIdString) throws IOException, ServletException {
-		Integer activityId = new Integer(activityIdString);
-		//ActionForward forward = new ActionForward();
+		context.request().setAttribute(PresentationConstantes.PARAM_ACTION_SUBMIT,PresentationConstantes.UPDATE_MODE);
+		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityIdString);
 		
-		try {
-				Activity activity = ActivityManager.getInstance().getActivityById(activityId);
-				
-				if ( activity.getState() instanceof CreatedActivityState ) {
-					context.forwardByName(PresentationConstantes.FORWARD_EDIT,activityId);
-					//forward = context.mapping().
-				}
-				else
-				{
-					context.addGlobalError("errors.manageActivityDependances");
-					context.forwardByName(PresentationConstantes.FORWARD_ERROR);
-				}
-		} catch (PersistanceException pe) {
-			context.addGlobalError("errors.persistance.select");
-		} catch (Throwable t) {
-			context.addGlobalError("errors.global");
-		}
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
+	}
+	
+	public void listActivities_onCreate(ControlActionContext context) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_ACTION_SUBMIT,PresentationConstantes.INSERT_MODE);
 		
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
 	}
 	
 }
