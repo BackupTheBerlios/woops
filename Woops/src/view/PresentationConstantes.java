@@ -36,6 +36,7 @@ public interface PresentationConstantes {
 	public static final String KEY_POSSIBLE_DEPENDANCES_OPTIONS="POSSIBLE_DEPENDANCES_OPTIONS";
 	public static final String KEY_DEPENDANCES_LIST = "KEY_DEPENDANCES_LIST";
 	public static final String KEY_DEPENDANCES_LIST_MNGR = "KEY_DEPENDANCES_LIST_MNGR";
+	public static final String KEY_ACTIVITY="ACTIVITY";
 	
 	public static final String LIBELLE_OUI="O";
 	public static final String LIBELLE_NON="N";
@@ -43,5 +44,9 @@ public interface PresentationConstantes {
 	//Constantes permettant de modifier l'état d'une activié
     public static final String ACTIVITY_START = "start";
     public static final String ACTIVITY_FINISH = "finish";
+    
+    //Constantes permettant de connaitre le mode d'un formulaire ( create ou update )
+    public static final String INSERT_MODE = "insert_mode";
+    public static final String UPDATE_MODE = "update_mode";
 	
 }
