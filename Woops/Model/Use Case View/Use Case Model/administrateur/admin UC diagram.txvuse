@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<nodeSet  version="1.1">
+	<view uin="V-rqmxokeilozyjd6mub8m">
+		<property name="$metaclass" value="Use Case Diagram"/>
+		<property name="$name" value="admin UC diagram"/>
+		<reference referencedUin="design:node:::2ck5meiloyyh8120cuu">
+			<property name="bounds" value="15,15,67,89"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+			<reference referencedUin="design:link:::937xdeiloyyh869n6kn:2ck5meiloyyh8120cuu">
+				<property name="sourceAnchor" value="87,55"/>
+				<property name="targetAnchor" value="160,55"/>
+			</reference>
+			<reference referencedUin="design:link:::2bviveiloyyh8m2myu2:2ck5meiloyyh8120cuu">
+				<property name="sourceAnchor" value="87,91"/>
+				<property name="targetAnchor" value="160,91"/>
+			</reference>
+		</reference>
+		<reference referencedUin="design:node:::6rgeieiloyujp3pvptd">
+			<property name="bounds" value="155,39,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::8b05meiloyujrxup5lf">
+			<property name="bounds" value="335,38,98,25"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+			<reference referencedUin="design:link:::6ddsieiloyujt-c4x8t2:8b05meiloyujrxup5lf">
+				<property name="sourceAnchor" value="340,55"/>
+				<property name="targetAnchor" value="260,55"/>
+			</reference>
+		</reference>
+		<reference referencedUin="design:node:::tqmleiloywkhio7wax">
+			<property name="bounds" value="155,75,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::jy1dfeiloywkh-lnivly">
+			<property name="bounds" value="335,74,181,25"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+			<reference referencedUin="design:link:::jbfm7eiloywkhxqmqn3:jy1dfeiloywkh-lnivly">
+				<property name="sourceAnchor" value="340,91"/>
+				<property name="targetAnchor" value="260,91"/>
+			</reference>
+		</reference>
+	</view>
+</nodeSet>

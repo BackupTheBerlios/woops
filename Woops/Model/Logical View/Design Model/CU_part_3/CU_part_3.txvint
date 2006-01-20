@@ -5,7 +5,7 @@
 	<view uin="bzcmego5fuwpvu2aw1">
 		<property name="$metaclass" value="Sequence Diagram"/>
 		<property name="$name" value="CU_part_3"/>
-		<property name="@url" value="element://model:project::Woops/design:node:::e0tg6egjrqpyexzf8st"/>
+		<property name="@url" value="element://model:project::Woops/design:node:::7ujy5eiloccdxeagi5x"/>
 		<reference referencedUin="design:node:::2p3hqego5h0m0-qx6xex">
 			<property name="location_set_by_user" value="true"/>
 			<property name="$shortcutReference" value="true"/>
@@ -73,15 +73,15 @@
 				<property name="col_sourceAnchor" value="102,9"/>
 				<property name="col_targetAnchor" value="116,9"/>
 			</reference>
-			<reference referencedUin="design:link:::ieje0rego5xin0wdf0rd:-w2q8ptego5q0ad-lt10y7">
-				<property name="col_sourceAnchor" value="0,25"/>
-				<property name="col_targetAnchor" value="0,25"/>
-			</reference>
 			<reference referencedUin="design:link:::ieje0regwpngc7q8jw66:-w2q8ptego5q0ad-lt10y7">
 				<property name="sendingInstant" value="131"/>
 				<property name="processingDuration" value="20"/>
 				<property name="seq_sourceAnchor" value="538,260"/>
 				<property name="seq_targetAnchor" value="580,260"/>
+			</reference>
+			<reference referencedUin="design:link:::ieje0rego5xin0wdf0rd:-w2q8ptego5q0ad-lt10y7">
+				<property name="col_sourceAnchor" value="0,25"/>
+				<property name="col_targetAnchor" value="0,25"/>
 			</reference>
 			<reference referencedUin="design:link:::ieje0rego5w4ny-2acsu0:-w2q8ptego5q0ad-lt10y7">
 				<property name="col_sourceAnchor" value="91,50"/>
