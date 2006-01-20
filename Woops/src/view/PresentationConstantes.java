@@ -29,7 +29,7 @@ public interface PresentationConstantes {
 	public static final String STYLE_FOND1="fond1";
 	public static final String STYLE_FOND2="fond2";
 	
-	//constantes de clés en session
+	//constantes de cl?s en session
 	public static final String KEY_FORM="FORM";
 	public static final String KEY_USER="USER";
 	public static final String KEY_OLD_DEPENDANCES_KEYS="OLD_DEPENDANCES_KEYS";
@@ -37,11 +37,12 @@ public interface PresentationConstantes {
 	public static final String KEY_DEPENDANCES_LIST = "KEY_DEPENDANCES_LIST";
 	public static final String KEY_DEPENDANCES_LIST_MNGR = "KEY_DEPENDANCES_LIST_MNGR";
 	public static final String KEY_ACTIVITY="ACTIVITY";
+	public static final String KEY_ACTIVITIES_MAP="ACTIVITIES_MAP";
 	
 	public static final String LIBELLE_OUI="O";
 	public static final String LIBELLE_NON="N";
 	
-	//Constantes permettant de modifier l'état d'une activié
+	//Constantes permettant de modifier l'?tat d'une activi?
     public static final String ACTIVITY_START = "start";
     public static final String ACTIVITY_FINISH = "finish";
     

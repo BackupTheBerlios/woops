@@ -2,15 +2,9 @@ package business.activity;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 
 import business.BusinessConstantes;
-import business.activity.state.CreatedActivityState;
-import business.activity.state.IActivityState;
-import business.activity.Activity;
-import business.activity.ActivityManager;
-import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
@@ -20,19 +14,19 @@ import business.hibernate.exception.PersistanceException;
 
 public class ActivityManager extends PersistentObjectManager {
 	
-	/** Instance permettant d'assurer la persistance d'une activité */
+	/** Instance permettant d'assurer la persistance d'une activit? */
 	private ActivityDAO activityDAO = new ActivityDAO();
 	
-	/** Instance privée de la classe */
+	/** Instance priv?e de la classe */
 	private static ActivityManager activityManager;
 
 	
-	/** Instance permettant d'assurer la persistance d'une activité */
+	/** Instance permettant d'assurer la persistance d'une activit? */
 	private ActivityDAO ActivityDAO= new ActivityDAO();
 	
 	
 	/**
-	 * Implémentation du pattern Singleton : constructeur privé
+	 * Impl?mentation du pattern Singleton : constructeur priv?
 	 */
 	private ActivityManager() {
 	}
@@ -56,10 +50,10 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Récupération des activités pour lesquelles le participant a la responsabilité
+	 * R?cup?ration des activit?s pour lesquelles le participant a la responsabilit?
 	 * @param userId : identifiant du participant
-	 * @return : Liste des activités du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la récupération des données
+	 * @return : Liste des activit?s du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
 	public Collection getActivitiesByUser(Integer userId)
 			throws PersistanceException {
@@ -72,8 +66,8 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	/**
 	 * 
-	 * @param activityId : l'activité dont on veut connaitre des dépendances possibles
-	 * @return la liste des activité dont peut dépendre l'activité passée en parametre
+	 * @param activityId : l'activit? dont on veut connaitre des d?pendances possibles
+	 * @return la liste des activit? dont peut d?pendre l'activit? pass?e en parametre
 	 * @throws PersistanceException
 	 */
 	public Collection getPossibleActivityPredecessors(Integer activityId)
@@ -84,8 +78,8 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	/**
 	 * 
-	 * @param activityId : l'activité dont on veut connaitre ses prédécesseurs
-	 * @return la liste des activité dont depend l'activité passée en parametre
+	 * @param activityId : l'activit? dont on veut connaitre ses pr?d?cesseurs
+	 * @return la liste des activit? dont depend l'activit? pass?e en parametre
 	 * @throws PersistanceException
 	 */
 	public Collection getPredecessors(Integer activityId) 
@@ -105,8 +99,8 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	/**
 	 * 
-	 * @param activityId : l'activité dont on veut connaitre ses dépendances
-	 * @return la liste des séquence d'activité dont l'activité passée en parametre et le successeur
+	 * @param activityId : l'activit? dont on veut connaitre ses d?pendances
+	 * @return la liste des s?quence d'activit? dont l'activit? pass?e en parametre et le successeur
 	 * @throws PersistanceException
 	 */
 	public Collection getActivitySequences(Integer activityId) 

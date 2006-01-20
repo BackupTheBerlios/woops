@@ -1,6 +1,7 @@
 package view.activity.manageActivity;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForward;
@@ -11,10 +12,8 @@ import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
 import business.hibernate.exception.DoublonException;
-import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
-import business.user.UserManager;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;
@@ -40,7 +39,38 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	}
 	
 	
+	/**
+	 * 
+	 * Action a realiser avant l'affichage du formulaire
+	 */
 
+	public void doExecute(ActionContext context) {
+
+		
+		ManageActivityCreationForm form = (ManageActivityCreationForm) context.form();
+	
+		String mode = (String)context.request().getAttribute(PresentationConstantes.PARAM_ACTION_SUBMIT);
+		
+		if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
+			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
+			
+			Integer activityId = new Integer((String)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID));
+
+			Activity activity = (Activity)activitiesMap.get(activityId);
+				
+			form.setActivityId(activityId.toString());
+			form.setName(activity.getName());
+			form.setDetails(activity.getDetails());			
+			
+		}
+		else {
+			mode = PresentationConstantes.INSERT_MODE;
+		}
+		
+		form.setActionSubmit(mode);
+		context.forward(context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS)); 
+	}
+	
 	
 	/**
 	 * 
@@ -61,7 +91,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	    if (!context.hasErrors()) {
 			try {
 				
-				//Récupération de l'identifiant du participant connecté
+				//R?cup?ration de l'identifiant du participant connect?
 		    	User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 				
 				String mode = context.request().getParameter(PresentationConstantes.PARAM_ACTION_SUBMIT);
@@ -69,10 +99,9 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				if (mode.equals(PresentationConstantes.INSERT_MODE)) {
 					Activity activity = new Activity();
 					
-					// Récupération des champs que l'utilisateur a pu entrer
+					// R?cup?ration des champs que l'utilisateur a pu entrer
 					activity.setDetails(form.getDetails());
 					activity.setName(form.getName());
-					
 					
 					activity.setState(new CreatedActivityState());
 					
@@ -82,13 +111,16 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					activity.setUserCreation((user.getId().toString()));
 					activity.setDateCreation(new Date());
 					ActivityManager.getInstance().insert(activity);
+					
+					context.addGlobalMessage("msg.info.activity.inserted", activity.getName());
 				}
 				else if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
 					
-					// Récupération de l'activity en session
-					Activity activity = (Activity)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITY);
+					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 					
-					//Récupération des champs que l'utilisateur a pu entrer
+					Activity activity = (Activity)activitiesMap.get(form.getActivityId());
+					
+					//R?cup?ration des champs que l'utilisateur a pu entrer
 					activity.setDetails(form.getDetails());
 					activity.setName(form.getName());
 					
@@ -96,15 +128,18 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					activity.setUserModification((user.getId().toString()));
 					activity.setDateModification(new Date());
 					ActivityManager.getInstance().update(activity);
+					
+					context.addGlobalMessage("msg.info.activity.updated", activity.getName());
 				}
-
+					
 				forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
 			} catch (PersistanceException pe) {
 				forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
                 pe.printStackTrace();
                 context.addGlobalError("errors.persistance.global");
 			} catch (DoublonException de) {
-				// Ce cas est impossible car les ids sont auto-générés
+				forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
+                context.addGlobalError("errors.persistance.doublon");
 			}	
 
         } else {
@@ -114,51 +149,5 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		context.forward(forward);
 
 	}
-	
-	
-	/**
-	 * 
-	 * Action a realiser avant l'affichage du formulaire
-	 */
-
-	public void doExecute(ActionContext context) {
-
-		
-		ManageActivityCreationForm form = (ManageActivityCreationForm) context.form();
-	
-		String mode = (String)context.request().getAttribute(PresentationConstantes.PARAM_ACTION_SUBMIT);
-		
-		if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-			
-			Integer activityId = new Integer((String)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID));
-			
-			try {
-				Activity activity = ActivityManager.getInstance().getActivityById(activityId);
-				form.setActivityId(activityId.toString());
-				form.setName(activity.getName());
-				form.setDetails(activity.getDetails());
-				
-				//Sauvegarde de l'activity dans la session
-				context.session().setAttribute(PresentationConstantes.KEY_ACTIVITY,activity);
-				
-			} catch (PersistanceException pe) {
-				forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
-                pe.printStackTrace();
-                context.addGlobalError("errors.persistance.global");
-			}
-			
-			
-		}
-		else
-		{
-			mode = PresentationConstantes.INSERT_MODE;
-		}
-		
-		form.setActionSubmit(mode);
-		context.forward(context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS)); 
-	}
-	
-	
-	
 	
 }
