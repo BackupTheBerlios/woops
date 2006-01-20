@@ -37,7 +37,7 @@
       	 	scope="session"
       	 	input="/html/activity/listActivities.jsp"
       	 >
-         	<forward name="error" path="/html/user/loginUser.jsp" />
+         	<forward name="error" path="/html/activity/listActivities.jsp" />
          	<forward name="success" path="/html/activity/listActivities.jsp" />
          	<forward name="action" path="/listActivities.do"/>
          	<forward name="edit" path="/manageActivityCreation.do"/>
@@ -53,7 +53,7 @@
          	input="/html/activity/manageActivityDependances.jsp"
          >
          	<forward name="success" path="/html/activity/manageActivityDependances.jsp" />
-         	<forward name="error" path="/html/user/loginUser.jsp" />
+         	<forward name="error" path="/html/activity/manageActivityDependances.jsp" />
          	<forward name="action" path="/listActivities.do"/>
       	</action>
 
@@ -68,7 +68,7 @@
          	input="/html/activity/manageActivityDependances.jsp"
          >
          	<forward name="success" path="/html/activity/manageDependancesTypes.jsp" />
-         	<forward name="error" path="/html/user/loginUser.jsp" />
+         	<forward name="error" path="/html/activity/manageDependancesTypes.jsp" />
       	</action>
 
 
