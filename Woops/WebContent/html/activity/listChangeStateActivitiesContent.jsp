@@ -20,18 +20,18 @@
 		>
 
 			<ctrl:columndrilldown 
-				title="table.field.listChangeStateActivities.name" 
+				title="table.field.listActivities.name" 
 				property="name" 
 				width="250"
 				sortable="true"/>
 			
 			<ctrl:columntext 
-				title="table.field.listChangeStateActivities.details"
+				title="table.field.listActivities.details"
 				property="details"
 				width="350"/>
 				
 			<ctrl:columnhtml id="activity"
-				title="table.field.listChangeStateActivities.state"
+				title="table.field.listActivities.state"
 				width="150"
 				>
 					<bean:message
@@ -40,10 +40,10 @@
 			</ctrl:columnhtml> 
 			
 			<ctrl:columnedit 
-				title="table.field.listChangeStateActivities.edit"/> 
+				title="table.field.listActivities.edit"/> 
 
 			<ctrl:columnbutton 
-				title="table.field.listChangeStateActivities.action" 
+				title="table.field.listActivities.action" 
 				text="@{bean.action}" 
 				align="center"
 				command="change"
