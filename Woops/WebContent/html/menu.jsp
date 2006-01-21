@@ -1,6 +1,23 @@
-  <a href="loginUser.do?actionSubmit=deconnect"><div class="rubrique">Se déconnecter</div></a><br>
-  
-  <div class="titreMenu">Gestion d'activités</div><br>
-  
-   <a href="listActivities.do"><div class="rubrique">Lister les activites</div></a>
-   <a href="manageActivityCreation.do"><div class="rubrique">ajouter une activité</div></a>
+<%@ taglib uri="/cc-menu" prefix="menu" %>
+<%@ taglib uri="/cc-utility" prefix="util" %>
+
+<menu:menu  id="user"  type="sidebar"  width="150">
+
+        <menu:menuitem   	
+        	id="1"  
+        	text="menu.deconnection"      
+        	action="loginUser.do?actionSubmit=deconnect"/>
+ 
+        <menu:menuitem   	
+        	id="1"  
+        	text="menu.listActivities"      
+        	action="listActivities.do"/>
+        	
+        <menu:menuitem    	
+        	id="2"  
+        	text="menu.manageActivityCreation"      
+        	action="manageActivityCreation.do"/>
+        
+
+
+</menu:menu>
