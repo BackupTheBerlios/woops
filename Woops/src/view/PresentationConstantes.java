@@ -18,6 +18,9 @@ public interface PresentationConstantes {
 	public static final String FORWARD_INDEX="index"; 
 	public static final String FORWARD_NOSESSION="nosession";
 	
+	public static final String FORWARD_DEPENDANCES="dependances";
+	public static final String FORWARD_DEPENDANCES_TYPES="dependancesTypes";
+	
 
 	//Constantes de parametres de request
 	public static final String PARAM_ACTION_SUBMIT="actionSubmit";

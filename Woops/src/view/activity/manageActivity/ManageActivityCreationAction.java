@@ -77,8 +77,6 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	 * @param		ctx		FormActionContext
 	 * 
 	 * Action a realiser apres validation du formulaire
-	 * @throws DoublonException 
-	 * @throws PersistanceException 
 	 */
 	
 	public void save_onClick(FormActionContext context) {
@@ -117,9 +115,9 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				else if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
 					
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
-					
-					Activity activity = (Activity)activitiesMap.get(form.getActivityId());
-					
+				
+					Activity activity = (Activity)activitiesMap.get(new Integer(form.getActivityId()));
+
 					//R?cup?ration des champs que l'utilisateur a pu entrer
 					activity.setDetails(form.getDetails());
 					activity.setName(form.getName());
@@ -150,4 +148,30 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 
 	}
 	
+	
+	/**
+	 * 
+	 * @param		ctx		FormActionContext
+	 * 
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton de gestion
+	 * des dépendances de l'activité
+	 */
+	
+	public void manageDependances_onClick(FormActionContext context) {
+		forward = context.mapping().findForward(PresentationConstantes.FORWARD_DEPENDANCES);
+		context.forward(forward);
+	}
+	
+	/**
+	 * 
+	 * @param		ctx		FormActionContext
+	 * 
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton de gestion
+	 * des types des dépendances de l'activité
+	 */
+	
+	public void manageDependancesTypes_onClick(FormActionContext context) {
+		forward = context.mapping().findForward(PresentationConstantes.FORWARD_DEPENDANCES_TYPES);
+		context.forward(forward);
+	}
 }

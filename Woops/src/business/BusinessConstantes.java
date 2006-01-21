@@ -13,4 +13,6 @@ public interface BusinessConstantes {
     public static final String ACTIVITY_STATE_CREATED = "created";
     public static final String ACTIVITY_STATE_IN_PROGRESS = "inProgress";
     public static final String ACTIVITY_STATE_FINISHED = "finished";
+    
+    public static final String DATE_FORMAT="DD/MM/YYYY";
 }

@@ -4,6 +4,7 @@
 <%@ taglib uri="/cc-base"     prefix="base" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
 <%@ taglib uri="/struts-bean" prefix="bean" %>
+<%@ taglib uri="/cc-controls" prefix="ctrl" %>
 
 
 
@@ -12,11 +13,13 @@
 	<logic:equal name="manageActivityCreationForm" property="actionSubmit" value="insert_mode">
 		<bean:define id="button" value="form.button.manageActivityCreation.insert"/>
 		<bean:define id="caption" value="form.title.manageActivityCreation.insert"/>
+		<bean:define id="disable_buttons" value="true"/>
 	</logic:equal>
 	
 	<logic:equal name="manageActivityCreationForm" property="actionSubmit" value="update_mode">
 		<bean:define id="button" value="form.button.manageActivityCreation.update"/>
 		<bean:define id="caption" value="form.title.manageActivityCreation.update"/>
+		<bean:define id="disable_buttons" value="false"/>
 	</logic:equal>
 
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -49,9 +52,23 @@
 			<forms:button
 				name="btnSave"
 				text="${pageScope.button}"/>
+				
+			<forms:button
+    			name="btnManageDependances"
+		    	text="form.button.manageActivityCreation.manageDependances"
+		    	disabled="${pageScope.disable_buttons}"
+		    	/>
+		    
+		    <forms:button
+		    	name="btnManageDependancesTypes"
+		    	text="form.button.manageActivityCreation.manageTypes"
+		    	disabled="${pageScope.disable_buttons}"
+		    	/>
 		</forms:buttonsection>
         
     </forms:form>
+    
+    
     
     <html:hidden property="activityId"/>
     <html:hidden property="actionSubmit"/>

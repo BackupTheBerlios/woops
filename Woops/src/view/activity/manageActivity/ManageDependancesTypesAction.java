@@ -3,6 +3,7 @@ package view.activity.manageActivity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import view.PresentationConstantes;
 import view.WoopsCCAction;
 import view.activity.ActivitySequenceItem;
 import view.activity.ListActiviySequencesModel;
+import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.ActivitySequence;
 import business.activity.ActivitySequenceManager;
@@ -148,8 +150,19 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 			}
 			
 		}
+		/* Récupération de l'activité dans la hashmap pour connaitre son nom */
+		HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 		
+		ManageDependancesTypesForm form = (ManageDependancesTypesForm) context.form();
 		
+		Activity activity = (Activity)activitiesMap.get(new Integer(form.getActivityId()));
+		
+		context.addGlobalMessage("msg.info.activity.dependancesTypes.saved",activity.getName());
+		
+		/** Appel de la page de garde **/
+		forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
+	
+		context.forward(forward);
 	}
 
 }

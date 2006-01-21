@@ -3,6 +3,7 @@ package view.activity.manageActivity;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
@@ -207,7 +208,12 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
 			context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
 			
-			context.addGlobalMessage("msg.info.activity.dependances.saved");
+			/* Récupération de l'activité dans la hashmap pour connaitre son nom */
+			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
+			
+			Activity activity = (Activity)activitiesMap.get(new Integer(form.getActivityId()));
+			
+			context.addGlobalMessage("msg.info.activity.dependances.saved",activity.getName());
 			
 			/** Appel de la page de garde **/
 			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
