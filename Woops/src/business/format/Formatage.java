@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import business.BusinessConstantes;
+
 
 public class Formatage {
 	/**
@@ -22,7 +24,7 @@ public class Formatage {
 	            && Controleur.isInteger(d.replaceAll("/","")) 
 	            && (d.replaceAll("/","")).length()<=8) {
 	    
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");		
+		    SimpleDateFormat dateFormat = new SimpleDateFormat(BusinessConstantes.DATE_FORMAT);		
 			try {	
 			    if (d.indexOf("/")<=0)
 			        d = d.substring(0,2) + "/" + d.substring(2,4) + "/" + d.substring(4);
@@ -71,7 +73,7 @@ public class Formatage {
 	public static String dateToString(Date date) {
 	
 		String result = "";
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat(BusinessConstantes.DATE_FORMAT);
 
 		if (date != null) {
 			result = dateFormat.format(date);
