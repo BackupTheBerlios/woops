@@ -32,6 +32,8 @@ CREATE TABLE Activity (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(50) NOT NULL
      , details TEXT
+     , startDate DATE
+     , endDate DATE
      , user INT NOT NULL
      , state VARCHAR(50) NOT NULL
      , PRIMARY KEY (id)
