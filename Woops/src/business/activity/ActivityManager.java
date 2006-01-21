@@ -19,11 +19,6 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	/** Instance priv?e de la classe */
 	private static ActivityManager activityManager;
-
-	
-	/** Instance permettant d'assurer la persistance d'une activit? */
-	private ActivityDAO ActivityDAO= new ActivityDAO();
-	
 	
 	/**
 	 * Impl?mentation du pattern Singleton : constructeur priv?
@@ -170,8 +165,105 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	
+	/**
+	 * 
+	 * @param actSeq
+	 * @param linkType1
+	 * @param linkType2
+	 * @return retourne Vrai si l'état du predecessor est le bon, faux sinon
+	 */
+	private boolean verifPredecessorState(ActivitySequence actSeq, String linkType1, String linkType2) {
+		boolean result = true;
+		
+		// Si il n'y a pas de lien Finish To ...
+		if (actSeq.getLinkType().getName().equals(linkType1)) {
+			// Et vérifier si l'activité predecessor est au bon état
+			if (!actSeq.getPredecessor().getState().equals(BusinessConstantes.ACTIVITY_STATE_FINISHED))
+				result = false;
+		}
+				
+		// Ou de lien Start To ...
+	    if (actSeq.getLinkType().getName().equals(linkType2)) {
+	    	// Et vérifier si l'activité predecessor est au bon état
+	    	if ((!actSeq.getPredecessor().getState().equals(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS))&&
+	    	     (!actSeq.getPredecessor().getState().equals(BusinessConstantes.ACTIVITY_STATE_FINISHED)))
+				result = false;
+	    }
+	    
+	    return result;
+	}
 	
+	/**
+	 * 
+	 * @param activity
+	 * @return retourne vrai si l'activite peut évoluer d'état, faux sinon
+	 * @throws PersistanceException
+	 */
+	private boolean verifChangeStateActivity(Activity activity) throws PersistanceException {
+		boolean result = true;
+		Iterator iter;
+		String activityState = activity.getState().getName();
+		
+		// Récupération de la liste des ActivitySequence de l'activite
+		Collection activitySeq = ActivityManager.getInstance().getActivitySequences((Integer) activity.getId());
+		
+		
+		////////////////////////////////////////////////////////////////////////////////////
+		
+		
+		// Si l'activité est Created
+		// Et qu'elle veut pouvoir commencer
+		if (activityState.equals(BusinessConstantes.ACTIVITY_STATE_CREATED)) {
+			iter = activitySeq.iterator();
+			
+			// Il faut vérifier dans ses predecesseurs
+			while ((iter.hasNext())&&(result==true))
+				result = verifPredecessorState((ActivitySequence)iter.next(),BusinessConstantes.LINK_TYPE_FINISH_TO_START,BusinessConstantes.LINK_TYPE_START_TO_START);
+		}
+		
+		
+		//////////////////////////////////////////////////////////////////////////////////
+		
+		
+		// Si l'activité est In Progress
+		// Et qu'elle veut pouvoir finir
+		if (activityState.equals(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS)) {
+			iter = activitySeq.iterator();
+			
+			// Il faut vérifier dans ses predecesseurs
+			while ((iter.hasNext())&&(result==true))
+				result = verifPredecessorState((ActivitySequence)iter.next(),BusinessConstantes.LINK_TYPE_FINISH_TO_FINISH,BusinessConstantes.LINK_TYPE_START_TO_FINISH);
+		}
+		
+		
+		return result;
+	}
 	
+	/**
+	 * 
+	 * @param userId
+	 * @return retourne à l'utilisateur, l'ensemble de ses activités dont il peut changer l'état
+	 * @throws PersistanceException 
+	 */
+	public Collection activitiesChangeState(Integer userId) throws PersistanceException {
+		Activity act;
+		
+		// Liste des activites pouvant changer d'état
+		Collection listActivitiesChangeState = new ArrayList();
+		
+		// Recuperation des activites de l'utilisateur
+		Collection listActivities = getActivitiesByUser(userId);
+		
+		// Pour chacune d'entre elles, on vérifie si elle peut changer d'etat
+		Iterator iter = listActivities.iterator();
+		while (iter.hasNext()) {
+			act = (Activity)iter.next();
+			if (verifChangeStateActivity(act))
+				listActivitiesChangeState.add(act);
+		}
+		
+		return listActivitiesChangeState;
+	}
 	
-	
+
 }

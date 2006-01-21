@@ -9,6 +9,7 @@
 		<form-bean name="manageActivityCreationForm" type="view.activity.manageActivity.ManageActivityCreationForm" />
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manageActivity.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manageActivity.ManageDependancesTypesForm" />
+	  	<form-bean name="listChangeStateActivitiesForm" type="view.activity.listActivities.ListChangeStateActivitiesForm" />
 	  
 	  	<form-bean name="loginForm" type="view.user.LoginForm" />
 	  
@@ -95,6 +96,18 @@
         	<forward name="deconnect" path="/html/user/loginUser.jsp" />
         	<forward name="success" path="/listActivities.do"/>
      </action>  
+     
+<!-- ================= List Change State Activities ================ -->  
+		<action path="/listChangeStateActivities"	 type="view.activity.listActivities.ListChangeStateActivitiesAction"
+      		name="listChangeStateActivitiesForm"
+      	 	scope="session"
+      	 	input="/html/activity/listChangeStateActivities.jsp"
+      	 >
+         	<forward name="error" path="/html/activity/listChangeStateActivities.jsp" />
+         	<forward name="success" path="/html/activity/listChangeStateActivities.jsp" />
+         	<forward name="action" path="/listChangeStateActivities.do"/>
+         	<forward name="edit" path="/manageActivityCreation.do"/>
+      	</action>
    
 </action-mappings>
 

@@ -18,6 +18,9 @@
         	text="menu.manageActivityCreation"      
         	action="manageActivityCreation.do"/>
         
-
+		<menu:menuitem   	
+        	id="1"  
+        	text="menu.listChangeStateActivities"      
+        	action="listChangeStateActivities.do"/>
 
 </menu:menu>

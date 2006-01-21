@@ -10,6 +10,8 @@ import org.apache.struts.action.ActionMessage;
 import business.format.Controleur;
 
 public class LoginForm extends ActionForm {
+	private static final long serialVersionUID = 1L;
+	
 	private String password;
 	private String login;
 	
