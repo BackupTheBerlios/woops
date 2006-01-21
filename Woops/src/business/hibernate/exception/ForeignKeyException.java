@@ -5,7 +5,7 @@ package business.hibernate.exception;
  * 
  */
 public class ForeignKeyException extends Exception {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2833330076327764582L; /** Generated Serial ID */
 	private String appMessage = null;
 	
 	public ForeignKeyException(String msg, Exception e){

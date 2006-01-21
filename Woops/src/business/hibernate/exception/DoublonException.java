@@ -6,7 +6,7 @@ package business.hibernate.exception;
  * 
  */
 public class DoublonException extends Exception {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6920039696419654314L; /** Generated Serial ID */
 	private String appMessage = null;
 	
 	public DoublonException(String msg, Exception e){
