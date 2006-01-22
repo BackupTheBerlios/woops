@@ -5,15 +5,15 @@
 	<!-- Form Beans -->
    	<form-beans >
    
-		<form-bean name="listActivitiesForm" type="view.activity.listActivities.ListActivitiesForm" />
-		<form-bean name="manageActivityCreationForm" type="view.activity.manageActivity.ManageActivityCreationForm" />
-		<form-bean name="manageActivityDependancesForm" type="view.activity.manageActivity.ManageActivityDependancesForm" />
-	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manageActivity.ManageDependancesTypesForm" />
+		<form-bean name="listActivitiesForm" type="view.activity.performing.ListActivitiesForm" />
+		<form-bean name="manageActivityCreationForm" type="view.activity.manage.ManageActivityCreationForm" />
+		<form-bean name="manageActivityDependancesForm" type="view.activity.manage.ManageActivityDependancesForm" />
+	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manage.ManageDependancesTypesForm" />
 	  	<form-bean name="listChangeStateActivitiesForm" type="view.activity.listActivities.ListChangeStateActivitiesForm" />
 	  
-	  	<form-bean name="loginForm" type="view.user.LoginForm" />
+	  	<form-bean name="loginForm" type="view.logon.LoginForm" />
 	  
-	  	<form-bean name="emptyForm" type="view.EmptyForm"/>
+	  	<form-bean name="emptyForm" type="view.common.EmptyForm"/>
   
 	</form-beans>
 
@@ -25,7 +25,7 @@
    	<!-- Global Forwards -->
    	<global-forwards>
 		<forward name="index" path="/index.jsp"/>
-		<forward name="nosession" path="/html/user/loginUser.jsp"/>
+		<forward name="nosession" path="/html/logon/loginUser.jsp"/>
    	</global-forwards>
 
 
@@ -33,34 +33,45 @@
    	<action-mappings >
 
 <!-- ================= List Activities ================ -->  
-		<action path="/listActivities"	 type="view.activity.listActivities.ListActivitiesAction"
+		<action path="/listActivities"	 type="view.activity.performing.ListActivitiesAction"
       		name="listActivitiesForm"
       	 	scope="session"
-      	 	input="/html/activity/listActivities.jsp"
+      	 	input="/html/user/activity/performing/listActivities.jsp"
       	 >
-         	<forward name="error" path="/html/activity/listActivities.jsp" />
-         	<forward name="success" path="/html/activity/listActivities.jsp" />
+         	<forward name="error" path="/html/logon/loginUser.jsp" />
+         	<forward name="success" path="/html/user/activity/performing/listActivities.jsp" />
          	<forward name="action" path="/listActivities.do"/>
          	<forward name="edit" path="/manageActivityCreation.do"/>
       	</action>
-      
+     	
+  <!-- ================= Historized Activities ================ -->  
+		<action path="/historizedActivities"	 type="view.activity.history.historizedActivities.HistorizedActivitiesAction"
+      		name="listActivitiesForm"
+      	 	scope="session"
+      	 	input="/html/user/activity/history/historizedActivities.jsp"
+      	 >
+         	<forward name="error" path="/html/user/activity/performing/listActivities.jsp" />
+         	<forward name="success" path="/html/user/activity/history/historizedActivities.jsp" />
+         	<forward name="action" path="/historizedActivities.do"/>
+      	</action>
+            
 <!-- ================= Manage Activity Dependances ================ -->  
-      	<action path="/manageActivityDependances"	 type="view.activity.manageActivity.ManageActivityDependancesAction"
+      	<action path="/manageActivityDependances"	 type="view.activity.manage.ManageActivityDependancesAction"
       	 	attribute="manageActivityDependancesForm"
          	name="manageActivityDependancesForm"
          	parameter="activityId"
 		 	validate="false"      
          	scope="request"
-         	input="/html/activity/manageActivityDependances.jsp"
+         	input="/html/user/activity/manage/manageActivityDependances.jsp"
          >
-         	<forward name="success" path="/html/activity/manageActivityDependances.jsp" />
-         	<forward name="error" path="/html/activity/manageActivityDependances.jsp" />
+         	<forward name="success" path="/html/user/activity/manage/manageActivityDependances.jsp" />
+         	<forward name="error" path="/html/user/activity/manage/manageActivityDependances.jsp" />
          	<forward name="action" path="/listActivities.do"/>
       	</action>
 
 
 <!-- ================= Manage Dependances Types ================ -->  
-      	<action path="/manageDependancesTypes"	 type="view.activity.manageActivity.ManageDependancesTypesAction"
+      	<action path="/manageDependancesTypes"	 type="view.activity.manage.ManageDependancesTypesAction"
       	 	attribute="manageDependancesTypesForm"
          	name="manageDependancesTypesForm"
          	parameter="activityId"
@@ -68,49 +79,50 @@
          	scope="request"
          	input="/html/activity/manageActivityDependances.jsp"
          >
-         	<forward name="success" path="/html/activity/manageDependancesTypes.jsp" />
-         	<forward name="error" path="/html/activity/manageDependancesTypes.jsp" />
+         	<forward name="success" path="/html/user/activity/manage/manageDependancesTypes.jsp" />
+         	<forward name="error" path="/html/user/activity/manage/manageDependancesTypes.jsp" />
       		<forward name="action" path="/listActivities.do"/>
       	</action>
 
 
 <!-- ================= Manage Activity Creation ================ -->  
-    <action path="/manageActivityCreation" type="view.activity.manageActivity.ManageActivityCreationAction"
+    <action path="/manageActivityCreation" type="view.activity.manage.ManageActivityCreationAction"
     	attribute="manageActivityCreationForm"
         name="manageActivityCreationForm"
 		validate="false"      
         scope="request">
-        <forward name="success" path="/html/activity/manageActivityCreation.jsp" />
-        <forward name="error" path="/html/activity/manageActivityCreation.jsp" />
+        <forward name="success" path="/html/user/activity/manage/manageActivityCreation.jsp" />
+        <forward name="error" path="/html/user/activity/manage/manageActivityCreation.jsp" />
         <forward name="action" path="/listActivities.do"/>
         <forward name="dependances" path="/manageActivityDependances.do"/>
         <forward name="dependancesTypes" path="/manageDependancesTypes.do"/>
      </action>
 
 <!-- ================= Login form ================ -->  
-      	<action path="/loginUser"	 type="view.user.LoginAction"
+      	<action path="/loginUser"	 type="view.logon.LoginAction"
      		attribute="loginForm"
         	name="loginForm"
         	parameter="actionSubmit"
 			validate="false"      
         	scope="request"
         	input="/html/user/loginUser.jsp">
-        	<forward name="error" path="/html/user/loginUser.jsp" />
-        	<forward name="deconnect" path="/html/user/loginUser.jsp" />
+        	<forward name="error" path="/html/logon/loginUser.jsp" />
+        	<forward name="deconnect" path="/html/logon/loginUser.jsp" />
         	<forward name="success" path="/listActivities.do"/>
      </action>  
-     
+
 <!-- ================= List Change State Activities ================ -->  
 		<action path="/listChangeStateActivities"	 type="view.activity.listActivities.ListChangeStateActivitiesAction"
       		name="listChangeStateActivitiesForm"
       	 	scope="session"
       	 	input="/html/activity/listChangeStateActivities.jsp"
       	 >
-         	<forward name="error" path="/html/activity/listChangeStateActivities.jsp" />
-         	<forward name="success" path="/html/activity/listChangeStateActivities.jsp" />
+         	<forward name="error" path="/html/user/activity/listChangeStateActivities.jsp" />
+         	<forward name="success" path="/html/user/activity/listChangeStateActivities.jsp" />
          	<forward name="action" path="/listChangeStateActivities.do"/>
          	<forward name="edit" path="/manageActivityCreation.do"/>
       	</action>
+   
    
 </action-mappings>
 

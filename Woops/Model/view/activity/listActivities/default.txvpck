@@ -2,16 +2,8 @@
 
 
 <nodeSet  version="1.1">
-	<view uin="V574ng9egbb60cchf7qhr">
+	<view uin="V574ng9eiriqx69ff9pwi">
 		<property name="$defaultDiagram" value="true"/>
 		<property name="$metaclass" value="Package Diagram"/>
-		<reference referencedUin="jdt:e_class:src:view.activity.listActivities.ListActivitiesForm">
-			<property name="bounds" value="5,165,152,96"/>
-			<property name="location_set_by_user" value="true"/>
-		</reference>
-		<reference referencedUin="jdt:e_class:src:view.activity.listActivities.ListActivitiesAction">
-			<property name="bounds" value="5,5,150,122"/>
-			<property name="location_set_by_user" value="true"/>
-		</reference>
 	</view>
 </nodeSet>
