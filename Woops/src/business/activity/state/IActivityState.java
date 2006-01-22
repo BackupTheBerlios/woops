@@ -36,10 +36,10 @@ public abstract class IActivityState extends HistorizedObject {
 		return name;
 	}
 	
-	public abstract boolean process(Activity activity);
-	public abstract boolean checkBeforeChange(Activity activity);
-	
 	public boolean equals(String state) {
 		return this.name.equals(state);
 	}
+	
+	public abstract boolean process(Activity activity);
+	public abstract boolean checkBeforeChange(Activity activity);
 }

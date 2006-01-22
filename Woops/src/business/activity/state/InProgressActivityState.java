@@ -4,15 +4,14 @@ import java.util.Iterator;
 
 import business.BusinessConstantes;
 import business.activity.Activity;
-import business.activity.ActivitySequence;
+import business.activity.sequence.ActivitySequence;
 
 /**
  * Implements a behavior associated with a state of the Context.
  */
 
 public class InProgressActivityState extends IActivityState {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1595751762726689156L; /** Generated Serial ID */
 	private Integer progress;	/** Indique la progression de l'activité */
 	
 	public InProgressActivityState() {

@@ -4,14 +4,14 @@ import java.util.Iterator;
 
 import business.BusinessConstantes;
 import business.activity.Activity;
-import business.activity.ActivitySequence;
+import business.activity.sequence.ActivitySequence;
 
 /**
  * Implements a behavior associated with a state of the Context.
  */
 
 public class CreatedActivityState extends IActivityState {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6158342648776520176L; /** Generated Serial ID */
 
 	public CreatedActivityState() {
 		super(BusinessConstantes.ACTIVITY_STATE_CREATED);
@@ -20,9 +20,7 @@ public class CreatedActivityState extends IActivityState {
 	public boolean process(Activity activity) {
 		boolean result = false;
 		if (checkBeforeChange(activity)) {
-			/** TODO integer parametre à remplacer */
 			InProgressActivityState inProg = new InProgressActivityState();
-
 			activity.setState(inProg);
 			result = true;
 		}
