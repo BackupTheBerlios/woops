@@ -1,20 +1,18 @@
-package view.activity.manageActivity;
+package view.activity.manage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
-import view.WoopsCCAction;
 import view.activity.ActivityItem;
-import view.activity.ListActivitiesModel;
+import view.activity.performing.ListActivitiesModel;
+import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.hibernate.exception.DoublonException;
@@ -28,12 +26,10 @@ import com.cc.framework.common.DisplayObject;
 
 /**
  * @author Simon Reggiani
- * ManageActivityDependancesAction : Action permetant de g?rer les d?pendances d'une activit?
+ * ManageActivityDependancesAction : Action permetant de gérer les dépendances d'une activité
  */
 public class ManageActivityDependancesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ManageActivityDependancesAction.class);   
-	
-	ActionForward forward = null;
 	
 	/**
 	 * Constructeur vide
@@ -49,9 +45,9 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	/**
 	 * @param context : contexte de l'action. Contient le form, la requette, ...
 	 * @throws IOException, ServletException
-	 * Permet d'initialiser le formulaire de gestion des d?pendances d'une activit?.
-	 * 	-> Initialise les options possibles pour la liste des activit?s d?pendantes
-	 * 	-> Initialise les activit?s d?pendantes d?j? existantes de l'activit?
+	 * Permet d'initialiser le formulaire de gestion des dépendances d'une activité.
+	 * 	-> Initialise les options possibles pour la liste des activités dépendantes
+	 * 	-> Initialise les activités dépendantes déjà existantes de l'activité
 	 */
 	public void doExecute(ActionContext context) throws IOException, ServletException {
 		logger.debug("ManageActivityDependancesAction.doExecute()");
@@ -61,7 +57,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		}
 	
 		try {
-			/** Met ? jour les attributs du ManageActivityDependancesForm **/
+			/** Met à jour les attributs du ManageActivityDependancesForm **/
 			setPossibleDependancesOptions(context);
 			setRealActivityDependancesKeys(context);
 		} catch (PersistanceException pe) {
@@ -71,7 +67,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		}
 		
 		/** Affiche la page avec le swap select **/
-	    context.forward(context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS)); 
+	    context.forwardByName(PresentationConstantes.FORWARD_SUCCESS); 
 	}
 	
 	
@@ -79,7 +75,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	 * @param context
 	 * @throws PersistanceException
 	 * 
-	 * Permet de mettre ? jour de l'attribut possibleDependancesOptions du Form
+	 * Permet de mettre à jour de l'attribut possibleDependancesOptions du Form
 	 */
 	private void setPossibleDependancesOptions(ActionContext context) throws PersistanceException {
 		Collection possibleActivityDependancesMgr = null;
@@ -88,17 +84,17 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		
 		ManageActivityDependancesForm madForm = (ManageActivityDependancesForm) context.form();
 		
-		/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans la requete*/
+		/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans la requete*/
 		Integer activityId = new Integer(context.request().getParameter(PresentationConstantes.PARAM_ACTIVITY_ID));
 		
 		/* Sauvegarde dans le form */
 		madForm.setActivityId(activityId.toString());
 		
-		/* R?cup?ration de la liste des d?pendances possible de l'activit? via le manager */
+		/* Récupération de la liste des dépendances possible de l'activité via le manager */
 		possibleActivityDependancesMgr = ActivityManager.getInstance().getPossibleActivityPredecessors(activityId);  	
 		
 		/**
-		 * Conversion de la liste d'Activity retourn?e par getPossibleActivityDependances
+		 * Conversion de la liste d'Activity retournée par getPossibleActivityDependances
 		 * en liste d'ActivityItem
 		 */
     	Iterator iter = possibleActivityDependancesMgr.iterator();
@@ -118,10 +114,10 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		 * Convertion la liste d'ActivityItem en tableau
 		 */
 		DisplayObject[] data = new ActivityItem[possibleActivityDependancesItems.size()];
-		data = (ActivityItem[]) possibleActivityDependancesItems.toArray(data);
+		possibleActivityDependancesItems.toArray(data);
 		
 		/**
-		 * Mis ? jour de l'attribut possibleDependancesOptions du Form
+		 * Mis à jour de l'attribut possibleDependancesOptions du Form
 		 * en passant par un ListActivitiesModel
 		 */
 		ListActivitiesModel model = new ListActivitiesModel(data);
@@ -140,22 +136,22 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	 * @param context
 	 * @throws PersistanceException
 	 * 
-	 * Permet de mettre ? jour de l'attribut realActivityDependancesKeys du Form
+	 * Permet de mettre à jour de l'attribut realActivityDependancesKeys du Form
 	 */
 	private void setRealActivityDependancesKeys(ActionContext context) throws PersistanceException {
 		Collection activityDependances = null;
 
 		ManageActivityDependancesForm madForm = (ManageActivityDependancesForm) context.form();
 		
-		/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans le form 
-		 * (il a ?t? mis ? jour dans la methode pr?c?dente : setPossibleDependancesOptions */
+		/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans le form 
+		 * (il a été mis à jour dans la methode précédente : setPossibleDependancesOptions */
 		Integer activityId = new Integer(madForm.getActivityId());
 		activityDependances = ActivityManager.getInstance().getPredecessors(activityId);  	
 		
 		
 		/**
-		 * Convertit la liste des cl?s de type Integer
-		 * de la liste activityDependancesKeys en tableau de cl?s de type String
+		 * Convertit la liste des clés de type Integer
+		 * de la liste activityDependancesKeys en tableau de clés de type String
 		 */  
     	String[] listStringKeys = new String[activityDependances.size()];
 		Iterator iter = activityDependances.iterator();
@@ -164,12 +160,12 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		}
 		
 		/**
-		 * Sauvegarde du tableau des anciennes cl?s des activit? depandantes dans la session
+		 * Sauvegarde du tableau des anciennes clés des activité depandantes dans la session
 		 */
 		context.session().setAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS,listStringKeys);
 		
 		/**
-		 * Mis ? jour de l'attribut realDependancesKeys du Form
+		 * Mis à jour de l'attribut realDependancesKeys du Form
 		 */
 		madForm.setRealDependancesKeys(listStringKeys);
 			
@@ -188,17 +184,17 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		String[] realDepedancesKeys  = form.getRealDependancesKeys();  
 		
 		/**
-		 * R?cup?ration du tableau des anciennes cl?s des activit? depandantes 
+		 * Récupération du tableau des anciennes clés des activité depandantes 
 		 * depuis la session
 		 */
 		String [] oldActivityDependancesKeys = (String [])context.session().getAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
 	
 		/**
-		 * Sauvegarde des d?pendances
+		 * Sauvegarde des dépendances
 		 */
 		try {
-			/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans le form 
-			 * (il a ?t? mis ? jour dans la methode pr?c?dente : setPossibleDependancesOptions */
+			/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans le form 
+			 * (il a été mis à jour dans la methode précédente : setPossibleDependancesOptions */
 			Integer activityId = new Integer(form.getActivityId());
 			ActivityManager.getInstance().saveActivityDependances(activityId,oldActivityDependancesKeys,realDepedancesKeys);
 			
@@ -208,33 +204,20 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
 			context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
 			
-			/* Récupération de l'activité dans la hashmap pour connaitre son nom */
-			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
-			
-			Activity activity = (Activity)activitiesMap.get(new Integer(form.getActivityId()));
-			
-			context.addGlobalMessage("msg.info.activity.dependances.saved",activity.getName());
-			
 			/** Appel de la page de garde **/
-			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
+			context.forwardByName(PresentationConstantes.FORWARD_ACTION);
 		} catch (PersistanceException e) {
 			context.addGlobalError("errors.persistance.global");
 			/** Rappel du formulaire avec le message d'erreur **/
-			forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		} catch (DoublonException e) {
-			// Ne doit pas passer par l?
-			e.printStackTrace();
+			// Ne doit pas passer par là
 		} catch (ForeignKeyException e) {
-			// Ne doit pas passer par l?
-			e.printStackTrace();
-		} finally {
-			context.forward(forward);
+			// Ne doit pas passer par là
+		} catch (Throwable t) {
+			logger.error(t);
+			context.addGlobalError("errors.global");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
 		}
-		
-		
-		
-		
-		
 	}
-
 }

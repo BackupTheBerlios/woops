@@ -1,8 +1,9 @@
-package view.activity;
+package view.activity.performing;
 
 import java.util.Arrays;
 
-import view.WoopsListDataModel;
+import view.activity.ActivityItem;
+import view.common.WoopsListDataModel;
 import business.format.ColumnComparator;
 
 import com.cc.framework.common.DisplayObject;
@@ -27,7 +28,7 @@ public class ListActivitiesModel extends WoopsListDataModel {
 	}
 	
 	/**
-	 * @see view.WoopsListDataModel#getUniqueKey(int)
+	 * @see view.common.WoopsListDataModel#getUniqueKey(int)
 	 */
 	public String getUniqueKey(int index) {
 		return ((ActivityItem)data[index]).getId();

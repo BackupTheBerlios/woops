@@ -1,13 +1,10 @@
-package view.activity.manageActivity;
+package view.activity.manage;
 
 import java.util.Date;
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForward;
-
 import view.PresentationConstantes;
-import view.WoopsCCAction;
+import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
@@ -25,15 +22,10 @@ import com.cc.framework.adapter.struts.FormActionContext;
  */
 public class ManageActivityCreationAction extends WoopsCCAction {
 	
-	private static Logger logger = Logger.getLogger(ManageActivityCreationAction.class); 
-	ActionForward forward = null;
-	
-	
 	/**
 	 * Constructeur vide
 	 *
 	 */
-	
 	public ManageActivityCreationAction() {
 		super();
 	}
@@ -89,7 +81,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	    if (!context.hasErrors()) {
 			try {
 				
-				//R?cup?ration de l'identifiant du participant connect?
+				//Récupération de l'identifiant du participant connect?
 		    	User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 				
 				String mode = context.request().getParameter(PresentationConstantes.PARAM_ACTION_SUBMIT);
@@ -97,7 +89,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				if (mode.equals(PresentationConstantes.INSERT_MODE)) {
 					Activity activity = new Activity();
 					
-					// R?cup?ration des champs que l'utilisateur a pu entrer
+					// Récup?ration des champs que l'utilisateur a pu entrer
 					activity.setDetails(form.getDetails());
 					activity.setName(form.getName());
 					
@@ -130,22 +122,17 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					context.addGlobalMessage("msg.info.activity.updated", activity.getName());
 				}
 					
-				forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
+				context.forwardByName(PresentationConstantes.FORWARD_ACTION);
 			} catch (PersistanceException pe) {
-				forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
-                pe.printStackTrace();
+				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
                 context.addGlobalError("errors.persistance.global");
 			} catch (DoublonException de) {
-				forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
+				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
                 context.addGlobalError("errors.persistance.doublon");
 			}	
-
         } else {
-        	forward = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
+        	context.forwardByName(PresentationConstantes.FORWARD_ERROR);
         }
-			
-		context.forward(forward);
-
 	}
 	
 	
@@ -158,8 +145,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	 */
 	
 	public void manageDependances_onClick(FormActionContext context) {
-		forward = context.mapping().findForward(PresentationConstantes.FORWARD_DEPENDANCES);
-		context.forward(forward);
+		context.forwardByName(PresentationConstantes.FORWARD_DEPENDANCES);
 	}
 	
 	/**
@@ -171,7 +157,6 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	 */
 	
 	public void manageDependancesTypes_onClick(FormActionContext context) {
-		forward = context.mapping().findForward(PresentationConstantes.FORWARD_DEPENDANCES_TYPES);
-		context.forward(forward);
+		context.forwardByName(PresentationConstantes.FORWARD_DEPENDANCES_TYPES);
 	}
 }

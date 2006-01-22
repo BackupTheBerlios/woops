@@ -1,15 +1,11 @@
-package view.activity.manageActivity;
+package view.activity.manage;
 
 import com.cc.framework.adapter.struts.FWActionForm;
 import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class ManageActivityDependancesForm extends FWActionForm {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8897437228950126830L; /** Generated Serial ID */
 
 	/* Represente l'id de l'activité dont on veut gérer ses dépendances */
 	private String activityId; 

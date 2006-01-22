@@ -1,4 +1,4 @@
-package view.user;
+package view.logon;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,8 +10,7 @@ import org.apache.struts.action.ActionMessage;
 import business.format.Controleur;
 
 public class LoginForm extends ActionForm {
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1355801189335397196L;
 	private String password;
 	private String login;
 	

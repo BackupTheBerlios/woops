@@ -1,10 +1,11 @@
-package business.activity;
+package business.activity.sequence;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import business.activity.Activity;
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 

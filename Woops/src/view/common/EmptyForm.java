@@ -1,4 +1,4 @@
-package view;
+package view.common;
 
 import com.cc.framework.adapter.struts.FWActionForm;
 

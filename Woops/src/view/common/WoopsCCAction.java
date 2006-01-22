@@ -1,7 +1,9 @@
-package view;
+package view.common;
 
 
 import javax.servlet.http.HttpSession;
+
+import view.PresentationConstantes;
 
 import business.hibernate.PersistentObject;
 

@@ -1,19 +1,18 @@
-package view.activity.listActivities;
+package view.activity.performing;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
-import view.WoopsCCAction;
 import view.activity.ActivityItem;
-import view.activity.ListActivitiesModel;
+import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
@@ -32,7 +31,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ListActivitiesAction.class);    
 
 	/**
-	 * Constructeur par d?faut
+	 * Constructeur par défaut
 	 */
 	public ListActivitiesAction() {
 		super();
@@ -57,9 +56,9 @@ public class ListActivitiesAction extends WoopsCCAction {
 	}
 	
 	/**
-	 * Cette m?thode constitue la liste ? partir de la BD
+	 * Cette méthode constitue la liste à partir de la BD
 	 * @param contexte	contexte d'execution de la servlet
-	 * @throws Exception	indique q'une erreur s'est produite pendant du traitement
+	 * @throws Exception	indique qu'une erreur s'est produite pendant le traitement
 	 */
 	private void loadList(ActionContext context) throws Exception {
 		logger.debug("ListActivitiesAction");
@@ -74,17 +73,16 @@ public class ListActivitiesAction extends WoopsCCAction {
 			context.session().setAttribute(context.mapping().getAttribute(), new ListActivitiesForm());
 		}
 		
-		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
+		// Récupération du form bean nécessaire pour fournir les informations à la JSP
     	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
 
-    	// R?cup?ration de l'identifiant du participant connect?
+    	// Récupération de l'identifiant du participant connecté
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
     	
-    	// R?cup?ration de la liste des activit?s
-    	dbData = ActivityManager.getInstance().getActivitiesByUser(sessionUser.getId());  	    	
-    	
-    	
-    	// Constitue une liste d'ActivityItems ? partir des donn?es stock?es en BD  
+    	// Récupération de la liste des activités
+    	dbData = ActivityManager.getInstance().getActivitiesByUser(sessionUser.getId());  	
+
+    	// Constitue une liste d'ActivityItems à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();
     	listActivitiesItems = new ArrayList();
     	HashMap activitiesMap = new HashMap();
@@ -103,8 +101,8 @@ public class ListActivitiesAction extends WoopsCCAction {
 				activityItem.setAction(PresentationConstantes.ACTIVITY_FINISH);
 			}
 			listActivitiesItems.add(activityItem);
-			
-			// construction de la hash map stockant la liste des activit?s
+    	
+			// Construction de la hash map stockant la liste des activit?s
 			activitiesMap.put(activity.getId(),activity);
     	}
 
@@ -112,11 +110,11 @@ public class ListActivitiesAction extends WoopsCCAction {
 		DisplayObject[] result = new ActivityItem[listActivitiesItems.size()];
 		listActivitiesItems.toArray(result);
 		
-		// Cr?ation de la liste initialis?e avec les valeurs ? afficher
+		// Création de la liste initialisée avec les valeurs à afficher
 		ListActivitiesModel model = new ListActivitiesModel(result);
 		listActivitiesForm.setDataModel(model);
-		
-		// Sauvegarde d'une HashMap stockant la liste des activit?s de l'utilisateur
+	
+		// Sauvegarde d'une HashMap stockant la liste des activités du participant
 		context.session().setAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP,activitiesMap);
 	}
 
@@ -128,7 +126,7 @@ public class ListActivitiesAction extends WoopsCCAction {
     // ------------------------------------------------
 
 	/**
-	 * Cette m?thode est appel?e lorsque l'utilisateur demande un rafra?chissement de la liste 
+	 * Cette méthode est appelée lorsque l'utilisateur demande un rafraîchissement de la liste 
 	 * @param	context		contexte d'execution de la servlet
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
@@ -143,28 +141,28 @@ public class ListActivitiesAction extends WoopsCCAction {
 
 	
 	/**
-	 * Cette m?thode est appel?e si le participant clique sur l'icone de tri d'une colonne
+	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
 	 * @param context	contexte d'execution de la servlet
-	 * @param column	colonne ? trier
+	 * @param column	colonne à trier
 	 * @param direction	direction (ASC, DESC)
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
 	public void listActivities_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
-		// R?cup?ration de la liste dans le contexte
+		// Récupération de la liste dans le contexte
 		ListActivitiesModel model = (ListActivitiesModel) context.control().getDataModel();
 		
-		// Effectue le tri sur la colonne demand?e et enregistre les modification au niveau du contexte
+		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
 		model.sortByColumn(column, direction);		
 		context.control().execute(context, column,  direction);
 	}
 	
 	
 	/**
-	 * Cette est appel?e si le participant souhaite commencer ou terminer une activit?
+	 * Cette est appelée si le participant souhaite commencer ou terminer une activité
 	 * @param context	contexte d'execution de la servlet
-	 * @param key	identifiant d'une activit?
-	 * @throws IOException	indique qu'une erreur au niveau des entr?es/sorties s'est produite 
-	 * @throws ServletException	indique que le traitement demand? a g?n?r? une exception
+	 * @param key	identifiant d'une activité
+	 * @throws IOException	indique qu'une erreur au niveau des entrées/sorties s'est produite 
+	 * @throws ServletException	indique que le traitement demandé a généré une exception
 	 */
 	public void listActivities_onChange(ControlActionContext context, String key) throws IOException, ServletException {
 		Integer activityId = new Integer(key);
@@ -172,20 +170,20 @@ public class ListActivitiesAction extends WoopsCCAction {
 		try {
 			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
 			
-			/* Test si le changement peut ?tre effectu? : ce traitement implique la v?rification 
-			des d?pendances relatives ? l'activit? s?lectionn?e */
+			/* Test si le changement peut être effectué : ce traitement implique la vérification 
+			des dépendances relatives à l'activité sélectionnée */
 			if (!activity.process()) {
-				/* Informe l'utilisateur : le message affich? au participant est fonction de l'action
-				qu'il avait demand?e */
+				/* Informe l'utilisateur : le message affiché au participant est fonction de l'action
+				qu'il avait demandée */
 				if (activity.getState() instanceof CreatedActivityState) {
 					context.addGlobalError("msg.error.activity.change.state.created", activity.getName());
 				} else if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalError("msg.error.activity.change.state.inprogress", activity.getName());
 				}
 			} else {
-				// Met ? jour en BD l'?tat de l'activit? 
+				// Met à jour en BD l'état de l'activité 
 				ActivityManager.getInstance().update(activity);
-				// Informe le participant que sa demande a ?t? prise en compte
+				// Informe le participant que sa demande a été prise en compte
 				if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());
 				} else if (activity.getState() instanceof FinishedActivityState) {
@@ -199,9 +197,8 @@ public class ListActivitiesAction extends WoopsCCAction {
 			logger.error(t);
 			context.addGlobalError("errors.global");
 		}
-		context.forwardToInput();
+		context.forwardByName(PresentationConstantes.FORWARD_ACTION);
 	}
-	
 	
 	
 	
@@ -223,4 +220,6 @@ public class ListActivitiesAction extends WoopsCCAction {
 	}
 	
 }
+
+
 

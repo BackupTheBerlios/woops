@@ -1,4 +1,4 @@
-package view.activity.manageActivity;
+package view.activity.manage;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,17 +15,12 @@ import com.cc.framework.adapter.struts.FWActionForm;
  */
 
 public class ManageActivityCreationForm extends FWActionForm {
+	private static final long serialVersionUID = 1785279013061841305L; /** Generated Serial ID */
 	
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private	String	activityId; 	// identifiant de l'activit? 
-	private String 	name; 			// nom de l'activit? 
-	private	String	details; 		// description de l'activit? 
-	private String	actionSubmit;	// mode du formulaire ( insert ou update )	
+	private	String	activityId; 	/** identifiant de l'activité */
+	private String 	name; 			/** nom de l'activité */
+	private	String	details; 		/** description de l'activité */
+	private String	actionSubmit;	/** mode du formulaire ( insert ou update )	*/
 	
 	public ManageActivityCreationForm() {
 		super();

@@ -1,4 +1,4 @@
-package business.activity;
+package business.activity.sequencetype;
 
 import java.util.List;
 

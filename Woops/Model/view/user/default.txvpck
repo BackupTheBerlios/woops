@@ -2,16 +2,8 @@
 
 
 <nodeSet  version="1.1">
-	<view uin="V574ng9eggfjk4otdjs8z">
+	<view uin="V574ng9eiriveoh-jf8kb6">
 		<property name="$defaultDiagram" value="true"/>
 		<property name="$metaclass" value="Package Diagram"/>
-		<reference referencedUin="jdt:e_class:src:view.user.LoginAction">
-			<property name="bounds" value="5,145,92,80"/>
-			<property name="location_set_by_user" value="true"/>
-		</reference>
-		<reference referencedUin="jdt:e_class:src:view.user.LoginForm">
-			<property name="bounds" value="5,5,115,109"/>
-			<property name="location_set_by_user" value="true"/>
-		</reference>
 	</view>
 </nodeSet>

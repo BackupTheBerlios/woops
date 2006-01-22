@@ -11,9 +11,10 @@ import javax.servlet.ServletException;
 import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
-import view.WoopsCCAction;
 import view.activity.ActivityItem;
-import view.activity.ListActivitiesModel;
+import view.activity.performing.ListActivitiesAction;
+import view.activity.performing.ListActivitiesModel;
+import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;

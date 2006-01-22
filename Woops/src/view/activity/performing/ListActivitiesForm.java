@@ -1,11 +1,11 @@
-package view.activity.listActivities;
+package view.activity.performing;
 
 import com.cc.framework.adapter.struts.FWActionForm;
 import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class ListActivitiesForm extends FWActionForm {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8539904306657854815L; /** Generated Serial ID */
 	
 	/** * Liste de contrôle que l'on souhaite afficher au participant */ 
 	private SimpleListControl listActivities = new SimpleListControl();

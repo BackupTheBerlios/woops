@@ -1,9 +1,11 @@
-package business.activity;
+package business.activity.sequence;
 
+import business.activity.Activity;
+import business.activity.sequencetype.ActivitySequenceType;
 import business.hibernate.HistorizedObject;
 
 public class ActivitySequence extends HistorizedObject {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -2923306167381237289L; /** Generated Serial ID */
 	private Integer id;
 	private Activity successor;
 	private Activity predecessor;

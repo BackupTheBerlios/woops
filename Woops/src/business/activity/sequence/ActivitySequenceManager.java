@@ -1,5 +1,7 @@
-package business.activity;
+package business.activity.sequence;
 
+import business.activity.Activity;
+import business.activity.sequencetype.ActivitySequenceType;
 import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;

@@ -1,11 +1,11 @@
-package view.user;
+package view.logon;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
-import view.WoopsCCAction;
+import view.common.WoopsCCAction;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;

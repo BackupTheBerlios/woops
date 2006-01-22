@@ -1,4 +1,4 @@
-package view.activity.manageActivity;
+package view.activity.manage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,15 +12,14 @@ import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
-import view.WoopsCCAction;
 import view.activity.ActivitySequenceItem;
-import view.activity.ListActiviySequencesModel;
+import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
-import business.activity.ActivitySequence;
-import business.activity.ActivitySequenceManager;
-import business.activity.ActivitySequenceType;
-import business.activity.ActivitySequenceTypeManager;
+import business.activity.sequence.ActivitySequence;
+import business.activity.sequence.ActivitySequenceManager;
+import business.activity.sequencetype.ActivitySequenceType;
+import business.activity.sequencetype.ActivitySequenceTypeManager;
 import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;
@@ -108,7 +107,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 	
 		/* Sauvegarde de la simplListControl dans la session pour que la page jsp y accede*/
 		SimpleListControl list = new SimpleListControl();
-		list.setDataModel(new ListActiviySequencesModel(data));
+		list.setDataModel(new ManageDependancesTypesModel(data));
 		context.session().setAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST,list);
 		
 		/* Sauvegarde de la liste d'ActivitySequence récupérée avec le manager */
@@ -126,7 +125,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		SimpleListControl dependancesListSlc = (SimpleListControl)context.session().getAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST);
 		Collection dependancesListMgr = (Collection)context.session().getAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST_MNGR);
 		
-		ListActiviySequencesModel listDataModel = (ListActiviySequencesModel)dependancesListSlc.getDataModel();
+		ManageDependancesTypesModel listDataModel = (ManageDependancesTypesModel)dependancesListSlc.getDataModel();
 		
 		ActivitySequenceManager actSeqMngr = ActivitySequenceManager.getInstance();
 		ActivitySequenceTypeManager actSeqTypeMngr = ActivitySequenceTypeManager.getInstance();

@@ -1,4 +1,4 @@
-package view;
+package view.common;
 
 import com.cc.framework.common.DisplayObject;
 import com.cc.framework.ui.model.ListDataModel;
