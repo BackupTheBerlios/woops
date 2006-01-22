@@ -29,15 +29,29 @@
 			not-null="false"
 			type="string"
 		 />	
+		 
+		 <property
+			column="startDate"
+			name="startDate"
+			not-null="false"
+			type="date"
+		 />
+		 
+		 <property
+			column="endDate"
+			name="endDate"
+			not-null="false"
+			type="date"
+		 />	
 		
-		<property
+		 <property
 			column="user"
 			name="userId"
 			not-null="false"
 			type="integer"
 		 />
 		 
-		<many-to-one
+		 <many-to-one
 			class="business.activity.state.IActivityState"
 			name="state"
 			not-null="true"

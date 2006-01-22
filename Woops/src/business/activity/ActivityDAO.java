@@ -9,42 +9,41 @@ import business.hibernate.exception.PersistanceException;
 public class ActivityDAO extends PersistentObjectDAO {
 	/**
 	 * 
-	 * @param activityId : l'id de l'activit? que l'on veut r?cup?rer
-	 * @return l'activit?
+	 * @param activityId : l'id de l'activité que l'on veut récupérer
+	 * @return l'activité
 	 * @throws PersistanceException
 	 */
 	public Activity getActivityById(Integer activityId) throws PersistanceException {
 		List res = executeQuery("FROM Activity as act WHERE act.id = "+activityId);
 		return (Activity)res.get(0);
-		//return (Activity)get(Activity.class,activityId);
 	}
 	
 	
 	/**
-	 * R?cup?ration des activit?s pour lesquelles le participant a la responsabilit?
+	 * Récupération des activités pour lesquelles le participant a la responsabilité
 	 * @param userId : identifiant du participant
-	 * @return : Liste des activit?s du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 * @return : Liste des activités du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la récupération des données
 	 */
 	public Collection getActivitiesByUserWithStates(Integer userId, String[] states) throws PersistanceException {
-		// Constitution de la requ?te en tenant compte du participant pass? en param?tre 
+		// Constitution de la requête en tenant compte du participant passé en paramètre 
 		StringBuffer query = new StringBuffer();
 		query.append("FROM Activity as act WHERE act.userId = " + userId + " AND ");
 		
-		// S?lection des ?tats ? prendre en compte
+		// Sélection des états à prendre en compte
 		for(int i = 0; i < states.length; i++) {
 			query.append("act.state.name='"+ states[i] +"'");
 			if (i != states.length-1) query.append(" OR ");
 		}
 		
-		// R?cup?ration des donn?es
+		// Récupération des données
 		List listActivities = executeQuery(query.toString());
 		return listActivities;
 	}
 	
 	/**
-	 * @param activityId : l'activit? dont on veut connaitre des pr?d?cesseurs possibles
-	 * @return la liste des activit?s dont peut d?pendre l'activit? pass?e en parametre
+	 * @param activityId : l'activité dont on veut connaitre des prédécesseurs possibles
+	 * @return la liste des activités dont peut dépendre l'activité passée en parametre
 	 * @throws PersistanceException
 	 */
 	public Collection getPossiblePredecessors(Integer activityId) 
@@ -57,8 +56,8 @@ public class ActivityDAO extends PersistentObjectDAO {
 	
 	
 	/**
-	 * @param activityId : l'activit? dont on veut connaitre ses d?pendances
-	 * @return la liste des s?quence d'activit? dont l'activit? pass?e en parametre et le successeur
+	 * @param activityId : l'activité dont on veut connaitre ses dépendances
+	 * @return la liste des séquence d'activité dont l'activité passée en parametre et le successeur
 	 * @throws PersistanceException
 	 */
 	public Collection getActivitySequences(Integer successorId) 

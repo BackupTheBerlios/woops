@@ -1,22 +1,25 @@
 package business.activity;
 
 import java.util.Collection;
+import java.util.Date;
 
 import business.activity.state.IActivityState;
 import business.hibernate.HistorizedObject;
 
 
 public class Activity extends HistorizedObject{	
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5271834569122025630L; /** Generated Serial ID */
 	private	Integer			id; /** identifiant de l'activité */
 	private String 			name; /** nom de l'activité */
 	private	String			details; /** description de l'activité */
+	private Date			startDate; /** date à laquelle le participant à commencer la réalisation de l'activité */
+	private Date			endDate; /** date à laquelle le participant à terminer la réalisation de l'activité */
 	private Integer 		userId; /** Id du participant responsable de la réalisation de l'activité */
 	private IActivityState	state; /** Etat actuel de l'activité
 	
 	/**
 	 * Liste des activités dont dépend l'activité
-	 * @associates business.activity.ActivitySequence
+	 * @associates business.activity.sequence.ActivitySequence
 	 * @clientCardinality 1
 	 * @clientRole listActivitiesSequences
 	 * @directed directed
@@ -32,7 +35,8 @@ public class Activity extends HistorizedObject{
 		this.id = null;
 		this.name = null;
 		this.details = null;
-		//this.listActivitiesSequences = null;
+		this.startDate = null;
+		this.endDate = null;
 		this.userId = null;
 		this.state = null;
 	}
@@ -134,5 +138,37 @@ public class Activity extends HistorizedObject{
 	 */
 	public boolean process() {
 		return state.process(this);
+	}
+
+	/**
+	 * Modification de la date à laquelle le participant a commencé l'activité
+	 * @param details date de commencemet de l'activité
+	 */
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	
+	/**
+	 * Récupération de la date à laquelle le participant a commencé l'activité
+	 * @return date de commencemet de l'activité
+	 */
+	public Date getStartDate() {
+		return startDate;
+	}
+	
+	/**
+	 * Modification de la date à laquelle le participant a terminé l'activité
+	 * @param startDate date de fin de l'activité
+	 */
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	
+	/**
+	 * Récupération de la date à laquelle le participant a terminé l'activité
+	 * @return date de fin de l'activité
+	 */
+	public Date getEndDate() {
+		return endDate;
 	}
 }
