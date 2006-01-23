@@ -4,7 +4,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
 
 <hibernate-mapping package="business.activity.state">
-	<class name="IActivityState" table="ActivityState">
+	<class name="business.activity.state.IActivityState" table="ActivityState">
 		
 
 		

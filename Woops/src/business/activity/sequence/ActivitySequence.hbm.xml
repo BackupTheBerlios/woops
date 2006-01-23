@@ -4,7 +4,7 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
 
 <hibernate-mapping>
-	<class name="business.activity.ActivitySequence" table="ActivitySequence">
+	<class name="business.activity.sequence.ActivitySequence" table="ActivitySequence">
 		<!-- identifiant d'une occurrence dans la table -->
 		<id
 			column="id"
@@ -35,7 +35,7 @@
 		
 		<!--  -->
 		<many-to-one
-			class="business.activity.ActivitySequenceType"
+			class="business.activity.sequencetype.ActivitySequenceType"
 			name="linkType"
 			not-null="true"
 			>

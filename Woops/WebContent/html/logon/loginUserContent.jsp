@@ -1,7 +1,6 @@
 <%@ taglib uri="/struts-html" prefix="html" %>
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 
-
 <html:form action="loginUser.do" >
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
 

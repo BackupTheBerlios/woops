@@ -16,6 +16,7 @@
 		<nature>com.sysdeo.eclipse.tomcat.tomcatnature</nature>
 		<nature>com.tssap.selena.model.modeling_nature</nature>
 		<nature>com.borland.selena.uml14.uml14_nature</nature>
+		<nature>com.tssap.selena.cmf.TemplateNature</nature>
 	</natures>
 	<linkedResources>
 		<link>
