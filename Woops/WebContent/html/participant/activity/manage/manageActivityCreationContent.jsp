@@ -10,13 +10,13 @@
 
 <html:form action="manageActivityCreation.do">
 
-	<logic:equal name="manageActivityCreationForm" property="actionSubmit" value="insert_mode">
+	<logic:equal name="manageActivityCreationForm" property="mode" value="insert_mode">
 		<bean:define id="button" value="form.button.manageActivityCreation.insert"/>
 		<bean:define id="caption" value="form.title.manageActivityCreation.insert"/>
 		<bean:define id="disable_buttons" value="true"/>
 	</logic:equal>
 	
-	<logic:equal name="manageActivityCreationForm" property="actionSubmit" value="update_mode">
+	<logic:equal name="manageActivityCreationForm" property="mode" value="update_mode">
 		<bean:define id="button" value="form.button.manageActivityCreation.update"/>
 		<bean:define id="caption" value="form.title.manageActivityCreation.update"/>
 		<bean:define id="disable_buttons" value="false"/>
@@ -49,21 +49,19 @@
             
             
         <forms:buttonsection>
-			<forms:button
-				name="btnSave"
-				text="${pageScope.button}"/>
+        
+            <forms:button
+				name="btnPrevious"
+				text="previous..."/>
+				
+        	<forms:button
+				name="btnNext"
+				text="next..."/>
 				
 			<forms:button
-    			name="btnManageDependances"
-		    	text="form.button.manageActivityCreation.manageDependances"
-		    	disabled="${pageScope.disable_buttons}"
-		    	/>
-		    
-		    <forms:button
-		    	name="btnManageDependancesTypes"
-		    	text="form.button.manageActivityCreation.manageTypes"
-		    	disabled="${pageScope.disable_buttons}"
-		    	/>
+				name="btnFinish"
+				text="finish"/>
+ 
 		</forms:buttonsection>
         
     </forms:form>
@@ -71,6 +69,6 @@
     
     
     <html:hidden property="activityId"/>
-    <html:hidden property="actionSubmit"/>
+    <html:hidden property="mode"/>
     
 </html:form>

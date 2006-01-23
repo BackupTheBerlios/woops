@@ -32,9 +32,19 @@
 		</forms:swapselect>
         
         <forms:buttonsection>
+        
+            <forms:button
+				name="btnPrevious"
+				text="previous..."/>
+				
+        	<forms:button
+				name="btnNext"
+				text="next..."/>
+				
 			<forms:button
-				name="btnSave"
-				text="form.button.manageActivityDependances.submit"/>
+				name="btnFinish"
+				text="finish"/>
+		    
 		</forms:buttonsection>
         
         <html:hidden property="activityId"/>

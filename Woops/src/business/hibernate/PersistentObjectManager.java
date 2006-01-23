@@ -1,5 +1,7 @@
 package business.hibernate;
 
+import java.io.Serializable;
+
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import business.hibernate.exception.DoublonException;
@@ -41,6 +43,18 @@ public class PersistentObjectManager {
     
     public void insert(PersistentObject objet) throws PersistanceException,DoublonException {
         dao.insert(objet);
+    }
+    
+    /**
+     * Methode ajoutée par simon et ben, le 23/01/06
+     * 
+     * @param objet
+     * @return
+     * @throws PersistanceException
+     * @throws DoublonException
+     */
+    public Serializable insertWithGetId(PersistentObject objet) throws PersistanceException,DoublonException {
+        return dao.insertWithGetId(objet);
     }
 
     public void insert(PersistentObject objet, Session session) throws HibernateException  {

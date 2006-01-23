@@ -85,7 +85,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		ManageActivityDependancesForm madForm = (ManageActivityDependancesForm) context.form();
 		
 		/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans la requete*/
-		Integer activityId = new Integer(context.request().getParameter(PresentationConstantes.PARAM_ACTIVITY_ID));
+		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
 		/* Sauvegarde dans le form */
 		madForm.setActivityId(activityId.toString());
@@ -173,12 +173,9 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	}
 	
 	/**
-	 * This Method is called if the Save-Button on the
-	 * HTML-Page is pressed.
-	 * 
 	 * @param		ctx		FormActionContext
 	 */
-	public void save_onClick(FormActionContext context) {
+	public void saveDependances(FormActionContext context) {
 
 		ManageActivityDependancesForm form = (ManageActivityDependancesForm) context.form();
 		String[] realDepedancesKeys  = form.getRealDependancesKeys();  
@@ -204,8 +201,10 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
 			context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
 			
-			/** Appel de la page de garde **/
-			context.forwardByName(PresentationConstantes.FORWARD_ACTION);
+			//Répercution de l'attribut
+			context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
+			
+			
 		} catch (PersistanceException e) {
 			context.addGlobalError("errors.persistance.global");
 			/** Rappel du formulaire avec le message d'erreur **/
@@ -219,5 +218,51 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			context.addGlobalError("errors.global");
 			context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
 		}
+	}
+	
+	/**
+	 * 
+	 * @param		ctx		FormActionContext
+	 * 
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton finish (retour à listActivities)
+	 */
+	
+	public void finish_onClick(FormActionContext context) {
+		
+		saveDependances(context);
+		context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+	}
+	
+	
+	/**
+	 * 
+	 * @param		ctx		FormActionContext
+	 * 
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton next (gestion
+	 * des types des dépendances de l'activité)
+	 */
+	
+	public void next_onClick(FormActionContext context) {
+		
+		saveDependances(context);
+		context.forwardByName(PresentationConstantes.FORWARD_NEXT);
+	}
+	
+	/**
+	 * 
+	 * @param		ctx		FormActionContext
+	 * 
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton previous (manageActivityCreation)
+	 */
+	
+	public void previous_onClick(FormActionContext context) {
+		//Répercution de l'attribut
+		ManageActivityDependancesForm form = (ManageActivityDependancesForm) context.form();
+		Integer activityId = new Integer(form.getActivityId());
+		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
+		
+		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
+		
+		context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
 	}
 }

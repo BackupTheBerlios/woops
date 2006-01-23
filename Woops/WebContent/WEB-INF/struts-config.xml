@@ -66,7 +66,9 @@
          >
          	<forward name="success" path="/html/participant/activity/manage/manageActivityDependances.jsp" />
          	<forward name="error" path="/html/participant/activity/manage/manageActivityDependances.jsp" />
-         	<forward name="action" path="/listActivities.do"/>
+         	<forward name="finish" path="/listActivities.do"/>
+        	<forward name="next" path="/manageDependancesTypes.do"/>
+        	<forward name="previous" path="/manageActivityCreation.do"/>
       	</action>
 
 
@@ -81,7 +83,8 @@
          >
          	<forward name="success" path="/html/participant/activity/manage/manageDependancesTypes.jsp" />
          	<forward name="error" path="/html/participant/activity/manage/manageDependancesTypes.jsp" />
-      		<forward name="action" path="/listActivities.do"/>
+      		<forward name="finish" path="/listActivities.do"/>
+        	<forward name="previous" path="/manageActivityDependances.do"/>
       	</action>
 
 
@@ -93,9 +96,9 @@
         scope="request">
         <forward name="success" path="/html/participant/activity/manage/manageActivityCreation.jsp" />
         <forward name="error" path="/html/participant/activity/manage/manageActivityCreation.jsp" />
-        <forward name="action" path="/listActivities.do"/>
-        <forward name="dependances" path="/manageActivityDependances.do"/>
-        <forward name="dependancesTypes" path="/manageDependancesTypes.do"/>
+        <forward name="finish" path="/listActivities.do"/>
+        <forward name="next" path="/manageActivityDependances.do"/>
+        <forward name="previous" path="/listActivities.do"/>
      </action>
 
 <!-- ================= Login form ================ -->  

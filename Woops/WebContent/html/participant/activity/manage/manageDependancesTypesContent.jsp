@@ -25,12 +25,22 @@
                
     </ctrl:list>
         
-   	<br>
-        
-	<ctrl:button
-		name="btnSave"
-		text="list.button.manageDependancesTypes.submit"/>
-
+   	<forms:form type="edit" noframe="true" formid="frmDependancesTypes">
+	
+		<forms:buttonsection>
+	        
+		    <forms:button
+				name="btnPrevious"
+				text="previous..."/>
+				
+			<forms:button
+				name="btnFinish"
+				text="finish"/>
+		    
+		</forms:buttonsection>
+	
+	</forms:form>
+	
 	<html:hidden property="activityId"/>
    
 </html:form>

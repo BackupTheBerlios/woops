@@ -79,8 +79,8 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		Collection dependancesListMgr;
 		
 		
-		/* Recupération de l'id de l'activité dont on veut gérer les types des dépendances */
-		Integer activityId = new Integer(context.request().getParameter(PresentationConstantes.PARAM_ACTIVITY_ID));
+		/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans la requete*/
+		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
 		/* Récupération des la liste des dépendances de cette activité en BD */
 		dependancesListMgr = ActivityManager.getInstance().getActivitySequences(activityId);
@@ -115,12 +115,13 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 	}
 	
 	/**
-	 * This Method is called if the Save-Button on the
-	 * HTML-Page is pressed.
 	 * 
-	 * @param		context		FormActionContext
+	 * @param		ctx		FormActionContext
+	 * 
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton finish (retour à listActivities)
 	 */
-	public void save_onClick(FormActionContext context) {
+	
+	public void finish_onClick(FormActionContext context) {
 		
 		SimpleListControl dependancesListSlc = (SimpleListControl)context.session().getAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST);
 		Collection dependancesListMgr = (Collection)context.session().getAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST_MNGR);
@@ -162,6 +163,22 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
 	
 		context.forward(forward);
+	}
+	
+	/**
+	 * 
+	 * @param		ctx		FormActionContext
+	 * 
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton previous (manageActivityCreation)
+	 */
+	
+	public void previous_onClick(FormActionContext context) {
+		//Répercution de l'attribut
+		ManageDependancesTypesForm form = (ManageDependancesTypesForm) context.form();
+		Integer activityId = new Integer(form.getActivityId());
+		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
+		
+		context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
 	}
 
 }

@@ -20,7 +20,7 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private	String	activityId; 	/** identifiant de l'activité */
 	private String 	name; 			/** nom de l'activité */
 	private	String	details; 		/** description de l'activité */
-	private String	actionSubmit;	/** mode du formulaire ( insert ou update )	*/
+	private String	mode;	/** mode du formulaire ( insert ou update )	*/
 	
 	public ManageActivityCreationForm() {
 		super();
@@ -49,11 +49,14 @@ public class ManageActivityCreationForm extends FWActionForm {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getActionSubmit() {
-		return actionSubmit;
+	
+	public String getMode() {
+		return mode;
 	}
-	public void setActionSubmit(String actionSubmit) {
-		this.actionSubmit = actionSubmit;
+
+
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 
 

@@ -13,12 +13,14 @@
         <forms:text 
         	label="form.field.login"
         	property="login"
-        	required="true"/>
+        	required="true"
+        	value="bernard"/>
         
         <forms:password    	
         	label="form.field.password"	
         	property="password"   	
-        	required="true"/>
+        	required="true"
+        	value="bernard"/>
 
        	<forms:buttonsection default="btnLogin">  
         	<forms:button

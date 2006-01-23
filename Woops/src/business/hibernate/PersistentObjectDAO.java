@@ -56,6 +56,39 @@ public class PersistentObjectDAO  {
 			}
 		}
 	}
+	
+	public Serializable insertWithGetId(PersistentObject objet) throws PersistanceException,DoublonException {
+		
+        Session session = null ;
+        Transaction transaction = null;
+        Serializable id = null;
+        try {
+            session = HibernateSessionFactory.currentSession();
+            transaction = session.beginTransaction();
+
+            id = session.save(objet);
+            
+            transaction.commit();
+			
+		} catch (ConstraintViolationException cve) {
+            rollback(transaction);
+            if (cve.getErrorCode()==1)
+				throw new DoublonException(cve.getMessage());
+			throw new PersistanceException(cve.getMessage(),cve);
+		} catch (HibernateException he) {
+		    rollback(transaction);
+            throw new PersistanceException(he.getMessage(),he);
+		} finally {
+			try {
+				if (session!=null && session.isOpen()) 
+					HibernateSessionFactory.closeSession();				
+			} catch (HibernateException he) {
+				throw new PersistanceException(he.getMessage(),he);
+			}
+		}
+		
+		return id;
+	}
 
     public void insert(PersistentObject objet, Session session) throws HibernateException {
         session.save(objet);
