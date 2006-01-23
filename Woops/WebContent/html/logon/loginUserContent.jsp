@@ -20,7 +20,7 @@
         	property="password"   	
         	required="true"/>
 
-       	<forms:buttonsection>  
+       	<forms:buttonsection default="btnLogin">  
         	<forms:button
             	name="btnLogin"
             	default="true"
