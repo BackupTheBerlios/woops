@@ -10,12 +10,3 @@ INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'Analyser
 INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'Programmer la solution', 'Impl?menter les cas d''utilisation', 1, 'created' );
 INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'Programmer les tests d?veloppeur', '', 1, 'created' );
 INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 2, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );
-INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'D?rouler l''it?ration', '', 1, 'created' );

@@ -7,6 +7,9 @@
 	
 	
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
+	<forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
+	
+	<br>
 	
     <forms:form type="edit" name="manageActivityDependancesForm" caption="form.title.manageActivityDependances" formid="frmActivityDependances" width="550">
 
@@ -35,16 +38,16 @@
         
             <forms:button
 				name="btnPrevious"
-				text="previous..."/>
+				text="form.button.previous"/>
 				
         	<forms:button
 				name="btnNext"
-				text="next..."/>
+				text="form.button.next"/>
 				
 			<forms:button
 				name="btnFinish"
-				text="finish"/>
-		    
+				text="form.button.finish"/>
+ 
 		</forms:buttonsection>
         
         <html:hidden property="activityId"/>

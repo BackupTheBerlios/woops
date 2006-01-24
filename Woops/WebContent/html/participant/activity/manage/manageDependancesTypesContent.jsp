@@ -8,6 +8,9 @@
 <html:form action="/manageDependancesTypes">
 	
 	<forms:message formid="frmError" caption="title.error" severity="error" width="350"/>
+	<forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
+	
+	<br>
 	
     <ctrl:list
 		name="KEY_DEPENDANCES_LIST"
@@ -31,11 +34,11 @@
 	        
 		    <forms:button
 				name="btnPrevious"
-				text="previous..."/>
+				text="form.button.previous"/>
 				
 			<forms:button
 				name="btnFinish"
-				text="finish"/>
+				text="form.button.finish"/>
 		    
 		</forms:buttonsection>
 	

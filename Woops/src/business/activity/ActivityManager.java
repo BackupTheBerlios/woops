@@ -17,16 +17,16 @@ import business.hibernate.exception.PersistanceException;
 
 public class ActivityManager extends PersistentObjectManager {
 	
-	/** Instance permettant d'assurer la persistance d'une activité */
+	/** Instance permettant d'assurer la persistance d'une activit? */
 	private ActivityDAO activityDAO = new ActivityDAO();
 	
-	/** Instance privée de la classe */
+	/** Instance priv?e de la classe */
 	private static ActivityManager activityManager;
 
 	
 
 	/**
-	 * Implémentation du pattern Singleton : constructeur privé
+	 * Impl?mentation du pattern Singleton : constructeur priv?
 	 */
 	private ActivityManager() {
 	}
@@ -51,10 +51,10 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Récupération des activités pour lesquelles le participant a la responsabilité
+	 * R?cup?ration des activit?s pour lesquelles le participant a la responsabilit?
 	 * @param userId : identifiant du participant
-	 * @return : Liste des activités du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la récupération des données
+	 * @return : Liste des activit?s du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
 	public Collection getActivitiesByUser(Integer userId)
 			throws PersistanceException {
@@ -66,10 +66,10 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Récupération des activités que le participant a terminées
+	 * R?cup?ration des activit?s que le participant a termin?es
 	 * @param userId : identifiant du participant
-	 * @return : historique des activités du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la récupération des données
+	 * @return : historique des activit?s du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
 	public Collection getActivitiesHistoryByUser(Integer userId)
 			throws PersistanceException {
@@ -82,8 +82,8 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	/**
 	 * 
-	 * @param activityId : l'activité dont on veut connaitre des dépendances possibles
-	 * @return la liste des activité dont peut dépendre l'activité passée en parametre
+	 * @param activityId : l'activit? dont on veut connaitre des d?pendances possibles
+	 * @return la liste des activit? dont peut d?pendre l'activit? pass?e en parametre
 	 * @throws PersistanceException
 	 */
 	public Collection getPossibleActivityPredecessors(Integer activityId)
@@ -94,8 +94,8 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	/**
 	 * 
-	 * @param activityId : l'activité dont on veut connaitre ses prédécesseurs
-	 * @return la liste des activité dont depend l'activité passée en parametre
+	 * @param activityId : l'activit? dont on veut connaitre ses pr?d?cesseurs
+	 * @return la liste des activit? dont depend l'activit? pass?e en parametre
 	 * @throws PersistanceException
 	 */
 	public Collection getPredecessors(Integer activityId) 
@@ -115,8 +115,8 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	/**
 	 * 
-	 * @param activityId : l'activité dont on veut connaitre ses dépendances
-	 * @return la liste des séquence d'activité dont l'activité passée en parametre et le successeur
+	 * @param activityId : l'activit? dont on veut connaitre ses d?pendances
+	 * @return la liste des s?quence d'activit? dont l'activit? pass?e en parametre et le successeur
 	 * @throws PersistanceException
 	 */
 	public Collection getActivitySequences(Integer activityId) 
@@ -158,11 +158,17 @@ public class ActivityManager extends PersistentObjectManager {
 		Activity successor= new Activity();
 		successor.setId(activityId);
 		Activity predecessor = new Activity();
+		
+		Iterator dependancesToRemoveIter = dependancesToRemoveList.iterator();
+		while(dependancesToRemoveIter.hasNext())
+		{
+			predecessor.setId(dependancesToRemoveIter.next());
+			activitySequenceManager.removeActivitySequence(predecessor,successor);
+		}
+		
+		/* Par defaut, le type des d?pendances sont finsihToStart */
 		ActivitySequenceType linkType = new ActivitySequenceType();
 		linkType.setId(new Integer(1));
-		/**
-		 * Attention : id du activitySequenceType en DUR 
-		 */
 		
 		Iterator dependancesToAddIter = dependancesToAddList.iterator();
 		while(dependancesToAddIter.hasNext())
@@ -171,12 +177,6 @@ public class ActivityManager extends PersistentObjectManager {
 			activitySequenceManager.addActivitySequence(predecessor,successor,linkType);
 		}
 		
-		Iterator dependancesToRemoveIter = dependancesToRemoveList.iterator();
-		while(dependancesToRemoveIter.hasNext())
-		{
-			predecessor.setId(dependancesToRemoveIter.next());
-			activitySequenceManager.removeActivitySequence(predecessor,successor,linkType);
-		}
 	}
 	
 	public Activity getActivityWithDependances(Integer activityId) throws PersistanceException {
@@ -190,21 +190,21 @@ public class ActivityManager extends PersistentObjectManager {
 	 * @param actSeq
 	 * @param linkType1
 	 * @param linkType2
-	 * @return retourne Vrai si l'état du predecessor est le bon, faux sinon
+	 * @return retourne Vrai si l'?tat du predecessor est le bon, faux sinon
 	 */
 	private boolean verifPredecessorState(ActivitySequence actSeq, String linkType1, String linkType2) {
 		boolean result = true;
 		
 		// Si il n'y a pas de lien Finish To ...
 		if (actSeq.getLinkType().getName().equals(linkType1)) {
-			// Et vérifier si l'activité predecessor est au bon état
+			// Et v?rifier si l'activit? predecessor est au bon ?tat
 			if (!actSeq.getPredecessor().getState().equals(BusinessConstantes.ACTIVITY_STATE_FINISHED))
 				result = false;
 		}
 				
 		// Ou de lien Start To ...
 	    if (actSeq.getLinkType().getName().equals(linkType2)) {
-	    	// Et vérifier si l'activité predecessor est au bon état
+	    	// Et v?rifier si l'activit? predecessor est au bon ?tat
 	    	if ((!actSeq.getPredecessor().getState().equals(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS))&&
 	    	     (!actSeq.getPredecessor().getState().equals(BusinessConstantes.ACTIVITY_STATE_FINISHED)))
 				result = false;
@@ -216,7 +216,7 @@ public class ActivityManager extends PersistentObjectManager {
 	/**
 	 * 
 	 * @param activity
-	 * @return retourne vrai si l'activite peut évoluer d'état, faux sinon
+	 * @return retourne vrai si l'activite peut ?voluer d'?tat, faux sinon
 	 * @throws PersistanceException
 	 */
 	private boolean verifChangeStateActivity(Activity activity) throws PersistanceException {
@@ -224,19 +224,19 @@ public class ActivityManager extends PersistentObjectManager {
 		Iterator iter;
 		String activityState = activity.getState().getName();
 		
-		// Récupération de la liste des ActivitySequence de l'activite
+		// R?cup?ration de la liste des ActivitySequence de l'activite
 		Collection activitySeq = ActivityManager.getInstance().getActivitySequences((Integer) activity.getId());
 		
 		
 		////////////////////////////////////////////////////////////////////////////////////
 		
 		
-		// Si l'activité est Created
+		// Si l'activit? est Created
 		// Et qu'elle veut pouvoir commencer
 		if (activityState.equals(BusinessConstantes.ACTIVITY_STATE_CREATED)) {
 			iter = activitySeq.iterator();
 			
-			// Il faut vérifier dans ses predecesseurs
+			// Il faut v?rifier dans ses predecesseurs
 			while ((iter.hasNext())&&(result==true))
 				result = verifPredecessorState((ActivitySequence)iter.next(),BusinessConstantes.LINK_TYPE_FINISH_TO_START,BusinessConstantes.LINK_TYPE_START_TO_START);
 		}
@@ -245,12 +245,12 @@ public class ActivityManager extends PersistentObjectManager {
 		//////////////////////////////////////////////////////////////////////////////////
 		
 		
-		// Si l'activité est In Progress
+		// Si l'activit? est In Progress
 		// Et qu'elle veut pouvoir finir
 		if (activityState.equals(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS)) {
 			iter = activitySeq.iterator();
 			
-			// Il faut vérifier dans ses predecesseurs
+			// Il faut v?rifier dans ses predecesseurs
 			while ((iter.hasNext())&&(result==true))
 				result = verifPredecessorState((ActivitySequence)iter.next(),BusinessConstantes.LINK_TYPE_FINISH_TO_FINISH,BusinessConstantes.LINK_TYPE_START_TO_FINISH);
 		}
@@ -262,19 +262,19 @@ public class ActivityManager extends PersistentObjectManager {
 	/**
 	 * 
 	 * @param userId
-	 * @return retourne à l'utilisateur, l'ensemble de ses activités dont il peut changer l'état
+	 * @return retourne ? l'utilisateur, l'ensemble de ses activit?s dont il peut changer l'?tat
 	 * @throws PersistanceException 
 	 */
 	public Collection activitiesChangeState(Integer userId) throws PersistanceException {
 		Activity act;
 		
-		// Liste des activites pouvant changer d'état
+		// Liste des activites pouvant changer d'?tat
 		Collection listActivitiesChangeState = new ArrayList();
 		
 		// Recuperation des activites de l'utilisateur
 		Collection listActivities = getActivitiesByUser(userId);
 		
-		// Pour chacune d'entre elles, on vérifie si elle peut changer d'etat
+		// Pour chacune d'entre elles, on v?rifie si elle peut changer d'etat
 		Iterator iter = listActivities.iterator();
 		while (iter.hasNext()) {
 			act = (Activity)iter.next();

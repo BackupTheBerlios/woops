@@ -10,14 +10,14 @@ import business.hibernate.exception.PersistanceException;
 
 public class ActivitySequenceManager extends PersistentObjectManager {
 	
-	/** Instance permettant d'assurer la persistance d'une activité */
+	/** Instance permettant d'assurer la persistance d'une activit? */
 	private ActivitySequenceDAO activitySequenceDAO = new ActivitySequenceDAO();
 	
-	/** Instance privée de la la classe */
+	/** Instance priv?e de la la classe */
 	private static ActivitySequenceManager activitySequenceManager;
 
 	/**
-	 * Implémentation du pattern Singleton : constructeur privé
+	 * Impl?mentation du pattern Singleton : constructeur priv?
 	 */
 	private ActivitySequenceManager() {
 	}
@@ -46,13 +46,12 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 		activitySequenceDAO.insert((PersistentObject)newActivitySequence);
 	}
 	
-	public void removeActivitySequence(Activity predecessor, Activity successor, ActivitySequenceType linkType ) 
+	public void removeActivitySequence(Activity predecessor, Activity successor) 
 	throws PersistanceException, ForeignKeyException {
 		StringBuffer query = new StringBuffer();
 		query.append("FROM ActivitySequence actSeq");
 		query.append(" WHERE actSeq.successor.id = "+successor.getId().toString());
 		query.append(" AND actSeq.predecessor.id = "+predecessor.getId().toString());
-		query.append(" AND actSeq.linkType.id ="+linkType.getId().toString());
 		activitySequenceDAO.delete(query.toString());
 	}
 	

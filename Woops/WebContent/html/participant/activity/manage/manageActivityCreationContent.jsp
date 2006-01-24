@@ -10,33 +10,21 @@
 
 <html:form action="manageActivityCreation.do">
 
-	<logic:equal name="manageActivityCreationForm" property="mode" value="insert_mode">
-		<bean:define id="button" value="form.button.manageActivityCreation.insert"/>
-		<bean:define id="caption" value="form.title.manageActivityCreation.insert"/>
-		<bean:define id="disable_buttons" value="true"/>
-	</logic:equal>
-	
-	<logic:equal name="manageActivityCreationForm" property="mode" value="update_mode">
-		<bean:define id="button" value="form.button.manageActivityCreation.update"/>
-		<bean:define id="caption" value="form.title.manageActivityCreation.update"/>
-		<bean:define id="disable_buttons" value="false"/>
-	</logic:equal>
-
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
+	<forms:message formid="frmWarning" caption="msg.warning" severity="warning" width="350"/>
 	
     <forms:form 
     type="edit" 
     name="manageActivityCreationForm" 
-    caption="${pageScope.caption}" 
+    caption="${manageActivityCreationForm.caption}" 
     formid="frmActivityCreation" 
     width="550">
     
     
 		 <forms:text        
 		 label="form.field.manageActivityCreation.name"         
-		 property="name"    
-		 size="20"  
-		 maxlength="20" 
+		 property="name"     
+		 maxlength="50" 
 		 required="true"  
 		 />
  
@@ -52,15 +40,16 @@
         
             <forms:button
 				name="btnPrevious"
-				text="previous..."/>
+				text="form.button.previous"/>
 				
         	<forms:button
 				name="btnNext"
-				text="next..."/>
+				text="form.button.next"
+				disabled="${manageActivityCreationForm.disableNext}"/>
 				
 			<forms:button
 				name="btnFinish"
-				text="finish"/>
+				text="form.button.finish"/>
  
 		</forms:buttonsection>
         

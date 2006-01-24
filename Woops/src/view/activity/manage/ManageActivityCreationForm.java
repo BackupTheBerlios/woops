@@ -17,10 +17,12 @@ import com.cc.framework.adapter.struts.FWActionForm;
 public class ManageActivityCreationForm extends FWActionForm {
 	private static final long serialVersionUID = 1785279013061841305L; /** Generated Serial ID */
 	
-	private	String	activityId; 	/** identifiant de l'activité */
-	private String 	name; 			/** nom de l'activité */
-	private	String	details; 		/** description de l'activité */
-	private String	mode;	/** mode du formulaire ( insert ou update )	*/
+	private	String	activityId; 	/** identifiant de l'activit? */
+	private String 	name; 			/** nom de l'activit? */
+	private	String	details; 		/** description de l'activit? */
+	private String	mode;			/** mode du formulaire ( insert ou update )	*/
+	private String	caption;		/** libell? de l'entete du formulaire */
+	private String	disableNext;	/** bool?en indiquant si le bouton next est d?sactiv? */
 	
 	public ManageActivityCreationForm() {
 		super();
@@ -57,6 +59,25 @@ public class ManageActivityCreationForm extends FWActionForm {
 
 	public void setMode(String mode) {
 		this.mode = mode;
+	}
+	
+	public String getCaption() {
+		return caption;
+	}
+
+
+	public void setCaption(String caption) {
+		this.caption = caption;
+	}
+
+
+	public String getDisableNext() {
+		return disableNext;
+	}
+
+
+	public void setDisableNext(String disableNext) {
+		this.disableNext = disableNext;
 	}
 
 

@@ -4,9 +4,11 @@ import java.util.Date;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
+import org.apache.struts.action.ActionMessage;
 
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
+import business.BusinessConstantes;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
@@ -56,14 +58,28 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			form.setActivityId(activityId.toString());
 			form.setName(activity.getName());
 			form.setDetails(activity.getDetails());			
+			form.setCaption("form.title.manageActivityCreation.update");
+			
+			if ( activity.getState().equals(BusinessConstantes.ACTIVITY_STATE_CREATED) ) {	
+				form.setDisableNext("false");
+			}
+			else {
+				form.setDisableNext("true");
+				context.addGlobalMessage("msg.info.activity.manageActivityDependances", activity.getName());
+			}
+				
 			
 		}
 		else {
 			mode = PresentationConstantes.INSERT_MODE;
+			
+			form.setCaption("form.title.manageActivityCreation.update");
+			form.setDisableNext("false");
 		}
 		
 		form.setMode(mode);
-		context.forward(context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS)); 
+		context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
+	
 	}
 	
 	
@@ -71,7 +87,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	 * 
 	 * @param		ctx		FormActionContext
 	 * 
-	 * Action a realiser lorsque l'utilisateur clique sur le bouton finish (retour à listActivities)
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton finish (retour ? listActivities)
 	 */
 	
 	public void finish_onClick(FormActionContext context) {
@@ -86,7 +102,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	 * @param		ctx		FormActionContext
 	 * 
 	 * Action a realiser lorsque l'utilisateur clique sur le bouton next (gestion
-	 * des dépendances de l'activité)
+	 * des d?pendances de l'activit?)
 	 */
 	
 	public void next_onClick(FormActionContext context) {
@@ -122,7 +138,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	    if (!context.hasErrors()) {
 			try {
 				
-				//Récupération de l'identifiant du participant connect?
+				//R?cup?ration de l'identifiant du participant connect?
 		    	User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 				
 				String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
@@ -132,7 +148,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				if (mode.equals(PresentationConstantes.INSERT_MODE)) {
 					Activity activity = new Activity();
 					
-					// Récup?ration des champs que l'utilisateur a pu entrer
+					// R?cup?ration des champs que l'utilisateur a pu entrer
 					activity.setDetails(form.getDetails());
 					activity.setName(form.getName());
 					
@@ -168,7 +184,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					context.addGlobalMessage("msg.info.activity.updated", activity.getName());
 				}
 				
-				// Répercution de l'attribut
+				// R?percution de l'attribut
 				context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
 				
 			} catch (PersistanceException pe) {

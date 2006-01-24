@@ -30,7 +30,7 @@ import com.cc.framework.ui.control.SimpleListControl;
 
 /**
  * @author Simon Reggiani
- * ManageDependancesTypesAction : Action permetant de gérer les types des dépendances d'une activité
+ * ManageDependancesTypesAction : Action permetant de g?rer les types des d?pendances d'une activit?
  */
 public class ManageDependancesTypesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ManageDependancesTypesAction.class);   
@@ -50,8 +50,8 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 	/**
 	 * @param context : contexte de l'action. Contient le form, la requette, ...
 	 * @throws IOException, ServletException
-	 * Permet d'initialiser le formulaire de gestion des types des dépendances d'une activité.
-	 * 	-> Initialise la liste des dépendances avec leur type
+	 * Permet d'initialiser le formulaire de gestion des types des d?pendances d'une activit?.
+	 * 	-> Initialise la liste des d?pendances avec leur type
 	 */
 	public void doExecute(ActionContext context) throws IOException, ServletException {
 		logger.debug("ManageActivityDependancesAction.doExecute()");
@@ -61,7 +61,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		}
 	
 		try {
-			/** Met à jour les attributs du ManageDependancesTypesForm **/
+			/** Met ? jour les attributs du ManageDependancesTypesForm **/
 			setDependancesList(context);
 		} catch (PersistanceException pe) {
 			context.addGlobalError("errors.persistance.global");
@@ -70,7 +70,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 			t.printStackTrace();
 		}
 		
-		/** Affiche la page avec la liste à boutons radio **/
+		/** Affiche la page avec la liste ? boutons radio **/
 	    context.forward(context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS)); 
 	}
 	
@@ -79,10 +79,10 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		Collection dependancesListMgr;
 		
 		
-		/* Recupération de l'id de l'activité dont on veut gérer les dépendances dans la requete*/
+		/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans la requete*/
 		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
-		/* Récupération des la liste des dépendances de cette activité en BD */
+		/* R?cup?ration des la liste des d?pendances de cette activit? en BD */
 		dependancesListMgr = ActivityManager.getInstance().getActivitySequences(activityId);
 	
 		/* Convertion de cette liste en liste d'ActivitySequenceType */
@@ -110,7 +110,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		list.setDataModel(new ManageDependancesTypesModel(data));
 		context.session().setAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST,list);
 		
-		/* Sauvegarde de la liste d'ActivitySequence récupérée avec le manager */
+		/* Sauvegarde de la liste d'ActivitySequence r?cup?r?e avec le manager */
 		context.session().setAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST_MNGR,dependancesListMgr);
 	}
 	
@@ -118,7 +118,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 	 * 
 	 * @param		ctx		FormActionContext
 	 * 
-	 * Action a realiser lorsque l'utilisateur clique sur le bouton finish (retour à listActivities)
+	 * Action a realiser lorsque l'utilisateur clique sur le bouton finish (retour ? listActivities)
 	 */
 	
 	public void finish_onClick(FormActionContext context) {
@@ -150,7 +150,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 			}
 			
 		}
-		/* Récupération de l'activité dans la hashmap pour connaitre son nom */
+		/* R?cup?ration de l'activit? dans la hashmap pour connaitre son nom */
 		HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 		
 		ManageDependancesTypesForm form = (ManageDependancesTypesForm) context.form();
@@ -160,9 +160,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		context.addGlobalMessage("msg.info.activity.dependancesTypes.saved",activity.getName());
 		
 		/** Appel de la page de garde **/
-		forward = context.mapping().findForward(PresentationConstantes.FORWARD_ACTION);
-	
-		context.forward(forward);
+		context.forwardByName(PresentationConstantes.FORWARD_FINISH);
 	}
 	
 	/**
@@ -173,7 +171,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 	 */
 	
 	public void previous_onClick(FormActionContext context) {
-		//Répercution de l'attribut
+		//R?percution de l'attribut
 		ManageDependancesTypesForm form = (ManageDependancesTypesForm) context.form();
 		Integer activityId = new Integer(form.getActivityId());
 		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
