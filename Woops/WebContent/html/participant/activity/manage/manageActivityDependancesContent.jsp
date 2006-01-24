@@ -42,7 +42,8 @@
 				
         	<forms:button
 				name="btnNext"
-				text="form.button.next"/>
+				text="form.button.next"
+				default="true"/>
 				
 			<forms:button
 				name="btnFinish"

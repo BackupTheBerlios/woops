@@ -54,7 +54,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 
 			Activity activity = (Activity)activitiesMap.get(activityId);
-				
+			
 			form.setActivityId(activityId.toString());
 			form.setName(activity.getName());
 			form.setDetails(activity.getDetails());			
@@ -171,17 +171,19 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					activityId = new Integer(form.getActivityId());
 					
 					Activity activity = (Activity)activitiesMap.get(activityId);
-
-					//R?cup?ration des champs que l'utilisateur a pu entrer
-					activity.setDetails(form.getDetails());
-					activity.setName(form.getName());
 					
-					//activity.setUserModification(user.getFirstName()+" "+user.getLastName());
-					activity.setUserModification((user.getId().toString()));
-					activity.setDateModification(new Date());
-					ActivityManager.getInstance().update(activity);
-					
-					context.addGlobalMessage("msg.info.activity.updated", activity.getName());
+					/* V?rification que l'utilisateur a bien modifi? quelque chose */
+					if ( !form.getName().equals(activity.getName()) || !form.getDetails().equals(activity.getDetails()) ) {
+						//R?cup?ration des champs que l'utilisateur a pu entrer
+						activity.setDetails(form.getDetails());
+						activity.setName(form.getName());
+						
+						activity.setUserModification((user.getId().toString()));
+						activity.setDateModification(new Date());
+						ActivityManager.getInstance().update(activity);
+						
+						context.addGlobalMessage("msg.info.activity.updated", activity.getName());
+					}
 				}
 				
 				// R?percution de l'attribut

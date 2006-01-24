@@ -38,7 +38,8 @@
 				
 			<forms:button
 				name="btnFinish"
-				text="form.button.finish"/>
+				text="form.button.finish"
+				default="true"/>
 		    
 		</forms:buttonsection>
 	

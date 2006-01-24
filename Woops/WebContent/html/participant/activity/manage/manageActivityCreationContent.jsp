@@ -45,7 +45,8 @@
         	<forms:button
 				name="btnNext"
 				text="form.button.next"
-				disabled="${manageActivityCreationForm.disableNext}"/>
+				disabled="${manageActivityCreationForm.disableNext}"
+				default="true"/>
 				
 			<forms:button
 				name="btnFinish"
@@ -54,7 +55,6 @@
 		</forms:buttonsection>
         
     </forms:form>
-    
     
     
     <html:hidden property="activityId"/>

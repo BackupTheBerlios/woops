@@ -179,52 +179,76 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	public void saveDependances(FormActionContext context) {
 
 		ManageActivityDependancesForm form = (ManageActivityDependancesForm) context.form();
-		String[] realDepedancesKeys  = form.getRealDependancesKeys();  
+		String[] newDependancesKeys  = form.getRealDependancesKeys();  
+		
+		Integer activityId = new Integer(form.getActivityId());
 		
 		/**
 		 * R?cup?ration du tableau des anciennes cl?s des activit? depandantes 
 		 * depuis la session
 		 */
-		String [] oldActivityDependancesKeys = (String [])context.session().getAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
+		String [] oldDependancesKeys = (String [])context.session().getAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
 	
-		/**
-		 * Sauvegarde des d?pendances
+		/** 
+		 * V?rification que l'utilisateur ait rajout? ou enlev? des d?pendances
+		 * Si ce n'est pas le cas, ce n'est pas la peine de sauvegarder les d?pendances
 		 */
-		try {
-			/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans le form 
-			 * (il a ?t? mis ? jour dans la methode pr?c?dente : setPossibleDependancesOptions */
-			Integer activityId = new Integer(form.getActivityId());
-			ActivityManager.getInstance().saveActivityDependances(activityId,oldActivityDependancesKeys,realDepedancesKeys);
-			
+		Collection oldDependancesKeysList = new ArrayList();
+		for(int i=0; i < oldDependancesKeys.length; i++)
+			if(!oldDependancesKeys[i].equals(""))
+				oldDependancesKeysList.add(new Integer(oldDependancesKeys[i]));
+		
+		Collection newDependancesKeysList = new ArrayList();
+		for(int i=0; i < newDependancesKeys.length; i++)
+			if(!newDependancesKeys[i].equals(""))
+				newDependancesKeysList.add(new Integer(newDependancesKeys[i]));
+		
+		if (!oldDependancesKeysList.containsAll(newDependancesKeysList) 
+				|| !newDependancesKeysList.containsAll(oldDependancesKeysList) )
+		{
+
 			/**
-			 * Suppression des attributs de la session
+			 * Sauvegarde des d?pendances
 			 */
-			context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
-			context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
-			
-			//R?percution de l'attribut
-			context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
-			
-			/* R?cup?ration de l'activit? dans la hashmap pour connaitre son nom */
-			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
-			
-			Activity activity = (Activity)activitiesMap.get(activityId);
-			
-			context.addGlobalMessage("msg.info.activity.dependances.saved",activity.getName());
-			
-		} catch (PersistanceException e) {
-			context.addGlobalError("errors.persistance.global");
-			/** Rappel du formulaire avec le message d'erreur **/
-			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
-		} catch (DoublonException e) {
-			// Ne doit pas passer par l?
-		} catch (ForeignKeyException e) {
-			// Ne doit pas passer par l?
-		} catch (Throwable t) {
-			logger.error(t);
-			context.addGlobalError("errors.global");
-			context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
+			try {
+				/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans le form 
+				 * (il a ?t? mis ? jour dans la methode pr?c?dente : setPossibleDependancesOptions */
+				
+				ActivityManager.getInstance().saveActivityDependances(activityId,oldDependancesKeysList,newDependancesKeysList);
+				
+				/* R?cup?ration de l'activit? dans la hashmap pour connaitre son nom */
+				HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
+				
+				Activity activity = (Activity)activitiesMap.get(activityId);
+				
+				context.addGlobalMessage("msg.info.activity.dependances.saved",activity.getName());
+				
+			} catch (PersistanceException e) {
+				context.addGlobalError("errors.persistance.global");
+				/** Rappel du formulaire avec le message d'erreur **/
+				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
+			} catch (DoublonException e) {
+				// Ne doit pas passer par l?
+			} catch (ForeignKeyException e) {
+				// Ne doit pas passer par l?
+			} catch (Throwable t) {
+				logger.error(t);
+				context.addGlobalError("errors.global");
+				context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
+			}
+		
 		}
+		
+		/**
+		 * Suppression des attributs de la session
+		 */
+		context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
+		context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
+		
+		//R?percution de l'attribut
+		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
+		
+			
 	}
 	
 	/**

@@ -134,23 +134,14 @@ public class ActivityManager extends PersistentObjectManager {
 	 * @throws DoublonException 
 	 * @throws ForeignKeyException 
 	 */
-	public void saveActivityDependances(Integer activityId, String[] oldDependancesKeys, String[] newDependancesKeys)
+	public void saveActivityDependances(Integer activityId, Collection oldDependancesKeysList, Collection newDependancesKeysList)
 	throws PersistanceException, DoublonException, ForeignKeyException {
-		Collection oldDendancesKeysList = new ArrayList();
-		for(int i=0; i < oldDependancesKeys.length; i++)
-			if(!oldDependancesKeys[i].equals(""))
-				oldDendancesKeysList.add(new Integer(oldDependancesKeys[i]));
 		
-		Collection newDendancesKeysList = new ArrayList();
-		for(int i=0; i < newDependancesKeys.length; i++)
-			if(!newDependancesKeys[i].equals(""))
-				newDendancesKeysList.add(new Integer(newDependancesKeys[i]));
+		Collection dependancesToAddList = new ArrayList(newDependancesKeysList);
+		dependancesToAddList.removeAll(oldDependancesKeysList);
 		
-		Collection dependancesToAddList = new ArrayList(newDendancesKeysList);
-		dependancesToAddList.removeAll(oldDendancesKeysList);
-		
-		Collection dependancesToRemoveList = new ArrayList(oldDendancesKeysList);
-		dependancesToRemoveList.removeAll(newDendancesKeysList);
+		Collection dependancesToRemoveList = new ArrayList(oldDependancesKeysList);
+		dependancesToRemoveList.removeAll(newDependancesKeysList);
 		
 		
 		ActivitySequenceManager activitySequenceManager = ActivitySequenceManager.getInstance();
