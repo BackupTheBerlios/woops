@@ -30,7 +30,7 @@
         
    	<forms:form type="edit" noframe="true" formid="frmDependancesTypes">
 	
-		<forms:buttonsection>
+		<forms:buttonsection default="btnFinish">
 	        
 		    <forms:button
 				name="btnPrevious"
@@ -38,8 +38,7 @@
 				
 			<forms:button
 				name="btnFinish"
-				text="form.button.finish"
-				default="true"/>
+				text="form.button.finish"/>
 		    
 		</forms:buttonsection>
 	

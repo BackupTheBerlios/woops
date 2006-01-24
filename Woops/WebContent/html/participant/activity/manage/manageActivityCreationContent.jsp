@@ -36,7 +36,7 @@
           />
             
             
-        <forms:buttonsection>
+        <forms:buttonsection default="btnNext">
         
             <forms:button
 				name="btnPrevious"
@@ -45,8 +45,7 @@
         	<forms:button
 				name="btnNext"
 				text="form.button.next"
-				disabled="${manageActivityCreationForm.disableNext}"
-				default="true"/>
+				disabled="${manageActivityCreationForm.disableNext}"/>
 				
 			<forms:button
 				name="btnFinish"

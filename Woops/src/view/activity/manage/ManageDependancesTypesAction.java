@@ -105,7 +105,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		data = (ActivitySequenceItem[]) activitySequenceItems.toArray(data);
 		
 	
-		/* Sauvegarde de la simplListControl dans la session pour que la page jsp y accede*/
+		/* Sauvegarde de la simpleListControl dans la session pour que la page jsp y accede*/
 		SimpleListControl list = new SimpleListControl();
 		list.setDataModel(new ManageDependancesTypesModel(data));
 		context.session().setAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST,list);
@@ -123,8 +123,15 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 	
 	public void finish_onClick(FormActionContext context) {
 		
+		/* R?cup?ration de la simpleListeControle dans la session */
 		SimpleListControl dependancesListSlc = (SimpleListControl)context.session().getAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST);
+		/* Supression de l'attribut de la session */
+		context.session().removeAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST);
+		
+		/* R?cup?ration de la liste dans la session */
 		Collection dependancesListMgr = (Collection)context.session().getAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST_MNGR);
+		/* Supression de l'attribut de la session */
+		context.session().removeAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST_MNGR);
 		
 		ManageDependancesTypesModel listDataModel = (ManageDependancesTypesModel)dependancesListSlc.getDataModel();
 		
@@ -136,28 +143,36 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		ActivitySequence actSeq;
 		
 		Iterator iter = dependancesListMgr.iterator();
+		boolean allUnchanged = true;
 		for(int i=0; iter.hasNext(); i++) {
 			actSeqItem = (ActivitySequenceItem)listDataModel.getElementAt(i);
 			try {
-				actSeqType = actSeqTypeMngr.getActivitySequenceTypeByName(actSeqItem.getLinkType());
 				actSeq = (ActivitySequence)iter.next();
-				
-				actSeq.setLinkType(actSeqType);
-				
-				actSeqMngr.update(actSeq);
+				/* v?rification que l'utilisateur ait bien modifi? le type 
+				 * ( on ne va pas updater alors qu'il n'y a pas eut de changement ) */
+				if ( !actSeq.getLinkType().getName().equals(actSeqItem.getLinkType()) ) {
+					actSeqType = actSeqTypeMngr.getActivitySequenceTypeByName(actSeqItem.getLinkType());
+					actSeq.setLinkType(actSeqType);
+					actSeqMngr.update(actSeq);
+			
+					allUnchanged=false;
+				}	
 			} catch (PersistanceException e) {
 				context.addGlobalError("errors.persistance.global");
 			}
-			
+
 		}
-		/* R?cup?ration de l'activit? dans la hashmap pour connaitre son nom */
-		HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 		
-		ManageDependancesTypesForm form = (ManageDependancesTypesForm) context.form();
-		
-		Activity activity = (Activity)activitiesMap.get(new Integer(form.getActivityId()));
-		
-		context.addGlobalMessage("msg.info.activity.dependancesTypes.saved",activity.getName());
+		if (!allUnchanged) {
+			/* R?cup?ration de l'activit? dans la hashmap pour connaitre son nom */
+			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
+			
+			ManageDependancesTypesForm form = (ManageDependancesTypesForm) context.form();
+			
+			Activity activity = (Activity)activitiesMap.get(new Integer(form.getActivityId()));
+			
+			context.addGlobalMessage("msg.info.activity.dependancesTypes.saved",activity.getName());
+		}
 		
 		/** Appel de la page de garde **/
 		context.forwardByName(PresentationConstantes.FORWARD_FINISH);
