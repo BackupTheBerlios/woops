@@ -18,6 +18,7 @@ import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
 import business.activity.state.FinishedActivityState;
 import business.activity.state.InProgressActivityState;
+import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 
@@ -187,7 +188,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 				if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());
 				} else if (activity.getState() instanceof FinishedActivityState) {
-					context.addGlobalMessage("msg.info.activity.change.state.finished", activity.getName());
+					context.addGlobalError("msg.error.activity.change.state.finished", activity.getName());
 				}
 			}
 		} catch (PersistanceException pe) {
@@ -217,6 +218,32 @@ public class ListActivitiesAction extends WoopsCCAction {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.INSERT_MODE);
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
+	}
+	
+	
+	
+	
+	
+	
+	public void listActivities_onDelete(ControlActionContext context, String activityIdString) throws IOException, ServletException, PersistanceException, ForeignKeyException {
+	
+		try{
+			
+			Integer activityId = new Integer(activityIdString);
+			ActivityManager.getInstance().deleteLinksFromActivity(activityId);
+
+		}
+		catch (ForeignKeyException fke) {
+			logger.error(fke);
+			context.addGlobalError("errors.persistance.activity.foreignKey");
+		}
+		catch (PersistanceException pe) {
+			logger.error(pe);
+			context.addGlobalError("errors.persistance.select");
+		} 
+ 		
+		context.forwardByName(PresentationConstantes.FORWARD_ACTION);
+		
 	}
 	
 }
