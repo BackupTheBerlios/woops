@@ -42,6 +42,11 @@
 			<ctrl:columnedit 
 				title="table.field.listActivities.edit"/> 
 
+			<ctrl:columndelete 
+				title="table.field.listActivities.delete"
+				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
+				/> 
+				
 			<ctrl:columnbutton 
 				title="table.field.listActivities.action" 
 				text="@{bean.action}" 
