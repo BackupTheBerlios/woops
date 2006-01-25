@@ -71,5 +71,22 @@ public class ActivityDAO extends PersistentObjectDAO {
 			
 	}
 	
+	/**
+	 * @author Benjamin TALOU
+	 * @param activityId : l'activité dont on veut connaitre les activités dependantes 
+	 * @return la liste des séquence d'activité 
+	 * @throws PersistanceException
+	 */
+	public Collection getActivitySequencesSuccessors(Integer predecessorId) 
+		throws PersistanceException {
+		
+		StringBuffer query = new StringBuffer();
+		query.append("FROM ActivitySequence as actSeq "); 
+		query.append("WHERE actSeq.predecessor.id = "+predecessorId);
+		
+		return executeQuery(query.toString());
+			
+	}
+	
 
 }
