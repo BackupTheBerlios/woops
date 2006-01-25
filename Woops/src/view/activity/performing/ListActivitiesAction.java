@@ -187,7 +187,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 				if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());
 				} else if (activity.getState() instanceof FinishedActivityState) {
-					context.addGlobalError("msg.error.activity.change.state.finished", activity.getName());
+					context.addGlobalMessage("msg.info.activity.change.state.finished", activity.getName());
 				}
 			}
 		} catch (PersistanceException pe) {
