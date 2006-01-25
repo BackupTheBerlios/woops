@@ -1,0 +1,80 @@
+package view.admin.user;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import business.format.Controleur;
+
+public class AddUserForm extends ActionForm{
+	private String firstName ;
+	private String lastName ;
+	private String login ;
+	private String password ;
+	private String password2 ;
+	/** 
+	 * Method validate
+	 * @param mapping
+	 * @param request
+	 * @return ActionErrors
+	 */
+	// TODO voir si login existe deja ??? dans action ?
+	public ActionErrors validate(
+		ActionMapping mapping,
+		HttpServletRequest request) {
+
+		ActionErrors errors = new ActionErrors();
+		if (Controleur.isVide(lastName)){
+			errors.add("lastName",new ActionMessage("errors.champ.obligatoire","lastName"));
+		}
+		if (Controleur.isVide(firstName)){
+			errors.add("firstName",new ActionMessage("errors.champ.obligatoire","firstName"));
+		}
+		if (Controleur.isVide(login)){
+			errors.add("login",new ActionMessage("errors.champ.obligatoire","login"));
+		}
+		if (Controleur.isVide(password)){
+			errors.add("password",new ActionMessage("errors.champ.obligatoire","mot de passe"));
+		}
+		if (password != password2){
+			errors.add("password",new ActionMessage("admin.error.password","mot de passe"));
+		}
+		return errors;
+	}
+	
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
+	}
+}
