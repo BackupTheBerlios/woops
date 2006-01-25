@@ -10,11 +10,12 @@
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manage.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manage.ManageDependancesTypesForm" />
 	  	<form-bean name="listChangeStateActivitiesForm" type="view.activity.listActivities.ListChangeStateActivitiesForm" />
-	  
+
 	  	<form-bean name="loginForm" type="view.logon.LoginForm" />
 	  
 	  	<form-bean name="emptyForm" type="view.common.EmptyForm"/>
-  
+	  	
+	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />  
 	</form-beans>
 
 
@@ -113,6 +114,7 @@
         	<forward name="deconnect" path="/html/logon/loginUser.jsp" />
         	<forward name="success" path="/listActivities.do"/>
      </action>  
+     
 
 <!-- ================= List Change State Activities ================ -->  
 		<action path="/listChangeStateActivities"	 type="view.activity.listActivities.ListChangeStateActivitiesAction"
@@ -126,6 +128,18 @@
          	<forward name="edit" path="/manageActivityCreation.do"/>
       	</action>
    
+   
+   <!-- ================= Admin / addUser ================ -->  
+      	<action path="/addUser"	 type="view.admin.user.AddUserAction"
+     		attribute="addUserForm"
+        	name="addUserForm"
+        	parameter="actionSubmit"
+			validate="false"      
+        	scope="request"
+        	input="/html/admin/addUser.jsp">
+        	<forward name="error" path="/html/admin/addUser.jsp" />
+        	<forward name="success" path="/html/admin/addUser.jsp"/>
+     </action>  
    
 </action-mappings>
 
