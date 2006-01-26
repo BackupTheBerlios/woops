@@ -13,7 +13,7 @@
 		id="list" 
 		property="listActivities" 
 		title="table.title.listActivities" 
-		width="500" 
+		width="650" 
 		rows="5" 
 		refreshButton="false" 
 		createButton="true"
@@ -45,7 +45,7 @@
 			<ctrl:columndelete 
 				title="table.field.listActivities.delete"
 				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
-				/> 
+			/> 
 				
 			<ctrl:columnbutton 
 				title="table.field.listActivities.action" 
