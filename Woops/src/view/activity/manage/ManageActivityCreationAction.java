@@ -154,7 +154,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					
 					activity.setState(new CreatedActivityState());
 					
-					activity.setUserId(user.getId());
+					activity.setUserId((Integer) user.getId());
 					
 					//activity.setUserCreation(user.getFirstName()+" "+user.getLastName());
 					activity.setUserCreation((user.getId().toString()));

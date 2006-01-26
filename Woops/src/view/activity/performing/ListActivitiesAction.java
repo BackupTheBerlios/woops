@@ -81,7 +81,7 @@ public class ListActivitiesAction extends WoopsCCAction {
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
     	
     	// Récupération de la liste des activités
-    	dbData = ActivityManager.getInstance().getActivitiesByUser(sessionUser.getId());  	
+    	dbData = ActivityManager.getInstance().getActivitiesByUser((Integer) sessionUser.getId());  	
 
     	// Constitue une liste d'ActivityItems à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();

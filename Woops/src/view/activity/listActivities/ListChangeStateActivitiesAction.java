@@ -81,7 +81,7 @@ public class ListChangeStateActivitiesAction  extends WoopsCCAction {
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
     	
     	// R?cup?ration de la liste des activit?s
-    	dbData = ActivityManager.getInstance().activitiesChangeState(sessionUser.getId());  	    	
+    	dbData = ActivityManager.getInstance().activitiesChangeState((Integer) sessionUser.getId());  	    	
     	
     	
     	// Constitue une liste d'ActivityItems ? partir des donn?es stock?es en BD  

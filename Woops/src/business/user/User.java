@@ -2,7 +2,10 @@ package business.user;
 
 import java.util.Collection;
 
-public class User {
+import business.hibernate.HistorizedObject;
+
+public class User extends HistorizedObject{	
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 

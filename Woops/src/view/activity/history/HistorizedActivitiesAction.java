@@ -69,7 +69,7 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 
     	// Récupération de l'identifiant du participant connecté
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-    	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser(sessionUser.getId());  	
+    	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer) sessionUser.getId());  	
 
     	// Constitue une liste d'ActivityItems à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();
