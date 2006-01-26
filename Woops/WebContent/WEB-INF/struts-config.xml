@@ -113,6 +113,7 @@
         	<forward name="error" path="/html/logon/loginUser.jsp" />
         	<forward name="deconnect" path="/html/logon/loginUser.jsp" />
         	<forward name="success" path="/listActivities.do"/>
+        	<forward name="admin" path="/html/admin/user/addUser.jsp"/>        	
      </action>  
      
 
@@ -137,8 +138,8 @@
 			validate="false"      
         	scope="request"
         	input="/html/admin/addUser.jsp">
-        	<forward name="error" path="/html/admin/addUser.jsp" />
-        	<forward name="success" path="/html/admin/addUser.jsp"/>
+        	<forward name="error" path="/html/admin/user/addUser.jsp" />
+        	<forward name="success" path="/html/admin/user/addUser.jsp"/>
      </action>  
    
 </action-mappings>

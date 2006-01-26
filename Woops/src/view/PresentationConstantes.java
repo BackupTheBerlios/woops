@@ -55,5 +55,8 @@ public interface PresentationConstantes {
     //Constantes permettant de connaitre le mode d'un formulaire ( create ou update )
     public static final String INSERT_MODE = "insert_mode";
     public static final String UPDATE_MODE = "update_mode";
+    
+    // Constantes forward pour admin
+    public static final String FORWARD_ADMIN="admin";
 	
 }

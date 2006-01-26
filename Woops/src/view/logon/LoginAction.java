@@ -35,6 +35,10 @@ public class LoginAction extends WoopsCCAction {
 						httpSession.setAttribute(PresentationConstantes.KEY_USER,user);
 						
 						retour = context.mapping().findForward(PresentationConstantes.FORWARD_SUCCESS);
+						if (user.getLogin().equals("faure"))
+						{
+							retour = retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
+						}
 					}
 					else {
 						context.addGlobalError("errors.login.invalide");
@@ -57,7 +61,6 @@ public class LoginAction extends WoopsCCAction {
               
             retour = context.mapping().findForward(PresentationConstantes.FORWARD_DECONNECT); 
 		}
-		
 		context.forward(retour);
 	}
 }

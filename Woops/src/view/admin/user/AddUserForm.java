@@ -39,8 +39,8 @@ public class AddUserForm extends ActionForm{
 		if (Controleur.isVide(password)){
 			errors.add("password",new ActionMessage("errors.champ.obligatoire","mot de passe"));
 		}
-		if (password != password2){
-			errors.add("password",new ActionMessage("admin.error.password","mot de passe"));
+		if (!password.equals(password2)){
+			errors.add("password2",new ActionMessage("admin.error.password","mot de passe"));
 		}
 		return errors;
 	}

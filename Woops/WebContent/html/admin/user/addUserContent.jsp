@@ -31,7 +31,7 @@
         	required="true"/>
         	
         <forms:password    	
-        	label="form.field.password"	
+        	label="admin.field.checkPassword"	
         	property="password2"   	
         	required="true"/>
 
