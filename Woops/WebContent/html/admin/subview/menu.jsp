@@ -7,7 +7,11 @@
         	id="1"  
         	text="menu.deconnection"      
         	action="loginUser.do?actionSubmit=deconnect"/>
- 
+ 		
+ 		<menu:menuitem   	
+        	id="2"  
+        	text="admin.menu.createUser"      
+        	action="html/admin/user/addUser.jsp"/>
      
 
 </menu:menu>

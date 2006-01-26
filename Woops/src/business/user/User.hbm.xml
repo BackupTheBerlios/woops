@@ -10,7 +10,7 @@
 			name="id"
 			type="integer"
 		>
-		<generator class="assigned" />
+		<generator class="identity" />
 		</id>
 		
 		<property

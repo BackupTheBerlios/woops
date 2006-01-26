@@ -3,7 +3,7 @@
 
 <html:form action="addUser.do" >
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
-
+	<forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
     <forms:form 
     	formid="addUserForm"
     	type="edit"

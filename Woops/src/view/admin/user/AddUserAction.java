@@ -3,12 +3,15 @@ package view.admin.user;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMessages;
 
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
 
 import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectDAO;
+import business.hibernate.exception.DoublonException;
+import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserDAO;
 import business.user.UserManager;
@@ -33,6 +36,22 @@ public class AddUserAction extends WoopsCCAction {
 				user.setLastName(addUserForm.getLastName());
 				user.setLogin(addUserForm.getLogin());
 				user.setPassword(addUserForm.getPassword());
+				user.setId(null);
+				try {
+					UserManager.getInstance().insert(user);
+					context.addGlobalMessage("admin.msg.info.user.validate");
+				}
+				catch (PersistanceException p)
+				{
+					context.addGlobalError("admin.msg.error.user.insert");
+					System.out.println(p.getMessage());
+				}
+				catch(DoublonException e)
+				{
+					context.addGlobalError("admin.msg.error.user.insert");
+					System.out.println(e.getMessage());
+				}
+				
 				
 	        } else {
 	        	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);

@@ -3,9 +3,10 @@ package business.user;
 import java.io.File;
 
 import business.hibernate.HibernateSessionFactory;
+import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.PersistanceException;
 
-public class UserManager  {
+public class UserManager extends PersistentObjectManager {
 	
 	private UserDAO dao = new UserDAO();	
 	
