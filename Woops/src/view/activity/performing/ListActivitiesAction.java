@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import view.PresentationConstantes;
 import view.activity.ActivityItem;
 import view.common.WoopsCCAction;
+import business.BusinessConstantes;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
@@ -68,6 +69,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 		Collection listActivitiesItems = null;
 		ActivityItem activityItem = null;
 		User sessionUser = null;
+		String state = null;
 		
 		// Initialisation du form si celui-ci est nul
 		if (context.form()==null) {
@@ -95,12 +97,19 @@ public class ListActivitiesAction extends WoopsCCAction {
     		activityItem.setName(activity.getName());
     		activityItem.setDetails(activity.getDetails());
     		activityItem.setState(activity.getState().toString());
-			if (activity.getState() instanceof CreatedActivityState) {
-				activityItem.setAction(PresentationConstantes.ACTIVITY_START);
-			}
-			else if (activity.getState() instanceof InProgressActivityState) {
-				activityItem.setAction(PresentationConstantes.ACTIVITY_FINISH);
-			}
+    		
+    		// Verifions si les dependances de l'activite lui permettent de changer d'etat
+    		state = ActivityManager.getInstance().verifChangeStateActivity(activity);
+    		if (state!=null) {
+    			if (state.equals(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS)) 
+    				activityItem.setAction(PresentationConstantes.ACTIVITY_START);
+    			else 
+    				activityItem.setAction(PresentationConstantes.ACTIVITY_FINISH);
+    		}
+    		// si state est null, l'activite ne peut pas changer d'etat
+    		else
+    			activityItem.setAction("");
+			
 			listActivitiesItems.add(activityItem);
     	
 			// Construction de la hash map stockant la liste des activit?s

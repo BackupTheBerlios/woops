@@ -2,6 +2,7 @@
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 <%@ taglib uri="/struts-bean" prefix="bean" %>
 <%@ taglib uri="/struts-html" prefix="html" %>
+<%@ taglib uri="/cc-utility"  prefix="util" %>
 
 <forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
 <forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
@@ -18,6 +19,22 @@
 		refreshButton="false" 
 		createButton="true"
 		>
+		
+		<util:designrule
+        rule="@{bean.action == '' && bean.state == 'created'}"
+        style="background-color: gray;"/>
+        
+        <util:designrule
+        rule="@{bean.action == '' && bean.state == 'inProgress'}"
+        style="background-color: gray; font-weight: bold;"/>
+        
+        <util:designrule
+        rule="@{bean.action != '' && bean.state == 'created'}"
+        style=""/>
+        
+        <util:designrule
+        rule="@{bean.action != '' && bean.state == 'inProgress'}"
+        style="font-weight: bold;"/>
 
 			<ctrl:columndrilldown 
 				title="table.field.listActivities.name" 
@@ -45,7 +62,7 @@
 			<ctrl:columndelete 
 				title="table.field.listActivities.delete"
 				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
-			/> 
+				/> 
 				
 			<ctrl:columnbutton 
 				title="table.field.listActivities.action" 

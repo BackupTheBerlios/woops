@@ -9,7 +9,6 @@
 		<form-bean name="manageActivityCreationForm" type="view.activity.manage.ManageActivityCreationForm" />
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manage.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manage.ManageDependancesTypesForm" />
-	  	<form-bean name="listChangeStateActivitiesForm" type="view.activity.listActivities.ListChangeStateActivitiesForm" />
 
 	  	<form-bean name="loginForm" type="view.logon.LoginForm" />
 	  
@@ -39,7 +38,7 @@
       	 	scope="session"
       	 	input="/html/participant/activity/performing/listActivities.jsp"
       	 >
-         	<forward name="error" path="/html/logon/loginUser.jsp" />
+         	<forward name="error" path="/html/participant/activity/performing/listActivities.jsp" />
          	<forward name="success" path="/html/participant/activity/performing/listActivities.jsp" />
          	<forward name="action" path="/listActivities.do"/>
          	<forward name="edit" path="/manageActivityCreation.do"/>
@@ -115,19 +114,6 @@
         	<forward name="success" path="/listActivities.do"/>
         	<forward name="admin" path="/html/admin/user/addUser.jsp"/>        	
      </action>  
-     
-
-<!-- ================= List Change State Activities ================ -->  
-		<action path="/listChangeStateActivities"	 type="view.activity.listActivities.ListChangeStateActivitiesAction"
-      		name="listChangeStateActivitiesForm"
-      	 	scope="session"
-      	 	input="/html/participant/activity/listChangeStateActivities.jsp"
-      	 >
-         	<forward name="error" path="/html/participant/activity/listChangeStateActivities.jsp" />
-         	<forward name="success" path="/html/participant/activity/listChangeStateActivities.jsp" />
-         	<forward name="action" path="/listChangeStateActivities.do"/>
-         	<forward name="edit" path="/manageActivityCreation.do"/>
-      	</action>
    
    
    <!-- ================= Admin / addUser ================ -->  

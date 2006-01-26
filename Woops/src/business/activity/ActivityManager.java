@@ -229,11 +229,12 @@ public class ActivityManager extends PersistentObjectManager {
 	/**
 	 * 
 	 * @param activity
-	 * @return retourne vrai si l'activite peut ?voluer d'?tat, faux sinon
+	 * @return retourne l'état dans lequel peut changer l'activité, null si elle ne peut pas changer d'etat
 	 * @throws PersistanceException
 	 */
-	private boolean verifChangeStateActivity(Activity activity) throws PersistanceException {
+	public String verifChangeStateActivity(Activity activity) throws PersistanceException {
 		boolean result = true;
+		String state = null;
 		Iterator iter;
 		String activityState = activity.getState().getName();
 		
@@ -252,6 +253,10 @@ public class ActivityManager extends PersistentObjectManager {
 			// Il faut v?rifier dans ses predecesseurs
 			while ((iter.hasNext())&&(result==true))
 				result = verifPredecessorState((ActivitySequence)iter.next(),BusinessConstantes.LINK_TYPE_FINISH_TO_START,BusinessConstantes.LINK_TYPE_START_TO_START);
+		
+			if (result==true) {
+				state  = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
+			}
 		}
 		
 		
@@ -266,10 +271,13 @@ public class ActivityManager extends PersistentObjectManager {
 			// Il faut v?rifier dans ses predecesseurs
 			while ((iter.hasNext())&&(result==true))
 				result = verifPredecessorState((ActivitySequence)iter.next(),BusinessConstantes.LINK_TYPE_FINISH_TO_FINISH,BusinessConstantes.LINK_TYPE_START_TO_FINISH);
+		
+			if (result==true) {
+				state  = BusinessConstantes.ACTIVITY_STATE_FINISHED;
+			}
 		}
 		
-		
-		return result;
+		return state;
 	}
 	
 	/**
@@ -291,7 +299,7 @@ public class ActivityManager extends PersistentObjectManager {
 		Iterator iter = listActivities.iterator();
 		while (iter.hasNext()) {
 			act = (Activity)iter.next();
-			if (verifChangeStateActivity(act))
+			if (verifChangeStateActivity(act)!=null)
 				listActivitiesChangeState.add(act);
 		}
 		
