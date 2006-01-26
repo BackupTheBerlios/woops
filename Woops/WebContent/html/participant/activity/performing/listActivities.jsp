@@ -1,9 +1,15 @@
 <%@ taglib uri="/cc-template" prefix="template" %>
+<%@ taglib uri="/cc-utility" prefix="util" %>
+
 
 
 <template:insert base="/html" template="$/template.jsp">
 
-    <template:put  name="title"     content="page.title.listActivities" direct="true"/>
+	
+    <template:put  name="title"  direct="true">
+    	<util:resource key="page.title.listActivities"/>
+    </template:put>
+    
     <template:put  name="menuHaut"  content="$/participant/subview/identification.jsp" />
     <template:put  name="menu"  	content="$/participant/subview/menu.jsp"/>
     <template:put  name="contents"  content="$/participant/activity/performing/listActivitiesContent.jsp"/>
