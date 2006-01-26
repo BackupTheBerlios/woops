@@ -41,7 +41,7 @@ public class User extends HistorizedObject{
 		this.firstName = firstName;
 	}
 
-	public Integer getId() {
+	public Object getId() {
 		return id;
 	}
 
