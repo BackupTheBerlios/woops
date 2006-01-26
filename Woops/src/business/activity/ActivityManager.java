@@ -114,6 +114,27 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
+	 * @author Benjamin TALOU
+	 * @param activityId : l'activit? dont on veut connaitre ses pr?d?cesseurs
+	 * @return la liste des activit? dont depend l'activit? pass?e en parametre
+	 * @throws PersistanceException
+	 */
+	public Collection getSuccessors(Integer activityId) 
+			throws PersistanceException {
+		Collection listActivitySequences = activityDAO.getActivitySequencesSuccessors(activityId);
+		
+		Collection listSuccessor = new ArrayList();
+		Iterator iter = listActivitySequences.iterator();
+		
+		while(iter.hasNext())
+		{
+			listSuccessor.add(((ActivitySequence)iter.next()).getSuccessor());
+		}
+		
+		return listSuccessor;
+	}
+	
+	/**
 	 * 
 	 * @param activityId : l'activit? dont on veut connaitre ses d?pendances entrantes
 	 * @return la liste des s?quence d'activit? dont l'activit? pass?e en parametre et le successeur
@@ -216,14 +237,16 @@ public class ActivityManager extends PersistentObjectManager {
 	    return result;
 	}
 	
+		
 	/**
 	 * 
 	 * @param activity
-	 * @return retourne vrai si l'activite peut ?voluer d'?tat, faux sinon
+	 * @return retourne l'état dans lequel peut changer l'activité, null si elle ne peut pas changer d'etat
 	 * @throws PersistanceException
 	 */
-	private boolean verifChangeStateActivity(Activity activity) throws PersistanceException {
+	public String verifChangeStateActivity(Activity activity) throws PersistanceException {
 		boolean result = true;
+		String state = null;
 		Iterator iter;
 		String activityState = activity.getState().getName();
 		
@@ -242,6 +265,10 @@ public class ActivityManager extends PersistentObjectManager {
 			// Il faut v?rifier dans ses predecesseurs
 			while ((iter.hasNext())&&(result==true))
 				result = verifPredecessorState((ActivitySequence)iter.next(),BusinessConstantes.LINK_TYPE_FINISH_TO_START,BusinessConstantes.LINK_TYPE_START_TO_START);
+		
+			if (result==true) {
+				state  = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
+			}
 		}
 		
 		
@@ -256,10 +283,13 @@ public class ActivityManager extends PersistentObjectManager {
 			// Il faut v?rifier dans ses predecesseurs
 			while ((iter.hasNext())&&(result==true))
 				result = verifPredecessorState((ActivitySequence)iter.next(),BusinessConstantes.LINK_TYPE_FINISH_TO_FINISH,BusinessConstantes.LINK_TYPE_START_TO_FINISH);
+		
+			if (result==true) {
+				state  = BusinessConstantes.ACTIVITY_STATE_FINISHED;
+			}
 		}
 		
-		
-		return result;
+		return state;
 	}
 	
 	/**
@@ -281,12 +311,60 @@ public class ActivityManager extends PersistentObjectManager {
 		Iterator iter = listActivities.iterator();
 		while (iter.hasNext()) {
 			act = (Activity)iter.next();
-			if (verifChangeStateActivity(act))
+			if (verifChangeStateActivity(act)!=null)
 				listActivitiesChangeState.add(act);
 		}
 		
 		return listActivitiesChangeState;
 	}
 	
+	/**
+	 * 
+	 * Cette méthode permet  de supprimer une activité.
+	 * Pour cela il fautégalement supprimer toutes les relations d'une activité avec les autres.
+	 * 
+	 * On supprime TOUS les liens relatifs à l'activité (mode barbare)
+	 * 
+	 * @param activityId
+	 * @return 
+	 * @throws PersistanceException, ForeignKeyException
+	 */
+	
+	public void deleteLinksFromActivity(Integer activityId) throws PersistanceException, ForeignKeyException{
+		
+		// listes des predecesseurs et des successeurs
+		Collection PredecessorsList = null ;
+		Collection SuccessorsList	= null ;
 
+		// chargement de l'activité
+		Activity activity = ActivityManager.getInstance().getActivityById(activityId);
+			
+		// on recupere toutes les activités précedentes
+	PredecessorsList =ActivityManager.getInstance().getPredecessors(activityId);
+	
+		// puis on supprime les liens avec predecesseurs via un iterateur
+	Iterator iter = PredecessorsList.iterator();
+	while (iter.hasNext()) {
+		Activity pred = (Activity) iter.next();
+		
+		// appel a une methode du manager de activitySequence
+		ActivitySequenceManager.getInstance().removeActivitySequence(pred,activity);
+	}
+	
+	// on recupere les sequences des dependances suivantes
+	SuccessorsList =ActivityManager.getInstance().getSuccessors(activityId);
+	
+	//  puis on supprime les liens avec les successeurs		
+	Iterator iter2 = SuccessorsList.iterator();
+	while (iter2.hasNext()) {
+		Activity succ = (Activity) iter2.next();
+		ActivitySequenceManager.getInstance().removeActivitySequence(activity,succ);
+	}
+
+
+	// ... et on finit par supprimes l'activité
+	ActivityManager.getInstance().delete(activity);
+	
+	}
+	
 }

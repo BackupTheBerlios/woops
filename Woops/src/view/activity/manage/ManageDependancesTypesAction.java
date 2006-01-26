@@ -83,7 +83,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
 		/* R?cup?ration des la liste des d?pendances de cette activit? en BD */
-		dependancesListMgr = ActivityManager.getInstance().getActivitySequences(activityId);
+		dependancesListMgr = ActivityManager.getInstance().getActivitySequencesPredecessors(activityId);
 	
 		/* Convertion de cette liste en liste d'ActivitySequenceType */
 		Iterator iter = dependancesListMgr.iterator();
