@@ -5,9 +5,9 @@
 <html>
 
 <head>
-<title>woops</title>
+<title>WOOPS</title>
 <meta http-equiv="Content-Type" content="text/html;">
-<link href="/Woops/images/css.css" rel="stylesheet" type="text/css">
+<link href="images/css.css" rel="stylesheet" type="text/css">
 
 
   <!-------##############------->
@@ -18,36 +18,37 @@
   
 </head>
 
-<body bgcolor="#DED9E6">
-<center>
-<table border="0" cellpadding="0" cellspacing="0"  >
+<body bgcolor="#ded9e6">
 
-<tr>
-  <td width="227" height="100%" valign="top">
-  
-  
- <table border="0" cellpadding="0" cellspacing="0" width="227" height="100%">
-
-  
-  <tr>
-    <td colspan="3" height="122" style="background-image: url('/Woops/images/logo.jpg');">
-
-    </td>
-  </tr>
-  
-    <tr>
-    <td colspan="3" height="23" style="background-image: url('/Woops/images/menuHaut.jpg');" >
-
-    </td>
-  </tr>
-
-  
-  <tr>
-    <td width="35" height="35" style="background-image: url('/Woops/images/idGauche.jpg');">
-
-    </td>
-      <td width="171" height="35" style="background-image: url('/Woops/images/id.jpg');">
+      <table class="table_spacer_top">
+      <tr><td>
+      </td></tr>
+      </table>
       
+<center>
+<table width="900" class="table1">
+  <tr>
+  <td>
+  
+    <table   width="900" class="table2">
+    <tr>
+  
+    <td width="200" valign="top">
+    
+      <table width="200"  class="table3">
+      <tr><td>
+      <center><img src="images/logo.gif"></center>
+      </td></tr>
+      </table>
+      
+      <table class="table_spacer">
+      <tr><td>
+      </td></tr>
+      </table>
+      
+      <table  width="200" class="table4">
+      <tr><td>
+      <div class="identification" >
       
   <!-------#################------->
   <!-------DEBUT ENTETE MENU------->
@@ -56,25 +57,18 @@
   <!-------###############------->
 
   
-  
-    </td>
-    <td width="21" height="35" style="background-image: url('/Woops/images/idDroit.jpg');" >
-
-    </td>
-  </tr>
-  
-  <tr>
-    <td colspan="3" height="15" style="background-image: url('/Woops/images/sousId.jpg');" >
-
-    </td>
-  </tr>
-
-  
-  <tr>
-    <td  width="35" height="100%" style="background-image: url('/Woops/images/menuGauche.jpg');">
-    </td>
-      <td width="171" valign="top" height="100%" style="background-image: url('/Woops/images/menu.jpg');" >
+ </div>
+      </td></tr>
+      </table>
       
+      <table class="table_spacer">
+      <tr><td>
+      </td></tr>
+      </table>
+      
+      <table width="200" class="table3">
+      <tr><td>
+      <div class="menu" >
       
   <!-------##########------->
   <!-------DEBUT MENU------->
@@ -84,59 +78,37 @@
   <!-------FIN MENU------->
   <!-------########------->
   
-    </td>
-
-    <td width="21" height="100%" style="background-image: url('/Woops/images/menuDroit.jpg');" >
-    </td>
-  </tr>
-  
-
-  
-  <tr>
-    <td colspan="3" height="36" style="background-image: url('/Woops/images/menuBas.jpg');" >
-
-    </td>
-  </tr>
-  
-</table>
-
-  
-  
-  
-  
-  </td>
-  
-  <td width="736" valign="top" height="100%">
-  
-  
-   <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
-  
-  <tr>
-    <td width="736" height="36" style="background-image: url('/Woops/images/contenuHaut.jpg');">
-
-    </td>
-  </tr>
-  
-  <tr>
-
-    <td height="27" style="background-image: url('/Woops/images/titre.jpg');padding:0 0 5 20;" >
+</div>
+      </td></tr>
+      </table>
     
+    </td>
+
+    <td width="3"></td>
+
+    <td valign="top">
     
+      <table   width="700" height="30"  class="table5">
+      <tr><td>
+      <div class="pageTitle" >
   <!-------###########------->
   <!-------DEBUT TITRE------->
 <template:get name="title"/>
   <!-------FIN TITRE------->
   <!-------#########------->
   
-  
-    </td>
-  </tr>
-  
-  <tr>
-
-    <td valign="top" width="736"  height="100%" style="background-image: url('/Woops/images/contenu.jpg'); padding:0 30 0 20;" >
-    
-    
+  </div>
+      </td></tr>
+      </table>
+      
+      <table  width="200"  class="table_spacer">
+      <tr><td>
+      </td></tr>
+      </table>
+      
+      <table width="700" height="200" class="table6">
+      <tr><td valign="top">
+      <div class="contenu">
   <!-------#############------->
   <!-------DEBUT CONTENU------->
   
@@ -145,27 +117,21 @@
   <!-------FIN CONTENU------->
   <!-------###########------->
  
-  
-
+  </div>
+      </td></tr>
+      </table>
+      
     </td>
-  </tr>
-
+    
   
-  <tr>
-    <td height="36" style="background-image: url('/Woops/images/contenuBas.jpg');" >
-
-    </td>
-  </tr>
+    </tr>
+    </table>
   
   
   </td>
-</tr>
-
-
-
+  </tr>
 </table>
 </center>
-
 
       <util:jsp directive="endofpage"/>  
       
