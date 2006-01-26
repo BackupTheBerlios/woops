@@ -9,7 +9,7 @@
 		<form-bean name="manageActivityCreationForm" type="view.activity.manage.ManageActivityCreationForm" />
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manage.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manage.ManageDependancesTypesForm" />
-
+		<form-bean name="showActivitySummaryForm" type="view.activity.summary.ShowActivitySummaryForm" />
 	  	<form-bean name="loginForm" type="view.logon.LoginForm" />
 	  
 	  	<form-bean name="emptyForm" type="view.common.EmptyForm"/>
@@ -38,10 +38,11 @@
       	 	scope="session"
       	 	input="/html/participant/activity/performing/listActivities.jsp"
       	 >
-         	<forward name="error" path="/html/participant/activity/performing/listActivities.jsp" />
+         	<forward name="error" path="/html/logon/loginUser.jsp" />
          	<forward name="success" path="/html/participant/activity/performing/listActivities.jsp" />
          	<forward name="action" path="/listActivities.do"/>
          	<forward name="edit" path="/manageActivityCreation.do"/>
+         	<forward name="drillDown" path="/showActivitySummary.do"/>
       	</action>
      	
   <!-- ================= Historized Activities ================ -->  
@@ -54,6 +55,7 @@
          	<forward name="success" path="/html/participant/activity/history/historizedActivities.jsp" />
          	<forward name="action" path="/historizedActivities.do"/>
       	</action>
+            
             
 <!-- ================= Manage Activity Dependances ================ -->  
       	<action path="/manageActivityDependances"	 type="view.activity.manage.ManageActivityDependancesAction"
@@ -101,6 +103,17 @@
         <forward name="previous" path="/listActivities.do"/>
      </action>
 
+<!-- ================= Show Activity Summary ================ -->  
+		<action path="/showActivitySummary"	 type="view.activity.summary.ShowActivitySummaryAction"
+      		name="showActivitySummaryForm"
+      	 	scope="session"
+      	 >
+         	<forward name="error" path="/showActivitySummary.do" />
+         	<forward name="success" path="/html/participant/activity/summary/showActivitySummary.jsp" />
+      		<forward name="previous" path="/listActivities.do"/>
+      	</action>
+
+
 <!-- ================= Login form ================ -->  
       	<action path="/loginUser"	 type="view.logon.LoginAction"
      		attribute="loginForm"
@@ -114,7 +127,8 @@
         	<forward name="success" path="/listActivities.do"/>
         	<forward name="admin" path="/html/admin/user/addUser.jsp"/>        	
      </action>  
-   
+  
+ 
    
    <!-- ================= Admin / addUser ================ -->  
       	<action path="/addUser"	 type="view.admin.user.AddUserAction"
@@ -133,4 +147,3 @@
 <message-resources parameter="ApplicationResources" />
 
 </struts-config>
-
