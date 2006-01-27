@@ -120,5 +120,30 @@
 			<taglib-location>/WEB-INF/tags/cc-utility.tld</taglib-location> 
 		</taglib>
 	</jsp-config>
+	
+<!-- Interdit l'accès direct aux JSP -->
+	<security-constraint> 
+		<web-resource-collection>
+			<web-resource-name>Toutes ressources JSP et HTML</web-resource-name>
+			<url-pattern>/html/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+    		<role-name>user</role-name>
+  		</auth-constraint>
+	</security-constraint>
+ 	
+ 	//the login page in case of form based authentication
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<form-login-config>
+			<form-login-page>/html/logon/loginUser.jsp</form-login-page> //path to login page
+			<form-error-page>/html/logon/loginUser.jsp</form-error-page> //path in case login fails
+		</form-login-config>
+	</login-config>
+	
+	<security-role>
+		<description>Un utilisateur quelconque</description>
+		<role-name>user</role-name>
+	</security-role>
 
 </web-app>
