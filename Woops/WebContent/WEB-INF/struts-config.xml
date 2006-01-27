@@ -93,19 +93,17 @@
 
 
 <!-- ================= Manage Activity Creation ================ -->  
-    	<action path="/manageActivityCreation" type="view.activity.manage.ManageActivityCreationAction"
-    		attribute="manageActivityCreationForm"
-        	name="manageActivityCreationForm"
-			validate="false"      
-        	scope="request"
-        	roles="#dev"
-   	 	>
-       		<forward name="success" path="/html/participant/activity/manage/manageActivityCreation.jsp" />
-        	<forward name="error" path="/html/participant/activity/manage/manageActivityCreation.jsp" />
-        	<forward name="finish" path="/listActivities.do"/>
-        	<forward name="next" path="/manageActivityDependances.do"/>
-        	<forward name="previous" path="/listActivities.do"/>
-     	</action>
+    <action path="/manageActivityCreation" type="view.activity.manage.ManageActivityCreationAction"
+    	attribute="manageActivityCreationForm"
+        name="manageActivityCreationForm"
+		validate="false"      
+        scope="request">
+        <forward name="success" path="/html/participant/activity/manage/manageActivityCreation.jsp" />
+        <forward name="error" path="/manageActivityCreation.do" />
+        <forward name="finish" path="/listActivities.do"/>
+        <forward name="next" path="/manageActivityDependances.do"/>
+        <forward name="previous" path="/listActivities.do"/>
+     </action>
 
 <!-- ================= Show Activity Summary ================ -->  
 		<action path="/showActivitySummary"	 type="view.activity.summary.ShowActivitySummaryAction"
