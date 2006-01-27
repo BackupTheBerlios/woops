@@ -9,6 +9,6 @@
         <menu:menuitem   	
         	id="1"  
         	text="menu.deconnection"      
-        	action="loginUser.do?actionSubmit=deconnect"/>
+        	action="logoutUser.do"/>
         	
 </menu:menu>
