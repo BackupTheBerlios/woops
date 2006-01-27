@@ -4,7 +4,6 @@
 <%@ taglib uri="/struts-html" prefix="html" %>
 
 <forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
-<forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
 <br>
 
 <html:form action="historizedActivities.do">	
@@ -22,13 +21,19 @@
 			<ctrl:columndrilldown 
 				title="table.field.listActivities.name" 
 				property="name" 
-				width="250"
-				sortable="true"/>
+				width="250"/>
 			
 			<ctrl:columntext 
-				title="table.field.listActivities.details"
-				property="details"
-				width="350"/>			
+				title="table.field.listActivities.startDate"
+				property="startDate"
+				width="150"
+				sortable="true"/>
+				
+			<ctrl:columntext 
+				title="table.field.listActivities.endDate"
+				property="endDate"
+				width="150"
+				sortable="true"/>				
 	</ctrl:list>
 	
 </html:form>
