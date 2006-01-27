@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
 import view.activity.ActivitySequenceItem;
+import view.activity.ActivitySequencesModel;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
@@ -107,7 +108,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 	
 		/* Sauvegarde de la simpleListControl dans la session pour que la page jsp y accede*/
 		SimpleListControl list = new SimpleListControl();
-		list.setDataModel(new ManageDependancesTypesModel(data));
+		list.setDataModel(new ActivitySequencesModel(data));
 		context.session().setAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST,list);
 		
 		/* Sauvegarde de la liste d'ActivitySequence r?cup?r?e avec le manager */
@@ -133,7 +134,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		/* Supression de l'attribut de la session */
 		context.session().removeAttribute(PresentationConstantes.KEY_DEPENDANCES_LIST_MNGR);
 		
-		ManageDependancesTypesModel listDataModel = (ManageDependancesTypesModel)dependancesListSlc.getDataModel();
+		ActivitySequencesModel listDataModel = (ActivitySequencesModel)dependancesListSlc.getDataModel();
 		
 		ActivitySequenceManager actSeqMngr = ActivitySequenceManager.getInstance();
 		ActivitySequenceTypeManager actSeqTypeMngr = ActivitySequenceTypeManager.getInstance();

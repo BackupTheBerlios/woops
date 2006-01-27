@@ -18,7 +18,6 @@
 		rows="5" 
 		refreshButton="false" 
 		createButton="true"
-		refreshButton="true"
 		>
 		
 		<util:designrule
@@ -41,12 +40,9 @@
 				title="table.field.listActivities.name" 
 				property="name" 
 				width="250"
-				sortable="true"/>
-			
-			<ctrl:columntext 
-				title="table.field.listActivities.details"
-				property="details"
-				width="350"/>
+				sortable="true"
+				tooltip="@{bean.details}"
+				/>
 				
 			<ctrl:columnhtml id="activity"
 				title="table.field.listActivities.state"

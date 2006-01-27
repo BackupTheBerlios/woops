@@ -174,10 +174,13 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	}
 	
 	/**
-	 * @param		ctx		FormActionContext
+	 * 
+	 * @param context
+	 * @return true si ca s'est bien passé
 	 */
-	public void saveDependances(FormActionContext context) {
-
+	public boolean saveDependances(FormActionContext context) {
+		boolean ok = false;
+		
 		ManageActivityDependancesForm form = (ManageActivityDependancesForm) context.form();
 		String[] newDependancesKeys  = form.getRealDependancesKeys();  
 		
@@ -223,6 +226,8 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 				
 				context.addGlobalMessage("msg.info.activity.dependances.saved",activity.getName());
 				
+				ok=true;
+				
 			} catch (PersistanceException e) {
 				context.addGlobalError("errors.persistance.global");
 				/** Rappel du formulaire avec le message d'erreur **/
@@ -238,6 +243,8 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			}
 		
 		}
+		else
+			ok=true;
 		
 		/**
 		 * Suppression des attributs de la session
@@ -248,7 +255,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		//R?percution de l'attribut
 		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
 		
-			
+		return ok;	
 	}
 	
 	/**
@@ -260,8 +267,8 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	
 	public void finish_onClick(FormActionContext context) {
 		
-		saveDependances(context);
-		context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+		if(saveDependances(context))
+			context.forwardByName(PresentationConstantes.FORWARD_FINISH);
 	}
 	
 	
@@ -275,8 +282,8 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	
 	public void next_onClick(FormActionContext context) {
 		
-		saveDependances(context);
-		context.forwardByName(PresentationConstantes.FORWARD_NEXT);
+		if(saveDependances(context))
+			context.forwardByName(PresentationConstantes.FORWARD_NEXT);
 	}
 	
 	/**

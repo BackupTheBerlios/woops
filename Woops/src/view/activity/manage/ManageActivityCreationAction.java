@@ -73,7 +73,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		else {
 			mode = PresentationConstantes.INSERT_MODE;
 			
-			form.setCaption("form.title.manageActivityCreation.update");
+			form.setCaption("form.title.manageActivityCreation.insert");
 			form.setDisableNext("false");
 		}
 		
@@ -92,8 +92,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	
 	public void finish_onClick(FormActionContext context) {
 		
-		saveActivity(context);
-		context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+		if(saveActivity(context))
+			context.forwardByName(PresentationConstantes.FORWARD_FINISH);
 	}
 	
 	
@@ -106,9 +106,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	 */
 	
 	public void next_onClick(FormActionContext context) {
-		
-		saveActivity(context);
-		context.forwardByName(PresentationConstantes.FORWARD_NEXT);
+		if(saveActivity(context))
+			context.forwardByName(PresentationConstantes.FORWARD_NEXT);
 	}
 	
 	/**
@@ -127,8 +126,11 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	/**
 	 * Methode effectuant la sauvegarde en base
 	 * @param context
+	 * @return true si ca s'est bien passé
 	 */
-	public void saveActivity(FormActionContext context) {
+	public boolean saveActivity(FormActionContext context) {
+		
+		boolean ok = false;
 		
 		ManageActivityCreationForm form = (ManageActivityCreationForm) context.form();
 
@@ -189,6 +191,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				// R?percution de l'attribut
 				context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
 				
+				ok=true;
+				
 			} catch (PersistanceException pe) {
 				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
                 context.addGlobalError("errors.persistance.global");
@@ -199,6 +203,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
         } else {
         	context.forwardByName(PresentationConstantes.FORWARD_ERROR);
         }
+	    
+	    return ok;
 	}
 	
 	

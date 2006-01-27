@@ -1,6 +1,8 @@
 package view.activity.summary;
 
 import com.cc.framework.adapter.struts.FWActionForm;
+import com.cc.framework.ui.control.SimpleListControl;
+import com.cc.framework.ui.model.ListDataModel;
 
 /**
  * @author Simon REGGIANI
@@ -8,15 +10,20 @@ import com.cc.framework.adapter.struts.FWActionForm;
 
 public class ShowActivitySummaryForm extends FWActionForm {
 
-	private	String	activityId; 	/** identifiant de l'activit? */
-	private String 	name; 			/** nom de l'activit? */
-	private	String	details; 		/** description de l'activit? */
-	private String	state;			/** état de l'activté */
-	private String	startDate;		/** date de début de l'activité */
-	private String	endDate;		/** date de fin de l'activité */
+	private	String	activityId; /** identifiant de l'activit? */
+	private String 	name; 		/** nom de l'activit? */
+	private	String	details; 	/** description de l'activit? */
+	private String	state;		/** état de l'activté */
+	private String	startDate;	/** date de début de l'activité */
+	private String	endDate;	/** date de fin de l'activité */
+	
+	private SimpleListControl	predecessorsList;	/** liste des dépendances entrantes */
+	private SimpleListControl	successorsList;		/** liste des dépendances sortantes */
 	
 	public ShowActivitySummaryForm() {
 		super();
+		predecessorsList = new SimpleListControl();
+		successorsList = new SimpleListControl();
 	}
 
 	
@@ -117,6 +124,38 @@ public class ShowActivitySummaryForm extends FWActionForm {
 	 */
 	public void setState(String state) {
 		this.state = state;
+	}
+
+
+	/**
+	 * @return Returns the predecessorsList.
+	 */
+	public SimpleListControl getPredecessorsList() {
+		return predecessorsList;
+	}
+
+
+	/**
+	 * @param model The model to set to predecessorsList.
+	 */
+	public void setPredecessorsList(ListDataModel model) {
+		this.predecessorsList.setDataModel(model);
+	}
+
+
+	/**
+	 * @return Returns the successorsList.
+	 */
+	public SimpleListControl getSuccessorsList() {
+		return successorsList;
+	}
+
+
+	/**
+	 * @param model The model to set to successorsList.
+	 */
+	public void setSuccessorsList(ListDataModel model) {
+		this.successorsList.setDataModel(model);
 	}
 
 	

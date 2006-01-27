@@ -231,7 +231,11 @@ public class ListActivitiesAction extends WoopsCCAction {
 	
 	
 	
-	
+	public void listActivities_onDrilldown(ControlActionContext context, String activityIdString) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,new Integer(activityIdString));
+		
+		context.forwardByName(PresentationConstantes.FORWARD_DRILLDOWN);
+	}
 	
 	
 	public void listActivities_onDelete(ControlActionContext context, String activityIdString) throws IOException, ServletException, PersistanceException, ForeignKeyException {

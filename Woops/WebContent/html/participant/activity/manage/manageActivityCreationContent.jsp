@@ -7,7 +7,6 @@
 <%@ taglib uri="/cc-controls" prefix="ctrl" %>
 
 
-
 <html:form action="manageActivityCreation.do">
 
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -22,14 +21,14 @@
     
     
 		 <forms:text        
-		 label="form.field.manageActivityCreation.name"         
+		 label="form.field.activity.name"         
 		 property="name"     
 		 maxlength="50" 
 		 required="true"  
 		 />
  
          <forms:textarea
-            label="form.field.manageActivityCreation.details"
+            label="form.field.activity.details"
             property="details"
             cols="64"
             rows="3"          

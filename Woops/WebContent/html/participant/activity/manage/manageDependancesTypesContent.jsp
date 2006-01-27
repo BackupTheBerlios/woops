@@ -12,23 +12,27 @@
 	
 	<br>
 	
+	
+	
     <ctrl:list
 		name="KEY_DEPENDANCES_LIST"
-		title="list.title.manageDependancesTypes">
+		title="list.title.manageDependancesTypes"
+		formElement="true"
+		>
        
         <ctrl:columntext    title="list.manageDependancesTypes.predecessor"         property="predecessor"/>
         <ctrl:columntext    title="list.manageDependancesTypes.successor"         	property="successor"/>
               
         <ctrl:columngroup title="list.manageDependancesTypes.columngroup.title" align="center">
-			<ctrl:columnradio	title="list.manageDependancesTypes.columngroup.fs"     property="linkType"   value="finishToStart"		editable="true"/>
-			<ctrl:columnradio	title="list.manageDependancesTypes.columngroup.ff"     property="linkType"   value="finishToFinish"    editable="true"/>
-			<ctrl:columnradio	title="list.manageDependancesTypes.columngroup.ss"     property="linkType"   value="startToStart"  	editable="true"/>
-			<ctrl:columnradio	title="list.manageDependancesTypes.columngroup.sf"   	property="linkType"   value="startToFinish"   	editable="true"/>
+			<ctrl:columnradio	title="finishToStart"   property="linkType"   value="finishToStart"		editable="true"/>
+			<ctrl:columnradio	title="finishToFinish"	property="linkType"   value="finishToFinish"    editable="true"/>
+			<ctrl:columnradio	title="startToStart"    property="linkType"   value="startToStart"  	editable="true"/>
+			<ctrl:columnradio	title="startToFinish"   property="linkType"   value="startToFinish"   	editable="true"/>
 		</ctrl:columngroup>      
                
     </ctrl:list>
         
-   	<forms:form type="edit" noframe="true" formid="frmDependancesTypes">
+	<forms:form type="edit" noframe="true" formid="frmDependancesTypes">
 	
 		<forms:buttonsection default="btnFinish">
 	        

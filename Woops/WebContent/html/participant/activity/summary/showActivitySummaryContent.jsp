@@ -24,10 +24,14 @@
             property="details"          
           	/>
           
-        <forms:text
-            label="form.field.activity.state"        
-    		property="state"
-    		/>
+        <forms:html
+            label="form.field.activity.state"
+			>
+    		<bean:message 
+    			name="showActivitySummaryForm"
+    			property="state"
+    			/>
+    	</forms:html>
           
         <forms:text
 			label="form.field.activity.startDate"
@@ -38,18 +42,33 @@
 			label="form.field.activity.endDate"
             property="endDate"          
           	/>    
-            
-        <forms:buttonsection default="btnPrevious">
-        
-            <forms:button
-				name="btnPrevious"
-				text="form.button.previous"
-				/>
- 
-		</forms:buttonsection>
-        
+          	
     </forms:form>
+    
+	<br>
 	
+	<ctrl:list 
+		id="predecessorsList" 
+		property="predecessorsList" 
+		title="predecesors"  
+		rows="5"
+		>
+		
+		<ctrl:columntext
+			title="predecessor"
+			property="predecessor"
+			/>
+		
+			
+	</ctrl:list>
+	
+	<br>
+    
+    <ctrl:button
+		name="btnPrevious"
+		text="form.button.previous"
+		/>
+		
 </html:form>
  
 
