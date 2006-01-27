@@ -9,12 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html;">
 <link href="images/css.css" rel="stylesheet" type="text/css">
 
+<util:base/>
 
-  <!-------##############------->
-  <!-------DEB INCLUSIONS------->
+
+<%-- Framework Includes --%>
 <util:jsp directive="includes"/>
-  <!-------FIN INCLUSIONS------->
-  <!-------##############------->
   
 </head>
 
