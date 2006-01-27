@@ -12,6 +12,11 @@
         	id="2"  
         	text="admin.menu.createUser"      
         	action="html/admin/user/addUser.jsp"/>
+        	
+         <menu:menuitem   	
+        	id="3"  
+        	text="admin.menu.listUsers"      
+        	action="html/admin/user/listUsers.jsp"/>
      
 
 </menu:menu>
