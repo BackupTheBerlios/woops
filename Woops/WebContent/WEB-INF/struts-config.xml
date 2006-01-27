@@ -126,7 +126,7 @@
         	input="/html/logon/loginUser.jsp">
         	<forward name="error" path="/html/logon/loginUser.jsp" />
         	<forward name="success" path="/listActivities.do"/>
-        	<forward name="admin" path="/html/admin/user/listUsers.jsp"/>  
+        	<forward name="admin" path="/listUsers.do"/>  
      	</action>
 
 <!-- ================= Login form ================ -->  
@@ -169,8 +169,9 @@
 			validate="false"      
         	scope="request"
         	input="/html/admin/user/listUsers.jsp">
-        	<forward name="error" path="/html/admin/user/listUsers.jsp" />
-        	<forward name="success" path="/html/admin/user/listUsers.jsp"/>
+        	<forward name="error" path="/listUsers.do" />
+        	<forward name="success" path="/listUsers.do"/>
+        	<forward name="edit" path="/addUser.do"/>
      </action>
 
 	</action-mappings>

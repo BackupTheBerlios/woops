@@ -70,7 +70,6 @@ public class ListUsersAction extends WoopsCCAction {
 		Collection dbData = null;
 		Collection listUsersItems = null;
 		UserItem userItem = null;
-		User sessionUser = null;
 		
 		// Initialisation du form si celui-ci est nul
 		if (context.form()==null) {
@@ -79,12 +78,9 @@ public class ListUsersAction extends WoopsCCAction {
 		
 		// Récupération du form bean nécessaire pour fournir les informations à la JSP
     	ListUsersForm listUsersForm = (ListUsersForm) context.form();
-
-    	// Récupération de l'identifiant du participant connecté
-    	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
     	
     	// Récupération de la liste des activités
-    	//dbData = UserManager.getInstance();
+    	dbData = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
 
     	// Constitue une liste d'ActivityItems à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();
@@ -99,13 +95,14 @@ public class ListUsersAction extends WoopsCCAction {
     		userItem.setLastName(user.getLastName());
     		userItem.setLogin(user.getLogin());
     		userItem.setRole(user.getRole().getName());
-    		  		
+    		
+    		listUsersItems.add(userItem);
 			// Construction de la hash map stockant la liste des activit?s
 			usersMap.put(user.getId(),user);
     	}
 
 		// Conversion de la liste en tableau d'items
-		DisplayObject[] result = new ActivityItem[listUsersItems.size()];
+		DisplayObject[] result = new UserItem[listUsersItems.size()];
 		listUsersItems.toArray(result);
 		
 		// Création de la liste initialisée avec les valeurs à afficher

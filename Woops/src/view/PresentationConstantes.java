@@ -59,6 +59,8 @@ public interface PresentationConstantes {
     public static final String UPDATE_MODE = "update_mode";
     
     // Constantes forward pour admin
-    public static final String FORWARD_ADMIN="admin";
-	
+    public static final String FORWARD_ADMIN="admin";   
+    
+    // constantes de nom de table
+	public static final String TABLE_USER="User";
 }

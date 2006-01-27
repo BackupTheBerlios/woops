@@ -67,14 +67,6 @@
 				title="table.field.listUsers.delete"
 				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
 				/> 
-				
-			<ctrl:columnbutton 
-				title="table.field.listUsers.action" 
-				text="@{bean.action}" 
-				align="center"
-				command="change"
-				width="150">
-			</ctrl:columnbutton>
 			
 	</ctrl:list>
 	
