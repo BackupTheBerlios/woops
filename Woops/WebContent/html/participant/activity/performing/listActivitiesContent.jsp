@@ -18,6 +18,7 @@
 		rows="5" 
 		refreshButton="false" 
 		createButton="true"
+		refreshButton="true"
 		>
 		
 		<util:designrule
