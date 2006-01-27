@@ -16,17 +16,17 @@
 		title="table.title.listActivities" 
 		width="650" 
 		rows="5" 
-		refreshButton="false" 
+		refreshButton="true" 
 		createButton="true"
 		>
 		
 		<util:designrule
         rule="@{bean.action == '' && bean.state == 'created'}"
-        style="background-color: gray;"/>
+        style="background-color: #FFC4C4;"/>
         
         <util:designrule
         rule="@{bean.action == '' && bean.state == 'inProgress'}"
-        style="background-color: gray; font-weight: bold;"/>
+        style="background-color: #FFC4C4; font-weight: bold;"/>
         
         <util:designrule
         rule="@{bean.action != '' && bean.state == 'created'}"
