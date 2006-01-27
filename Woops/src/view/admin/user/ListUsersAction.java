@@ -148,59 +148,9 @@ public class ListUsersAction extends WoopsCCAction {
 		context.control().execute(context, column,  direction);
 	}
 	
-	
-	/**
-	 * Cette est appelée si le participant souhaite commencer ou terminer une activité
-	 * @param context	contexte d'execution de la servlet
-	 * @param key	identifiant d'une activité
-	 * @throws IOException	indique qu'une erreur au niveau des entrées/sorties s'est produite 
-	 * @throws ServletException	indique que le traitement demandé a généré une exception
-	 */
-	public void listUsers_onChange(ControlActionContext context, String key) throws IOException, ServletException {
-		String login = key;
-		
-//		try {
-//			User user = UserManager.getInstance().getUser(login);
-//			
-//			/* Test si le changement peut être effectué : ce traitement implique la vérification 
-//			des dépendances relatives à l'activité sélectionnée */
-//			if (!activity.process()) {
-//				/* Informe l'utilisateur : le message affiché au participant est fonction de l'action
-//				qu'il avait demandée */
-//				if (activity.getState() instanceof CreatedActivityState) {
-//					context.addGlobalError("msg.error.activity.change.state.created", activity.getName());
-//				} else if (activity.getState() instanceof InProgressActivityState) {
-//					context.addGlobalError("msg.error.activity.change.state.inprogress", activity.getName());
-//				}
-//			} else {
-//				// Met à jour en BD l'état de l'activité 
-//				ActivityManager.getInstance().update(activity);
-//				// Informe le participant que sa demande a été prise en compte
-//				if (activity.getState() instanceof InProgressActivityState) {
-//					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());
-//				} else if (activity.getState() instanceof FinishedActivityState) {
-//					context.addGlobalError("msg.error.activity.change.state.finished", activity.getName());
-//				}
-//			}
-//		} catch (PersistanceException pe) {
-//			logger.error(pe);
-//			context.addGlobalError("errors.persistance.select");
-//		} catch (Throwable t) {
-//			logger.error(t);
-//			context.addGlobalError("errors.global");
-//		}
-		context.forwardByName(PresentationConstantes.FORWARD_ACTION);
-	}
-	
-	
-	
-	
-	
-	
-	
-	public void listUsers_onEdit(ControlActionContext context, String activityIdString) throws IOException, ServletException {
+	public void listUsers_onEdit(ControlActionContext context, String login) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
-		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,new Integer(activityIdString));
+		context.request().setAttribute(PresentationConstantes.PARAM_LOGIN,login);
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
 	}

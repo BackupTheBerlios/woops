@@ -31,6 +31,7 @@ public interface PresentationConstantes {
 	public static final String PARAM_ACTION_SUBMIT="actionSubmit";
 	public static final String PARAM_MODE="mode";
 	public static final String PARAM_ACTIVITY_ID="activityId";
+	public static final String PARAM_LOGIN="login";
 
 	
 	//constantes relatives aux Styles
