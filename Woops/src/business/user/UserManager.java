@@ -1,6 +1,7 @@
 package business.user;
 
 import java.io.File;
+import java.util.List;
 
 import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectManager;
@@ -13,7 +14,7 @@ public class UserManager extends PersistentObjectManager {
 	private static UserManager instance;
 	
 	/**
-	 * Singleton -> Constructeur privé
+	 * Singleton -> Constructeur priv?
 	 */
 	private UserManager() {}
 
@@ -33,7 +34,7 @@ public class UserManager extends PersistentObjectManager {
 	
 
 	/**
-	 * Cette methode controle la validité du couple login/mot de passe
+	 * Cette methode controle la validit? du couple login/mot de passe
 	 * @param login
 	 * @param password
 	 * @return
@@ -50,12 +51,12 @@ public class UserManager extends PersistentObjectManager {
 	// TESTS //
 	public static void main(String[] args) {
 		
-		File f = new File("C:/Abeilles/Travail/eclipse 3.1/workspace/Woops/src/hibernate.cfg.xml");
+		File f = new File("/users/iupisi/m1isi23/eclipse/workspace/Woops/src/hibernate.cfg.xml");
 		HibernateSessionFactory.init(f);
 		
 		try {
-			User user = UserManager.getInstance().isLoginValid("toto","tutu");
-			if (user==null)
+			List boubou = UserManager.getInstance().getList("User");
+			if (boubou==null)
 				System.out.println("User doesn't exist !");
 			else
 				System.out.println("It's ok man");

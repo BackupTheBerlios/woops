@@ -1,6 +1,7 @@
 package business.hibernate;
 
 import java.io.Serializable;
+import java.util.List;
 
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
@@ -19,7 +20,7 @@ public class PersistentObjectManager {
     /*private static ObjetPersistantManager instance;
     
     /**
-     * Singleton -> Constructeur privé
+     * Singleton -> Constructeur priv?
      */
     /*private ObjetPersistantManager() {}
 
@@ -46,7 +47,7 @@ public class PersistentObjectManager {
     }
     
     /**
-     * Methode ajoutée par simon et ben, le 23/01/06
+     * Methode ajout?e par simon et ben, le 23/01/06
      * 
      * @param objet
      * @return
@@ -76,6 +77,10 @@ public class PersistentObjectManager {
     
     public void delete(PersistentObject objet, Session session) throws HibernateException, ForeignKeyException {
         dao.delete(objet,session);
+    }
+    
+    public List getList(String table) throws PersistanceException {
+    	return dao.getList(table);
     }
 
 }
