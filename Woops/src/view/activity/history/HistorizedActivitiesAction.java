@@ -8,7 +8,6 @@ import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
 import view.activity.performing.ListActivitiesForm;
-import view.activity.performing.ListActivitiesModel;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
@@ -17,6 +16,8 @@ import business.user.User;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
+import com.cc.framework.common.SortOrder;
+import com.cc.framework.ui.control.ControlActionContext;
 
 public class HistorizedActivitiesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(HistorizedActivitiesAction.class);    
@@ -69,6 +70,7 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 
     	// Récupération de l'identifiant du participant connecté
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+    	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer)sessionUser.getId());  	
     	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer) sessionUser.getId());  	
 
     	// Constitue une liste d'ActivityItems à partir des données stockées en BD  
@@ -92,8 +94,24 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 		listActivitiesItems.toArray(result);
 		
 		// Création de la liste initialisée avec les valeurs à afficher
-		ListActivitiesModel model = new ListActivitiesModel(result);
+		HistorizedActivitiesModel model = new HistorizedActivitiesModel(result);
 		listActivitiesForm.setDataModel(model);
+	}
+	
+	/**
+	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
+	 * @param context	contexte d'execution de la servlet
+	 * @param column	colonne à trier
+	 * @param direction	direction (ASC, DESC)
+	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
+	 */
+	public void listActivities_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
+		// Récupération de la liste dans le contexte
+		HistorizedActivitiesModel model = (HistorizedActivitiesModel) context.control().getDataModel();
+		
+		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
+		model.sortByColumn(column, direction);		
+		context.control().execute(context, column,  direction);
 	}
 
 }
