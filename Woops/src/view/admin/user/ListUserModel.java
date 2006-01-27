@@ -3,6 +3,7 @@ package view.admin.user;
 import java.util.Arrays;
 
 import business.format.ColumnComparator;
+import business.format.StringColumnComparator;
 import business.user.User;
 
 import com.cc.framework.common.DisplayObject;
@@ -41,7 +42,7 @@ public class ListUserModel extends WoopsListDataModel {
 	 * @param direction		ordre de tri : ascendant ou descendant
 	 */	
 	public void sortByColumn(String column, SortOrder direction) {
-		Arrays.sort(data, new ColumnComparator(column, direction));
+		Arrays.sort(data, new StringColumnComparator(column, direction));
 	}
 
 }
