@@ -1,5 +1,6 @@
 package business.activity.state;
 
+import java.util.Date;
 import java.util.Iterator;
 
 import business.BusinessConstantes;
@@ -22,8 +23,8 @@ public class InProgressActivityState extends IActivityState {
 		boolean result = false;
 		if (checkBeforeChange(activity)) {
 			FinishedActivityState finished = new FinishedActivityState();
-			
 			activity.setState(finished);
+			activity.setEndDate(new Date());
 			result = true;
 		}
 		return result;

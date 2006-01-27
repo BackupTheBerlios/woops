@@ -15,7 +15,7 @@
 			name="name"
 			type="string" 
 		>
-			<!--identifiant auto-incrementé --> 
+			<!-- l'identifiant est fourni par l'application --> 
 			<generator class="assigned" />
 		</id>
 		
