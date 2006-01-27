@@ -13,5 +13,10 @@
         	id="2"  
         	text="menu.manageActivityCreation"      
         	action="manageActivityCreation.do"/>
+        
+        <menu:menuitem   	
+        	id="1"  
+        	text="menu.historizedActivities"      
+        	action="historizedActivities.do"/>
 
 </menu:menu>
