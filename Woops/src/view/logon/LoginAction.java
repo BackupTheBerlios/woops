@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
 import business.hibernate.exception.PersistanceException;
+import business.security.SecurityConfig;
 import business.user.User;
 import business.user.UserManager;
 
@@ -48,7 +49,16 @@ public class LoginAction extends WoopsCCAction {
 						//on met en session l'utilisateur
 						httpSession.setAttribute(PresentationConstantes.KEY_USER,user);
 						
-						context.forwardToAction("/listActivities");
+						
+						
+						if (SecurityConfig.isAdmin(user))
+						{
+							context.forwardByName(PresentationConstantes.FORWARD_ADMIN);
+						}
+						else{
+							context.forwardToAction("/listActivities");	
+						}
+							
 					}
 					else {
 						context.addGlobalError("errors.login.invalide");

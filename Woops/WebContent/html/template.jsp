@@ -7,9 +7,10 @@
 <head>
 <title>WOOPS</title>
 <meta http-equiv="Content-Type" content="text/html;">
+<util:base/>
 <link href="images/css.css" rel="stylesheet" type="text/css">
 
-<util:base/>
+
 
 
 <%-- Framework Includes --%>

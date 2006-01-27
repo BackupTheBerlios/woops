@@ -14,6 +14,7 @@
 	  
 	  	<form-bean name="emptyForm" type="view.common.EmptyForm"/>
 	  	
+	  	<form-bean name="listUsersForm" type="view.admin.user.ListUsersForm" />  
 	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />  
 	</form-beans>
 
@@ -125,7 +126,7 @@
         	input="/html/logon/loginUser.jsp">
         	<forward name="error" path="/html/logon/loginUser.jsp" />
         	<forward name="success" path="/listActivities.do"/>
-        	<forward name="admin" path="/html/admin/user/addUser.jsp"/>  
+        	<forward name="admin" path="/html/admin/user/listUsers.jsp"/>  
      	</action>
 
 <!-- ================= Login form ================ -->  
@@ -134,8 +135,7 @@
         	name="loginForm"
 			validate="false"      
         	scope="request"
-        	input="/html/logon/loginUser.jsp"
-        >
+        	input="/html/logon/loginUser.jsp">
             <forward name="deconnect" path="/html/logon/loginUser.jsp" />
      	</action>   
 
@@ -155,7 +155,6 @@
       	<action path="/addUser"	 type="view.admin.user.AddUserAction"
      		attribute="addUserForm"
         	name="addUserForm"
-        	parameter="actionSubmit"
 			validate="false"      
         	scope="request"
         	input="/html/admin/user/addUser.jsp">
@@ -164,10 +163,9 @@
      	</action>  
      	
      <!-- ================= Admin / listUsers ================ -->  
-      	<action path="/listUsers"	 type="view.admin.user.AddUserAction"
+      	<action path="/listUsers"	 type="view.admin.user.ListUsersAction"
      		attribute="listUsersForm"
         	name="listUsersForm"
-        	parameter="actionSubmit"
 			validate="false"      
         	scope="request"
         	input="/html/admin/user/listUsers.jsp">

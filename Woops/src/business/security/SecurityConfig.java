@@ -51,7 +51,7 @@ public final class SecurityConfig {
 	 * @param 	user 	utilisateur
 	 * @return <code>true</code> Si l'utilisateur est administrateur
 	 */
-	public boolean isAdmin(User user) {
+	public static boolean isAdmin(User user) {
 		RoleDescriptor userRole = user.getRole();
 		return userRole.getCode().equals(Roles.ADMINISTRATOR_ROLE);
 	}

@@ -11,12 +11,12 @@ import com.cc.framework.common.SortOrder;
 
 import view.common.WoopsListDataModel;
 
-public class ListUserModel extends WoopsListDataModel {
+public class ListUsersModel extends WoopsListDataModel {
 
 	/**
 	 * Constructeur par défaut
 	 */
-	public ListUserModel() {
+	public ListUsersModel() {
 		super();
 	}
 	
@@ -25,7 +25,7 @@ public class ListUserModel extends WoopsListDataModel {
 	 * pour le contrôleur c'est à dire les lignes de la liste qui 
 	 * sera affichée au participant
 	 */
-	public ListUserModel(DisplayObject[] elements) {
+	public ListUsersModel(DisplayObject[] elements) {
 		super(elements);
 	}
 	
