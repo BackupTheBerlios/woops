@@ -44,5 +44,13 @@
 			not-null="true"
 			type="string"
 		 />	
+		 
+		 <many-to-one
+			class="business.user.UserRole"
+			name="role"
+			not-null="true"
+			>
+			<column name="role" />
+		</many-to-one>
 	</class>	
 </hibernate-mapping>

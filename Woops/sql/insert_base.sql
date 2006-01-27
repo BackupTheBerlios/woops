@@ -1,6 +1,6 @@
-INSERT INTO `User` (`firstName`, `lastName`, `login`, `password` ) VALUES  ( 'Bernard', 'Cherbonneau', 'bernard', 'bernard' );
-INSERT INTO `User` (`firstName`, `lastName`, `login`, `password` ) VALUES  ( 'Claude', 'Aubry', 'claude', 'claude' );
-
+INSERT INTO `User` (`firstName`, `lastName`, `login`, `password`, `role` ) VALUES  ( 'Bernard', 'Cherbonneau', 'bernard', 'bernard', 'dev' );
+INSERT INTO `User` (`firstName`, `lastName`, `login`, `password`, `role` ) VALUES  ( 'Claude', 'Aubry', 'claude', 'claude', 'dev' );
+INSERT INTO `User` (`firstName`, `lastName`, `login`, `password`, `role` ) VALUES  ( 'root', 'root', 'woops', 'woops', 'admin' );
 
 INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'Analyser le probl?me', '', 1, 'created' );
 INSERT INTO `Activity` (`name`, `details`, `user`, `state` ) VALUES  ( 'Identifier cas d''utilisation', '', 1, 'created' );

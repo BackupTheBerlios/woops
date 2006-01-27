@@ -2,8 +2,15 @@ DROP TABLE ActivitySequence;
 DROP TABLE Activity;
 DROP TABLE ActivitySequenceType;
 DROP TABLE User;
+DROP TABLE UserRole;
 DROP TABLE ActivityState;
 
+
+CREATE TABLE UserRole (
+       code VARCHAR(10) NOT NULL
+     , name VARCHAR(30) NOT NULL
+     , PRIMARY KEY (code)
+)ENGINE=InnoDB;
 
 CREATE TABLE User (
        id INT NOT NULL AUTO_INCREMENT
@@ -11,8 +18,11 @@ CREATE TABLE User (
      , lastName VARCHAR(50) NOT NULL
      , login VARCHAR(20) NOT NULL
      , password VARCHAR(10) NOT NULL
+     , role VARCHAR(10) NOT NULL
      , UNIQUE UQ_User_login (login)
      , PRIMARY KEY (id)
+     , CONSTRAINT FK_User_role FOREIGN KEY (role)
+                  REFERENCES UserRole (code)
 )ENGINE=InnoDB;
 
 CREATE TABLE ActivitySequenceType (
@@ -73,3 +83,5 @@ INSERT INTO ActivitySequenceType(name) VALUES ('startToFinish');
 INSERT INTO ActivityState(name) VALUES ('created');
 INSERT INTO ActivityState(name) VALUES ('inProgress');
 INSERT INTO ActivityState(name) VALUES ('finished');
+INSERT INTO UserRole VALUES ('admin', 'administrator');
+INSERT INTO UserRole VALUES ('dev', 'developer');
