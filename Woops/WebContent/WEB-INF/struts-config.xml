@@ -158,10 +158,22 @@
         	parameter="actionSubmit"
 			validate="false"      
         	scope="request"
-        	input="/html/admin/addUser.jsp">
+        	input="/html/admin/user/addUser.jsp">
         	<forward name="error" path="/html/admin/user/addUser.jsp" />
         	<forward name="success" path="/html/admin/user/addUser.jsp"/>
      	</action>  
+     	
+     <!-- ================= Admin / listUsers ================ -->  
+      	<action path="/listUsers"	 type="view.admin.user.AddUserAction"
+     		attribute="listUsersForm"
+        	name="listUsersForm"
+        	parameter="actionSubmit"
+			validate="false"      
+        	scope="request"
+        	input="/html/admin/user/listUsers.jsp">
+        	<forward name="error" path="/html/admin/user/listUsers.jsp" />
+        	<forward name="success" path="/html/admin/user/listUsers.jsp"/>
+     </action>
 
 	</action-mappings>
 
