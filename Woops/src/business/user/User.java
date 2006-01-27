@@ -2,10 +2,14 @@ package business.user;
 
 import java.util.Collection;
 
+import business.security.RoleDescriptor;
 import business.hibernate.HistorizedObject;
 
-public class User extends HistorizedObject{	
-	private static final long serialVersionUID = 1L;
+import com.cc.framework.security.Principal;
+
+public class User extends HistorizedObject implements Principal {
+
+	private static final long serialVersionUID = -526715186666675789L; 	/** Generated Serial ID */
 
 	private Integer id;
 
@@ -16,6 +20,9 @@ public class User extends HistorizedObject{
 	private String firstName;
 
 	private String lastName;
+	
+	/** user role */
+	private RoleDescriptor role = null;
 
 	/**
 	 * @link aggregation
@@ -25,6 +32,13 @@ public class User extends HistorizedObject{
 	 */
 	private Collection linkToActivity = null;
 
+	/**
+	 * Constructeur
+	 */
+	public User() {
+		super();
+	}
+	
 	public Collection getLinkToActivity() {
 		return linkToActivity;
 	}
@@ -71,5 +85,48 @@ public class User extends HistorizedObject{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	/**
+	 * Récupération du rôle
+	 * @return UserRole
+	 */
+	public RoleDescriptor getRole() {
+		return role;
+	}
+	
+	/**
+	 * Modification du rôle
+	 * @param role Le rôle à modifier
+	 */
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+	
+	
+//	 ==============================
+	// Principal
+	// ==============================
+
+	/**
+	 * @see com.cc.framework.security.Principal#hasRight(java.lang.String)
+	 */
+	public boolean hasRight(String checkForRight) {
+		if (role == null) {
+			return false;
+		} else {
+			return role.hasRight(checkForRight);
+		}
+	}
+
+	/**
+	 * @see com.cc.framework.security.Principal#isInRole(java.lang.String)
+	 */
+	public boolean isInRole(String checkForRole) {
+		if (role == null) {
+			return false;
+		} else {
+			return role.equals(checkForRole);
+		}
 	}
 }
