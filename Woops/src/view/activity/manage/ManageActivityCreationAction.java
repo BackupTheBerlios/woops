@@ -56,6 +56,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			Activity activity = (Activity)activitiesMap.get(activityId);
 			
 			form.setActivityId(activityId.toString());
+			
+		
 			form.setName(activity.getName());
 			form.setDetails(activity.getDetails());			
 			form.setCaption("form.title.manageActivityCreation.update");
@@ -149,10 +151,10 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				
 				if (mode.equals(PresentationConstantes.INSERT_MODE)) {
 					Activity activity = new Activity();
-					
+										
 					// R?cup?ration des champs que l'utilisateur a pu entrer
 					activity.setDetails(form.getDetails());
-					activity.setName(form.getName());
+					activity.setName(form.getName().trim());
 					
 					activity.setState(new CreatedActivityState());
 					
