@@ -4,7 +4,8 @@ DROP TABLE ActivitySequenceType;
 DROP TABLE User;
 DROP TABLE UserRole;
 DROP TABLE ActivityState;
-
+DROP TABLE BreakDownElement;
+DROP TABLE BreakDownElementKind;
 
 CREATE TABLE UserRole (
        code VARCHAR(10) NOT NULL
@@ -23,6 +24,25 @@ CREATE TABLE User (
      , PRIMARY KEY (id)
      , CONSTRAINT FK_User_role FOREIGN KEY (role)
                   REFERENCES UserRole (code)
+)ENGINE=InnoDB;
+
+CREATE TABLE BreakdownElementKind (
+       id INT NOT NULL AUTO_INCREMENT
+     , name VARCHAR(15) NOT NULL
+     , UNIQUE UQ_ActivitySequenceType_name (name)
+     , PRIMARY KEY (id)
+)ENGINE=InnoDB;
+
+CREATE TABLE BreakdownElement (
+       id INT NOT NULL AUTO_INCREMENT
+     , prefix VARCHAR(15) NOT NULL
+     , startDate DATE
+     , endDate DATE
+     , kind INT NOT NULL
+     , UNIQUE UQ_BreakdownElement_prefix (prefix)
+     , PRIMARY KEY (id)
+     , CONSTRAINT FK_BreakdownElement_kind FOREIGN KEY (kind)
+     			  REFERENCES BreakdownElementKind (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE ActivitySequenceType (
