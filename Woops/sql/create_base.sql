@@ -48,6 +48,7 @@ CREATE TABLE Activity (
      , state VARCHAR(50) NOT NULL
      , PRIMARY KEY (id)
      , INDEX (user)
+     , UNIQUE KEY `name` (`name`)
      , CONSTRAINT FK_Activity_user FOREIGN KEY (user)
                   REFERENCES User (id)
      , CONSTRAINT FK_Activity_state FOREIGN KEY (state)
