@@ -177,10 +177,10 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					Activity activity = (Activity)activitiesMap.get(activityId);
 					
 					/* V?rification que l'utilisateur a bien modifi? quelque chose */
-					if ( !form.getName().equals(activity.getName()) || !form.getDetails().equals(activity.getDetails()) ) {
+					if ( !form.getName().trim().equals(activity.getName()) || !form.getDetails().equals(activity.getDetails()) ) {
 						//R?cup?ration des champs que l'utilisateur a pu entrer
 						activity.setDetails(form.getDetails());
-						activity.setName(form.getName());
+						activity.setName(form.getName().trim());
 						
 						activity.setUserModification((user.getId().toString()));
 						activity.setDateModification(new Date());
