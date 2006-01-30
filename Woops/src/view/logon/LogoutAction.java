@@ -21,14 +21,16 @@ public class LogoutAction extends WoopsCCAction {
 	 * @see com.cc.framework.adapter.struts.FrameworkAction#doExecute(com.cc.framework.adapter.struts.ActionContext)
 	 */
 	public void doExecute(ActionContext context) throws Exception {
-		HttpSession httpSession = context.request().getSession(false);
-		httpSession.removeAttribute(PresentationConstantes.KEY_USER);
+		// Vérifie si la session est valide
+		if (isValidSession(context)) {
+			HttpSession httpSession = context.request().getSession(false);
+			httpSession.removeAttribute(PresentationConstantes.KEY_USER);
 		
-		SecurityUtil.unregisterPrincipal(context.session());
+			SecurityUtil.unregisterPrincipal(context.session());
 		
-		context.session().invalidate();
-          
-		context.forwardByName(PresentationConstantes.FORWARD_DECONNECT); 
+			context.session().invalidate();
+		}
+		context.forwardByName(PresentationConstantes.FORWARD_NOSESSION); 	
 	}
 }
 

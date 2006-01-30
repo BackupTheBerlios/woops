@@ -120,6 +120,7 @@
 			<taglib-location>/WEB-INF/tags/cc-utility.tld</taglib-location> 
 		</taglib>
 	</jsp-config>
+
 	
 <!-- Interdit l'accès direct aux JSP -->
 	<security-constraint> 
@@ -136,8 +137,8 @@
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<form-login-config>
-			<form-login-page>/html/logon/loginUser.jsp</form-login-page> //path to login page
-			<form-error-page>/html/logon/loginUser.jsp</form-error-page> //path in case login fails
+			<form-login-page>/html/logon/loginUser.jsp</form-login-page> //path pour accéder à la page de login
+			<form-error-page>/logoutUser.do</form-error-page> //path si l'accès est refusé
 		</form-login-config>
 	</login-config>
 	

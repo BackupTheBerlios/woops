@@ -28,6 +28,8 @@
 		<forward name="index" path="/index.jsp"/>
 		<forward name="nosession" path="/html/logon/loginUser.jsp"/>
 		<forward name="logout" path="/logoutUser.do"/>
+		<forward name="admin" path="/addUser.do"/>
+		<forward name="dev" path="/listActivities.do"/>
    	</global-forwards>
 
 
@@ -125,8 +127,6 @@
         	scope="request"
         	input="/html/logon/loginUser.jsp">
         	<forward name="error" path="/html/logon/loginUser.jsp" />
-        	<forward name="success" path="/listActivities.do"/>
-        	<forward name="admin" path="/listUsers.do"/>  
      	</action>
 
 <!-- ================= Login form ================ -->  
@@ -136,7 +136,6 @@
 			validate="false"      
         	scope="request"
         	input="/html/logon/loginUser.jsp">
-            <forward name="deconnect" path="/html/logon/loginUser.jsp" />
      	</action>   
 
 <!-- ================= List Change State Activities ================ -->  

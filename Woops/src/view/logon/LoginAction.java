@@ -2,10 +2,10 @@ package view.logon;
 
 import javax.servlet.http.HttpSession;
 
+
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
 import business.hibernate.exception.PersistanceException;
-import business.security.SecurityConfig;
 import business.user.User;
 import business.user.UserManager;
 
@@ -49,16 +49,8 @@ public class LoginAction extends WoopsCCAction {
 						//on met en session l'utilisateur
 						httpSession.setAttribute(PresentationConstantes.KEY_USER,user);
 						
-						
-						
-						if (SecurityConfig.isAdmin(user))
-						{
-							context.forwardByName(PresentationConstantes.FORWARD_ADMIN);
-						}
-						else{
-							context.forwardToAction("/listActivities");	
-						}
-							
+						// L'utilisateur est redirigé en fonction de son rôle
+						context.forwardByName(user.getRole().getCode());
 					}
 					else {
 						context.addGlobalError("errors.login.invalide");
@@ -75,7 +67,8 @@ public class LoginAction extends WoopsCCAction {
 		}
 		else {
 			/* L'utilisateur est déjà connecté */
-            context.forwardByName("logout"); 
+			User user = (User) httpSession.getAttribute(PresentationConstantes.KEY_USER);
+			context.forwardByName(user.getRole().getCode());
         }
 	}
 }

@@ -5,7 +5,8 @@ package view;
  * 
  */
 public interface PresentationConstantes {
-
+	
+	// Forward
 	public static final String FORWARD_SUCCESS="success";
 	public static final String FORWARD_ERROR="error";
 	public static final String FORWARD_ACTION="action";
