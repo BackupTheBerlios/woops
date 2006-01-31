@@ -12,12 +12,15 @@
 	
 	<br>
 	
+	<table>
 	
-	
+	<tr>
+    
+    <td colspan="2">
+    
     <ctrl:list
 		name="KEY_DEPENDANCES_LIST"
 		title="list.title.manageDependancesTypes"
-		formElement="true"
 		>
        
         <ctrl:columntext    title="list.manageDependancesTypes.predecessor"         property="predecessor"/>
@@ -31,22 +34,30 @@
 		</ctrl:columngroup>      
                
     </ctrl:list>
-        
-	<forms:form type="edit" noframe="true" formid="frmDependancesTypes">
 	
-		<forms:buttonsection default="btnFinish">
-	        
-		    <forms:button
-				name="btnPrevious"
-				text="form.button.previous"/>
-				
-			<forms:button
-				name="btnFinish"
-				text="form.button.finish"/>
-		    
-		</forms:buttonsection>
+	</td>
 	
-	</forms:form>
+	</tr>
+    
+    <tr><td></td><td></td></tr>
+    
+    <tr>
+    
+    <td align="right" width="75%">
+    	<ctrl:button
+			name="btnPrevious"
+			text="form.button.previous"/>
+	</td>
+	
+	<td align="right" width="25%">	
+		<ctrl:button
+			name="btnFinish"
+			text="form.button.finish"/>
+	</td>
+	
+	</tr>
+	
+	</table>
 	
 	<html:hidden property="activityId"/>
    
