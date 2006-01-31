@@ -3,10 +3,13 @@
 <%@ taglib uri="/struts-bean" prefix="bean" %>
 <%@ taglib uri="/struts-html" prefix="html" %>
 <%@ taglib uri="/cc-utility"  prefix="util" %>
+<%@ page import="org.apache.struts.util.MessageResources" %>
 
 <forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
 <forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
 <br>
+
+<bean:define id="confirmMessage" value="<%=MessageResources.getMessageResources("ApplicationResources").getMessage("table.field.listActivities.deleteConfirmation")%>"/>
 
 <html:form action="listActivities.do">	
 	
@@ -41,7 +44,6 @@
 				property="name" 
 				width="250"
 				sortable="true"
-				tooltip="@{bean.details}"
 				/>
 				
 			<ctrl:columnhtml id="activity"
@@ -58,7 +60,7 @@
 
 			<ctrl:columndelete 
 				title="table.field.listActivities.delete"
-				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
+				onclick="return confirm('${confirmMessage}');"
 				/> 
 				
 			<ctrl:columnbutton 
