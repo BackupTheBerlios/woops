@@ -128,7 +128,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	/**
 	 * Methode effectuant la sauvegarde en base
 	 * @param context
-	 * @return true si ca s'est bien passé
+	 * @return true si ca s'est bien pass?
 	 */
 	public boolean saveActivity(FormActionContext context) {
 		
@@ -165,6 +165,11 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					activity.setDateCreation(new Date());
 					
 					activityId = (Integer)ActivityManager.getInstance().insertWithGetId(activity);
+					
+					/* R?cup?ration la hashmap pour y rajouter l'activit? */
+					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
+					
+					activitiesMap.put(activityId,activity);
 					
 					context.addGlobalMessage("msg.info.activity.inserted", activity.getName());
 				}

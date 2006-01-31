@@ -5,14 +5,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
-
 import view.PresentationConstantes;
-import view.activity.ActivityItem;
 import view.activity.ActivitySequenceItem;
 import view.activity.ActivitySequencesModel;
 import view.common.WoopsCCAction;
-import business.BusinessConstantes;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.sequence.ActivitySequence;
@@ -20,16 +16,14 @@ import business.format.Formatage;
 import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;
-import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
 
 
 /**
  * @author Simon REGGIANI
- * ShowActivitySummaryAction : permet de creer une nouvelle activite
+ * ShowActivitySummaryAction : permet de voir la fiche de d?tail d'une activit?
  */
 public class ShowActivitySummaryAction extends WoopsCCAction {
-	private static Logger logger = Logger.getLogger(ShowActivitySummaryAction.class);   
 	
 	/**
 	 * Constructeur vide
@@ -60,58 +54,79 @@ public class ShowActivitySummaryAction extends WoopsCCAction {
 		form.setDetails(activity.getDetails());
 		String state = activity.getState().toString();
 		form.setState(state);
-		if ( state.equals(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS) )
-			form.setStartDate(Formatage.dateToString(activity.getStartDate()));
-		
-		if ( state.equals(BusinessConstantes.ACTIVITY_STATE_FINISHED) )
-			form.setEndDate(Formatage.dateToString(activity.getEndDate()));
-		
+		form.setStartDate(Formatage.dateToString(activity.getStartDate()));
+		form.setEndDate(Formatage.dateToString(activity.getEndDate()));
 		
 		try {
-			// Récupération de la liste des prédécesseurs de l'activité
-			Collection predecessorsMngr = ActivityManager.getInstance().getActivitySequencesPredecessors(activityId);
-		
-			//Convertion de cette liste en une liste d'ActivitySequenceItem
-			Iterator iter = predecessorsMngr.iterator();
-			ActivitySequence activitySequence;
-			
-			Collection activitySequenceItems = new ArrayList();
-			while(iter.hasNext()) {
-				activitySequence = (ActivitySequence)iter.next();
-				ActivitySequenceItem activitySequenceItem = new ActivitySequenceItem();
-				activitySequenceItem.setId(activitySequence.getId().toString());
-				activitySequenceItem.setPredecessor(activitySequence.getPredecessor().getName());
-				activitySequenceItem.setSuccessor(activitySequence.getSuccessor().getName());
-				activitySequenceItem.setLinkType(activitySequence.getLinkType().getName());
-				activitySequenceItems.add(activitySequenceItem);
-			}
-			
-			/* Convertion de cette liste en tableau */
-			DisplayObject[] data = new ActivitySequenceItem[activitySequenceItems.size()];
-			data = (ActivitySequenceItem[]) activitySequenceItems.toArray(data);
-			
-			form.setPredecessorsList(new ActivitySequencesModel(data));
-			
+			setPredecessorsList(context);
+			setSuccessorsList(context);
+			context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
 		} catch (PersistanceException pe) {
-			logger.error(pe);
-			context.addGlobalError("errors.persistance.select");
+			context.addGlobalError("errors.persistance.global");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 		
-		
-		context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
 	}
 	
 	
-	/**
-	 * 
-	 * @param		ctx		FormActionContext
-	 * 
-	 * Action a realiser lorsque l'utilisateur clique sur le bouton previous (listActivities)
-	 */
-	
-	public void previous_onClick(FormActionContext context) {
+	public void setPredecessorsList(ActionContext context) throws PersistanceException {
+		ShowActivitySummaryForm form = (ShowActivitySummaryForm) context.form();
+		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
-		context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
+		// R?cup?ration de la liste des pr?d?cesseurs de l'activit?
+		Collection predecessorsListMngr = ActivityManager.getInstance().getActivitySequencesPredecessors(activityId);
+	
+		//Convertion de cette liste en une liste d'ActivitySequenceItem
+		Iterator iter = predecessorsListMngr.iterator();
+		ActivitySequence activitySequence;
+		
+		Collection activitySequenceItems = new ArrayList();
+		while(iter.hasNext()) {
+			activitySequence = (ActivitySequence)iter.next();
+			ActivitySequenceItem activitySequenceItem = new ActivitySequenceItem();
+			activitySequenceItem.setId(activitySequence.getId().toString());
+			activitySequenceItem.setPredecessor(activitySequence.getPredecessor().getName());
+			activitySequenceItem.setSuccessor(activitySequence.getSuccessor().getName());
+			activitySequenceItem.setLinkType(activitySequence.getLinkType().getName());
+			activitySequenceItems.add(activitySequenceItem);
+		}
+		
+		/* Convertion de cette liste en tableau */
+		DisplayObject[] data = new ActivitySequenceItem[activitySequenceItems.size()];
+		data = (ActivitySequenceItem[]) activitySequenceItems.toArray(data);
+		
+		form.setPredecessorsList(new ActivitySequencesModel(data));
+			
 	}
 	
+	
+	public void setSuccessorsList(ActionContext context) throws PersistanceException {
+		ShowActivitySummaryForm form = (ShowActivitySummaryForm) context.form();
+		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
+		
+		// R?cup?ration de la liste des successeurs de l'activit?
+		Collection successorsListMngr = ActivityManager.getInstance().getActivitySequencesSuccessors(activityId);
+	
+		//Convertion de cette liste en une liste d'ActivitySequenceItem
+		Iterator iter = successorsListMngr.iterator();
+		ActivitySequence activitySequence;
+		
+		Collection activitySequenceItems = new ArrayList();
+		while(iter.hasNext()) {
+			activitySequence = (ActivitySequence)iter.next();
+			ActivitySequenceItem activitySequenceItem = new ActivitySequenceItem();
+			activitySequenceItem.setId(activitySequence.getId().toString());
+			activitySequenceItem.setPredecessor(activitySequence.getPredecessor().getName());
+			activitySequenceItem.setSuccessor(activitySequence.getSuccessor().getName());
+			activitySequenceItem.setLinkType(activitySequence.getLinkType().getName());
+			activitySequenceItems.add(activitySequenceItem);
+		}
+		
+		/* Convertion de cette liste en tableau */
+		DisplayObject[] data = new ActivitySequenceItem[activitySequenceItems.size()];
+		data = (ActivitySequenceItem[]) activitySequenceItems.toArray(data);
+		
+		form.setSuccessorsList(new ActivitySequencesModel(data));
+			
+	}
 }

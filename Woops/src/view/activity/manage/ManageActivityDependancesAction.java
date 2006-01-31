@@ -176,7 +176,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	/**
 	 * 
 	 * @param context
-	 * @return true si ca s'est bien passé
+	 * @return true si ca s'est bien pass?
 	 */
 	public boolean saveDependances(FormActionContext context) {
 		boolean ok = false;
@@ -237,7 +237,6 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			} catch (ForeignKeyException e) {
 				// Ne doit pas passer par l?
 			} catch (Throwable t) {
-				logger.error(t);
 				context.addGlobalError("errors.global");
 				context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
 			}
