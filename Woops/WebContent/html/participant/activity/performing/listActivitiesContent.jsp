@@ -62,13 +62,16 @@
 				title="table.field.listActivities.delete"
 				onclick="return confirm('${confirmMessage}');"
 				/> 
-				
+			
 			<ctrl:columnbutton 
 				title="table.field.listActivities.action" 
 				text="@{bean.action}" 
 				align="center"
 				command="change"
 				width="150">
+				<util:designrule
+            		rule="@{bean.action == ''}"
+            		style=""/>
 			</ctrl:columnbutton>
 			
 	</ctrl:list>
