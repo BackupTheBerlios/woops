@@ -15,46 +15,30 @@
 		property="listUsers" 
 		title="table.title.listUsers"
 		width="650" 
-		rows="5" 
+		rows="3" 
 		refreshButton="false" 
 		createButton="true"
 		>
 		
-		<util:designrule
-        rule="@{bean.action == '' && bean.state == 'created'}"
-        style="background-color: gray;"/>
-        
-        <util:designrule
-        rule="@{bean.action == '' && bean.state == 'inProgress'}"
-        style="background-color: gray; font-weight: bold;"/>
-        
-        <util:designrule
-        rule="@{bean.action != '' && bean.state == 'created'}"
-        style=""/>
-        
-        <util:designrule
-        rule="@{bean.action != '' && bean.state == 'inProgress'}"
-        style="font-weight: bold;"/>
-
-			<ctrl:columndrilldown 
+			<ctrl:columntext 
 				title="table.field.listUsers.firstName" 
 				property="firstName" 
 				width="250"
 				sortable="true"/>
 			
-			<ctrl:columndrilldown  
+			<ctrl:columntext 
 				title="table.field.listUsers.lastName"
 				property="lastName"
 				width="350"
 				sortable="true"/>
 				
-			<ctrl:columndrilldown   
+			<ctrl:columntext   
 				title="table.field.listUsers.login"
 				property="login"
 				width="350"
 				sortable="true"/>
 				
-			<ctrl:columndrilldown   
+			<ctrl:columntext   
 				title="table.field.listUsers.role"
 				property="role"
 				width="350"

@@ -65,4 +65,9 @@ public interface PresentationConstantes {
     
     // constantes de nom de table
 	public static final String TABLE_USER="User";
+	
+	public static final String KEY_USERS_MAP="USERS_MAP" ;
+	
+	// admin
+	public static final String KEY_USER_ID="USER_ID" ;
 }

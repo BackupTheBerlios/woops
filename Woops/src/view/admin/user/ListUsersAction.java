@@ -110,7 +110,7 @@ public class ListUsersAction extends WoopsCCAction {
 		listUsersForm.setDataModel(model);
 	
 		// Sauvegarde d'une HashMap stockant la liste des activités du participant
-		// context.session().setAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP,usersMap);
+		context.session().setAttribute(PresentationConstantes.KEY_USERS_MAP,usersMap);
 	}
 	
 	// ------------------------------------------------
@@ -148,9 +148,9 @@ public class ListUsersAction extends WoopsCCAction {
 		context.control().execute(context, column,  direction);
 	}
 	
-	public void listUsers_onEdit(ControlActionContext context, String login) throws IOException, ServletException {
+	public void listUsers_onEdit(ControlActionContext context, String id) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
-		context.request().setAttribute(PresentationConstantes.PARAM_LOGIN,login);
+		context.request().setAttribute(PresentationConstantes.PARAM_LOGIN,id);
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
 	}

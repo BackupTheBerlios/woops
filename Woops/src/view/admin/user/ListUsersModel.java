@@ -33,7 +33,7 @@ public class ListUsersModel extends WoopsListDataModel {
 	 * @see view.common.WoopsListDataModel#getUniqueKey(int)
 	 */
 	public String getUniqueKey(int index) {
-		return ((UserItem)data[index]).getLogin();
+		return ((UserItem)data[index]).getId();
 	}
 	
 	/**
