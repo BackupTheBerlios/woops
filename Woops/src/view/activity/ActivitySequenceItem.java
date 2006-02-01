@@ -10,6 +10,8 @@ public class ActivitySequenceItem implements DisplayObject{
 	private String predecessor;
 	private String successor;
 	private String linkType;
+	private String predecessorState;
+	private String successorState;
 	
 	/**
 	 * @return Returns the id.
@@ -59,6 +61,32 @@ public class ActivitySequenceItem implements DisplayObject{
 	public void setSuccessor(String successor) {
 		this.successor = successor;
 	}
+	/**
+	 * @return Returns the predecessorState.
+	 */
+	public String getPredecessorState() {
+		return predecessorState;
+	}
+	/**
+	 * @param predecessorState The predecessorState to set.
+	 */
+	public void setPredecessorState(String predecessorState) {
+		this.predecessorState = predecessorState;
+	}
+	/**
+	 * @return Returns the successorState.
+	 */
+	public String getSuccessorState() {
+		return successorState;
+	}
+	/**
+	 * @param successorState The successorState to set.
+	 */
+	public void setSuccessorState(String successorState) {
+		this.successorState = successorState;
+	}
+	
+	
 	
 	
 	

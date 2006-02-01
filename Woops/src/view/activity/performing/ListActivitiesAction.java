@@ -108,7 +108,8 @@ public class ListActivitiesAction extends WoopsCCAction {
     		}
     		// si state est null, l'activite ne peut pas changer d'etat
     		else
-    			activityItem.setAction("");
+    			activityItem.setAction(null);
+    		
 			
 			listActivitiesItems.add(activityItem);
     	

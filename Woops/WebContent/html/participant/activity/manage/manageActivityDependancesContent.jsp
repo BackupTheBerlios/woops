@@ -21,7 +21,7 @@
             labelRight="form.field.manageActivityDependances.added"
             valign="top"
             size="10"
-            style="width: 200;"
+            style="width: 250;"
             align="center"
             filter="false"
             required="false"

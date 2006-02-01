@@ -73,6 +73,14 @@
 				/>
 			
 			<ctrl:columnhtml id="activitySequence"
+				title="form.table.predecessors.field.predecessorState"
+				>
+					<bean:message
+						name="activitySequence"
+						property="predecessorState"/>
+			</ctrl:columnhtml> 
+			
+			<ctrl:columnhtml id="activitySequence"
 				title="form.table.succ_pred.field.linkType"
 				>
 					<bean:message
@@ -97,6 +105,14 @@
 				title="form.table.successors.field.successor"
 				property="successor"
 				/>
+			
+			<ctrl:columnhtml id="activitySequence"
+				title="form.table.successors.field.successorState"
+				>
+					<bean:message
+						name="activitySequence"
+						property="successorState"/>
+			</ctrl:columnhtml> 
 			
 			<ctrl:columnhtml id="activitySequence"
 				title="form.table.succ_pred.field.linkType"

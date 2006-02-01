@@ -24,7 +24,8 @@
 		>
        
         <ctrl:columntext    title="list.manageDependancesTypes.predecessor"         property="predecessor"/>
-        <ctrl:columntext    title="list.manageDependancesTypes.successor"         	property="successor"/>
+        
+        <ctrl:columntext    title="list.manageDependancesTypes.predecessorState"         property="predecessorState"/>
               
         <ctrl:columngroup title="list.manageDependancesTypes.columngroup.title" align="center">
 			<ctrl:columnradio	title="finishToStart"   property="linkType"   value="finishToStart"		editable="true"/>

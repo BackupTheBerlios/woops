@@ -9,6 +9,7 @@ import java.util.Iterator;
 import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
+import org.apache.struts.util.MessageResources;
 
 import view.PresentationConstantes;
 import view.activity.ActivityItem;
@@ -106,7 +107,8 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			
 			item = new ActivityItem();
 			item.setId(activity.getId().toString());
-			item.setName(activity.getName());
+			String state = MessageResources.getMessageResources("ApplicationResources").getMessage(activity.getState().toString());
+			item.setName(activity.getName()+" ("+state+")");
 			
 			possibleActivityDependancesItems.add(item);
 		}

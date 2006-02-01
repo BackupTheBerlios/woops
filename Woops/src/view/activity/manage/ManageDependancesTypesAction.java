@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForward;
+import org.apache.struts.util.MessageResources;
 
 import view.PresentationConstantes;
 import view.activity.ActivitySequenceItem;
@@ -96,8 +97,9 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 			ActivitySequenceItem activitySequenceItem = new ActivitySequenceItem();
 			activitySequenceItem.setId(activitySequence.getId().toString());
 			activitySequenceItem.setPredecessor(activitySequence.getPredecessor().getName());
-			activitySequenceItem.setSuccessor(activitySequence.getSuccessor().getName());
 			activitySequenceItem.setLinkType(activitySequence.getLinkType().getName());
+			String state = MessageResources.getMessageResources("ApplicationResources").getMessage(activitySequence.getPredecessor().getState().toString());
+			activitySequenceItem.setPredecessorState(state);
 			activitySequenceItems.add(activitySequenceItem);
 		}
 			

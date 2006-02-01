@@ -86,7 +86,7 @@ public class ShowActivitySummaryAction extends WoopsCCAction {
 			ActivitySequenceItem activitySequenceItem = new ActivitySequenceItem();
 			activitySequenceItem.setId(activitySequence.getId().toString());
 			activitySequenceItem.setPredecessor(activitySequence.getPredecessor().getName());
-			activitySequenceItem.setSuccessor(activitySequence.getSuccessor().getName());
+			activitySequenceItem.setPredecessorState(activitySequence.getPredecessor().getState().toString());
 			activitySequenceItem.setLinkType(activitySequence.getLinkType().getName());
 			activitySequenceItems.add(activitySequenceItem);
 		}
@@ -116,8 +116,8 @@ public class ShowActivitySummaryAction extends WoopsCCAction {
 			activitySequence = (ActivitySequence)iter.next();
 			ActivitySequenceItem activitySequenceItem = new ActivitySequenceItem();
 			activitySequenceItem.setId(activitySequence.getId().toString());
-			activitySequenceItem.setPredecessor(activitySequence.getPredecessor().getName());
 			activitySequenceItem.setSuccessor(activitySequence.getSuccessor().getName());
+			activitySequenceItem.setSuccessorState(activitySequence.getSuccessor().getState().toString());
 			activitySequenceItem.setLinkType(activitySequence.getLinkType().getName());
 			activitySequenceItems.add(activitySequenceItem);
 		}

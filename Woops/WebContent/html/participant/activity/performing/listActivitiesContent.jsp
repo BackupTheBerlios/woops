@@ -2,6 +2,7 @@
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 <%@ taglib uri="/struts-bean" prefix="bean" %>
 <%@ taglib uri="/struts-html" prefix="html" %>
+<%@ taglib uri="/struts-logic" prefix="logic" %>
 <%@ taglib uri="/cc-utility"  prefix="util" %>
 <%@ page import="org.apache.struts.util.MessageResources" %>
 
@@ -24,19 +25,19 @@
 		>
 		
 		<util:designrule
-        rule="@{bean.action == '' && bean.state == 'created'}"
+        rule="@{bean.action == null && bean.state == 'created'}"
         style="background-color: #FFC4C4;"/>
         
         <util:designrule
-        rule="@{bean.action == '' && bean.state == 'inProgress'}"
+        rule="@{bean.action == null && bean.state == 'inProgress'}"
         style="background-color: #FFC4C4; font-weight: bold;"/>
         
         <util:designrule
-        rule="@{bean.action != '' && bean.state == 'created'}"
+        rule="@{bean.action != null && bean.state == 'created'}"
         style=""/>
         
         <util:designrule
-        rule="@{bean.action != '' && bean.state == 'inProgress'}"
+        rule="@{bean.action != null && bean.state == 'inProgress'}"
         style="font-weight: bold;"/>
 
 			<ctrl:columndrilldown 
@@ -63,16 +64,15 @@
 				onclick="return confirm('${confirmMessage}');"
 				/> 
 			
-			<ctrl:columnbutton 
-				title="table.field.listActivities.action" 
-				text="@{bean.action}" 
-				align="center"
-				command="change"
-				width="150">
-				<util:designrule
-            		rule="@{bean.action == ''}"
-            		style=""/>
-			</ctrl:columnbutton>
+			<logic:notEmpty name="list" property="action">
+				<ctrl:columnbutton 
+					title="table.field.listActivities.action" 
+					text="@{bean.action}" 
+					align="center"
+					command="change"
+					width="150">
+				</ctrl:columnbutton>
+			</logic:notEmpty>
 			
 	</ctrl:list>
 	
