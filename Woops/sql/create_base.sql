@@ -4,8 +4,8 @@ DROP TABLE ActivitySequenceType;
 DROP TABLE User;
 DROP TABLE UserRole;
 DROP TABLE ActivityState;
-DROP TABLE BreakDownElement;
-DROP TABLE BreakDownElementKind;
+DROP TABLE BreakdownElement;
+DROP TABLE BreakdownElementKind;
 
 CREATE TABLE UserRole (
        code VARCHAR(10) NOT NULL
@@ -36,8 +36,8 @@ CREATE TABLE BreakdownElementKind (
 CREATE TABLE BreakdownElement (
        id INT NOT NULL AUTO_INCREMENT
      , prefix VARCHAR(15) NOT NULL
-     , startDate DATE
-     , endDate DATE
+     , startDate TIMESTAMP
+     , endDate TIMESTAMP
      , kind INT NOT NULL
      , UNIQUE UQ_BreakdownElement_prefix (prefix)
      , PRIMARY KEY (id)
@@ -62,8 +62,8 @@ CREATE TABLE Activity (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(50) NOT NULL
      , details TEXT
-     , startDate DATE
-     , endDate DATE
+     , startDate DATETIME
+     , endDate DATETIME
      , user INT NOT NULL
      , state VARCHAR(50) NOT NULL
      , PRIMARY KEY (id)

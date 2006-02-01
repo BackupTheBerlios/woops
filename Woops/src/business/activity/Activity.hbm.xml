@@ -34,14 +34,14 @@
 			column="startDate"
 			name="startDate"
 			not-null="false"
-			type="date"
+			type="timestamp"
 		 />
 		 
 		 <property
 			column="endDate"
 			name="endDate"
 			not-null="false"
-			type="date"
+			type="timestamp"
 		 />	
 		
 		 <property
