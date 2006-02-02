@@ -38,15 +38,21 @@
         
             <forms:button
 				name="btnPrevious"
-				text="form.button.previous"/>
+				text="form.button.previous"
+				title="form.tooltip.manageActivityDependances.previous"
+				/>
 				
         	<forms:button
 				name="btnNext"
-				text="form.button.next"/>
+				text="form.button.next"
+				title="form.tooltip.manageActivityDependances.next"
+				/>
 				
 			<forms:button
 				name="btnFinish"
-				text="form.button.finish"/>
+				text="form.button.finish"
+				title="form.tooltip.manageActivityDependances.finish"
+				/>
  
 		</forms:buttonsection>
         

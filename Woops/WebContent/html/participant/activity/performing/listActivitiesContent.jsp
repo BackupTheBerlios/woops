@@ -45,6 +45,7 @@
 				property="name" 
 				width="250"
 				sortable="true"
+				tooltip="table.tooltip.listActivities.drillDown"
 				/>
 				
 			<ctrl:columnhtml id="activity"
@@ -57,11 +58,14 @@
 			</ctrl:columnhtml> 
 			
 			<ctrl:columnedit 
-				title="table.field.listActivities.edit"/> 
+				title="table.field.listActivities.edit"
+				tooltip="table.tooltip.listActivities.edit"
+				/> 
 
 			<ctrl:columndelete 
 				title="table.field.listActivities.delete"
 				onclick="return confirm('${confirmMessage}');"
+				tooltip="table.tooltip.listActivities.delete"
 				/> 
 			
 			<logic:notEmpty name="list" property="action">

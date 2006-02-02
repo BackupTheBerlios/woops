@@ -61,6 +61,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			form.setName(activity.getName());
 			form.setDetails(activity.getDetails());			
 			form.setCaption("form.title.manageActivityCreation.update");
+			form.setTooltipFinish("form.tooltip.manageActivityCreation.finish.update");
+			form.setTooltipNext("form.tooltip.manageActivityCreation.next.update");
 			
 			if ( activity.getState().equals(BusinessConstantes.ACTIVITY_STATE_CREATED) ) {	
 				form.setDisableNext("false");
@@ -76,6 +78,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			mode = PresentationConstantes.INSERT_MODE;
 			
 			form.setCaption("form.title.manageActivityCreation.insert");
+			form.setTooltipFinish("form.tooltip.manageActivityCreation.finish.insert");
+			form.setTooltipNext("form.tooltip.manageActivityCreation.next.insert");
 			form.setDisableNext("false");
 		}
 		

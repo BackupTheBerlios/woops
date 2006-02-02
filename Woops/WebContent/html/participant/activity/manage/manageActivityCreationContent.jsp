@@ -39,16 +39,22 @@
         
             <forms:button
 				name="btnPrevious"
-				text="form.button.previous"/>
+				text="form.button.previous"
+				title="form.tooltip.manageActivityCreation.previous"
+				/>
 				
         	<forms:button
 				name="btnNext"
 				text="form.button.next"
-				disabled="${manageActivityCreationForm.disableNext}"/>
+				disabled="${manageActivityCreationForm.disableNext}"
+				title="${manageActivityCreationForm.tooltipNext}"
+				/>
 				
 			<forms:button
 				name="btnFinish"
-				text="form.button.finish"/>
+				text="form.button.finish"
+				title="${manageActivityCreationForm.tooltipFinish}"
+				/>
  
 		</forms:buttonsection>
         

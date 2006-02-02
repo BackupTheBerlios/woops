@@ -47,13 +47,17 @@
     <td align="right" width="75%">
     	<ctrl:button
 			name="btnPrevious"
-			text="form.button.previous"/>
+			text="form.button.previous"
+			title="list.tooltip.manageDependancesTypes.previous"
+			/>
 	</td>
 	
 	<td align="right" width="25%">	
 		<ctrl:button
 			name="btnFinish"
-			text="form.button.finish"/>
+			text="form.button.finish"
+			title="list.tooltip.manageDependancesTypes.finish"
+			/>
 	</td>
 	
 	</tr>

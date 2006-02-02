@@ -22,6 +22,8 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private	String	details; 		/** description de l'activit? */
 	private String	mode;			/** mode du formulaire ( insert ou update )	*/
 	private String	caption;		/** libell? de l'entete du formulaire */
+	private String	tooltipFinish;			/**	libell? du bouton finish (en rfonction du mode) */
+	private String 	tooltipNext;			/** libell? du bouton next (en rfonction du mode) */
 	private String	disableNext;	/** bool?en indiquant si le bouton next est d?sactiv? */
 	
 	public ManageActivityCreationForm() {
@@ -78,6 +80,26 @@ public class ManageActivityCreationForm extends FWActionForm {
 
 	public void setDisableNext(String disableNext) {
 		this.disableNext = disableNext;
+	}
+
+
+	public String getTooltipFinish() {
+		return tooltipFinish;
+	}
+
+
+	public void setTooltipFinish(String tooltipFinish) {
+		this.tooltipFinish = tooltipFinish;
+	}
+
+
+	public String getTooltipNext() {
+		return tooltipNext;
+	}
+
+
+	public void setTooltipNext(String tooltipNext) {
+		this.tooltipNext = tooltipNext;
 	}
 
 
