@@ -82,5 +82,9 @@ public class PersistentObjectManager {
     public List getList(String table) throws PersistanceException {
     	return dao.getList(table);
     }
+    
+    public PersistentObject get(Class classe, Serializable id) throws PersistanceException {
+    	return dao.get(classe,id);
+    }
 
 }

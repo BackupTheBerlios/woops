@@ -1,5 +1,6 @@
 package business.activity.sequencetype;
 
+import business.activity.sequence.ActivitySequence;
 import business.hibernate.HistorizedObject;
 
 
@@ -9,16 +10,16 @@ public class ActivitySequenceType extends HistorizedObject {
 	private String name;
 	
 	/**
-	 * Récupération de l'identifiant du type de sequence d'activité nécessaire pour la persistence
-	 * @return identifiant du type de sequence d'activité
+	 * R?cup?ration de l'identifiant du type de sequence d'activit? n?cessaire pour la persistence
+	 * @return identifiant du type de sequence d'activit?
 	 */
 	public Object getId() {
 		return id;
 	}
 
 	/**
-	 * Modification de l'identifiant du type de sequence d'activité
-	 * @param id identifiant du type de sequence d'activité à modifier
+	 * Modification de l'identifiant du type de sequence d'activit?
+	 * @param id identifiant du type de sequence d'activit? ? modifier
 	 */
 	public void setId(Object id) {
 		this.id = (Integer) id;
@@ -40,5 +41,15 @@ public class ActivitySequenceType extends HistorizedObject {
 	
 	public boolean equals(String link) {
 		return this.name.equals(link);
+	}
+	
+	
+	
+	public boolean equals(Object obj) {
+		boolean ok = ((ActivitySequenceType)obj).getId().equals(id);
+	
+		ok &= ((ActivitySequenceType)obj).getName().equals(name);
+			
+		return ok;
 	}
 }

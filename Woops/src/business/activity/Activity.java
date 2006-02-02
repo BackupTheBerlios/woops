@@ -3,22 +3,23 @@ package business.activity;
 import java.util.Collection;
 import java.util.Date;
 
+import business.activity.sequence.ActivitySequence;
 import business.activity.state.IActivityState;
 import business.hibernate.HistorizedObject;
 
 
 public class Activity extends HistorizedObject{	
 	private static final long serialVersionUID = -5271834569122025630L; /** Generated Serial ID */
-	private	Integer			id; /** identifiant de l'activité */
-	private String 			name; /** nom de l'activité */
-	private	String			details; /** description de l'activité */
-	private Date			startDate; /** date à laquelle le participant à commencer la réalisation de l'activité */
-	private Date			endDate; /** date à laquelle le participant à terminer la réalisation de l'activité */
-	private Integer 		userId; /** Id du participant responsable de la réalisation de l'activité */
-	private IActivityState	state; /** Etat actuel de l'activité
+	private	Integer			id; /** identifiant de l'activit? */
+	private String 			name; /** nom de l'activit? */
+	private	String			details; /** description de l'activit? */
+	private Date			startDate; /** date ? laquelle le participant ? commencer la r?alisation de l'activit? */
+	private Date			endDate; /** date ? laquelle le participant ? terminer la r?alisation de l'activit? */
+	private Integer 		userId; /** Id du participant responsable de la r?alisation de l'activit? */
+	private IActivityState	state; /** Etat actuel de l'activit?
 	
 	/**
-	 * Liste des activités dont dépend l'activité
+	 * Liste des activit?s dont d?pend l'activit?
 	 * @associates business.activity.sequence.ActivitySequence
 	 * @clientCardinality 1
 	 * @clientRole listActivitiesSequences
@@ -29,7 +30,7 @@ public class Activity extends HistorizedObject{
 	private Collection 		listActivitiesSequences;
 	
 	/**
-	 * Constructeur par défaut
+	 * Constructeur par d?faut
 	 */
 	public Activity() {
 		this.id = null;
@@ -42,39 +43,39 @@ public class Activity extends HistorizedObject{
 	}
 	
 	/**
-	 * Récupération de l'identifiant de l'activité nécessaire pour la persistence
-	 * @return identifiant de l'activité
+	 * R?cup?ration de l'identifiant de l'activit? n?cessaire pour la persistence
+	 * @return identifiant de l'activit?
 	 */
 	public Object getId() {
 		return id;
 	}
 
 	/**
-	 * Modification de l'identifiant de l'activité
-	 * @param id identifiant de l'activité à modifier
+	 * Modification de l'identifiant de l'activit?
+	 * @param id identifiant de l'activit? ? modifier
 	 */
 	public void setId(Object id) {
 		this.id = (Integer) id;
 	}
 
 	/**
-	 * Récupération du nom de l'activité
-	 * @return nom de l'activité
+	 * R?cup?ration du nom de l'activit?
+	 * @return nom de l'activit?
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * Modification du nom de l'activité 
-	 * @param name nom de l'activité
+	 * Modification du nom de l'activit? 
+	 * @param name nom de l'activit?
 	 */ 
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * Récupération du participant responsable de la réalisation de l'activité
+	 * R?cup?ration du participant responsable de la r?alisation de l'activit?
 	 * @return : l'id du participant
 	 */
 	public Integer getUserId() {
@@ -82,7 +83,7 @@ public class Activity extends HistorizedObject{
 	}
 
 	/**
-	 * Modification du participant responsable de la réalisation de l'activité
+	 * Modification du participant responsable de la r?alisation de l'activit?
 	 * @param  participant
 	 */
 	public void setUserId(Integer userId) {
@@ -90,16 +91,16 @@ public class Activity extends HistorizedObject{
 	}
 
 	/**
-	 * Récupération du descriptif de l'activité
-	 * @return description de l'activité
+	 * R?cup?ration du descriptif de l'activit?
+	 * @return description de l'activit?
 	 */
 	public String getDetails() {
 		return details;
 	}
 
 	/**
-	 * Modification du descriptif de l'activité
-	 * @param details description de l'activité
+	 * Modification du descriptif de l'activit?
+	 * @param details description de l'activit?
 	 */
 	public void setDetails(String details) {
 		this.details = details;
@@ -115,60 +116,75 @@ public class Activity extends HistorizedObject{
 	}
 
 	/**
-	 * Récupération de l'état de l'activité
-	 * @return état de l'activité
+	 * R?cup?ration de l'?tat de l'activit?
+	 * @return ?tat de l'activit?
 	 */
 	public IActivityState getState() {
 		return state;
 	}
 	
 	/**
-	 * Modification de l'état de l'activité
+	 * Modification de l'?tat de l'activit?
 	 * @shapeType PatternLink
 	 * @pattern gof.State
 	 * @supplierRole State Abstraction
-	 * @param newState nouvel état
+	 * @param newState nouvel ?tat
 	 */
 	public void setState(IActivityState newState) {
 		this.state = newState;
 	}
 
 	/**
-	 * Opération qui déclenche la modification de l'état de l'activité
+	 * Op?ration qui d?clenche la modification de l'?tat de l'activit?
 	 */
 	public boolean process() {
 		return state.process(this);
 	}
 
 	/**
-	 * Modification de la date à laquelle le participant a commencé l'activité
-	 * @param details date de commencemet de l'activité
+	 * Modification de la date ? laquelle le participant a commenc? l'activit?
+	 * @param details date de commencemet de l'activit?
 	 */
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	
 	/**
-	 * Récupération de la date à laquelle le participant a commencé l'activité
-	 * @return date de commencemet de l'activité
+	 * R?cup?ration de la date ? laquelle le participant a commenc? l'activit?
+	 * @return date de commencemet de l'activit?
 	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 	
 	/**
-	 * Modification de la date à laquelle le participant a terminé l'activité
-	 * @param startDate date de fin de l'activité
+	 * Modification de la date ? laquelle le participant a termin? l'activit?
+	 * @param startDate date de fin de l'activit?
 	 */
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 	
 	/**
-	 * Récupération de la date à laquelle le participant a terminé l'activité
-	 * @return date de fin de l'activité
+	 * R?cup?ration de la date ? laquelle le participant a termin? l'activit?
+	 * @return date de fin de l'activit?
 	 */
 	public Date getEndDate() {
 		return endDate;
+	}
+	
+	
+	
+	public boolean equals(Object obj) {
+		boolean ok = ((Activity)obj).getId().equals(id);
+		
+		ok &= ((Activity)obj).getName().equals(name);
+		ok &= ( ((Activity)obj).getDetails()==null && details==null) || ((Activity)obj).getDetails().equals(details);
+		ok &= ( ((Activity)obj).getStartDate()==null && startDate==null) || ((Activity)obj).getStartDate().equals(startDate);
+		ok &= ( ((Activity)obj).getEndDate()==null && endDate==null) || ((Activity)obj).getEndDate().equals(endDate);
+		ok &= ((Activity)obj).getUserId().equals(userId);
+		ok &= ((Activity)obj).getState().equals(state);
+			
+		return ok;
 	}
 }

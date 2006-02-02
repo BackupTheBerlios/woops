@@ -35,16 +35,6 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 		return activitySequenceManager;
 	}
 
-	public void addActivitySequence(Activity predecessor, Activity successor, ActivitySequenceType linkType ) 
-		throws PersistanceException, DoublonException {
-		
-		ActivitySequence newActivitySequence = new ActivitySequence();
-		newActivitySequence.setPredecessor(predecessor);
-		newActivitySequence.setSuccessor(successor);
-		newActivitySequence.setLinkType(linkType);
-		
-		activitySequenceDAO.insert((PersistentObject)newActivitySequence);
-	}
 	
 	public void removeActivitySequence(Activity predecessor, Activity successor) 
 	throws PersistanceException, ForeignKeyException {

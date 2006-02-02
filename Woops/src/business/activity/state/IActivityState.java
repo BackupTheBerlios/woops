@@ -13,7 +13,7 @@ public abstract class IActivityState extends HistorizedObject {
 	protected	String name;
 	
 	/**
-	 * Constructeur par défaut appelé par Hibernate
+	 * Constructeur par d?faut appel? par Hibernate
 	 */
 	public IActivityState() {}
 	
@@ -38,6 +38,10 @@ public abstract class IActivityState extends HistorizedObject {
 	
 	public boolean equals(String state) {
 		return this.name.equals(state);
+	}
+	
+	public boolean equals(Object obj) {
+		return ((IActivityState)obj).getName().equals(name);
 	}
 	
 	public abstract boolean process(Activity activity);

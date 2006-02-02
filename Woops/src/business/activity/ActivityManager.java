@@ -198,7 +198,11 @@ public class ActivityManager extends PersistentObjectManager {
 		while(dependancesToAddIter.hasNext())
 		{
 			predecessor.setId(dependancesToAddIter.next());
-			activitySequenceManager.addActivitySequence(predecessor,successor,linkType);
+			ActivitySequence newActivitySequence = new ActivitySequence();
+			newActivitySequence.setPredecessor(predecessor);
+			newActivitySequence.setSuccessor(successor);
+			newActivitySequence.setLinkType(linkType);
+			activitySequenceManager.insert(newActivitySequence);
 		}
 		
 	}
@@ -241,7 +245,7 @@ public class ActivityManager extends PersistentObjectManager {
 	/**
 	 * 
 	 * @param activity
-	 * @return retourne l'état dans lequel peut changer l'activité, null si elle ne peut pas changer d'etat
+	 * @return retourne l'?tat dans lequel peut changer l'activit?, null si elle ne peut pas changer d'etat
 	 * @throws PersistanceException
 	 */
 	public String verifChangeStateActivity(Activity activity) throws PersistanceException {
@@ -320,10 +324,10 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	/**
 	 * 
-	 * Cette méthode permet  de supprimer une activité.
-	 * Pour cela il fautégalement supprimer toutes les relations d'une activité avec les autres.
+	 * Cette m?thode permet  de supprimer une activit?.
+	 * Pour cela il faut?galement supprimer toutes les relations d'une activit? avec les autres.
 	 * 
-	 * On supprime TOUS les liens relatifs à l'activité (mode barbare)
+	 * On supprime TOUS les liens relatifs ? l'activit? (mode barbare)
 	 * 
 	 * @param activityId
 	 * @return 
@@ -336,10 +340,10 @@ public class ActivityManager extends PersistentObjectManager {
 		Collection PredecessorsList = null ;
 		Collection SuccessorsList	= null ;
 
-		// chargement de l'activité
+		// chargement de l'activit?
 		Activity activity = ActivityManager.getInstance().getActivityById(activityId);
 			
-		// on recupere toutes les activités précedentes
+		// on recupere toutes les activit?s pr?cedentes
 	PredecessorsList =ActivityManager.getInstance().getPredecessors(activityId);
 	
 		// puis on supprime les liens avec predecesseurs via un iterateur
@@ -362,7 +366,7 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 
 
-	// ... et on finit par supprimes l'activité
+	// ... et on finit par supprimes l'activit?
 	ActivityManager.getInstance().delete(activity);
 	
 	}

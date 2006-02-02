@@ -13,16 +13,16 @@ public class ActivitySequence extends HistorizedObject {
 	
 	
 	/**
-	 * Récupération de l'identifiant de la séquence d'activité nécessaire pour la persistence
-	 * @return identifiant de la séquence d'activité
+	 * R?cup?ration de l'identifiant de la s?quence d'activit? n?cessaire pour la persistence
+	 * @return identifiant de la s?quence d'activit?
 	 */
 	public Object getId() {
 		return id;
 	}
 
 	/**
-	 * Modification de l'identifiant de la séquence d'activité
-	 * @param id identifiant de la séquence d'activité à modifier
+	 * Modification de l'identifiant de la s?quence d'activit?
+	 * @param id identifiant de la s?quence d'activit? ? modifier
 	 */
 	public void setId(Object id) {
 		this.id = (Integer) id;
@@ -51,4 +51,19 @@ public class ActivitySequence extends HistorizedObject {
 	public void setLinkType(ActivitySequenceType linkType) {
 		this.linkType = linkType;
 	}
+
+	public boolean equals(Object obj) {
+		boolean ok = ((ActivitySequence)obj).getId().equals(id);
+		
+		ok &= ((ActivitySequence)obj).getPredecessor().equals(predecessor);
+		
+		ok &= ((ActivitySequence)obj).getSuccessor().equals(successor);
+		
+		ok &= ((ActivitySequence)obj).getLinkType().equals(linkType);
+		
+		return ok;
+	}
+	
+	
+	
 }
