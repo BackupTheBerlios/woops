@@ -16,7 +16,7 @@
 	
 	<tr>
     
-    <td colspan="2">
+    <td colspan="3">
     
     <ctrl:list
 		name="KEY_DEPENDANCES_LIST"
@@ -40,15 +40,23 @@
 	
 	</tr>
     
-    <tr><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td></tr>
     
     <tr>
     
-    <td align="right" width="75%">
+    <td align="right" width="50%">
     	<ctrl:button
 			name="btnPrevious"
 			text="form.button.previous"
 			title="list.tooltip.manageDependancesTypes.previous"
+			/>
+	</td>
+	
+	<td align="right" width="25%">	
+		<ctrl:button
+			name="btnNext"
+			text="form.button.next"
+			disabled="true"
 			/>
 	</td>
 	
