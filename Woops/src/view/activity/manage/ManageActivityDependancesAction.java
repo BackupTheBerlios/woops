@@ -54,10 +54,6 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	public void doExecute(ActionContext context) throws IOException, ServletException {
 		logger.debug("ManageActivityDependancesAction.doExecute()");
 		
-		if (context.form()==null) {
-			context.request().setAttribute(context.mapping().getAttribute(), new ManageActivityDependancesForm());
-		}
-	
 		try {
 			/** Met ? jour les attributs du ManageActivityDependancesForm **/
 			setPossibleDependancesOptions(context);
