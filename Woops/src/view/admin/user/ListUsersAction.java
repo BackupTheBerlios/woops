@@ -150,7 +150,7 @@ public class ListUsersAction extends WoopsCCAction {
 	
 	public void listUsers_onEdit(ControlActionContext context, String id) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
-		context.request().setAttribute(PresentationConstantes.PARAM_LOGIN,id);
+		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,id);
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
 	}

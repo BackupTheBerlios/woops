@@ -9,12 +9,19 @@ import org.apache.struts.action.ActionMessage;
 
 import business.format.Controleur;
 
+import com.cc.framework.ui.control.SimpleListControl;
+import com.cc.framework.ui.model.ListDataModel;
+
 public class AddUserForm extends ActionForm{
 	private String firstName ;
 	private String lastName ;
 	private String login ;
 	private String password ;
 	private String password2 ;
+	private String roleCode ;
+	private String mode ;
+	private String userId ;
+	private SimpleListControl roleOptions = new SimpleListControl ();
 	/** 
 	 * Method validate
 	 * @param mapping
@@ -76,5 +83,37 @@ public class AddUserForm extends ActionForm{
 
 	public void setPassword2(String password2) {
 		this.password2 = password2;
+	}
+
+	public ListDataModel getRoleOptions() {
+		return (ListDataModel) this.roleOptions.getDataModel();
+	}
+	
+	public void setRoleOptions(ListDataModel dataModel) {
+		this.roleOptions.setDataModel(dataModel);
+	}
+
+	public String getRoleCode() {
+		return roleCode;
+	}
+
+	public void setRoleCode(String roleCode) {
+		this.roleCode = roleCode;
+	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

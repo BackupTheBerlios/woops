@@ -5,6 +5,7 @@ import java.util.Arrays;
 import business.format.ColumnComparator;
 import business.format.StringColumnComparator;
 import business.user.User;
+import business.user.UserRole;
 
 import com.cc.framework.common.DisplayObject;
 import com.cc.framework.common.SortOrder;
@@ -12,12 +13,12 @@ import com.cc.framework.ui.model.ListDataModel;
 
 import view.common.WoopsListDataModel;
 
-public class ListUsersModel extends WoopsListDataModel {
+public class ListRoleModel extends WoopsListDataModel {
 
 	/**
 	 * Constructeur par défaut
 	 */
-	public ListUsersModel() {
+	public ListRoleModel() {
 		super();
 	}
 	
@@ -26,7 +27,7 @@ public class ListUsersModel extends WoopsListDataModel {
 	 * pour le contrôleur c'est à dire les lignes de la liste qui 
 	 * sera affichée au participant
 	 */
-	public ListUsersModel(DisplayObject[] elements) {
+	public ListRoleModel(DisplayObject[] elements) {
 		super(elements);
 	}
 	
@@ -34,18 +35,7 @@ public class ListUsersModel extends WoopsListDataModel {
 	 * @see view.common.WoopsListDataModel#getUniqueKey(int)
 	 */
 	public String getUniqueKey(int index) {
-		return ((UserItem)data[index]).getId();
+		return ((RoleItem)data[index]).getCode();
 	}
-	
-	/**
-	 * Trie la liste à partir de la colonne selectionnée  
-	 * @param column		propriété qui définie la colonne
-	 * @param direction		ordre de tri : ascendant ou descendant
-	 */	
-	public void sortByColumn(String column, SortOrder direction) {
-		Arrays.sort(data, new StringColumnComparator(column, direction));
-	}
-	
-	
 
 }

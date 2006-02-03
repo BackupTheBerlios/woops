@@ -32,7 +32,7 @@ public interface PresentationConstantes {
 	public static final String PARAM_ACTION_SUBMIT="actionSubmit";
 	public static final String PARAM_MODE="mode";
 	public static final String PARAM_ACTIVITY_ID="activityId";
-	public static final String PARAM_LOGIN="login";
+	public static final String PARAM_USER_ID="userId";
 
 	
 	//constantes relatives aux Styles
@@ -48,6 +48,7 @@ public interface PresentationConstantes {
 	public static final String KEY_DEPENDANCES_LIST_MNGR = "KEY_DEPENDANCES_LIST_MNGR";
 	public static final String KEY_ACTIVITY="ACTIVITY";
 	public static final String KEY_ACTIVITIES_MAP="ACTIVITIES_MAP";
+	public static final String KEY_ROLE_OPTIONS ="ROLE_OPTIONS";
 	
 	public static final String LIBELLE_OUI="O";
 	public static final String LIBELLE_NON="N";
@@ -65,6 +66,7 @@ public interface PresentationConstantes {
     
     // constantes de nom de table
 	public static final String TABLE_USER="User";
+	public static final String TABLE_USERROLE = "UserRole" ;
 	
 	public static final String KEY_USERS_MAP="USERS_MAP" ;
 	

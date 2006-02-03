@@ -14,13 +14,13 @@
         	label="form.field.login"
         	property="login"
         	required="true"
-        	value="bernard"/>
+        	value="woops"/>
         
         <forms:password    	
         	label="form.field.password"	
         	property="password"   	
         	required="true"
-        	value="bernard"/>
+        	value="woops"/>
 
        	<forms:buttonsection default="btnLogin">  
         	<forms:button

@@ -1,5 +1,6 @@
 <%@ taglib uri="/struts-html" prefix="html" %>
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
+<%@ taglib uri="/cc-base"    prefix="base" %>
 
 <html:form action="addUser.do" >
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -19,6 +20,14 @@
         	label="admin.addUser.lastName"	
         	property="lastName"   	
         	required="true"/>
+		    
+		<forms:select
+        	label="admin.addUser.role"
+        	property="roleCode"
+        	>
+        	<base:options property="roleOptions" keyProperty="code" labelProperty="name" />
+		    </forms:select>
+		    
 		    
         <forms:text 
         	label="form.field.login"
@@ -45,5 +54,8 @@
         </forms:buttonsection>
     
 	</forms:form>
+	
+	<html:hidden property="mode"/>
+	<html:hidden property="userId"/>
     
 </html:form>
