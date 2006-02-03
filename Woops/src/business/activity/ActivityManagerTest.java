@@ -6,6 +6,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 
+import business.BusinessConstantes;
+import business.activity.sequence.ActivitySequence;
+import business.activity.sequencetype.ActivitySequenceType;
+import business.activity.sequencetype.ActivitySequenceTypeManager;
 import business.hibernate.exception.PersistanceException;
 import junit.framework.TestCase;
 
@@ -119,6 +123,8 @@ public class ActivityManagerTest extends TestCase {
 	 */
 	public void testGetPredecessors() {
 
+			// POSTULAT : "2" poss?de des dependances
+
 		Integer id = new Integer(2);
 		Collection ActivitiesList = new ArrayList();
 		Collection ActivitiesListSucc = new ArrayList();
@@ -144,7 +150,7 @@ public class ActivityManagerTest extends TestCase {
 		}
 		
 		
-		// tabmleau d'activit?s pas vide
+		// tableau d'activit?s pas vide
 		assertFalse(ActivitiesList.isEmpty());
 		
 		Iterator iter = ActivitiesList.iterator();
@@ -162,17 +168,15 @@ public class ActivityManagerTest extends TestCase {
 			catch (PersistanceException e1) {
 				assertTrue(false);
 			}
-			System.out.print(res+"\n\n");
-			System.out.print(act.getId()+"\n\n");
-			System.out.print(acti.getId()+"\n\n");
 			
-			res &= ActivitiesListSucc.contains(act);
+			// tableau d'activit?s pas vide
+			assertFalse(ActivitiesListSucc.isEmpty());
+			
+			res |= ActivitiesListSucc.contains(act);
+			assertTrue(res);
 	 		
 		}
-		assertTrue(res);
-	 	
-	 	
-	 	
+		
 	}
 
 	/*
@@ -186,9 +190,54 @@ public class ActivityManagerTest extends TestCase {
 	 * Test method for 'business.activity.ActivityManager.getActivitySequencesPredecessors(Integer)'
 	 */
 	public void testGetActivitySequencesPredecessors() {
+		
+		Collection SequencesList = new ArrayList();
+		Collection PredList = new ArrayList();
+		Integer id = new Integer(2);
+		ActivitySequence st = new ActivitySequence();
+		Activity activity = new Activity();
+		
+		try {
+			activity = ActivityManager.getInstance().getActivityById(id);
+		} catch (PersistanceException e1) {
+			assertTrue(false);
+		}
+		
+		try {
+			SequencesList = ActivityManager.getInstance().getActivitySequencesPredecessors(id);
+		} catch (PersistanceException e) {
+			assertTrue(false);
+		}
+		
+		
+		Iterator iter = SequencesList.iterator();
+		
+		Activity a1 = new Activity();
+		Activity a2 = new Activity();
+		
+		while (iter.hasNext()) {	
+			
+			st = (ActivitySequence)iter.next();
+			a1 = st.getPredecessor();
+			a2 = st.getSuccessor();
+			
+			// le successeur de la sequence est l'activite testee 
+			assertTrue(a2.equals(activity));
+			
+			try {
+				PredList = ActivityManager.getInstance().getPossibleActivityPredecessors((Integer)activity.getId());
+			} catch (PersistanceException e) {
+				assertTrue(false);
+			} 
+			
+			// a1 est dans la liste des predecesseurs de a2
+			assertTrue(PredList.contains(a1));			
+						
+		}
 
 	}
 
+	
 	/*
 	 * Test method for 'business.activity.ActivityManager.getActivitySequencesSuccessors(Integer)'
 	 */
