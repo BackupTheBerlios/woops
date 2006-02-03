@@ -83,7 +83,7 @@ public class ActivityManagerTest extends TestCase {
 		catch (PersistanceException e1) {
 		}
 
-		// tabmleau d'activit? par vide
+		// tabmleau d'activit? pas vide
 		assertFalse(ActivitiesList.isEmpty());
 		
 		Iterator iter = ActivitiesList.iterator();
@@ -103,6 +103,7 @@ public class ActivityManagerTest extends TestCase {
 	 * Test method for 'business.activity.ActivityManager.getActivitiesHistoryByUser(Integer)'
 	 */
 	public void testGetActivitiesHistoryByUser() {
+		
 
 	}
 
@@ -118,6 +119,60 @@ public class ActivityManagerTest extends TestCase {
 	 */
 	public void testGetPredecessors() {
 
+		Integer id = new Integer(2);
+		Collection ActivitiesList = new ArrayList();
+		Collection ActivitiesListSucc = new ArrayList();
+		Activity act = new Activity();
+		Activity acti = new Activity();
+		boolean res = false ;
+		
+		try {
+			act = ActivityManager.getInstance().getActivityById(id);
+		}
+		catch (PersistanceException e1) {
+			
+			assertTrue(false);
+		}
+		
+		
+		try {
+			ActivitiesList = ActivityManager.getInstance().getPredecessors((Integer)act.getId());
+		}		
+		catch (PersistanceException e1) {
+			
+			assertTrue(false);
+		}
+		
+		
+		// tabmleau d'activit?s pas vide
+		assertFalse(ActivitiesList.isEmpty());
+		
+		Iterator iter = ActivitiesList.iterator();
+		
+
+		while (iter.hasNext()) {	
+			
+			res = false;
+			
+			acti = (Activity)iter.next();
+			
+			try{
+				ActivitiesListSucc = ActivityManager.getInstance().getSuccessors((Integer)acti.getId());
+			}
+			catch (PersistanceException e1) {
+				assertTrue(false);
+			}
+			System.out.print(res+"\n\n");
+			System.out.print(act.getId()+"\n\n");
+			System.out.print(acti.getId()+"\n\n");
+			
+			res &= ActivitiesListSucc.contains(act);
+	 		
+		}
+		assertTrue(res);
+	 	
+	 	
+	 	
 	}
 
 	/*
