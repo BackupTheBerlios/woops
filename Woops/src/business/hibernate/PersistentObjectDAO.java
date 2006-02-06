@@ -41,7 +41,7 @@ public class PersistentObjectDAO  {
 			
 		} catch (ConstraintViolationException cve) {
             rollback(transaction);
-            if (cve.getErrorCode()==1)
+            if (cve.getErrorCode()==1062)
 				throw new DoublonException(cve.getMessage());
 			throw new PersistanceException(cve.getMessage(),cve);
 		} catch (HibernateException he) {
@@ -72,7 +72,7 @@ public class PersistentObjectDAO  {
 			
 		} catch (ConstraintViolationException cve) {
             rollback(transaction);
-            if (cve.getErrorCode()==1)
+            if (cve.getErrorCode()==1062)
 				throw new DoublonException(cve.getMessage());
 			throw new PersistanceException(cve.getMessage(),cve);
 		} catch (HibernateException he) {
@@ -94,7 +94,7 @@ public class PersistentObjectDAO  {
         session.save(objet);
     }    
 	
-	public void update(PersistentObject objet) throws PersistanceException {
+	public void update(PersistentObject objet) throws PersistanceException, DoublonException {
 		
         Session session = null ;
         Transaction transaction = null;
@@ -106,7 +106,12 @@ public class PersistentObjectDAO  {
             
             transaction.commit();
 
-        } catch (HibernateException he) {
+        } catch (ConstraintViolationException cve) {
+            rollback(transaction);
+            if (cve.getErrorCode()==1062)
+				throw new DoublonException(cve.getMessage());
+			throw new PersistanceException(cve.getMessage(),cve);
+		} catch (HibernateException he) {
             rollback(transaction);
 			throw new PersistanceException(he.getMessage(),he);
 		} finally {

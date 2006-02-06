@@ -140,7 +140,24 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		
 		ManageActivityCreationForm form = (ManageActivityCreationForm) context.form();
 
-		// controle de la validation du formulaire
+		
+		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
+		
+		//R?percution de l'attribut mode en cas d'erreur
+		context.request().setAttribute(PresentationConstantes.PARAM_MODE,mode);
+		
+		Integer activityId = null;
+		
+		if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
+			//R?percution de l'attribut activityId
+			activityId = new Integer(form.getActivityId());
+			context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
+		}
+		
+			
+		
+		
+		//controle de la validation du formulaire
 		context.addErrors(form.validate(context.mapping(),context.request()));
 		
 	    if (!context.hasErrors()) {
@@ -148,10 +165,6 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				
 				//R?cup?ration de l'identifiant du participant connect?
 		    	User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-				
-				String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
-				
-				Integer activityId = null;
 				
 				if (mode.equals(PresentationConstantes.INSERT_MODE)) {
 					Activity activity = new Activity();
@@ -181,8 +194,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 				
-					activityId = new Integer(form.getActivityId());
-					
+				
 					Activity activity = (Activity)activitiesMap.get(activityId);
 					
 					/* V?rification que l'utilisateur a bien modifi? quelque chose */
@@ -199,9 +211,6 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					}
 				}
 				
-				// R?percution de l'attribut
-				context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
-				
 				ok=true;
 				
 			} catch (PersistanceException pe) {
@@ -209,7 +218,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
                 context.addGlobalError("errors.persistance.global");
 			} catch (DoublonException de) {
 				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
-                context.addGlobalError("errors.persistance.doublon");
+                context.addGlobalError("errors.persistance.doublon",form.getName());
 			}	
         } else {
         	context.forwardByName(PresentationConstantes.FORWARD_ERROR);
