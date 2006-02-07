@@ -3,7 +3,6 @@ package view.activity.history;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.servlet.ServletException;
@@ -52,7 +51,7 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 	}
 
 	/**
-	 * Cette m?thode constitue la liste ? partir de la BD
+	 * Cette methode constitue la liste ? partir de la BD
 	 * @param contexte	contexte d'execution de la servlet
 	 * @throws Exception	indique qu'une erreur s'est produite pendant le traitement
 	 */
@@ -75,12 +74,11 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
     	// R?cup?ration de l'identifiant du participant connect?
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
     	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer)sessionUser.getId());  	
-    	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer) sessionUser.getId());  	
-
+    	
     	// Constitue une liste d'ActivityItems ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();
     	listActivitiesItems = new ArrayList();
-    	HashMap activitiesMap = new HashMap();
+
     	while (iter.hasNext()) {
     		Activity activity = (Activity) iter.next();
     		activityItem = new HistorizedActivityItem();
@@ -93,8 +91,6 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
     		
 			listActivitiesItems.add(activityItem);
 			
-			//Construction de la hash map stockant la liste des activit?s
-			activitiesMap.put(activity.getId(),activity);
     	}
 
 		// Conversion de la liste en tableau d'items
@@ -105,8 +101,6 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 		HistorizedActivitiesModel model = new HistorizedActivitiesModel(result);
 		listActivitiesForm.setDataModel(model);
 		
-		//Sauvegarde d'une HashMap stockant la liste des activit?s du participant
-		context.session().setAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP,activitiesMap);
 	}
 	
 	/**
