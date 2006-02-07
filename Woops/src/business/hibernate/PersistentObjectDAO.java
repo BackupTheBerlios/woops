@@ -27,41 +27,12 @@ import business.hibernate.exception.PersistanceException;
 public class PersistentObjectDAO  {
 
     
-	public void insert(PersistentObject objet) throws PersistanceException,DoublonException {
-		
-        Session session = null ;
-        Transaction transaction = null;
-        try {
-            session = HibernateSessionFactory.currentSession();
-            transaction = session.beginTransaction();
-
-            session.save(objet);
-            
-            transaction.commit();
-			
-		} catch (ConstraintViolationException cve) {
-            rollback(transaction);
-            if (cve.getErrorCode()==1062)
-				throw new DoublonException(cve.getMessage());
-			throw new PersistanceException(cve.getMessage(),cve);
-		} catch (HibernateException he) {
-		    rollback(transaction);
-            throw new PersistanceException(he.getMessage(),he);
-		} finally {
-			try {
-				if (session!=null && session.isOpen()) 
-					HibernateSessionFactory.closeSession();				
-			} catch (HibernateException he) {
-				throw new PersistanceException(he.getMessage(),he);
-			}
-		}
-	}
-	
-	public Serializable insertWithGetId(PersistentObject objet) throws PersistanceException,DoublonException {
+	public Serializable insert(PersistentObject objet) throws PersistanceException,DoublonException {
 		
         Session session = null ;
         Transaction transaction = null;
         Serializable id = null;
+        
         try {
             session = HibernateSessionFactory.currentSession();
             transaction = session.beginTransaction();
@@ -72,7 +43,7 @@ public class PersistentObjectDAO  {
 			
 		} catch (ConstraintViolationException cve) {
             rollback(transaction);
-            if (cve.getErrorCode()==1062)
+            if (cve.getErrorCode()==1)
 				throw new DoublonException(cve.getMessage());
 			throw new PersistanceException(cve.getMessage(),cve);
 		} catch (HibernateException he) {
@@ -89,15 +60,16 @@ public class PersistentObjectDAO  {
 		
 		return id;
 	}
-
-    public void insert(PersistentObject objet, Session session) throws HibernateException {
-        session.save(objet);
+	
+	public Serializable insert(PersistentObject objet, Session session) throws HibernateException {
+        return session.save(objet);
     }    
 	
-	public void update(PersistentObject objet) throws PersistanceException, DoublonException {
+	public void update(PersistentObject objet) throws PersistanceException {
 		
         Session session = null ;
         Transaction transaction = null;
+        
         try {
             session = HibernateSessionFactory.currentSession();
             transaction = session.beginTransaction();
@@ -106,12 +78,7 @@ public class PersistentObjectDAO  {
             
             transaction.commit();
 
-        } catch (ConstraintViolationException cve) {
-            rollback(transaction);
-            if (cve.getErrorCode()==1062)
-				throw new DoublonException(cve.getMessage());
-			throw new PersistanceException(cve.getMessage(),cve);
-		} catch (HibernateException he) {
+        } catch (HibernateException he) {
             rollback(transaction);
 			throw new PersistanceException(he.getMessage(),he);
 		} finally {

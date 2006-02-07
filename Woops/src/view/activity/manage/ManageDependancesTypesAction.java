@@ -163,11 +163,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 				}	
 			} catch (PersistanceException e) {
 				context.addGlobalError("errors.persistance.global");
-			} catch (DoublonException e) {
-				// Ne doit jamais passer par là
-				e.printStackTrace();
 			}
-
 		}
 		
 		if (!allUnchanged) {

@@ -17,22 +17,6 @@ public class PersistentObjectManager {
 
     private PersistentObjectDAO dao = new PersistentObjectDAO();  
     
-    /*private static ObjetPersistantManager instance;
-    
-    /**
-     * Singleton -> Constructeur priv?
-     */
-    /*private ObjetPersistantManager() {}
-
-    public static ObjetPersistantManager getInstance() {
-        if (instance == null) {
-            synchronized (ObjetPersistantManager.class) {
-                instance = new ObjetPersistantManager();
-            }
-        }
-        return instance;
-    }*/
-
     public Session getSession() throws HibernateException  {
         return HibernateSessionFactory.currentSession();
     }
@@ -42,28 +26,16 @@ public class PersistentObjectManager {
             HibernateSessionFactory.closeSession();
     }    
     
-    public void insert(PersistentObject objet) throws PersistanceException,DoublonException {
-        dao.insert(objet);
+    public Serializable insert(PersistentObject objet) throws PersistanceException,DoublonException {
+        return dao.insert(objet);
     }
     
-    /**
-     * Methode ajout?e par simon et ben, le 23/01/06
-     * 
-     * @param objet
-     * @return
-     * @throws PersistanceException
-     * @throws DoublonException
-     */
-    public Serializable insertWithGetId(PersistentObject objet) throws PersistanceException,DoublonException {
-        return dao.insertWithGetId(objet);
-    }
-
-    public void insert(PersistentObject objet, Session session) throws HibernateException  {
-        dao.insert(objet,session);
+    public Serializable insert(PersistentObject objet, Session session) throws HibernateException  {
+        return dao.insert(objet,session);
     }    
   
     
-    public void update(PersistentObject objet) throws PersistanceException, DoublonException {
+    public void update(PersistentObject objet) throws PersistanceException {
         dao.update(objet);
     }
 

@@ -25,8 +25,7 @@ import com.cc.framework.adapter.struts.FormActionContext;
  * ManageActivityCreationAction : permet de creer une nouvelle activite
  */
 public class ManageActivityCreationAction extends WoopsCCAction {
-	private static Logger logger = Logger.getLogger(ManageActivityDependancesAction.class);   
-	
+
 	/**
 	 * Constructeur vide
 	 *
@@ -181,7 +180,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					activity.setUserCreation((user.getId().toString()));
 					activity.setDateCreation(new Date());
 					
-					activityId = (Integer)ActivityManager.getInstance().insertWithGetId(activity);
+					activityId = (Integer)ActivityManager.getInstance().insert(activity);
 					
 					/* R?cup?ration la hashmap pour y rajouter l'activit? */
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);

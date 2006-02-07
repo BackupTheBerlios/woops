@@ -38,7 +38,7 @@ public class ActivitySequenceManagerTest extends TestCase {
 			predecessor.setName("pred");
 			predecessor.setUserId(new Integer(1));
 			predecessor.setState(new CreatedActivityState());
-			Integer predecessorId = (Integer)ActivityManager.getInstance().insertWithGetId(predecessor);
+			Integer predecessorId = (Integer)ActivityManager.getInstance().insert(predecessor);
 			predecessor.setId(predecessorId);
 		
 			// cr?ation du successeur
@@ -46,7 +46,7 @@ public class ActivitySequenceManagerTest extends TestCase {
 			successor.setName("succ");
 			successor.setUserId(new Integer(1));
 			successor.setState(new CreatedActivityState());
-			Integer successorId = (Integer)ActivityManager.getInstance().insertWithGetId(successor);
+			Integer successorId = (Integer)ActivityManager.getInstance().insert(successor);
 			successor.setId(successorId);
 		
 			// cr?ation du linkType
@@ -59,7 +59,7 @@ public class ActivitySequenceManagerTest extends TestCase {
 			newActivitySequence.setPredecessor(predecessor);
 			newActivitySequence.setSuccessor(successor);
 			newActivitySequence.setLinkType(linkType);
-			Integer newActivitySequenceId = (Integer)ActivitySequenceManager.getInstance().insertWithGetId(newActivitySequence);
+			Integer newActivitySequenceId = (Integer)ActivitySequenceManager.getInstance().insert(newActivitySequence);
 		
 			
 			// V?rification que l'activity sequence a bien ?t? ajout?e
