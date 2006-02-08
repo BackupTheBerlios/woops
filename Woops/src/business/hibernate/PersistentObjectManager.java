@@ -58,5 +58,9 @@ public class PersistentObjectManager {
     public PersistentObject get(Class classe, Serializable id) throws PersistanceException {
     	return dao.get(classe,id);
     }
+    
+    public boolean exist(Class classe, Serializable id) throws PersistanceException {
+    	return dao.exist(classe, id);
+    }
 
 }

@@ -133,7 +133,6 @@ public class PersistentObjectDAO  {
 		try {
 			session = HibernateSessionFactory.currentSession();
 			objet = (PersistentObject) session.get(classe, id);
-			
 		} catch (HibernateException he) {
 			throw new PersistanceException(he.getMessage(),he);
 		} finally {
@@ -148,6 +147,25 @@ public class PersistentObjectDAO  {
 	
 	}		
 	
+	protected boolean exist(Class classe, Serializable id) throws PersistanceException {
+		
+		Session session = null ;
+		PersistentObject objet =null;
+		try {
+			session = HibernateSessionFactory.currentSession();
+			objet = (PersistentObject) session.get(classe, id);
+			if (objet != null) return true;
+			return false;
+		} catch (HibernateException he) {
+			throw new PersistanceException(he.getMessage(),he);
+		} finally {
+			try {
+				if (session!=null && session.isOpen()) HibernateSessionFactory.closeSession();				
+			} catch (HibernateException he) {
+				throw new PersistanceException(he.getMessage(),he);
+			}
+		}
+	}	
 	
 	protected List getList(String table) throws PersistanceException {
 		
