@@ -9,7 +9,7 @@ import com.cc.framework.ui.model.ListDataModel;
  */
 
 public class ShowActivitySummaryForm extends FWActionForm {
-
+	private static final long serialVersionUID = -7623927860007234202L; /** Generated Serial ID */
 	private	String	activityId; /** identifiant de l'activit? */
 	private String 	name; 		/** nom de l'activit? */
 	private	String	details; 	/** description de l'activit? */

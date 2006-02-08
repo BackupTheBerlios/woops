@@ -1,6 +1,5 @@
 package business.activity.sequencetype;
 
-import business.activity.sequence.ActivitySequence;
 import business.hibernate.HistorizedObject;
 
 

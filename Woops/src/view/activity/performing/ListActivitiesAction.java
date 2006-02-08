@@ -3,8 +3,8 @@ package view.activity.performing;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.servlet.ServletException;
 

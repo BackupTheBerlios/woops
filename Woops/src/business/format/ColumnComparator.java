@@ -1,6 +1,7 @@
 package business.format;
 
 import java.util.Comparator;
+
 import com.cc.framework.common.SortOrder;
 
 public abstract class ColumnComparator implements Comparator {

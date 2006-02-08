@@ -1,10 +1,7 @@
 package business.activity.sequence;
 
 import business.activity.Activity;
-import business.activity.sequencetype.ActivitySequenceType;
-import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectManager;
-import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 

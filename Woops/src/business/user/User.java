@@ -2,8 +2,8 @@ package business.user;
 
 import java.util.Collection;
 
-import business.security.RoleDescriptor;
 import business.hibernate.HistorizedObject;
+import business.security.RoleDescriptor;
 
 import com.cc.framework.security.Principal;
 
