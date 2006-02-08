@@ -13,6 +13,11 @@
         	id="3"  
         	text="admin.menu.createUser"      
         	action="addUser.do"/>
+        	
+        <menu:menuitem   	
+        	id="3"  
+        	text="admin.menu.createProject"      
+        	action="addProject.do"/>
      	
         <menu:menuitem   	
         	id="5"  

@@ -1,5 +1,13 @@
 package view.admin.project;
 
-public class AddProjectAction {
+import com.cc.framework.adapter.struts.ActionContext;
+
+import view.common.WoopsCCAction;
+
+public class AddProjectAction extends WoopsCCAction {
+
+	public void doExecute(ActionContext context) throws Exception {		
+		context.forwardToInput();
+	}
 
 }

@@ -13,8 +13,10 @@
 	  	<form-bean name="loginForm" type="view.logon.LoginForm" />
 	  
 	  	<form-bean name="emptyForm" type="view.common.EmptyForm"/>
+	  	
 	  	<form-bean name="adminForm" type="view.admin.AdminForm" />  
-	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />  
+	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />
+	  	<form-bean name="addProjectForm" type="view.admin.project.AddProjectForm" />  
 	</form-beans>
 
 
@@ -149,18 +151,7 @@
          	<forward name="action" path="/listChangeStateActivities.do"/>
          	<forward name="edit" path="/manageActivityCreation.do"/>
       	</action>
-   
-   <!-- ================= Admin / addUser ================ -->  
-      	<action path="/addUser"	 type="view.admin.user.AddUserAction"
-     		attribute="addUserForm"
-        	name="addUserForm"
-			validate="false"      
-        	scope="request"
-        	input="/html/admin/user/addUser.jsp">
-        	<forward name="error" path="/html/admin/user/addUser.jsp" />
-        	<forward name="success" path="/html/admin/user/addUser.jsp"/>
-     	</action>  
-     	
+    	
      <!-- ================= Admin / admin ================ -->  
       	<action path="/admin"	 type="view.admin.AdminAction"
      		attribute="adminForm"
@@ -172,6 +163,28 @@
         	<forward name="success" path="/admin.do"/>
         	<forward name="edit" path="/addUser.do"/>
      </action>
+     
+    <!-- ================= Admin / addUser ================ -->  
+  	<action path="/addUser"	 type="view.admin.user.AddUserAction"
+ 		attribute="addUserForm"
+    	name="addUserForm"
+		validate="false"      
+    	scope="request"
+    	input="/html/admin/user/addUser.jsp">
+    	<forward name="error" path="/html/admin/user/addUser.jsp" />
+    	<forward name="success" path="/html/admin/user/addUser.jsp"/>
+ 	</action>  
+ 	
+ 	<!-- ================= Admin / addProject ================ -->  
+  	<action path="/addProject"	 type="view.admin.project.AddProjectAction"
+ 		attribute="addProjectForm"
+    	name="addProjectForm"
+		validate="false"      
+    	scope="request"
+    	input="/html/admin/project/addProject.jsp">
+    	<forward name="error" path="/html/admin/project/addProject.jsp" />
+    	<forward name="success" path="/html/admin/project/addProject.jsp"/>
+ 	</action>    
 
 	</action-mappings>
 
