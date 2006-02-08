@@ -8,11 +8,7 @@
         	text="admin.admin"      
         	action="admin.do"/>
         
-        <menu:menuitem   	
-        	id="2"  
-        	text="admin.menu.listUsers"      
-        	action="listUsers.do"/>
-        	
+         	
         <menu:menuitem   	
         	id="3"  
         	text="admin.menu.createUser"      
