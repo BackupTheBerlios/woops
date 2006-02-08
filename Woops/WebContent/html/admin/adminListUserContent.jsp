@@ -1,17 +1,9 @@
 <%@ taglib uri="/cc-controls" prefix="ctrl" %> 
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
-<%@ taglib uri="/struts-bean" prefix="bean" %>
-<%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/cc-utility"  prefix="util" %>
-
-<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
-<forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
-<br>
-
 <html:form action="admin.do">	
 	
 	<ctrl:list 
-		id="list" 
+		id="listUser" 
 		property="listUsers" 
 		title="table.title.listUsers"
 		width="650" 

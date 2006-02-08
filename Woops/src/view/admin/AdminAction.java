@@ -10,6 +10,10 @@ import javax.servlet.ServletException;
 
 import org.apache.log4j.Logger;
 
+import view.PresentationConstantes;
+import view.admin.user.ListUsersModel;
+import view.admin.user.UserItem;
+import view.common.WoopsCCAction;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
@@ -19,17 +23,10 @@ import com.cc.framework.common.DisplayObject;
 import com.cc.framework.common.SortOrder;
 import com.cc.framework.ui.control.ControlActionContext;
 
-import view.PresentationConstantes;
-import view.activity.performing.ListActivitiesAction;
-import view.admin.user.ListUsersForm;
-import view.admin.user.ListUsersModel;
-import view.admin.user.UserItem;
-import view.common.WoopsCCAction;
-
 public class AdminAction  extends WoopsCCAction {
 
 	
-	private static Logger logger = Logger.getLogger(ListActivitiesAction.class);    
+	private static Logger logger = Logger.getLogger(AdminAction.class);    
 	
 	public AdminAction (){
 		super();
@@ -39,7 +36,7 @@ public class AdminAction  extends WoopsCCAction {
 		try {
 			this.loadListUsers(context);
 			context.forwardToInput();
-	    } catch (PersistanceException pe) {
+		} catch (PersistanceException pe) {
 	    	logger.error(pe);
 			context.addGlobalError("errors.persistance.select");
 			context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
@@ -51,7 +48,7 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	
 	private void loadListUsers(ActionContext context) throws Exception {
-		logger.debug("ListActivitiesAction");
+		logger.debug("AdminAction");
 		
 		Collection dbData = null;
 		Collection listUsersItems = null;
@@ -59,11 +56,11 @@ public class AdminAction  extends WoopsCCAction {
 		
 		// Initialisation du form si celui-ci est nul
 		if (context.form()==null) {
-			context.session().setAttribute(context.mapping().getAttribute(), new ListUsersForm());
+			context.session().setAttribute(context.mapping().getAttribute(), new AdminForm());
 		}
 		
 		// Récupération du form bean nécessaire pour fournir les informations à la JSP
-    	ListUsersForm listUsersForm = (ListUsersForm) context.form();
+    	AdminForm adminForm = (AdminForm) context.form();
     	
     	// Récupération de la liste des activités
     	dbData = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
@@ -93,7 +90,7 @@ public class AdminAction  extends WoopsCCAction {
 		
 		// Création de la liste initialisée avec les valeurs à afficher
 		ListUsersModel model = new ListUsersModel(result);
-		listUsersForm.setDataModel(model);
+		adminForm.setDataModelUser(model);
 	
 		// Sauvegarde d'une HashMap stockant la liste des activités du participant
 		context.session().setAttribute(PresentationConstantes.KEY_USERS_MAP,usersMap);
@@ -110,7 +107,7 @@ public class AdminAction  extends WoopsCCAction {
 	 */
 	public void listUsers_onRefresh(ControlActionContext ctx) throws Exception {
 		try {
-			this.loadList(ctx);
+			this.loadListUsers(ctx);
 		} catch (Throwable t) {
 			logger.error(t);
 			ctx.addGlobalError("errors.global");

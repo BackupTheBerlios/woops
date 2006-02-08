@@ -13,8 +13,7 @@
 	  	<form-bean name="loginForm" type="view.logon.LoginForm" />
 	  
 	  	<form-bean name="emptyForm" type="view.common.EmptyForm"/>
-	  	
-	  	<form-bean name="listUsersForm" type="view.admin.user.ListUsersForm" />  
+	  	<form-bean name="adminForm" type="view.admin.AdminForm" />  
 	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />  
 	</form-beans>
 
@@ -28,7 +27,7 @@
 		<forward name="index" path="/index.jsp"/>
 		<forward name="nosession" path="/html/logon/loginUser.jsp"/>
 		<forward name="logout" path="/logoutUser.do"/>
-		<forward name="admin" path="/listUsers.do"/>
+		<forward name="admin" path="/admin.do"/>
 		<forward name="dev" path="/listActivities.do"/>
    	</global-forwards>
 
@@ -162,15 +161,15 @@
         	<forward name="success" path="/html/admin/user/addUser.jsp"/>
      	</action>  
      	
-     <!-- ================= Admin / listUsers ================ -->  
-      	<action path="/listUsers"	 type="view.admin.user.ListUsersAction"
-     		attribute="listUsersForm"
-        	name="listUsersForm"
+     <!-- ================= Admin / admin ================ -->  
+      	<action path="/admin"	 type="view.admin.AdminAction"
+     		attribute="adminForm"
+        	name="adminForm"
 			validate="false"      
         	scope="session"
-        	input="/html/admin/user/listUsers.jsp">
-        	<forward name="error" path="/listUsers.do" />
-        	<forward name="success" path="/listUsers.do"/>
+        	input="/html/admin/admin.jsp">
+        	<forward name="error" path="/admin.do" />
+        	<forward name="success" path="/admin.do"/>
         	<forward name="edit" path="/addUser.do"/>
      </action>
 

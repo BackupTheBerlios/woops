@@ -5,6 +5,7 @@ import com.cc.framework.ui.model.ListDataModel;
 import com.cc.framework.adapter.struts.FWActionForm;
 
 public class AdminForm extends FWActionForm {
+	
 	private SimpleListControl listUsers = new SimpleListControl();
 	
 	public SimpleListControl getListUsers() {
