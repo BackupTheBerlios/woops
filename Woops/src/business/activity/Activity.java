@@ -3,7 +3,7 @@ package business.activity;
 import java.util.Collection;
 import java.util.Date;
 
-import business.activity.sequence.ActivitySequence;
+import business.activity.state.CreatedActivityState;
 import business.activity.state.IActivityState;
 import business.hibernate.HistorizedObject;
 
@@ -39,7 +39,7 @@ public class Activity extends HistorizedObject{
 		this.startDate = null;
 		this.endDate = null;
 		this.userId = null;
-		this.state = null;
+		this.state = new CreatedActivityState();
 	}
 	
 	/**
