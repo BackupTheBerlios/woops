@@ -22,7 +22,6 @@ import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
 import business.activity.sequencetype.ActivitySequenceType;
 import business.activity.sequencetype.ActivitySequenceTypeManager;
-import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;

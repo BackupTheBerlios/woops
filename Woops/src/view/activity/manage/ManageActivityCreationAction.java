@@ -3,9 +3,6 @@ package view.activity.manage;
 import java.util.Date;
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionMessage;
-
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
 import business.BusinessConstantes;

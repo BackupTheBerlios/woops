@@ -2,7 +2,6 @@ package view.logon;
 
 import javax.servlet.http.HttpSession;
 
-
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
 import business.hibernate.exception.PersistanceException;

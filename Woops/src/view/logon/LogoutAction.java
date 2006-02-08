@@ -2,11 +2,11 @@ package view.logon;
 
 import javax.servlet.http.HttpSession;
 
-import com.cc.framework.adapter.struts.ActionContext;
-import com.cc.framework.security.SecurityUtil;
-
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
+
+import com.cc.framework.adapter.struts.ActionContext;
+import com.cc.framework.security.SecurityUtil;
 
 public class LogoutAction extends WoopsCCAction {
 

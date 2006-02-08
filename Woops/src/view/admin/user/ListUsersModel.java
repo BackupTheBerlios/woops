@@ -2,15 +2,11 @@ package view.admin.user;
 
 import java.util.Arrays;
 
-import business.format.ColumnComparator;
+import view.common.WoopsListDataModel;
 import business.format.StringColumnComparator;
-import business.user.User;
 
 import com.cc.framework.common.DisplayObject;
 import com.cc.framework.common.SortOrder;
-import com.cc.framework.ui.model.ListDataModel;
-
-import view.common.WoopsListDataModel;
 
 public class ListUsersModel extends WoopsListDataModel {
 

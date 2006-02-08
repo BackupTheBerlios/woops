@@ -13,6 +13,7 @@ import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class AddUserForm extends ActionForm{
+	private static final long serialVersionUID = 4324731707888397420L; /** Generated Serial ID */
 	private String firstName ;
 	private String lastName ;
 	private String login ;

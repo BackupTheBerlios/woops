@@ -1,29 +1,17 @@
 package view.admin.user;
 
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.struts.action.ActionForward;
-import org.apache.struts.util.MessageResources;
 
 import view.PresentationConstantes;
-import view.activity.ActivityItem;
-import view.activity.manage.ManageActivityCreationForm;
-import view.activity.manage.ManageActivityDependancesForm;
-import view.activity.performing.ListActivitiesModel;
 import view.common.WoopsCCAction;
-import business.BusinessConstantes;
-import business.activity.Activity;
-import business.activity.ActivityManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
-import business.security.RoleDescriptor;
-import business.security.Roles;
 import business.user.User;
 import business.user.UserManager;
 import business.user.UserRole;
@@ -31,7 +19,6 @@ import business.user.UserRole;
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
-import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 				
 
