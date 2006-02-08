@@ -10,6 +10,6 @@
     <template:put  name="menu"  	content="$/admin/subview/menu.jsp"/>
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
 	<forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
-    <template:put  name="UserContents"  content="$/admin/user/adminListUserContent.jsp"/>
-    <template:put  name="ProjectContents"  content="$/admin/user/adminListProjectContent.jsp"/>
+    <template:put  name="UserContents"  content="$/admin/adminListUserContent.jsp"/>
+    
 </template:insert>

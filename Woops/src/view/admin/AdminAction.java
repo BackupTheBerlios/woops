@@ -24,8 +24,6 @@ import com.cc.framework.common.SortOrder;
 import com.cc.framework.ui.control.ControlActionContext;
 
 public class AdminAction  extends WoopsCCAction {
-
-	
 	private static Logger logger = Logger.getLogger(AdminAction.class);    
 	
 	public AdminAction (){

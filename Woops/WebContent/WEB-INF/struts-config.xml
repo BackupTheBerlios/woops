@@ -165,7 +165,7 @@
       	<action path="/admin"	 type="view.admin.AdminAction"
      		attribute="adminForm"
         	name="adminForm"
-			validate="false"      
+			validate="false"
         	scope="session"
         	input="/html/admin/admin.jsp">
         	<forward name="error" path="/admin.do" />
