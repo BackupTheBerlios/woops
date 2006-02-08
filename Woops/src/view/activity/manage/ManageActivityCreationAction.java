@@ -187,6 +187,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					
 					activitiesMap.put(activityId,activity);
 					
+					context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
+					
 					context.addGlobalMessage("msg.info.activity.inserted", activity.getName());
 				}
 				else if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
