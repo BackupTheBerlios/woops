@@ -64,7 +64,7 @@ CREATE TABLE Activity (
      , details TEXT
      , startDate DATETIME
      , endDate DATETIME
-     , user INT NOT NULL
+     , user INT
      , state VARCHAR(50) NOT NULL
      , PRIMARY KEY (id)
      , INDEX (user)
