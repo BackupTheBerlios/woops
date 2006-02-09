@@ -19,12 +19,5 @@
         	text="admin.menu.createProject"      
         	action="addProject.do"/>
      	
-        <menu:menuitem   	
-        	id="5"  
-        	text="menu.deconnection"      
-        	action="logoutUser.do"/>
-        	
-      
-        
 
 </menu:menu>
