@@ -141,5 +141,11 @@ public class AdminAction  extends WoopsCCAction {
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
 	}
+	
+	public void listUsers_onDrilldown(ControlActionContext context, String userIdString) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,new Integer(userIdString));
+		
+		context.forwardByName(PresentationConstantes.FORWARD_DRILLDOWN_USER);
+	}
 
 }

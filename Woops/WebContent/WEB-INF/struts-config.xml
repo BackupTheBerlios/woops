@@ -17,6 +17,7 @@
 	  	<form-bean name="adminForm" type="view.admin.AdminForm" />  
 	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />
 	  	<form-bean name="addProjectForm" type="view.admin.project.AddProjectForm" />  
+	  	<form-bean name="showUserSummaryForm" type="view.admin.summary.ShowUserSummaryForm" />
 	</form-beans>
 
 
@@ -161,7 +162,8 @@
         	input="/html/admin/admin.jsp">
         	<forward name="error" path="/admin.do" />
         	<forward name="success" path="/admin.do"/>
-        	<forward name="edit" path="/addUser.do"/>
+        	<forward name="editUser" path="/addUser.do"/>
+        	<forward name="drillDownUser" path="/showUserSummary.do"/>
      </action>
      
     <!-- ================= Admin / addUser ================ -->  
@@ -185,6 +187,16 @@
     	<forward name="error" path="/html/admin/project/addProject.jsp" />
     	<forward name="success" path="/html/admin/project/addProject.jsp"/>
  	</action>    
+
+<!-- ================= Admin / Show User Summary ================ -->  
+		<action path="/showUserSummary"	 type="view.admin.summary.ShowUserSummaryAction"
+      		name="showUserSummaryForm"
+      	 	scope="session"
+      	 >
+         	<forward name="error" path="/showUserSummary.do" />
+         	<forward name="success" path="/html/admin/user/summary/summaryUser.jsp" />
+      		<forward name="previous" path="/admin"/>
+      	</action>
 
 	</action-mappings>
 

@@ -5,7 +5,7 @@
 <template:insert base="/html" template="$/template.jsp">
 
      <template:put  name="title"  direct="true">
-    	<util:resource key="admin.listUsers.title" /></template:put>
+    	<util:resource key="admin.admin.title" /></template:put>
     <template:put  name="menuHaut"  content="$/admin/subview/identification.jsp" />
     <template:put  name="menu"  	content="$/admin/subview/menu.jsp"/>
        

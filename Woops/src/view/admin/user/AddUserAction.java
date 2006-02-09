@@ -1,10 +1,13 @@
 package view.admin.user;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.servlet.ServletException;
 
 import org.apache.struts.action.ActionForward;
 
@@ -19,6 +22,7 @@ import business.user.UserRole;
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
+import com.cc.framework.ui.control.ControlActionContext;
 import com.cc.framework.ui.model.ListDataModel;
 				
 
@@ -68,6 +72,8 @@ public class AddUserAction extends WoopsCCAction {
 		context.forwardToInput();
 	}
 
+	
+	
 	public void add_onClick(FormActionContext context) {
 		ActionForward retour = null;	
 		

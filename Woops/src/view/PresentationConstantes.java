@@ -63,6 +63,8 @@ public interface PresentationConstantes {
     
     // Constantes forward pour admin
     public static final String FORWARD_ADMIN="admin";   
+    public static final String FORWARD_EDIT_USER="editUser";
+    public static final String FORWARD_DRILLDOWN_USER="drillDownUser";
     
     // constantes de nom de table
 	public static final String TABLE_USER="User";

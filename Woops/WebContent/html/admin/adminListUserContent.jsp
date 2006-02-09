@@ -14,12 +14,12 @@
 		property="listUsers" 
 		title="table.title.listUsers"
 		width="650" 
-		rows="3" 
+		rows="5" 
 		refreshButton="false" 
 		createButton="true"
 		>
 		
-			<ctrl:columntext 
+			<ctrl:columndrilldown
 				title="table.field.listUsers.firstName" 
 				property="firstName" 
 				width="250"
