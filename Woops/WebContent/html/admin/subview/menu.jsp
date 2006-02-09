@@ -5,7 +5,7 @@
      	
      	<menu:menuitem   	
         	id="1"  
-        	text="admin.admin"      
+        	text="admin.menu.home"      
         	action="admin.do"/>
         
          	
