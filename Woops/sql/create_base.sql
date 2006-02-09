@@ -74,7 +74,7 @@ CREATE TABLE Activity (
      , CONSTRAINT FK_Activity_state FOREIGN KEY (state)
                   REFERENCES ActivityState (name)            
 )ENGINE=InnoDB;
---CREATE INDEX IX_Activity_name ON Activity (name ASC);
+
 
 CREATE TABLE ActivitySequence (
        id INT NOT NULL AUTO_INCREMENT
