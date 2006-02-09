@@ -44,9 +44,9 @@
 /* FormBody */
 .fc .fcb {
 	font-size : 8pt;
-	border-left: 1px solid #1E5C99;
-	border-right: 1px solid #1E5C99;
-	border-bottom: 1px solid #1E5C99;
+	border-left: 1px solid #8B82A2;
+	border-right: 1px solid #8B82A2;
+	border-bottom: 1px solid #8B82A2;
 }
 
 /* FormBody: nested tables*/
@@ -56,19 +56,19 @@
 
 /* FormLeftSpacer */
 .fc .fls {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 	width : 4px;
 }
 
 /* FormRightSpacer */
 .fc .frs {
-	background-color : #EFEFEF;
+	background-color : #E0DEE7;
 	width : 4px;
 }
 
 /* FormErrorSpacer */
 .fc .fe {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 	width : 16px;	
 	padding-left: 5px;
 	padding-right: 2px;
@@ -76,7 +76,7 @@
 
 /* FormLabel */
 .fc .fl {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 	padding: 5px;
 	width: 90px;
 	word-wrap: break-word;
@@ -86,7 +86,7 @@
 
 /* FormDisplay */
 .fc .fd {
-	background-color : #EFEFEF;
+	background-color : #E0DEE7;
 	padding: 5px;
 }
 
@@ -99,7 +99,7 @@
 /* FormSearchLabel */
 .fc .fsl {
 	color : #FFFFFF;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	width : 100%;
 	font-family : Arial;
 	font-size : 9pt;
@@ -108,7 +108,7 @@
 
 /* FormButton */
 .fc .fb {
-	background-color : #EFEFEF;
+	background-color : #E0DEE7;
 	text-align : right;
 	padding: 7px;
 }
@@ -118,17 +118,17 @@
 	font-family : Arial;
 	font-size : 8pt;
 	font-weight : bold;
-	color: #1E5C99;
+	color: #8B82A2;
 	padding-left: 20px;
-	border-top: 1px solid #1E5C99;
-	border-bottom: 1px solid #1E5C99;
-	background-color: #9CB9D0;
+	border-top: 1px solid #8B82A2;
+	border-bottom: 1px solid #8B82A2;
+	background-color: #CAC0D6;
 }
 
 /* FormHeaderLabel */
 .fc .fhl {
 	color : #FFFFFF;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	width : 100%;
 }
 
@@ -138,7 +138,7 @@
 	font-size : 8pt;
 	font-weight : bold;
 	color : #FFFFFF;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	width : 100%;
 }
 
@@ -147,7 +147,7 @@
 	font-family : Arial;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -156,7 +156,7 @@
 	font-family : Arial;
 	font-size : 8pt;
 	font-weight : normal;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -190,19 +190,19 @@
 
 /* FormLeftSpacer */
 .fc_nf .fls {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 	width : 4px;
 }
 
 /* FormRightSpacer */
 .fc_nf .frs {
-	background-color : #EFEFEF;
+	background-color : #E0DEE7;
 	width : 4px;
 }
 
 /* FormErrorSpacer */
 .fc_nf .fe {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 	width : 16px;	
 	padding-left: 5px;
 	padding-right: 2px;
@@ -210,7 +210,7 @@
 
 /* FormLabel */
 .fc_nf .fl {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 	padding: 5px;
 	width: 90px;
 	word-wrap: break-word;
@@ -220,7 +220,7 @@
 
 /* FormDisplay */
 .fc_nf .fd {
-	background-color : #EFEFEF;
+	background-color : #E0DEE7;
 	padding: 5px;
 }
 
@@ -233,7 +233,7 @@
 /* FormSearchLabel */
 .fc_nf .fsl {
 	color : #FFFFFF;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	width : 100%;
 	font-family : Arial;
 	font-size : 9pt;
@@ -242,7 +242,7 @@
 
 /* FormButton */
 .fc_nf .fb {
-	background-color : #EFEFEF;
+	background-color : #E0DEE7;
 	text-align : right;
 	padding: 7px;
 }
@@ -252,17 +252,17 @@
 	font-family : Arial;
 	font-size : 8pt;
 	font-weight : bold;
-	color: #1E5C99;
+	color: #8B82A2;
 	padding-left: 20px;
-	border-top: 1px solid #1E5C99;
-	border-bottom: 1px solid #1E5C99;
+	border-top: 1px solid #8B82A2;
+	border-bottom: 1px solid #8B82A2;
 	background-color: #9CB9D0;
 }
 
 /* FormHeaderLabel */
 .fc_nf .fhl {
 	color : #FFFFFF;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	width : 100%;
 }
 
@@ -272,7 +272,7 @@
 	font-size : 8pt;
 	font-weight : bold;
 	color : #FFFFFF;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	width : 100%;
 }
 
@@ -281,7 +281,7 @@
 	font-family : Arial;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -290,7 +290,7 @@
 	font-family : Arial;
 	font-size : 8pt;
 	font-weight : normal;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -329,7 +329,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	color : #1E5C99;
+	color : #8B82A2;
 }
 
 /* ==========================================
@@ -464,10 +464,10 @@
 
 /* Body */
 .fc .hb {
-	border-left: 1px solid #1E5C99;
-	border-right: 1px solid #1E5C99;
-	border-bottom: 1px solid #1E5C99;
-	background-color : #CFE1EB;
+	border-left: 1px solid #8B82A2;
+	border-right: 1px solid #8B82A2;
+	border-bottom: 1px solid #8B82A2;
+	background-color : #CEC2D8;
 }
 
 /* Label */
@@ -490,13 +490,13 @@
 
 /* LeftSpacer */
 .fc .hb .fls {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 	width : 2px;
 }
 
 /* RightSpacer */
 .fc .hb .frs {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 	width : 2px;
 }
 

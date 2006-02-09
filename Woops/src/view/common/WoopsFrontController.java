@@ -6,6 +6,7 @@ import org.apache.struts.action.ActionServlet;
 
 import com.cc.framework.ui.painter.PainterFactory;
 import com.cc.framework.ui.painter.def.DefPainterFactory;
+import com.cc.framework.ui.painter.def2.Def2PainterFactory;
 import com.cc.framework.ui.painter.html.HtmlPainterFactory;
   
   public class WoopsFrontController extends ActionServlet { 
@@ -15,7 +16,7 @@ import com.cc.framework.ui.painter.html.HtmlPainterFactory;
   	super.init(); 
   	/* Autorisation de l'internationalisation */ 
   	getServletContext().setAttribute( com.cc.framework.Globals.LOCALENAME_KEY, "true");
-  	PainterFactory.registerApplicationPainter ( getServletContext (), DefPainterFactory.instance());
+  	PainterFactory.registerApplicationPainter ( getServletContext (), Def2PainterFactory.instance());
   	PainterFactory.registerApplicationPainter ( getServletContext (), HtmlPainterFactory.instance()); 
   	} 
   } 

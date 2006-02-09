@@ -29,7 +29,7 @@
 	font-size : 11pt;
 	font-weight : bold;
 	color: #F57E17;
-	border-bottom: 1px solid #6384BD;
+	border-bottom: 1px solid #BEB4CC;
 	padding-left : 2px;
 	padding-bottom : 2px;
 }
@@ -39,7 +39,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : bold;
-	color: #6384BD;
+	color: #BEB4CC;
 }
 
 /* ==========================================
@@ -89,10 +89,10 @@
 }
 
 .lc .lcb {
-	border-left: 1px solid #1E5C99;
-	border-right: 1px solid #1E5C99;
-	border-bottom: 1px solid #1E5C99;
-	background-color : #CFE1EB;
+	border-left: 1px solid #8B82A2;
+	border-right: 1px solid #8B82A2;
+	border-bottom: 1px solid #8B82A2;
+	background-color : #CEC2D8;
 	padding: 5px;
 }
 
@@ -101,7 +101,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -126,7 +126,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -151,7 +151,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -225,7 +225,7 @@
 	font-size : 8pt;
 	font-weight : bold;
 	color : #FFFFFF;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	width : 100%;
 }
 
@@ -234,7 +234,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -243,7 +243,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : normal;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -327,7 +327,7 @@
 }
 
 .lc_nf .lcb {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 }
 
 /* header (level 0) */
@@ -335,7 +335,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -360,7 +360,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -385,7 +385,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -469,7 +469,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -478,7 +478,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : normal;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -564,10 +564,10 @@
 }
 
 .tlc .tlcb {
-	border-left: 1px solid #1E5C99;
-	border-right: 1px solid #1E5C99;
-	border-bottom: 1px solid #1E5C99;
-	background-color : #CFE1EB;
+	border-left: 1px solid #8B82A2;
+	border-right: 1px solid #8B82A2;
+	border-bottom: 1px solid #8B82A2;
+	background-color : #CEC2D8;
 	padding: 5px;
 }
 
@@ -576,7 +576,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -589,7 +589,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -602,7 +602,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -685,7 +685,7 @@
 	font-size : 8pt;
 	font-weight : bold;
 	color : #FFFFFF;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	width : 100%;
 }
 
@@ -694,7 +694,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -703,7 +703,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : normal;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -789,7 +789,7 @@
 }
 
 .tlc_nf .tlcb {
-	background-color : #CFE1EB;
+	background-color : #CEC2D8;
 }
 
 /* header (level 0) */
@@ -797,7 +797,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -810,7 +810,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -823,7 +823,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : bold;
-	background-color : #6384BD;
+	background-color : #BEB4CC;
 	color : #FFFFFF;
 	padding-left : 5px;
 	padding-right : 5px;
@@ -916,7 +916,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 9pt;
 	font-weight : bold;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -925,7 +925,7 @@
 	font-family : Arial, Helvetica, Sans-Serif;
 	font-size : 8pt;
 	font-weight : normal;
-	background-color : #1E5C99;
+	background-color : #8B82A2;
 	color: #FFFFFF;
 }
 
@@ -994,10 +994,10 @@
 }
 
 .tsc .body {
-	background-color : #EFEFEF;
-	border-left : 1px solid #1E5C99;
-	border-right : 1px solid #1E5C99;
-	border-bottom : 1px solid #1E5C99;
+	background-color : #E0DEE7;
+	border-left : 1px solid #8B82A2;
+	border-right : 1px solid #8B82A2;
+	border-bottom : 1px solid #8B82A2;
 }
 
 .tsc .unsel, .tsc .unsel A {
