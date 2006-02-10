@@ -67,8 +67,9 @@ public interface PresentationConstantes {
     public static final String FORWARD_DRILLDOWN_USER="drillDownUser";
     
     // constantes de nom de table
-	public static final String TABLE_USER="User";
+	public static final String TABLE_USER = "User";
 	public static final String TABLE_USERROLE = "UserRole" ;
+	public static final String TABLE_BREAKDOWN = "BreakdownElement";
 	
 	public static final String KEY_USERS_MAP="USERS_MAP" ;
 	

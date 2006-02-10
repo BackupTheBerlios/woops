@@ -19,17 +19,23 @@
 		createButton="true"
 		>
 			<ctrl:columntext 
-				title="table.field.listBreakDownElements.name"
-				property="name" 
-				width="250"
+				title="table.field.listBreakDownElements.prefix"
+				property="prefix" 
+				width="350"
 				sortable="true"/>
 	
 				<ctrl:columntext 
-				title="table.field.listBreakDownElements.details"
-				property="details"
-				width="350"
+				title="table.field.listBreakDownElements.startDate"
+				property="startDate"
+				width="150"
 				sortable="true"/>
-
+				
+				<ctrl:columntext 
+				title="table.field.listBreakDownElements.endDate"
+				property="endDate"
+				width="150"
+				sortable="true"/>
+				
 			<ctrl:columnedit 
 				title="table.field.listBreakDownElements.edit"/> 
 
@@ -54,7 +60,7 @@
 				width="250"
 				sortable="true"/>
 			
-			<ctrl:columndrilldown
+			<ctrl:columntext 
 				title="table.field.listUsers.lastName"
 				property="lastName"
 				width="350"

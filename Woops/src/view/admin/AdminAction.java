@@ -14,6 +14,7 @@ import view.PresentationConstantes;
 import view.admin.user.ListUsersModel;
 import view.admin.user.UserItem;
 import view.admin.breakdownelement.BreakDownElementItem;
+import view.admin.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -75,17 +76,27 @@ public class AdminAction  extends WoopsCCAction {
     		BreakdownElement breakdownElement = (BreakdownElement) iter.next();
     		breakDownElementItem = new BreakDownElementItem();
 			
-    		/*userItem.setId(user.getId().toString());
-    		userItem.setFirstName(user.getFirstName());
-    		userItem.setLastName(user.getLastName());
-    		userItem.setLogin(user.getLogin());
-    		userItem.setRole(user.getRole().getName());
+    		breakDownElementItem.setId((Integer)breakdownElement.getId());
+    		breakDownElementItem.setPrefix(breakdownElement.getPrefix());
+    		breakDownElementItem.setStartDate(breakdownElement.getStartDate());
+    		breakDownElementItem.setEndDate(breakdownElement.getEndDate());
+    		breakDownElementItem.setKind(breakdownElement.getKind());
     		
-    		listUsersItems.add(userItem);
+    		listBreakDownElementsItems.add(breakDownElementItem);
 			// Construction de la hash map stockant la liste des utilisateurs
-			usersMap.put(user.getId(),user);*/
+    		breakDownElementsMap.put(breakdownElement.getId(),breakdownElement);
     	}
-    	
+
+		// Conversion de la liste en tableau d'items
+		DisplayObject[] result = new BreakDownElementItem[listBreakDownElementsItems.size()];
+		listBreakDownElementsItems.toArray(result);
+		
+		// Création de la liste initialisée avec les valeurs à afficher
+		ListBreakDownElementsModel model = new ListBreakDownElementsModel(result);
+		adminForm.setDataModelListBreakDownElements(model);
+	
+		// Sauvegarde d'une HashMap stockant la liste des utilisateurs
+		context.session().setAttribute(PresentationConstantes.KEY_USERS_MAP,breakDownElementsMap);
 	}
 	private void loadListUsers(ActionContext context) throws Exception {
 		logger.debug("AdminAction");

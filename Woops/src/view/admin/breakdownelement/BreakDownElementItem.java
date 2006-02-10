@@ -1,39 +1,61 @@
 package view.admin.breakdownelement;
 
+import java.util.Date;
+
+import business.breakdownelement.BreakdownElementKind;
+
 import com.cc.framework.common.DisplayObject;
 
 public class BreakDownElementItem implements DisplayObject
 {
-	private	String id;
-	private String name;
-	private String details;
-		
+	private	Integer	id;
+	private String prefix;
+	private Date startDate;
+	private Date endDate;
+	private BreakdownElementKind kind;
+	
 	public BreakDownElementItem()
 	{
 		super();
 	}
 
-	public String getId() {
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getDetails() {
-		return details;
+	public BreakdownElementKind getKind() {
+		return kind;
 	}
 
-	public void setDetails(String details) {
-		this.details = details;
+	public void setKind(BreakdownElementKind kind) {
+		this.kind = kind;
 	}
 
-	public String getName() {
-		return name;
+	public String getPrefix() {
+		return prefix;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 }
