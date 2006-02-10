@@ -13,10 +13,13 @@ import org.apache.log4j.Logger;
 import view.PresentationConstantes;
 import view.admin.user.ListUsersModel;
 import view.admin.user.UserItem;
+import view.admin.breakdownelement.BreakDownElementItem;
 import view.common.WoopsCCAction;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
+import business.breakdownelement.BreakdownElementManager;
+import business.breakdownelement.BreakdownElement;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
@@ -31,7 +34,8 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	
 	public void doExecute(ActionContext context) throws Exception {
-		try {
+		try 
+		{
 			this.loadListBreakDownElements(context);
 			this.loadListUsers(context);
 			context.forwardToInput();
@@ -47,7 +51,41 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	private void loadListBreakDownElements(ActionContext context) throws Exception 
 	{
+		logger.debug("AdminAction");
+		Collection dbData = null;
+		Collection listBreakDownElementsItems = null;
+		BreakDownElementItem breakDownElementItem = null;
+
+		// Initialisation du form si celui-ci est nul
+		if (context.form()==null) 
+		{
+			context.session().setAttribute(context.mapping().getAttribute(), new AdminForm());
+		}
 		
+		// Récupération du form bean nécessaire pour fournir les informations à la JSP
+    	AdminForm adminForm = (AdminForm) context.form();
+    	dbData = BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN);
+    	
+    	// Constitue une liste d'UserItem à partir des données stockées en BD  
+    	Iterator iter = dbData.iterator();
+    	listBreakDownElementsItems = new ArrayList();
+    	HashMap breakDownElementsMap = new HashMap();
+    	
+    	while (iter.hasNext()) {
+    		BreakdownElement breakdownElement = (BreakdownElement) iter.next();
+    		breakDownElementItem = new BreakDownElementItem();
+			
+    		/*userItem.setId(user.getId().toString());
+    		userItem.setFirstName(user.getFirstName());
+    		userItem.setLastName(user.getLastName());
+    		userItem.setLogin(user.getLogin());
+    		userItem.setRole(user.getRole().getName());
+    		
+    		listUsersItems.add(userItem);
+			// Construction de la hash map stockant la liste des utilisateurs
+			usersMap.put(user.getId(),user);*/
+    	}
+    	
 	}
 	private void loadListUsers(ActionContext context) throws Exception {
 		logger.debug("AdminAction");
@@ -64,10 +102,10 @@ public class AdminAction  extends WoopsCCAction {
 		// Récupération du form bean nécessaire pour fournir les informations à la JSP
     	AdminForm adminForm = (AdminForm) context.form();
     	
-    	// Récupération de la liste des activités
+    	// Récupération de la liste des utilisateurs
     	dbData = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
 
-    	// Constitue une liste d'ActivityItems à partir des données stockées en BD  
+    	// Constitue une liste d'UserItem à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();
     	listUsersItems = new ArrayList();
     	HashMap usersMap = new HashMap();
@@ -82,7 +120,7 @@ public class AdminAction  extends WoopsCCAction {
     		userItem.setRole(user.getRole().getName());
     		
     		listUsersItems.add(userItem);
-			// Construction de la hash map stockant la liste des activit?s
+			// Construction de la hash map stockant la liste des utilisateurs
 			usersMap.put(user.getId(),user);
     	}
 
@@ -94,7 +132,7 @@ public class AdminAction  extends WoopsCCAction {
 		ListUsersModel model = new ListUsersModel(result);
 		adminForm.setDataModelUser(model);
 	
-		// Sauvegarde d'une HashMap stockant la liste des activités du participant
+		// Sauvegarde d'une HashMap stockant la liste des utilisateurs
 		context.session().setAttribute(PresentationConstantes.KEY_USERS_MAP,usersMap);
 	}
 	
