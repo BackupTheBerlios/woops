@@ -16,8 +16,8 @@
         	
         <menu:menuitem   	
         	id="3"  
-        	text="admin.menu.createProject"      
-        	action="addProject.do"/>
+        	text="admin.menu.createBreakdownElement"      
+        	action="addBreakdownElement.do"/>
      	
 
 </menu:menu>

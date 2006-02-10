@@ -1,4 +1,4 @@
-package view.admin.project;
+package view.admin.breakdownelement;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +23,7 @@ import view.admin.user.ListUsersModel;
 import view.admin.user.UserItem;
 import view.common.WoopsCCAction;
 
-public class AddProjectAction extends WoopsCCAction {
+public class AddBreakdownElementAction extends WoopsCCAction {
 
 	public void doExecute(ActionContext context) throws Exception {
 		setuserParticipationOptions(context);
@@ -35,7 +35,7 @@ public class AddProjectAction extends WoopsCCAction {
 		Collection userParticipationItems = null;
 		UserItem item = null;
 		
-		AddProjectForm madForm = (AddProjectForm) context.form();
+		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
 		
 		/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans la requete*/
 		//Integer projectId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_USER_ID);
@@ -43,7 +43,7 @@ public class AddProjectAction extends WoopsCCAction {
 		/* Sauvegarde dans le form */
 		//madForm.setProjectId(projectId.toString());
 		
-		/* Récupération de la liste des utilisateurs */
+		/* R?cup?ration de la liste des utilisateurs */
 		userParticipationMgr = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
 		
 		/**
@@ -88,7 +88,7 @@ public class AddProjectAction extends WoopsCCAction {
         private void setUsersParticipation(ActionContext context) throws PersistanceException {
 		Collection userParticipationMgr = null;
 
-		AddProjectForm madForm = (AddProjectForm) context.form();
+		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
 		
 		userParticipationMgr = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
 		

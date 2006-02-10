@@ -16,7 +16,7 @@
 	  	
 	  	<form-bean name="adminForm" type="view.admin.AdminForm" />  
 	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />
-	  	<form-bean name="addProjectForm" type="view.admin.project.AddProjectForm" />  
+	  	<form-bean name="addBreakdownElementForm" type="view.admin.breakdownelement.AddBreakdownElementForm" />  
 	  	<form-bean name="showUserSummaryForm" type="view.admin.summary.ShowUserSummaryForm" />
 	</form-beans>
 
@@ -177,15 +177,15 @@
     	<forward name="success" path="/html/admin/user/addUser.jsp"/>
  	</action>  
  	
- 	<!-- ================= Admin / addProject ================ -->  
-  	<action path="/addProject"	 type="view.admin.project.AddProjectAction"
- 		attribute="addProjectForm"
-    	name="addProjectForm"
+ 	<!-- ================= Admin / addBreakdownElement ================ -->  
+  	<action path="/addBreakdownElement"	 type="view.admin.breakdownelement.AddBreakdownElementAction"
+ 		attribute="addBreakdownElementForm"
+    	name="addBreakdownElementForm"
 		validate="false"      
     	scope="request"
-    	input="/html/admin/project/addProject.jsp">
-    	<forward name="error" path="/html/admin/project/addProject.jsp" />
-    	<forward name="success" path="/html/admin/project/addProject.jsp"/>
+    	input="/html/admin/breakdownelement/addBreakdownElement.jsp">
+    	<forward name="error" path="/html/admin/breakdownelement/addBreakdownElement.jsp" />
+    	<forward name="success" path="/html/admin/breakdownelement/addBreakdownElement.jsp"/>
  	</action>    
 
 <!-- ================= Admin / Show User Summary ================ -->  

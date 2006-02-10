@@ -3,22 +3,23 @@
 <%@ taglib uri="/cc-base"    prefix="base" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
 
-<html:form action="addProject.do" >
+<html:form action="addBreakdownElement.do" >
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
 	<forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
     <forms:form 
-    	formid="addProjectForm"
+    	formid="addBreakdownElementForm"
     	type="edit"
-    	caption="admin.addProject.title"
+    	caption="admin.addBreakdownElement.title"
+    	formid="frmUserParticipation"
     	width="600">
     	
     	<forms:text 
-        	label="admin.addProject.name"
+        	label="admin.addBreakdownElement.name"
         	property="name"
         	required="true"/>
         	
         <forms:textarea
-            label="admin.addProject.details"
+            label="admin.addBreakdownElement.details"
             property="details"
             cols="64"
             rows="3"          
@@ -26,10 +27,10 @@
           
        <forms:swapselect
             property="usersParticipation"
-            label="admin.addProject.manageUserParticipation"
+            label="admin.addBreakdownElement.manageUserParticipation"
             orientation="horizontal"
-            labelLeft="admin.addProject.manageUserParticipation.toAdd"
-            labelRight="admin.addProject.manageUserParticipation.added"
+            labelLeft="admin.addBreakdownElement.manageUserParticipation.toAdd"
+            labelRight="admin.addBreakdownElement.manageUserParticipation.added"
             valign="top"
             size="10"
             style="width: 250;"
@@ -41,7 +42,7 @@
             <base:options 
             	property="userParticipationOptions"  
             	keyProperty="id" 
-            	labelProperty="name"/>
+            	labelProperty="firstName"/>
         
 		</forms:swapselect>
 

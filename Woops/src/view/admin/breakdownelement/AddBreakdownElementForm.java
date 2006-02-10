@@ -1,11 +1,11 @@
-package view.admin.project;
+package view.admin.breakdownelement;
 
 import org.apache.struts.action.ActionForm;
 
 import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
-public class AddProjectForm extends ActionForm{
+public class AddBreakdownElementForm extends ActionForm{
 	private String name ;
 	private String details ;
 	/* Liste repr?sentant toutes les activit?s dont l'activit? peut d?pendre */
