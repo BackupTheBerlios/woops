@@ -33,6 +33,7 @@ public interface PresentationConstantes {
 	public static final String PARAM_MODE="mode";
 	public static final String PARAM_ACTIVITY_ID="activityId";
 	public static final String PARAM_USER_ID="userId";
+	public static final String PARAM_BREAKDOWN_ID="breakdownelementId";
 
 	
 	//constantes relatives aux Styles
@@ -65,6 +66,8 @@ public interface PresentationConstantes {
     public static final String FORWARD_ADMIN="admin";   
     public static final String FORWARD_EDIT_USER = "editUser";
     public static final String FORWARD_DRILLDOWN_USER="drillDownUser";
+    public static final String FORWARD_EDIT_BREAKDOWN = "editBreakdown";
+    public static final String FORWARD_DRILLDOWN_BREAKDOWN="drillDownBreakdown";
     
     // constantes de nom de table
 	public static final String TABLE_USER = "User";

@@ -67,7 +67,7 @@ public class AdminAction  extends WoopsCCAction {
     	AdminForm adminForm = (AdminForm) context.form();
     	dbData = BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN);
     	
-    	// Constitue une liste d'UserItem à partir des données stockées en BD  
+    	// Constitue une liste de BreakDownElementItem à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();
     	listBreakDownElementsItems = new ArrayList();
     	HashMap breakDownElementsMap = new HashMap();
@@ -83,7 +83,7 @@ public class AdminAction  extends WoopsCCAction {
     		breakDownElementItem.setKind(breakdownElement.getKind());
     		
     		listBreakDownElementsItems.add(breakDownElementItem);
-			// Construction de la hash map stockant la liste des utilisateurs
+			// Construction de la hash map stockant la liste des BreakDownElements
     		breakDownElementsMap.put(breakdownElement.getId(),breakdownElement);
     	}
 
@@ -95,7 +95,7 @@ public class AdminAction  extends WoopsCCAction {
 		ListBreakDownElementsModel model = new ListBreakDownElementsModel(result);
 		adminForm.setDataModelListBreakDownElements(model);
 	
-		// Sauvegarde d'une HashMap stockant la liste des utilisateurs
+		// Sauvegarde d'une HashMap stockant la liste des BreakDownElements
 		context.session().setAttribute(PresentationConstantes.KEY_USERS_MAP,breakDownElementsMap);
 	}
 	private void loadListUsers(ActionContext context) throws Exception {
@@ -150,7 +150,19 @@ public class AdminAction  extends WoopsCCAction {
 	// ------------------------------------------------
 	//          List-Control  Event Handler
     // ------------------------------------------------
-
+	/**
+	 * Cette méthode est appelée lorsque l'utilisateur demande un rafraîchissement de la liste 
+	 * @param	context		contexte d'execution de la servlet
+	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
+	 */
+	public void listBreakDownElements_onRefresh(ControlActionContext ctx) throws Exception {
+		try {
+			this.loadListBreakDownElements(ctx);
+		} catch (Throwable t) {
+			logger.error(t);
+			ctx.addGlobalError("errors.global");
+		}
+	}
 	/**
 	 * Cette méthode est appelée lorsque l'utilisateur demande un rafraîchissement de la liste 
 	 * @param	context		contexte d'execution de la servlet
@@ -164,8 +176,22 @@ public class AdminAction  extends WoopsCCAction {
 			ctx.addGlobalError("errors.global");
 		}
 	}
-
 	
+	/**
+	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
+	 * @param context	contexte d'execution de la servlet
+	 * @param column	colonne à trier
+	 * @param direction	direction (ASC, DESC)
+	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
+	 */
+	public void listBreakDownElements_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
+		// Récupération de la liste dans le contexte
+		ListBreakDownElementsModel model = (ListBreakDownElementsModel) context.control().getDataModel();
+		
+		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
+		model.sortByColumn(column, direction);		
+		context.control().execute(context, column,  direction);
+	}
 	/**
 	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
 	 * @param context	contexte d'execution de la servlet
@@ -182,6 +208,12 @@ public class AdminAction  extends WoopsCCAction {
 		context.control().execute(context, column,  direction);
 	}
 	
+	public void listBreakDownElements_onEdit(ControlActionContext context, String id) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
+		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,id);
+		
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN);
+	}
 	public void listUsers_onEdit(ControlActionContext context, String id) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
 		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,id);
@@ -189,12 +221,23 @@ public class AdminAction  extends WoopsCCAction {
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER);
 	}
 	
+	public void listBreakDownElements_onCreate(ControlActionContext context) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.INSERT_MODE);
+		
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN);
+	}
 	public void listUsers_onCreate(ControlActionContext context) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.INSERT_MODE);
 		
-		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER);
 	}
 	
+	public void listBreakDownElements_onDrilldown(ControlActionContext context, String userIdString) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,new Integer(userIdString));
+		
+		context.forwardByName(PresentationConstantes.FORWARD_DRILLDOWN_BREAKDOWN);
+	}
+
 	public void listUsers_onDrilldown(ControlActionContext context, String userIdString) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,new Integer(userIdString));
 		
