@@ -192,9 +192,10 @@
 		<action path="/showUserSummary"	 type="view.admin.summary.ShowUserSummaryAction"
       		name="showUserSummaryForm"
       	 	scope="session"
+      	 	input="/html/admin/user/summary/showUserSummary.jsp"
       	 >
          	<forward name="error" path="/showUserSummary.do" />
-         	<forward name="success" path="/html/admin/user/summary/summaryUser.jsp" />
+         	<forward name="success" path="/html/admin/user/summary/showUserSummary.jsp" />
       		<forward name="previous" path="/admin"/>
       	</action>
 

@@ -137,7 +137,7 @@ public class AdminAction  extends WoopsCCAction {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
 		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,id);
 		
-		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER);
 	}
 	
 	public void listUsers_onCreate(ControlActionContext context) throws IOException, ServletException {

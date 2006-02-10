@@ -11,6 +11,6 @@
     
     <template:put  name="menuHaut"  content="$/admin/subview/identification.jsp" />
     <template:put  name="menu"  	content="$/admin/subview/menu.jsp"/>
-    <template:put  name="contents"  content="$/admin/user/summary/summaryUserContent.jsp"/>
+    <template:put  name="contents"  content="$/admin/user/summary/showUserSummaryContent.jsp"/>
     
 </template:insert>

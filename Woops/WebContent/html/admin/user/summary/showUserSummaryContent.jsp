@@ -3,7 +3,7 @@
 <%@ taglib uri="/struts-bean" prefix="bean" %>
 <%@ taglib uri="/struts-html" prefix="html" %>
 
-<html:form action="showActivitySummary.do">	
+<html:form action="showUserSummary.do">	
 	
 	<table>
 	
@@ -13,29 +13,28 @@
 		type="display" 
 	    name="showUserSummaryForm" 
 	    caption="admin.showSummary.title" 
-	    formid="frmShowActivitySummary" 
+	    formid="frmShowUserSummary" 
 	    width="550"
 	    >
-    
-    
+
 		<forms:text        
-			label="form.field.activity.name"         
+			label="admin.addUser.firstName"         
 		 	property="firstName"        
 		 	/>
  
        	<forms:text
-			label="form.field.activity.details"
-            property="lastname"          
+			label="admin.addUser.lastName"
+            property="lastName"          
           	/>
           
      	<forms:text
-		label="form.field.activity.details"
-        property="login"          
+			label="table.field.listUsers.login"
+	        property="login"          
       	/>
       	
   		<forms:text
-		label="form.field.activity.details"
-        property="role"          
+			label="table.field.listUsers.role"
+	        property="role"          
       	/>
        
           	

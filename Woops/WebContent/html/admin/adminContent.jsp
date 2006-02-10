@@ -54,7 +54,7 @@
 				width="250"
 				sortable="true"/>
 			
-			<ctrl:columntext 
+			<ctrl:columndrilldown
 				title="table.field.listUsers.lastName"
 				property="lastName"
 				width="350"

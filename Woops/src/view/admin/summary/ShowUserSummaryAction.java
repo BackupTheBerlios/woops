@@ -19,7 +19,6 @@ public class ShowUserSummaryAction extends WoopsCCAction {
 	}
 	
 	public void doExecute(ActionContext context) {
-
 		ShowUserSummaryForm form = (ShowUserSummaryForm) context.form();
 	
 		HashMap usersMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_USERS_MAP);
@@ -34,8 +33,6 @@ public class ShowUserSummaryAction extends WoopsCCAction {
 		form.setLogin(user.getLogin());
 		form.setRole(user.getRole().getName());
 		context.forwardToInput();
-		
-		
 	}
 
 }
