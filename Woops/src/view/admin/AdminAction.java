@@ -32,6 +32,7 @@ public class AdminAction  extends WoopsCCAction {
 	
 	public void doExecute(ActionContext context) throws Exception {
 		try {
+			this.loadListBreakDownElements(context);
 			this.loadListUsers(context);
 			context.forwardToInput();
 		} catch (PersistanceException pe) {
@@ -44,7 +45,10 @@ public class AdminAction  extends WoopsCCAction {
 			context.forwardByName(PresentationConstantes.FORWARD_ERROR);  
 		}	
 	}
-	
+	private void loadListBreakDownElements(ActionContext context) throws Exception 
+	{
+		
+	}
 	private void loadListUsers(ActionContext context) throws Exception {
 		logger.debug("AdminAction");
 		

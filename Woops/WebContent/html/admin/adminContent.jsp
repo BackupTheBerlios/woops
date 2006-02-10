@@ -11,6 +11,36 @@
 	
 	<ctrl:list 
 		id="list"
+		property="listBreakDownElements" 
+		title="table.title.listBreakDownElements"
+		width="650" 
+		rows="3" 
+		refreshButton="false" 
+		createButton="true"
+		>
+			<ctrl:columntext 
+				title="table.field.listBreakDownElements.name"
+				property="name" 
+				width="250"
+				sortable="true"/>
+	
+				<ctrl:columntext 
+				title="table.field.listBreakDownElements.details"
+				property="details"
+				width="350"
+				sortable="true"/>
+
+			<ctrl:columnedit 
+				title="table.field.listBreakDownElements.edit"/> 
+
+			<ctrl:columndelete 
+				title="table.field.listBreakDownElements.delete"
+				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
+				/>
+	</ctrl:list>
+<br>
+	<ctrl:list 
+		id="list"
 		property="listUsers" 
 		title="table.title.listUsers"
 		width="650" 
@@ -18,7 +48,6 @@
 		refreshButton="false" 
 		createButton="true"
 		>
-		
 			<ctrl:columndrilldown
 				title="table.field.listUsers.firstName" 
 				property="firstName" 
@@ -50,7 +79,6 @@
 				title="table.field.listUsers.delete"
 				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
 				/> 
-			
 	</ctrl:list>
 	
 </html:form>
