@@ -15,15 +15,8 @@
     	
     	<forms:text 
         	label="admin.addBreakdownElement.name"
-        	property="name"
+        	property="prefix"
         	required="true"/>
-        	
-        <forms:textarea
-            label="admin.addBreakdownElement.details"
-            property="details"
-            cols="64"
-            rows="3"          
-          />
           
        <forms:swapselect
             property="usersParticipation"

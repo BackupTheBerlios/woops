@@ -69,6 +69,8 @@ public interface PresentationConstantes {
     public static final String FORWARD_EDIT_BREAKDOWN = "editBreakdown";
     public static final String FORWARD_DRILLDOWN_BREAKDOWN="drillDownBreakdown";
     
+    public static final String ADMIN_ROLE_CODE = "admin" ;
+    
     // constantes de nom de table
 	public static final String TABLE_USER = "User";
 	public static final String TABLE_USERROLE = "UserRole" ;

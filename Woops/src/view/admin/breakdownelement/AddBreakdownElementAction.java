@@ -2,23 +2,33 @@ package view.admin.breakdownelement;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.util.MessageResources;
 
 import business.activity.Activity;
 import business.activity.ActivityManager;
+import business.breakdownelement.BreakdownElement;
+import business.breakdownelement.BreakdownElementKind;
+import business.breakdownelement.BreakdownElementManager;
+import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
+import business.user.UserRole;
 
 import com.cc.framework.adapter.struts.ActionContext;
+import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
+import com.cc.framework.ui.model.ListDataModel;
 
 import view.PresentationConstantes;
 import view.activity.ActivityItem;
 import view.activity.manage.ManageActivityDependancesForm;
 import view.activity.performing.ListActivitiesModel;
+import view.admin.user.AddUserForm;
 import view.admin.user.ListUsersModel;
 import view.admin.user.UserItem;
 import view.common.WoopsCCAction;
@@ -27,6 +37,10 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 
 	public void doExecute(ActionContext context) throws Exception {
 		setuserParticipationOptions(context);
+		
+
+		
+					
 		context.forwardToInput();
 	}
 
@@ -60,8 +74,9 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 			item.setId(user.getId().toString());
 			item.setFirstName(user.getFirstName());
 			item.setLastName(user.getLastName());
-			
-			userParticipationItems.add(item);
+			item.setRole(user.getRole().getName());
+			if (!user.getRole().getCode().equals(PresentationConstantes.ADMIN_ROLE_CODE))
+					userParticipationItems.add(item);
 		}
 		
 		/**
@@ -111,8 +126,64 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		/**
 		 * Mis ? jour de l'attribut realDependancesKeys du Form
 		 */
-		madForm.setUsersParticipation(listStringKeys);
-			
-			
+		madForm.setUsersParticipation(listStringKeys);			
 	}
+        
+    	public void add_onClick(FormActionContext context) {
+    		ActionForward retour = null;	
+    		
+    		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
+
+    		// controle de la validation du formulaire
+    		context.addErrors(madForm.validate(context.mapping(),context.request()));
+
+    		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
+    	    
+    		if (!context.hasErrors()) {
+    			retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
+        		String prefix = madForm.getPrefix();
+        		BreakdownElement bke = new BreakdownElement ();
+        		bke.setId(null);
+        		bke.setPrefix(prefix);
+        		bke.setDateCreation(null);
+        		bke.setEndDate(null);
+        		BreakdownElementKind bkk = new BreakdownElementKind();
+        		bkk.setId(new Integer(1));
+        		bke.setKind(bkk);
+        		
+    			try {
+    				
+    					BreakdownElementManager.getInstance().insert(bke);
+    					context.addGlobalMessage("admin.msg.info.user.validate");
+
+    			}
+    			catch (PersistanceException p)
+    			{
+    				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
+    					context.addGlobalError("admin.msg.error.user.modify");
+    				}
+    				else {
+    					context.addGlobalError("admin.msg.error.user.insert");
+    				}
+    				System.out.println(p.getMessage());
+    			}
+    			catch(DoublonException e)
+    			{
+    				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
+    					context.addGlobalError("admin.msg.error.user.modify");
+    				}
+    				else {
+    					context.addGlobalError("admin.msg.error.user.insert");
+    			}
+    				System.out.println(e.getMessage());
+    			}
+    	    	
+    			
+    			
+            } else {
+            	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
+            }
+    	
+    	context.forward(retour);
+    	}    
 }
