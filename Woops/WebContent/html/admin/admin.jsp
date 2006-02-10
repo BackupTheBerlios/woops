@@ -10,6 +10,6 @@
     <template:put  name="menu"  	content="$/admin/subview/menu.jsp"/>
        
 	
- 	<template:put  name="contents"  content="$/admin/adminListUserContent.jsp"/>
+ 	<template:put  name="contents"  content="$/admin/adminContent.jsp"/>
     
 </template:insert>
