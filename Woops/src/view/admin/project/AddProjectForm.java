@@ -30,8 +30,8 @@ public class AddProjectForm extends ActionForm{
 		this.details = details;
 	}
 
-	public SimpleListControl getUserParticipationOptions() {
-		return userParticipationOptions;
+	public ListDataModel getUserParticipationOptions() {
+		return (ListDataModel) userParticipationOptions.getDataModel();
 	}
 
 	public void setUserParticipationOptions(

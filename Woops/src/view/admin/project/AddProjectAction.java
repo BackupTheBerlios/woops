@@ -68,7 +68,7 @@ public class AddProjectAction extends WoopsCCAction {
 		 * Convertion la liste d'ActivityItem en tableau
 		 */
 		DisplayObject[] data = new UserItem[userParticipationItems.size()];
-		userParticipationItems.toArray(data);
+		data =(UserItem[]) userParticipationItems.toArray(data);
 		
 		/**
 		 * Mis ? jour de l'attribut possibleDependancesOptions du Form
@@ -85,4 +85,34 @@ public class AddProjectAction extends WoopsCCAction {
 		madForm.setUserParticipationOptions(model);
 	}
 	
+        private void setUsersParticipation(ActionContext context) throws PersistanceException {
+		Collection userParticipationMgr = null;
+
+		AddProjectForm madForm = (AddProjectForm) context.form();
+		
+		userParticipationMgr = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
+		
+		
+		/**
+		 * Convertit la liste des cl?s de type Integer
+		 * de la liste activityDependancesKeys en tableau de cl?s de type String
+		 */  
+    	String[] listStringKeys = new String[userParticipationMgr.size()];
+		Iterator iter = userParticipationMgr.iterator();
+		for (int i=0; iter.hasNext(); i++) {
+			listStringKeys[i]=((User)iter.next()).getId().toString();
+		}
+		
+		/**
+		 * Sauvegarde du tableau des anciennes cl?s des activit? depandantes dans la session
+		 */
+		//context.session().setAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS,listStringKeys);
+		
+		/**
+		 * Mis ? jour de l'attribut realDependancesKeys du Form
+		 */
+		madForm.setUsersParticipation(listStringKeys);
+			
+			
+	}
 }
