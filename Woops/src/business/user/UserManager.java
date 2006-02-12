@@ -1,6 +1,7 @@
 package business.user;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import business.hibernate.HibernateSessionFactory;
@@ -46,6 +47,15 @@ public class UserManager extends PersistentObjectManager {
 		return user;
 	}	
 	
+	/**
+	 * Retourne la liste des utilisateur d'un projet
+	 * @param projectId l'id du projet
+	 * @return la liste des utilisateur d'un projet
+	 * @throws PersistanceException 
+	 */
+	public Collection getUsersByProject(Integer projectId) throws PersistanceException {
+		return dao.getUsersByProject(projectId);
+	}
 
 
 	// TESTS //

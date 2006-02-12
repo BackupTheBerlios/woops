@@ -1,6 +1,7 @@
 package business.user;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
@@ -42,5 +43,19 @@ public class UserDAO extends PersistentObjectDAO {
 	   return user;
     
 	}	
+	
+	
+	/**
+	 * Retourne la liste des utilisateur d'un projet
+	 * @param projectId L'id du projet
+	 * @return la liste des utilisateur d'un projet
+	 * @throws PersistanceException 
+	 */
+	public Collection getUsersByProject(Integer projectId) throws PersistanceException {
+		StringBuffer req = new StringBuffer("from User as u ");
+		// TODO Ajouter la clause where et filtrer sur le projet
+		req.append("where u.role.name = 'developer'");
+		return executeQuery(req.toString());
+	}
 	
 }
