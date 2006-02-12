@@ -46,6 +46,22 @@ public class ActivityDAO extends PersistentObjectDAO {
 	
 	
 	/**
+	 * R?cup?ration des activit?s d'un projet
+	 * @param userId : identifiant du projet
+	 * @return : Liste des activit?s du projet
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 */
+	public Collection getActivitiesByProject(Integer projectId) throws PersistanceException {
+		// Constitution de la requ?te  
+		StringBuffer query = new StringBuffer();
+		query.append("FROM Activity");
+		
+		// R?cup?ration des donn?es
+		List listActivities = executeQuery(query.toString());
+		return listActivities;
+	}
+	
+	/**
 	 * retourne les activities sans user
 	 * @return
 	 * @throws PersistanceException

@@ -11,6 +11,7 @@
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manage.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manage.ManageDependancesTypesForm" />
 		<form-bean name="showActivitySummaryForm" type="view.activity.summary.ShowActivitySummaryForm" />
+		<form-bean name="showActivityGraphForm" type="view.activity.graph.ShowActivityGraphForm" />
 	  	<form-bean name="loginForm" type="view.logon.LoginForm" />
 	  
 	  	<form-bean name="emptyForm" type="view.common.EmptyForm"/>
@@ -134,9 +135,17 @@
       	 >
          	<forward name="error" path="/showActivitySummary.do" />
          	<forward name="success" path="/html/participant/activity/summary/showActivitySummary.jsp" />
-      		<forward name="previous" path="/listActivities.do"/>
       	</action>
 
+
+<!-- ================= Show Activity Graph ================ -->  
+		<action path="/showActivityGraph"	 type="view.activity.graph.ShowActivityGraphAction"
+      		name="showActivityGraphForm"
+      	 	scope="session"
+      	 >
+         	<forward name="error" path="/listActivities.do" />
+         	<forward name="success" path="/html/participant/activity/graph/showActivityGraph.jsp" />
+      	</action>
 
 <!-- ================= Login form ================ -->  
       	<action path="/loginUser"	 type="view.logon.LoginAction"

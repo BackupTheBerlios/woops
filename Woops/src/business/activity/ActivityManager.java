@@ -53,10 +53,26 @@ public class ActivityManager extends PersistentObjectManager {
 	/**
 	 * R?cup?ration des activit?s pour lesquelles le participant a la responsabilit?
 	 * @param userId : identifiant du participant
-	 * @return : Liste des activit?s du particpant
+	 * @return : Liste des activit?s restantes du particpant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
-	public Collection getActivitiesByUser(Integer userId)
+	public Collection getAllActivitiesByUser(Integer userId)
+			throws PersistanceException {
+		String[] states = new String[3];
+		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
+		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
+		states[2] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
+		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states);
+		return list;
+	}
+	
+	/**
+	 * R?cup?ration des activit?s restant à réaliser pour lesquelles le participant a la responsabilit?
+	 * @param userId : identifiant du participant
+	 * @return : Liste des activit?s restantes du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 */
+	public Collection getRemainingActivitiesByUser(Integer userId)
 			throws PersistanceException {
 		String[] states = new String[2];
 		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
@@ -65,16 +81,6 @@ public class ActivityManager extends PersistentObjectManager {
 		return list;
 	}
 	
-	
-	/**
-	 * retourne les activities sans user
-	 * @return
-	 * @throws PersistanceException
-	 */
-	public Collection getFreeActivities() throws PersistanceException {
-		Collection list = activityDAO.getFreeActivities();
-		return list;
-	}
 	
 	/**
 	 * R?cup?ration des activit?s que le participant a termin?es
@@ -87,6 +93,27 @@ public class ActivityManager extends PersistentObjectManager {
 		String[] states = new String[1];
 		states[0] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
 		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states);
+		return list;
+	}
+	
+	/**
+	 * retourne les activities sans user
+	 * @return
+	 * @throws PersistanceException
+	 */
+	public Collection getFreeActivities() throws PersistanceException {
+		Collection list = activityDAO.getFreeActivities();
+		return list;
+	}
+	
+	/**
+	 * R?cup?ration des activit?s d'un projet
+	 * @param projectId : identifiant du projet
+	 * @return : Liste des activit?s du projet
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 */
+	public Collection getActivitiesByProject(Integer projectId) throws PersistanceException {
+		Collection list = activityDAO.getActivitiesByProject(projectId);
 		return list;
 	}
 	
@@ -220,7 +247,7 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	public Activity getActivityWithDependances(Integer activityId) throws PersistanceException {
 		Activity activity = activityDAO.getActivityById(activityId);
-		activity.setListActivitiesSequences(ActivityManager.getInstance().getActivitySequencesPredecessors(activityId));
+		activity.setListPredecessors(ActivityManager.getInstance().getActivitySequencesPredecessors(activityId));
 		return activity;
 	}
 	
@@ -320,7 +347,7 @@ public class ActivityManager extends PersistentObjectManager {
 		Collection listActivitiesChangeState = new ArrayList();
 		
 		// Recuperation des activites de l'utilisateur
-		Collection listActivities = getActivitiesByUser(userId);
+		Collection listActivities = getRemainingActivitiesByUser(userId);
 		
 		// Pour chacune d'entre elles, on v?rifie si elle peut changer d'etat
 		Iterator iter = listActivities.iterator();
