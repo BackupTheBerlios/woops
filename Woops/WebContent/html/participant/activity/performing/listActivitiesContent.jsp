@@ -25,19 +25,19 @@
 		>
 		
 		<util:designrule
-        rule="@{bean.action == null && bean.state == 'created'}"
+        rule="@{bean.actionEnabled == 'false' && bean.state == 'created'}"
         style="background-color: #FFC4C4;"/>
         
         <util:designrule
-        rule="@{bean.action == null && bean.state == 'inProgress'}"
+        rule="@{bean.actionEnabled == 'false' && bean.state == 'inProgress'}"
         style="background-color: #FFC4C4; font-weight: bold;"/>
         
         <util:designrule
-        rule="@{bean.action != null && bean.state == 'created'}"
+        rule="@{bean.actionEnabled == 'true' && bean.state == 'created'}"
         style=""/>
         
         <util:designrule
-        rule="@{bean.action != null && bean.state == 'inProgress'}"
+        rule="@{bean.actionEnabled == 'true' && bean.state == 'inProgress'}"
         style="font-weight: bold;"/>
 
 			<ctrl:columndrilldown 
@@ -66,18 +66,20 @@
 				title="table.field.listActivities.delete"
 				onclick="return confirm('${confirmMessage}');"
 				tooltip="table.tooltip.listActivities.delete"
+				property="deleteEnabled"
 				/> 
 			
-			<logic:notEmpty name="list" property="action">
-				<ctrl:columnbutton 
-					title="table.field.listActivities.action" 
-					text="@{bean.action}" 
-					align="center"
-					command="change"
-					width="150">
-				</ctrl:columnbutton>
-			</logic:notEmpty>
 			
+			<ctrl:columnbutton 
+				title="table.field.listActivities.action" 
+				text="@{bean.action}" 
+				align="center"
+				command="change"
+				width="150"
+				property="actionEnabled"
+				>
+			</ctrl:columnbutton>
+		
 	</ctrl:list>
 	
 </html:form>

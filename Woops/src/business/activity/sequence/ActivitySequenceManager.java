@@ -1,5 +1,7 @@
 package business.activity.sequence;
 
+import java.util.Collection;
+
 import business.activity.Activity;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.ForeignKeyException;
@@ -42,4 +44,14 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 		activitySequenceDAO.delete(query.toString());
 	}
 	
+	/**
+	 * R?cup?ration des sequences d'activit?s d'un projet
+	 * @param projectId : identifiant du projet
+	 * @return : Liste des sequences d'activit?s du projet
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 */
+	public Collection getActivitySequencesByProject(Integer projectId) throws PersistanceException {
+		Collection list = activitySequenceDAO.getActivitiesByProject(projectId);
+		return list;
+	}
 }

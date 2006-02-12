@@ -22,12 +22,12 @@ public class Activity extends HistorizedObject{
 	 * Liste des activit?s dont d?pend l'activit?
 	 * @associates business.activity.sequence.ActivitySequence
 	 * @clientCardinality 1
-	 * @clientRole listActivitiesSequences
+	 * @clientRole listPredecessors
 	 * @directed directed
 	 * @supplierCardinality 0..*
 	 * @supplierRole predecessor
 	 */
-	private Collection 		listActivitiesSequences;
+	private Collection 		listPredecessors;
 	
 	/**
 	 * Constructeur par d?faut
@@ -107,12 +107,12 @@ public class Activity extends HistorizedObject{
 	}
 	
 	
-	public Collection getListActivitiesSequences() {
-		return listActivitiesSequences;
+	public Collection getListPredecessors() {
+		return listPredecessors;
 	}
 
-	public void setListActivitiesSequences(Collection listActivitiesSequences) {
-		this.listActivitiesSequences = listActivitiesSequences;
+	public void setListPredecessors(Collection listActivitiesSequences) {
+		this.listPredecessors = listActivitiesSequences;
 	}
 
 	/**

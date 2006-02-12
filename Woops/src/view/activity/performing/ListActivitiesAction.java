@@ -83,7 +83,7 @@ public class ListActivitiesAction extends WoopsCCAction {
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
     	
     	// R?cup?ration de la liste des activit?s
-    	dbData = ActivityManager.getInstance().getActivitiesByUser((Integer) sessionUser.getId());  	
+    	dbData = ActivityManager.getInstance().getRemainingActivitiesByUser((Integer) sessionUser.getId());  	
 
     	// Constitue une liste d'ActivityItems ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();
@@ -105,10 +105,25 @@ public class ListActivitiesAction extends WoopsCCAction {
     				activityItem.setAction(PresentationConstantes.ACTIVITY_START);
     			else 
     				activityItem.setAction(PresentationConstantes.ACTIVITY_FINISH);
+    			
+    			activityItem.setActionEnabled(true);
     		}
     		// si state est null, l'activite ne peut pas changer d'etat
-    		else
-    			activityItem.setAction(null);
+    		else {
+    			if (activity.getState().toString().equals(BusinessConstantes.ACTIVITY_STATE_CREATED)) 
+    				activityItem.setAction(PresentationConstantes.ACTIVITY_START);
+    			else 
+    				activityItem.setAction(PresentationConstantes.ACTIVITY_FINISH);
+    			
+    			activityItem.setActionEnabled(false);
+    		}
+    		
+    		
+    		if (activity.getState().toString().equals(BusinessConstantes.ACTIVITY_STATE_CREATED)) 
+				activityItem.setDeleteEnabled(true);
+			else 
+				activityItem.setDeleteEnabled(false);
+			
     		
 			
 			listActivitiesItems.add(activityItem);

@@ -42,7 +42,7 @@ public class InProgressActivityState extends IActivityState {
 		/* Si l'activité n'a aucun prédecesseur, elle peut commencer */
 		boolean result = true;
 		
-		Iterator iter = activity.getListActivitiesSequences().iterator();
+		Iterator iter = activity.getListPredecessors().iterator();
 
 		ActivitySequence actSeq = null;
 		while ((iter.hasNext())&&(result==true)) {

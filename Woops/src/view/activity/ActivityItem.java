@@ -11,6 +11,8 @@ public class ActivityItem implements DisplayObject{
 	private String details;
 	private String state;
 	private String action;
+	private boolean actionEnabled;
+	private boolean deleteEnabled;
 	
 	public ActivityItem() {
 		super();
@@ -54,6 +56,28 @@ public class ActivityItem implements DisplayObject{
 
 	public void setAction(String action) {
 		this.action = action;
+	}
+
+	/**
+	 * @return Returns the actionEnabled.
+	 */
+	public boolean getActionEnabled() {
+		return actionEnabled;
+	}
+
+	/**
+	 * @param actionEnabled The actionEnabled to set.
+	 */
+	public void setActionEnabled(boolean actionEnabled) {
+		this.actionEnabled = actionEnabled;
+	}
+
+	public boolean getDeleteEnabled() {
+		return deleteEnabled;
+	}
+
+	public void setDeleteEnabled(boolean deleteEnabled) {
+		this.deleteEnabled = deleteEnabled;
 	}
 	
 }

@@ -169,7 +169,10 @@ public class PersistentObjectDAO  {
 	
 	protected List getList(String table) throws PersistanceException {
 		
-		List liste = executeQuery("from " + table);
+		StringBuffer query = new StringBuffer();
+		query.append("from ");
+		query.append(table);
+		List liste = executeQuery(query.toString());
 
 		return liste;
 	

@@ -32,7 +32,7 @@ public class CreatedActivityState extends IActivityState {
 	public boolean checkBeforeChange(Activity activity) {
 		boolean result = true;
 		
-		Iterator iter = activity.getListActivitiesSequences().iterator();
+		Iterator iter = activity.getListPredecessors().iterator();
 		
 		ActivitySequence actSeq = null;
 		while ((iter.hasNext())&&(result==true)) {
