@@ -57,6 +57,7 @@ public interface PresentationConstantes {
 	//Constantes permettant de modifier l'?tat d'une activi?
     public static final String ACTIVITY_START = "start";
     public static final String ACTIVITY_FINISH = "finish";
+    public static final String ACTIVITY_AFFECT = "affect";
     
     //Constantes permettant de connaitre le mode d'un formulaire ( create ou update )
     public static final String INSERT_MODE = "insert_mode";

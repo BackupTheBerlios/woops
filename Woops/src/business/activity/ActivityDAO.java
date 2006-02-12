@@ -44,6 +44,22 @@ public class ActivityDAO extends PersistentObjectDAO {
 		return listActivities;
 	}
 	
+	
+	/**
+	 * retourne les activities sans user
+	 * @return
+	 * @throws PersistanceException
+	 */
+	public Collection getFreeActivities() throws PersistanceException {
+	
+		StringBuffer query = new StringBuffer();
+		query.append("FROM Activity as act WHERE act.userId is null");
+		
+		// R?cup?ration des donn?es
+		List listActivities = executeQuery(query.toString());
+		return listActivities;
+	}
+	
 	/**
 	 * @param activityId : l'activit? dont on veut connaitre des pr?d?cesseurs possibles
 	 * @return la liste des activit?s dont peut d?pendre l'activit? pass?e en parametre

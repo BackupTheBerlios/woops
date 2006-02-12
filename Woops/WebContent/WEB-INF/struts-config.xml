@@ -6,6 +6,7 @@
    	<form-beans >
    
 		<form-bean name="listActivitiesForm" type="view.activity.performing.ListActivitiesForm" />
+		<form-bean name="listFreeActivitiesForm" type="view.activity.performing.ListFreeActivitiesForm" />
 		<form-bean name="manageActivityCreationForm" type="view.activity.manage.ManageActivityCreationForm" />
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manage.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manage.ManageDependancesTypesForm" />
@@ -51,6 +52,21 @@
          	<forward name="edit" path="/manageActivityCreation.do"/>
          	<forward name="drillDown" path="/showActivitySummary.do"/>
       	</action>
+      	
+<!-- ================= List Free Activities ================ -->  
+		<action path="/listFreeActivities"	 type="view.activity.performing.ListFreeActivitiesAction"
+      		name="listFreeActivitiesForm"
+      	 	scope="session"
+      	 	roles="#dev"
+      	 	input="/html/participant/activity/performing/listFreeActivities.jsp"
+      	 >
+         	<forward name="error" path="/html/logon/loginUser.jsp" />
+         	<forward name="success" path="/html/participant/activity/performing/listFreeActivities.jsp" />
+         	<forward name="action" path="/listFreeActivities.do"/>
+         	<forward name="edit" path="/manageActivityCreation.do"/>
+         	<forward name="drillDown" path="/showActivitySummary.do"/>
+      	</action>
+      	
      	
   <!-- ================= Historized Activities ================ -->  
 		<action path="/historizedActivities"	 type="view.activity.history.HistorizedActivitiesAction"

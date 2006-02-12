@@ -65,6 +65,17 @@ public class ActivityManager extends PersistentObjectManager {
 		return list;
 	}
 	
+	
+	/**
+	 * retourne les activities sans user
+	 * @return
+	 * @throws PersistanceException
+	 */
+	public Collection getFreeActivities() throws PersistanceException {
+		Collection list = activityDAO.getFreeActivities();
+		return list;
+	}
+	
 	/**
 	 * R?cup?ration des activit?s que le participant a termin?es
 	 * @param userId : identifiant du participant
