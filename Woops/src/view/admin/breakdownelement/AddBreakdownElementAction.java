@@ -179,33 +179,31 @@ public class AddBreakdownElementAction extends WoopsCCAction {
         		bke.setPrefix(prefix);
         		bke.setDateCreation(null);
         		bke.setEndDate(null);
-        		BreakdownElementKind bkk = new BreakdownElementKind();
-        		bkk.setId(new Integer(1));
-        		bke.setKind(bkk);
+        		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));
         		
     			try {
     				
     					BreakdownElementManager.getInstance().insert(bke);
-    					context.addGlobalMessage("admin.msg.info.user.validate");
+    					context.addGlobalMessage("admin.msg.info.breakdownelement.validate");
 
     			}
     			catch (PersistanceException p)
     			{
     				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					context.addGlobalError("admin.msg.error.user.modify");
+    					context.addGlobalError("admin.msg.error.breakdownelement.modify");
     				}
     				else {
-    					context.addGlobalError("admin.msg.error.user.insert");
+    					context.addGlobalError("admin.msg.error.breakdownelement.insert");
     				}
     				System.out.println(p.getMessage());
     			}
     			catch(DoublonException e)
     			{
     				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					context.addGlobalError("admin.msg.error.user.modify");
+    					context.addGlobalError("admin.msg.error.breakdownelement.modify");
     				}
     				else {
-    					context.addGlobalError("admin.msg.error.user.insert");
+    					context.addGlobalError("admin.msg.error.breakdownelement.insert");
     			}
     				System.out.println(e.getMessage());
     			}

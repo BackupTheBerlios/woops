@@ -12,6 +12,12 @@ public class BreakdownElementKind {
 		
 	}
 
+	public BreakdownElementKind(Integer id) {
+		super();
+		this.id = id;
+		this.name = null;
+		
+	}
 
 	public Integer getId() {
 		return id;
