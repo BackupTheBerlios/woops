@@ -6,12 +6,24 @@ import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class AddBreakdownElementForm extends ActionForm{
-	private String prefix ;
+	private String prefix ;	
+	private String kindId ;
 	
-	/* Liste repr?sentant toutes les activit?s dont l'activit? peut d?pendre */
+	private SimpleListControl kindOptions = new SimpleListControl ();
+	
+	public ListDataModel getKindOptions() {
+		return (ListDataModel) this.kindOptions.getDataModel();
+	}
+	
+	public void setKindOptions(ListDataModel dataModel) {
+		this.kindOptions.setDataModel(dataModel);
+	}
+
+	
+	/* Liste representant toutes les utilisateurs affectables au projet */
 	private SimpleListControl userParticipationOptions = new SimpleListControl();
 	
-	/* Liste repr?sentant les cl?s des d?pendances s?lectionn?es */
+	/* Liste representant les cles des utilisateurs selectionnes */
 	private String[] usersParticipation = new String[0];
 
 
@@ -38,5 +50,13 @@ public class AddBreakdownElementForm extends ActionForm{
 
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
+	}
+
+	public String getKindId() {
+		return kindId;
+	}
+
+	public void setKindId(String kindId) {
+		this.kindId = kindId;
 	}
 }

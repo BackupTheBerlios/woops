@@ -17,6 +17,13 @@
         	label="admin.addBreakdownElement.name"
         	property="prefix"
         	required="true"/>
+        	
+        <forms:select
+        	label="admin.addBreakdownElement.kind"
+        	property="kindId"
+        	>
+        	<base:options property="kindOptions" keyProperty="id" labelProperty="name" />
+		    </forms:select>
           
        <forms:swapselect
             property="usersParticipation"
