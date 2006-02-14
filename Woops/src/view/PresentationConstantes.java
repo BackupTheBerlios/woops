@@ -76,6 +76,7 @@ public interface PresentationConstantes {
 	public static final String TABLE_USER = "User";
 	public static final String TABLE_USERROLE = "UserRole" ;
 	public static final String TABLE_BREAKDOWN = "BreakdownElement";
+	public static final String TABLE_BREAKDOWN_KIND = "BreakdownElementKind";
 	
 	public static final String KEY_USERS_MAP="USERS_MAP" ;
 	

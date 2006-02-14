@@ -106,3 +106,4 @@ INSERT INTO ActivityState(name) VALUES ('inProgress');
 INSERT INTO ActivityState(name) VALUES ('finished');
 INSERT INTO UserRole VALUES ('admin', 'administrator');
 INSERT INTO UserRole VALUES ('dev', 'developer');
+INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('1', 'project');

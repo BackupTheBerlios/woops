@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.util.MessageResources;
@@ -29,18 +30,17 @@ import view.activity.ActivityItem;
 import view.activity.manage.ManageActivityDependancesForm;
 import view.activity.performing.ListActivitiesModel;
 import view.admin.user.AddUserForm;
+import view.admin.user.ListRoleModel;
 import view.admin.user.ListUsersModel;
+import view.admin.user.RoleItem;
 import view.admin.user.UserItem;
 import view.common.WoopsCCAction;
 
 public class AddBreakdownElementAction extends WoopsCCAction {
 
 	public void doExecute(ActionContext context) throws Exception {
-		setuserParticipationOptions(context);
-		
-
-		
-					
+		this.setuserParticipationOptions(context);
+		this.setSelect(context) ;				
 		context.forwardToInput();
 	}
 
@@ -127,6 +127,38 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		 * Mis ? jour de l'attribut realDependancesKeys du Form
 		 */
 		madForm.setUsersParticipation(listStringKeys);			
+	}
+        
+        
+    private void setSelect (ActionContext context){
+		
+    	AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
+    	KindItem item = null;
+		
+		try {
+			List kinds = BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN_KIND);
+			Collection listKindItem = new ArrayList () ;
+			Iterator i = kinds.iterator() ;
+			BreakdownElementKind ur ;
+			while (i.hasNext())
+			{
+				ur = (BreakdownElementKind)i.next();
+				item = new KindItem () ;
+				item.setId(ur.getId().toString());
+				item.setName(ur.getName());
+				listKindItem.add(item);
+			}
+			DisplayObject[] data = new DisplayObject[listKindItem.size()]; 
+			listKindItem.toArray(data ) ; 
+				
+			
+			ListKindModel model = new ListKindModel(data);
+			madForm.setKindOptions(model);
+		} catch (PersistanceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
 	}
         
     	public void add_onClick(FormActionContext context) {
