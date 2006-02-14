@@ -184,26 +184,26 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     			try {
     				
     					BreakdownElementManager.getInstance().insert(bke);
-    					context.addGlobalMessage("admin.msg.info.breakdownelement.validate");
+    					context.addGlobalMessage("admin.msg.info.user.validate");
 
     			}
     			catch (PersistanceException p)
     			{
     				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					context.addGlobalError("admin.msg.error.breakdownelement.modify");
+    					context.addGlobalError("admin.msg.error.user.modify");
     				}
     				else {
-    					context.addGlobalError("admin.msg.error.breakdownelement.insert");
+    					context.addGlobalError("admin.msg.error.user.insert");
     				}
     				System.out.println(p.getMessage());
     			}
     			catch(DoublonException e)
     			{
     				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					context.addGlobalError("admin.msg.error.breakdownelement.modify");
+    					context.addGlobalError("admin.msg.error.user.modify");
     				}
     				else {
-    					context.addGlobalError("admin.msg.error.breakdownelement.insert");
+    					context.addGlobalError("admin.msg.error.user.insert");
     			}
     				System.out.println(e.getMessage());
     			}
