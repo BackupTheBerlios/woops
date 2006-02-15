@@ -25,6 +25,7 @@ public interface PresentationConstantes {
     public static final String FORWARD_NEXT="next"; 
     public static final String FORWARD_PREVIOUS="previous"; 
     public static final String FORWARD_FINISH="finish"; 
+    public static final String FORWARD_FINISH_FREE_ACTIVITIES="finishListFreeActivities";
     
 	
 
