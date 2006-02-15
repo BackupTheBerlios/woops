@@ -257,10 +257,13 @@ public class ListActivitiesAction extends WoopsCCAction {
 	public void listActivities_onDelete(ControlActionContext context, String activityIdString) throws IOException, ServletException, PersistanceException, ForeignKeyException {
 	
 		try{
-			
+			Activity activ = new Activity();
 			Integer activityId = new Integer(activityIdString);
+			activ = ActivityManager.getInstance().getActivityById(activityId);
+			String name = activ.getName();
+			
 			ActivityManager.getInstance().deleteLinksFromActivity(activityId);
-
+			context.addGlobalMessage("msg.error.activity.delete",name);
 		}
 		catch (ForeignKeyException fke) {
 			logger.error(fke);
@@ -270,7 +273,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 			logger.error(pe);
 			context.addGlobalError("errors.persistance.select");
 		} 
- 		
+
 		context.forwardByName(PresentationConstantes.FORWARD_ACTION);
 		
 	}
