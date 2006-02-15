@@ -94,8 +94,20 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	
 	public void finish_onClick(FormActionContext context) {
 		
-		if(saveActivity(context))
-			context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+		Activity activity = new Activity();
+		activity = saveActivity(context);
+		
+		if(activity!=null){
+			
+			// on forwarde selon le cas
+			if (activity.getUserId()!=null){
+				
+				context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+			}else{
+				
+				context.forwardByName(PresentationConstantes.FORWARD_FINISH_FREE_ACTIVITIES);
+			}
+		}
 	}
 	
 	
@@ -108,8 +120,11 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	 */
 	
 	public void next_onClick(FormActionContext context) {
-		if(saveActivity(context))
-			context.forwardByName(PresentationConstantes.FORWARD_NEXT);
+		
+		Activity activity = new Activity();
+		activity = saveActivity(context);
+		
+		if(activity!=null) context.forwardByName(PresentationConstantes.FORWARD_NEXT);
 	}
 	
 	/**
@@ -130,9 +145,12 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	 * @param context
 	 * @return true si ca s'est bien pass?
 	 */
-	public boolean saveActivity(FormActionContext context) {
+	public Activity saveActivity(FormActionContext context) {
 		
-		boolean ok = false;
+
+		
+		// activité retournée
+		Activity act = new Activity();
 		
 		ManageActivityCreationForm form = (ManageActivityCreationForm) context.form();
 
@@ -162,58 +180,141 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				//R?cup?ration de l'identifiant du participant connect?
 		    	User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 				
+				// modif => message affiché a l'utilisateur apres ajout ou modification d'une activité
+				// 0 : pas de modif
+				// 1 : l'utilisateur courant affecté
+				// 2 : la tache est libre
+		    	// 3 : affectation à l'utilisateur lors de la modification
+		    	// 4 : liberation de l'activité lors de la modification
+		    	
+		    	Integer modif = new Integer(0);
+	
+		    	
+		    	
 				if (mode.equals(PresentationConstantes.INSERT_MODE)) {
 					Activity activity = new Activity();
 										
 					// R?cup?ration des champs que l'utilisateur a pu entrer
 					activity.setDetails(form.getDetails());
 					activity.setName(form.getName().trim());
-					
 					activity.setState(new CreatedActivityState());
-					
-	
-					//activity.setUserCreation(user.getFirstName()+" "+user.getLastName());
 					activity.setUserCreation((user.getId().toString()));
 					activity.setDateCreation(new Date());
 					
-			
+					
+					// La reaffection de l'activité (soit libre (null) soit à un user)
 					activity.setUserId((form.getFreeActivity()!=null)?(null):((Integer) user.getId()));
 					
-
+					
+					modif = (activity.getUserId()==null)?(new Integer(2)):(new Integer(1));
+					
+					// on insere l'activité
 					activityId = (Integer)ActivityManager.getInstance().insert(activity);
 					
-					/* R?cup?ration la hashmap pour y rajouter l'activit? */
-					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
-					
+					// R?cup?ration la hashmap pour y rajouter l'activit? 
+					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);		
 					activitiesMap.put(activityId,activity);
-					
 					context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
 					
-					context.addGlobalMessage("msg.info.activity.inserted", activity.getName());
+					
+					String message = new String("");
+					
+					switch(modif.intValue()){
+					
+					case(1):
+						message = "msg.info.activity.inserted.notFree";
+					break;
+					
+					case(2):
+						message = "msg.info.activity.inserted.free";
+					break;
+					
+					default :
+						message = "msg.info.activity.inserted";
+					}
+					
+					
+					act = activity;
+					
+					context.addGlobalMessage(message, activity.getName());
+					
+
 				}
 				else if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
 					
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
-
 					Activity activity = (Activity)activitiesMap.get(activityId);
+							
 					
+					// on prend l'etat de l'utlisateur associé AVANT la possible réaffection
+					Integer idbefore = activity.getUserId();
+					
+					// La reaffection de l'activité (soit libre (null) soit à un user)
 					activity.setUserId((form.getFreeActivity()!=null)?(null):((Integer) user.getId()));
 					
+					// on prend l'etat de l'utlisateur associé APRES la possible réaffection
+					Integer idafter = activity.getUserId();
+					
+					// message selon le cas (libre/affectée)
+					if (idafter == null) modif = new Integer(2);
+					if (idafter != null) modif = new Integer(1);
+					
+					// si il y a une difference entre les etats on reecrit le message
+					if(idbefore != idafter){	
+						// on regarde sil s'agit d'un affectation ou d'une liberation
+						if (idbefore==null) modif = new Integer(4);
+						if (idafter==null) modif = new Integer(5);
+					}
+					
+
 					/* V?rification que l'utilisateur a bien modifi? quelque chose */
-					if ( !form.getName().trim().equals(activity.getName()) || !form.getDetails().equals(activity.getDetails()) ) {
+					if ( 	modif.intValue()!=0 ||
+							!form.getName().trim().equals(activity.getName()) ||
+							!form.getDetails().equals(activity.getDetails()) ) {
+				
+						
 						//R?cup?ration des champs que l'utilisateur a pu entrer
 						activity.setDetails(form.getDetails());
 						activity.setName(form.getName().trim());
 						activity.setUserModification((user.getId().toString()));
 						activity.setDateModification(new Date());
+						
+						ActivityManager.getInstance().update(activity);
+						
+						
+						String message = new String("");
+						
+						switch(modif.intValue()){
+						
+						case(1):
+							message = "msg.info.activity.updated.notFree";
+						break;
+						
+						case(2):
+							message = "msg.info.activity.updated.free";
+						break;
+						
+						case(4):
+							message = "msg.info.activity.updated.affectation";
+						break;
+						
+						case(5):
+							message = "msg.info.activity.updated.liberation";
+						break;
+						
+						default :
+							message = "msg.info.activity.updated";
+						}
+						
+						context.addGlobalMessage(message, activity.getName());
+						
 					}
 					
-					ActivityManager.getInstance().update(activity);
-					context.addGlobalMessage("msg.info.activity.updated", activity.getName());
+					act = activity;
+
 				}
 				
-				ok=true;
-				
+
 			} catch (PersistanceException pe) {
 				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
                 context.addGlobalError("errors.persistance.global");
@@ -225,7 +326,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
         	context.forwardByName(PresentationConstantes.FORWARD_ERROR);
         }
 	    
-	    return ok;
+	    return act;
 	}
 	
 	
