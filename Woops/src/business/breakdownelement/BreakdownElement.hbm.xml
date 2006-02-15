@@ -19,7 +19,22 @@
 			column="prefix"
 			length="50"
 			name="prefix"
+			not-null="false"
+			type="string"
+		 />	
+		 
+		 <property
+			column="name"
+			length="50"
+			name="name"
 			not-null="true"
+			type="string"
+		 />	
+		 
+		 <property
+			column="details"
+			name="details"
+			not-null="false"
 			type="string"
 		 />	
 		 

@@ -54,23 +54,4 @@ public class BreakdownElementManager extends PersistentObjectManager {
 	public Collection getBreakDownElementKinds() throws PersistanceException {
 		return breakdownElementDAO.getBreakDownElementKinds();
 	}
-	
-	// TESTS //
-	public static void main(String[] args) {
-		
-		File f = new File("D:/Mes Documents/My Workspace/Woops/src/hibernate.cfg.xml");
-		HibernateSessionFactory.init(f);
-		
-		try {
-			List boubou = BreakdownElementManager.getInstance().getList("BreakdownElementKind");
-			if (boubou==null)
-				System.out.println("User doesn't exist !");
-			else
-				System.out.println("It's ok man");
-		}
-		catch (PersistanceException pe) {
-			pe.printStackTrace();
-		}
-	
-	}
 }

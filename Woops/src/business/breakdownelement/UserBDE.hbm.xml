@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+	<class name="business.breakdownelement.UserBDE" table="UserBDE">
+		<!-- identifiant d'une occurrence dans la table -->
+		<id
+			column="id"
+			name="id"
+			type="integer"
+		>
+			<!--identifiant auto-incrementé --> 
+			<generator class="identity" />
+		</id>
+		
+		<many-to-one
+			class="business.breakdownelement.BreakdownElement"
+			name="bde"
+			not-null="true"
+			>
+			<column name="bde" />
+		</many-to-one>
+		
+		<many-to-one
+			class="business.user.User"
+			name="user"
+			not-null="true"
+			>
+			<column name="user" />
+		</many-to-one>
+
+	</class>	
+</hibernate-mapping>

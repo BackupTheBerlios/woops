@@ -6,16 +6,20 @@ import business.hibernate.HistorizedObject;
 
 public class BreakdownElement extends HistorizedObject{	
 	private static final long serialVersionUID = 2763309763407190586L; /** Generated Serial ID */
-	private	Integer	id;
-	private String prefix;
-	private Date startDate;
-	private Date endDate;
-	private BreakdownElementKind kind;
+	private	Integer					id;
+	private String 					prefix;
+	private String 					name;
+	private String					details;
+	private Date 					startDate;
+	private Date 					endDate;
+	private BreakdownElementKind 	kind;
 	
 	public BreakdownElement() {
 		super();
 		this.id = null;
 		this.prefix = null;
+		this.name = null;
+		this.details = null;
 		this.startDate = null;
 		this.endDate = null;
 		this.kind = null;
@@ -33,8 +37,8 @@ public class BreakdownElement extends HistorizedObject{
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Object id) {
+		this.id = (Integer)id;
 	}
 
 	public BreakdownElementKind getKind() {
@@ -60,4 +64,22 @@ public class BreakdownElement extends HistorizedObject{
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 }
