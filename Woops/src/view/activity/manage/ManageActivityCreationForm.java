@@ -25,7 +25,7 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private String	tooltipFinish;			/**	libell? du bouton finish (en rfonction du mode) */
 	private String 	tooltipNext;			/** libell? du bouton next (en rfonction du mode) */
 	private String	disableNext;	/** bool?en indiquant si le bouton next est d?sactiv? */
-	
+	private String  freeActivity; 	/** booleen permettant de créer une activité libre */
 	public ManageActivityCreationForm() {
 		super();
 	}
@@ -113,6 +113,16 @@ public class ManageActivityCreationForm extends FWActionForm {
 			
 			return errors;
 		}
+
+
+	public String getFreeActivity() {
+		return freeActivity;
+	}
+
+
+	public void setFreeActivity(String freeActivity) {
+		this.freeActivity = freeActivity;
+	}
 	
 	
 	

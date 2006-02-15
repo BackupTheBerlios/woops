@@ -7,6 +7,7 @@
 <%@ taglib uri="/cc-controls" prefix="ctrl" %>
 
 
+
 <html:form action="manageActivityCreation.do">
 
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -34,7 +35,13 @@
             rows="3"          
           />
             
-            
+
+         <forms:checkbox  
+            label="form.field.activity.checkbox.freeActivity"
+            property="freeActivity"
+          />
+
+        
         <forms:buttonsection default="btnNext">
         
             <forms:button
