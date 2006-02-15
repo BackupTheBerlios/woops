@@ -12,6 +12,7 @@
 
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
 	<forms:message formid="frmWarning" caption="msg.warning" severity="warning" width="350"/>
+	<br>
 	
     <forms:form 
     type="edit" 
