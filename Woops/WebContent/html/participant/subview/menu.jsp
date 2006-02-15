@@ -15,8 +15,13 @@
         	action="manageActivityCreation.do"/>
         
         <menu:menuitem   	
-        	id="1"  
+        	id="3"  
         	text="menu.historizedActivities"      
         	action="historizedActivities.do"/>
+        	
+        <menu:menuitem   	
+        	id="4"  
+        	text="table.title.listFreeActivities"      
+        	action="listFreeActivities.do"/>
 
 </menu:menu>
