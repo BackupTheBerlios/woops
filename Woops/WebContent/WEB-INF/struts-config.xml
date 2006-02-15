@@ -112,6 +112,7 @@
          	<forward name="success" path="/html/participant/activity/manage/manageDependancesTypes.jsp" />
          	<forward name="error" path="/html/participant/activity/manage/manageDependancesTypes.jsp" />
       		<forward name="finish" path="/listActivities.do"/>
+      		<forward name="finishListFreeActivities" path="/listFreeActivities.do"/>
         	<forward name="previous" path="/manageActivityDependances.do"/>
       	</action>
 
@@ -125,6 +126,7 @@
         <forward name="success" path="/html/participant/activity/manage/manageActivityCreation.jsp" />
         <forward name="error" path="/manageActivityCreation.do" />
         <forward name="finish" path="/listActivities.do"/>
+        <forward name="finishListFreeActivities" path="/listFreeActivities.do"/>
         <forward name="next" path="/manageActivityDependances.do"/>
         <forward name="previous" path="/listActivities.do"/>
      </action>
