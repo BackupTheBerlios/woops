@@ -55,7 +55,14 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			
 		
 			form.setName(activity.getName());
-			form.setDetails(activity.getDetails());			
+			form.setDetails(activity.getDetails());	
+			
+			if (activity.getUserId()==null){
+				form.setFreeActivity("true");
+			}else{
+				form.setFreeActivity("false");
+			}
+			
 			form.setCaption("form.title.manageActivityCreation.update");
 			form.setTooltipFinish("form.tooltip.manageActivityCreation.finish.update");
 			form.setTooltipNext("form.tooltip.manageActivityCreation.next.update");
@@ -101,10 +108,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			
 			// on forwarde selon le cas
 			if (activity.getUserId()!=null){
-				
 				context.forwardByName(PresentationConstantes.FORWARD_FINISH);
 			}else{
-				
 				context.forwardByName(PresentationConstantes.FORWARD_FINISH_FREE_ACTIVITIES);
 			}
 		}
@@ -255,18 +260,19 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					// on prend l'etat de l'utlisateur associé APRES la possible réaffection
 					Integer idafter = activity.getUserId();
 					
-					// message selon le cas (libre/affectée)
-					if (idafter == null) modif = new Integer(2);
-					if (idafter != null) modif = new Integer(1);
-					
+				
 					// si il y a une difference entre les etats on reecrit le message
 					if(idbefore != idafter){	
 						// on regarde sil s'agit d'un affectation ou d'une liberation
 						if (idbefore==null) modif = new Integer(4);
 						if (idafter==null) modif = new Integer(5);
+					}else{
+						modif = new Integer(0);
 					}
 					
 
+					System.out.print(modif.intValue()+"\n\n");
+					
 					/* V?rification que l'utilisateur a bien modifi? quelque chose */
 					if ( 	modif.intValue()!=0 ||
 							!form.getName().trim().equals(activity.getName()) ||

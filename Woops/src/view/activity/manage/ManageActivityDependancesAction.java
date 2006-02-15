@@ -176,13 +176,21 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	 * @param context
 	 * @return true si ca s'est bien pass?
 	 */
-	public boolean saveDependances(FormActionContext context) {
-		boolean ok = false;
+	public Activity saveDependances(FormActionContext context) {
+	
+		Activity act = null;
 		
 		ManageActivityDependancesForm form = (ManageActivityDependancesForm) context.form();
 		String[] newDependancesKeys  = form.getRealDependancesKeys();  
 		
 		Integer activityId = new Integer(form.getActivityId());
+		
+		// obligé, pour renvoyer l'activité
+		// permet par la suite de forwardé corretcement
+		
+		try {
+			act = ActivityManager.getInstance().getActivityById(activityId);
+		} catch (PersistanceException e1) {}
 		
 		/**
 		 * R?cup?ration du tableau des anciennes cl?s des activit? depandantes 
@@ -224,7 +232,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 				
 				context.addGlobalMessage("msg.info.activity.dependances.saved",activity.getName());
 				
-				ok=true;
+				act = activity;
 				
 			} catch (PersistanceException e) {
 				context.addGlobalError("errors.persistance.global");
@@ -240,8 +248,8 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 			}
 		
 		}
-		else
-			ok=true;
+		
+			
 		
 		/**
 		 * Suppression des attributs de la session
@@ -252,7 +260,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		//R?percution de l'attribut
 		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
 		
-		return ok;	
+		return act;	
 	}
 	
 	/**
@@ -264,8 +272,23 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	
 	public void finish_onClick(FormActionContext context) {
 		
-		if(saveDependances(context))
-			context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+		
+		
+		Activity activity = new Activity();
+		activity = saveDependances(context);
+		
+		System.out.print("ACCES on click \n\n");
+		if(activity!=null){
+			
+			// on forwarde selon le cas
+			if (activity.getUserId()!=null){
+				context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+			}else{
+				context.forwardByName(PresentationConstantes.FORWARD_FINISH_FREE_ACTIVITIES);
+			}
+		}
+		
+	
 	}
 	
 	
@@ -279,8 +302,10 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	
 	public void next_onClick(FormActionContext context) {
 		
-		if(saveDependances(context))
-			context.forwardByName(PresentationConstantes.FORWARD_NEXT);
+		Activity activity = new Activity();
+		activity = (saveDependances(context));
+		
+		if(activity!=null) context.forwardByName(PresentationConstantes.FORWARD_NEXT);
 	}
 	
 	/**

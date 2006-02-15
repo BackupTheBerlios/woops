@@ -177,7 +177,22 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		}
 		
 		/** Appel de la page de garde **/
-		context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+		
+		// on est obligé de chargé l'activité pour forwarder correctement
+		ManageDependancesTypesForm form = (ManageDependancesTypesForm) context.form();
+		Integer activityId = new Integer(form.getActivityId());
+		Activity activity = new Activity();
+		try {
+			activity = ActivityManager.getInstance().getActivityById(activityId);
+		} 
+		catch (PersistanceException e) {}
+		
+		// on forwarde selon le cas
+		if (activity.getUserId()!=null){
+			context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+		}else{
+			context.forwardByName(PresentationConstantes.FORWARD_FINISH_FREE_ACTIVITIES);
+		}
 	}
 	
 	/**
