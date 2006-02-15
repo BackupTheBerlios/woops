@@ -23,5 +23,10 @@
         	id="4"  
         	text="table.title.listFreeActivities"      
         	action="listFreeActivities.do"/>
+        	
+        <menu:menuitem   	
+        	id="5"  
+        	text="menu.showActivityGraph"      
+        	action="showActivityGraph.do"/>
 
 </menu:menu>

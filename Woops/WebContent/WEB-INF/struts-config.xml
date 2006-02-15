@@ -141,7 +141,7 @@
 <!-- ================= Show Activity Graph ================ -->  
 		<action path="/showActivityGraph"	 type="view.activity.graph.ShowActivityGraphAction"
       		name="showActivityGraphForm"
-      	 	scope="session"
+      	 	scope="request"
       	 >
          	<forward name="error" path="/listActivities.do" />
          	<forward name="success" path="/html/participant/activity/graph/showActivityGraph.jsp" />

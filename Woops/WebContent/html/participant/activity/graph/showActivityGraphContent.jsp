@@ -1,9 +1,12 @@
 <%@ taglib uri="/cc-base" prefix="base" %> 
 <%@ taglib uri="/struts-html" prefix="html" %>
 
-<html:form action="showActivitySummary.do">	
+<html:form action="showActivityGraph.do">	
 
-	<base:image property="imageFilePath"/>
+	<html:img 
+		src="${showActivityGraphForm.imageFilePath}"
+		width="600"
+		/>
 
 </html:form>
  

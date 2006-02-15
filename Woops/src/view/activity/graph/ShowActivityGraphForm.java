@@ -9,7 +9,6 @@ import com.cc.framework.ui.model.ListDataModel;
  */
 
 public class ShowActivityGraphForm extends FWActionForm {
-	private static final long serialVersionUID = -7623927860007234202L; /** Generated Serial ID */
 	
 	private String imageFilePath;
 

@@ -1,14 +1,17 @@
 package view.activity.graph;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServlet;
+
+import org.apache.log4j.Logger;
 import org.apache.struts.util.MessageResources;
 
 import view.PresentationConstantes;
+import view.activity.performing.ListActivitiesAction;
 import view.common.WoopsCCAction;
 import business.BusinessConstantes;
 import business.activity.Activity;
@@ -24,10 +27,11 @@ import com.cc.framework.adapter.struts.ActionContext;
 
 /**
  * @author Simon REGGIANI
- * ShowActivitySummaryAction : permet de voir la fiche de d?tail d'une activit?
+ * ShowActivityGraphAction : permet de voir le graphe des activités du projet
  */
 public class ShowActivityGraphAction extends WoopsCCAction {
-	
+	private static Logger logger = Logger.getLogger(ShowActivityGraphAction.class);    
+
 	/**
 	 * Constructeur vide
 	 *
@@ -51,11 +55,9 @@ public class ShowActivityGraphAction extends WoopsCCAction {
     	
 		
 		try {
-			File tmp = File.createTempFile("dotFile",".dot");
+			GraphViz gv = new GraphViz();
 			
-			PrintStream p = new PrintStream(tmp);
-            
-            p.println("digraph G {");
+			gv.addln(gv.start_graph());
             
             UserManager userManager = UserManager.getInstance();
             
@@ -65,13 +67,13 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             while(iterUsers.hasNext()) {
             	User user = (User)iterUsers.next();
             	
-            	p.println("\tsubgraph cluster"+i+" {");
+            	gv.addln("\tsubgraph cluster"+i+" {");
             	if ( user.getId().equals(sessionUser.getId()) ) {
-            		p.println("\t\tstyle=filled;");
-            		p.println("\t\tcolor=lightgrey;");
+            		gv.addln("\t\tstyle=filled;");
+            		gv.addln("\t\tcolor=lightgrey;");
             	}
             		
-            	p.println("\t\tlabel = \""+user.getFirstName()+" "+user.getLastName()+"\";");
+            	gv.addln("\t\tlabel = \""+user.getFirstName()+" "+user.getLastName()+"\";");
             	
 				ActivityManager activityManager = ActivityManager.getInstance();
 				ArrayList listActivities = (ArrayList) activityManager.getAllActivitiesByUser((Integer)user.getId());
@@ -87,10 +89,10 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 					if (act.getState().equals(BusinessConstantes.ACTIVITY_STATE_FINISHED))
 						color="color=red,";
 					String style="style=filled";
-					p.println("\t\t"+act.getId().toString()+"["+label+" "+color+" "+style+"];");
+					gv.addln("\t\t"+act.getId().toString()+"["+label+" "+color+" "+style+"];");
 				}
 				
-				p.println("\t}");
+				gv.addln("\t}");
 				
 				i++;
             }
@@ -107,32 +109,31 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			
 				linkType = MessageResources.getMessageResources("ApplicationResources").getMessage(linkType);
 				
-				p.println("\t"+predecessorId+" -> "+successorId+"[label=\""+linkType+"\"];");
+				gv.addln("\t"+predecessorId+" -> "+successorId+"[label=\""+linkType+"\"];");
 			}
 			
-			p.println("}");
-			p.close();
+			gv.addln(gv.end_graph());
 			
-			String dotFilePath = tmp.getAbsolutePath();
-			String imageFileType = "jpg";
+			//logger.debug(gv.getDotSource());
+			
+			
+			String graphRealPath = getServlet().getServletContext().getRealPath("/") + "graph\\";
+			//TODO gérer les séparateurs selon l'OS ( windows / unix )
+			
+			GraphViz.setDOT(graphRealPath+"dot.exe");
+			GraphViz.setTEMP_DIR(graphRealPath);
+			
 			String imageFile = "graph"+sessionUser.getId().toString()+".jpg";
 			
-			String[] args = new String[3];
-			args[0]=dotFilePath;
-			args[1]="-T "+imageFileType;
-			args[2]="-o "+imageFile;			
+			File out = new File(graphRealPath+imageFile);
+			gv.writeGraphToFile(gv.getGraph(gv.getDotSource()), out);
 			
-			String command = "dot";
+			String graphPath = context.request().getContextPath()+"/graph/";
 			
-			Process proc = Runtime.getRuntime().exec(command,args);
-		
-			form.setImageFilePath(imageFile);
+			form.setImageFilePath(graphPath+imageFile);
 			context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
 		} catch (PersistanceException pe) {
 			context.addGlobalError("errors.persistance.global");
-			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
-		} catch (IOException e) {
-			context.addGlobalError("errors.global");
 			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 		
