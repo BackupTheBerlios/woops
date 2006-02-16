@@ -40,6 +40,7 @@
          <forms:checkbox  
             label="form.field.activity.checkbox.freeActivity"
             property="freeActivity"
+            tooltip="table.tooltip.activity.checkbox.freeActivity"
           />
 
         
