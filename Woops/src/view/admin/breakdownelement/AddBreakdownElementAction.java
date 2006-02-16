@@ -14,6 +14,8 @@ import business.activity.ActivityManager;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;
+import business.breakdownelement.UserBDE;
+import business.breakdownelement.UserBDEManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -176,38 +178,59 @@ public class AddBreakdownElementAction extends WoopsCCAction {
         		String prefix = madForm.getPrefix();
         		BreakdownElement bke = new BreakdownElement ();
         		bke.setId(null);
-        		bke.setPrefix(prefix);
+        		bke.setName(prefix);
         		bke.setDateCreation(null);
         		bke.setEndDate(null);
-        		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));
-        		
+        		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));      		
+
     			try {
     				
     					BreakdownElementManager.getInstance().insert(bke);
-    					context.addGlobalMessage("admin.msg.info.user.validate");
-
+    					context.addGlobalMessage("admin.msg.info.breakdownelement.validate");    					
     			}
     			catch (PersistanceException p)
     			{
     				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					context.addGlobalError("admin.msg.error.user.modify");
+    					context.addGlobalError("admin.msg.error.breakdownelement.modify");
     				}
     				else {
-    					context.addGlobalError("admin.msg.error.user.insert");
+    					context.addGlobalError("admin.msg.error.breakdownelement.insert");
     				}
     				System.out.println(p.getMessage());
     			}
     			catch(DoublonException e)
     			{
     				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					context.addGlobalError("admin.msg.error.user.modify");
+    					context.addGlobalError("admin.msg.error.breakdownelement.modify");
     				}
     				else {
-    					context.addGlobalError("admin.msg.error.user.insert");
+    					context.addGlobalError("admin.msg.error.breakdownelement.insert");
     			}
     				System.out.println(e.getMessage());
     			}
-    	    	
+//    			String [] users  = madForm.getUsersParticipation();
+//        		if (users != null) {
+//        			UserBDE userBde;
+//            		User user;
+//            		for (int i=0; i<users.length;i++) {
+//            			if (users[i]!= "") {
+//                			userBde = new UserBDE();
+//                			user = new User();
+//                			user.setId(new Integer(Integer.parseInt(users[i])));
+//                			userBde.setBde(bke);
+//                			userBde.setUser(user);
+//                    		try {
+//        						UserBDEManager.getInstance().insert(userBde);
+//        					} catch (PersistanceException e) {
+//        						// TODO Auto-generated catch block
+//        						e.printStackTrace();
+//        					} catch (DoublonException e) {
+//        						// TODO Auto-generated catch block
+//        						e.printStackTrace();
+//        					}
+//            			}
+//            		}
+//        		}
     			
     			
             } else {
