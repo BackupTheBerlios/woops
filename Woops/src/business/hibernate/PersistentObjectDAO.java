@@ -36,16 +36,22 @@ public class PersistentObjectDAO  {
         try {
             session = HibernateSessionFactory.currentSession();
             transaction = session.beginTransaction();
-
             id = session.save(objet);
-            
             transaction.commit();
 			
 		} catch (ConstraintViolationException cve) {
             rollback(transaction);
-            if (cve.getErrorCode()==1)
+            
+           // System.out.print(cve.getErrorCode()+"\n\n");
+            
+            // si erreur JDBC 1062 => doublon !
+            // on lève l'erreur adéquate
+            if (cve.getErrorCode()==1062)
 				throw new DoublonException(cve.getMessage());
+            
+            // sinon erreur de persistence
 			throw new PersistanceException(cve.getMessage(),cve);
+			
 		} catch (HibernateException he) {
 		    rollback(transaction);
             throw new PersistanceException(he.getMessage(),he);
