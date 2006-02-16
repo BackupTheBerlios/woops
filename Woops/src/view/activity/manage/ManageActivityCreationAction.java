@@ -107,13 +107,19 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		if(activity!=null){
 			
 			// on forwarde selon le cas
-			if (activity.getUserId()!=null){
-				context.forwardByName(PresentationConstantes.FORWARD_FINISH);
-			}else{
-				context.forwardByName(PresentationConstantes.FORWARD_FINISH_FREE_ACTIVITIES);
+			// on ne forwarde pas si l'objet n'a pas été crée
+			
+			if (activity.getId()!=null)
+				
+				if ((activity.getUserId()==null)&&(activity.getName()!=null)){
+					context.forwardByName(PresentationConstantes.FORWARD_FINISH_FREE_ACTIVITIES);
+				}else{
+					context.forwardByName(PresentationConstantes.FORWARD_FINISH);
+				}
+			
 			}
 		}
-	}
+	
 	
 	
 	/**
@@ -126,10 +132,10 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	
 	public void next_onClick(FormActionContext context) {
 		
-		Activity activity = new Activity();
+		Activity activity = null;
 		activity = saveActivity(context);
 		
-		if(activity!=null) context.forwardByName(PresentationConstantes.FORWARD_NEXT);
+		if(activity.getId()!= null) context.forwardByName(PresentationConstantes.FORWARD_NEXT);
 	}
 	
 	/**
@@ -271,7 +277,6 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					}
 					
 
-					System.out.print(modif.intValue()+"\n\n");
 					
 					/* V?rification que l'utilisateur a bien modifi? quelque chose */
 					if ( 	modif.intValue()!=0 ||
@@ -322,10 +327,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				
 
 			} catch (PersistanceException pe) {
-				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
                 context.addGlobalError("errors.persistance.global");
 			} catch (DoublonException de) {
-				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
                 context.addGlobalError("errors.persistance.doublon",form.getName());
 			}	
         } else {
