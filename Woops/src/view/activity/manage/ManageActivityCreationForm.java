@@ -26,6 +26,9 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private String 	tooltipNext;			/** libell? du bouton next (en rfonction du mode) */
 	private String	disableNext;	/** bool?en indiquant si le bouton next est d?sactiv? */
 	private String  freeActivity; 	/** booleen permettant de créer une activité libre */
+	private String  disableFreeActivityCheckbox;
+	
+	
 	public ManageActivityCreationForm() {
 		super();
 	}
@@ -82,7 +85,18 @@ public class ManageActivityCreationForm extends FWActionForm {
 		this.disableNext = disableNext;
 	}
 
+	
+	public String getDisableFreeActivityCheckbox() {
+		return disableFreeActivityCheckbox;
+	}
 
+
+	public void setDisableFreeActivityCheckbox(String disableFreeActivityCheckbox) {
+		this.disableFreeActivityCheckbox = disableFreeActivityCheckbox;
+	}
+
+
+	
 	public String getTooltipFinish() {
 		return tooltipFinish;
 	}
@@ -123,6 +137,11 @@ public class ManageActivityCreationForm extends FWActionForm {
 	public void setFreeActivity(String freeActivity) {
 		this.freeActivity = freeActivity;
 	}
+
+
+
+	
+
 	
 	
 	

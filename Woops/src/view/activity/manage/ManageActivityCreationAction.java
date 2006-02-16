@@ -57,11 +57,26 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			form.setName(activity.getName());
 			form.setDetails(activity.getDetails());	
 			
-			if (activity.getUserId()==null){
-				form.setFreeActivity("true");
-			}else{
-				form.setFreeActivity("false");
+
+			// si activité en cours, on desactive le checkbox
+			
+			if (! activity.getState().equals(BusinessConstantes.ACTIVITY_STATE_CREATED) ){
+				
+				System.out.print("inProgress\n\n");
+				form.setDisableFreeActivityCheckbox("true");
 			}
+			// sinon on affichage le checkbox selon son cas
+			else{
+				System.out.print("NOT inProgress\n\n");
+				form.setDisableFreeActivityCheckbox("false");
+				if (activity.getUserId()==null){
+					form.setFreeActivity("true");
+				}else{
+					form.setFreeActivity("false");
+				}
+			}
+			
+			
 			
 			form.setCaption("form.title.manageActivityCreation.update");
 			form.setTooltipFinish("form.tooltip.manageActivityCreation.finish.update");
