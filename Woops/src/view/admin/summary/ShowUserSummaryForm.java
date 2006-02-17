@@ -1,6 +1,8 @@
 package view.admin.summary;
 
 import com.cc.framework.adapter.struts.FWActionForm;
+import com.cc.framework.ui.control.SimpleListControl;
+import com.cc.framework.ui.model.ListDataModel;
 
 public class ShowUserSummaryForm extends FWActionForm{
 	private String userID ;
@@ -8,6 +10,8 @@ public class ShowUserSummaryForm extends FWActionForm{
 	private String lastName ;
 	private String login ;
 	private String role ;
+	
+	private SimpleListControl	bdeList;	/** liste des bde d'un user */
 	
 	public String getFirstName() {
 		return firstName;
@@ -38,5 +42,20 @@ public class ShowUserSummaryForm extends FWActionForm{
 	}
 	public void setUserID(String userID) {
 		this.userID = userID;
+	}
+	
+	/**
+	 * @return Returns the predecessorsList.
+	 */
+	public SimpleListControl getBdeList() {
+		return bdeList;
+	}
+
+
+	/**
+	 * @param model The model to set to predecessorsList.
+	 */
+	public void setBdeList(ListDataModel model) {
+		this.bdeList.setDataModel(model);
 	}
 }
