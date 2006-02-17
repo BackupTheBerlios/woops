@@ -4,6 +4,9 @@
 <%@ taglib uri="/struts-html" prefix="html" %>
 <%@ taglib uri="/struts-logic" prefix="logic" %>
 <%@ taglib uri="/cc-utility"  prefix="util" %>
+<%@ page import="org.apache.struts.util.MessageResources" %>
+
+<bean:define id="confirmMessageDeleteUser" value="<%=MessageResources.getMessageResources("ApplicationResources").getMessage("table.field.listUsers.deleteConfirmation")%>"/>
 
 <html:form action="admin.do">	
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -53,7 +56,7 @@
 
 			<ctrl:columndelete 
 				title="table.field.listBreakDownElements.delete"
-				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
+				onclick="return confirm('${confirmMessage}');"
 				/>
 	</ctrl:list>
 <br>
@@ -95,7 +98,7 @@
 
 			<ctrl:columndelete 
 				title="table.field.listUsers.delete"
-				onclick="return confirm('table.field.listActivities.deleteConfirmation');"
+				onclick="return confirm('${confirmMessageDeleteUser}');"
 				/> 
 	</ctrl:list>
 	
