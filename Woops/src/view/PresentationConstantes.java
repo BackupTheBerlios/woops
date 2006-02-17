@@ -46,6 +46,7 @@ public interface PresentationConstantes {
 	//constantes de cl?s en session
 	public static final String KEY_FORM="FORM";
 	public static final String KEY_USER="USER";
+	public static final String KEY_BDE="BDE_ID";
 	public static final String KEY_OLD_DEPENDANCES_KEYS="OLD_DEPENDANCES_KEYS";
 	public static final String KEY_POSSIBLE_DEPENDANCES_OPTIONS="POSSIBLE_DEPENDANCES_OPTIONS";
 	public static final String KEY_DEPENDANCES_LIST = "KEY_DEPENDANCES_LIST";
@@ -87,4 +88,5 @@ public interface PresentationConstantes {
 	
 	// admin
 	public static final String KEY_USER_ID="USER_ID" ;
+
 }
