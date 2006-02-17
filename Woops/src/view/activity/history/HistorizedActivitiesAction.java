@@ -15,6 +15,7 @@ import view.activity.performing.ListActivitiesForm;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
+import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 
@@ -27,7 +28,7 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(HistorizedActivitiesAction.class);    
 
 	/**
-	 * Constructeur par d?faut
+	 * Constructeur par defaut
 	 */
 	public HistorizedActivitiesAction() {
 		super();
@@ -63,6 +64,7 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 		Collection listActivitiesItems = null;
 		HistorizedActivityItem activityItem = null;
 		User sessionUser = null;
+		BreakdownElement sessionBDE = null;
 		
 		// Initialisation du form si celui-ci est nul
 		if (context.form()==null) {
@@ -72,9 +74,10 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
     	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
 
-    	// R?cup?ration de l'identifiant du participant connect?
+    	// R?cup?ration de l'identifiant du participant connecte et de l'entite
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-    	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer)sessionUser.getId());  	
+    	sessionBDE = (BreakdownElement) context.session().getAttribute(PresentationConstantes.KEY_BDE);
+    	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer)sessionUser.getId(), (Integer)sessionBDE.getId());  	
     	
     	// Constitue une liste d'ActivityItems ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();

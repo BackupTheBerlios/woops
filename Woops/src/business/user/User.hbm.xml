@@ -52,5 +52,10 @@
 			>
 			<column name="role" />
 		</many-to-one>
+		
+		<set name="bdes" table="UserBDE" lazy="true" inverse="true">
+      		<key column="user"/>
+      		<many-to-many class="business.breakdownelement.BreakdownElement" column="bde"/>
+    	</set>
 	</class>	
 </hibernate-mapping>

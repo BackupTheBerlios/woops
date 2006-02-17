@@ -3,9 +3,14 @@ package business.user;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
+
+import business.breakdownelement.BreakdownElement;
+import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
-import business.security.Roles;
 
 public class UserDAO extends PersistentObjectDAO {
 
@@ -47,16 +52,30 @@ public class UserDAO extends PersistentObjectDAO {
 	
 	
 	/**
-	 * Retourne la liste des utilisateur d'un projet
-	 * @param projectId L'id du projet
-	 * @return la liste des utilisateur d'un projet
-	 * @throws PersistanceException 
+	 * Fournit tous les participants de l'entité
+	 * @param bdeId : identifiant de l'entité
+	 * @return : liste des participants
+	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
-	public Collection getUsersByProject(Integer projectId) throws PersistanceException {
-		StringBuffer req = new StringBuffer("from User as u, UserBDE as ubde ");
-		req.append("where ubde.project.id = "+projectId);
-		req.append("where u.role.name <> '"+Roles.ADMINISTRATOR_ROLE+"'");
-		return executeQuery(req.toString());
+	public Collection getUsersByBDE(Integer bdeId) throws PersistanceException {
+		//return executeQuery("FROM User as u , UserBDE ubde WHERE u.id = ubde.user AND ubde.bde = " + bdeId);
+		Session session;
+		try {
+			session = HibernateSessionFactory.currentSession();
+		
+	    Transaction transaction = session.beginTransaction();
+
+	    BreakdownElement bde = (BreakdownElement) session
+	            .createQuery("SELECT bde FROM BreakdownElement bde left join fetch bde.users WHERE bde.id = :bdeid")
+	            .setParameter("bdeId", bdeId)
+	            .uniqueResult(); // Eager fetch the collection so we can use it detached
+
+	    	transaction.commit();
+	    	return bde.getUsers();
+		} catch (HibernateException e) {
+			// TODO Auto-generated catch block
+			throw new PersistanceException(e.toString());
+		}
+		
 	}
-	
 }

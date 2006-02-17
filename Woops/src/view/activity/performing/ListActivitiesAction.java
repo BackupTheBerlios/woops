@@ -19,6 +19,8 @@ import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
 import business.activity.state.FinishedActivityState;
 import business.activity.state.InProgressActivityState;
+import business.breakdownelement.BreakdownElement;
+import business.breakdownelement.BreakdownElementManager;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -69,6 +71,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 		Collection listActivitiesItems = null;
 		ActivityItem activityItem = null;
 		User sessionUser = null;
+		BreakdownElement sessionBDE = null;
 		String state = null;
 		
 		// Initialisation du form si celui-ci est nul
@@ -79,11 +82,12 @@ public class ListActivitiesAction extends WoopsCCAction {
 		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
     	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
 
-    	// R?cup?ration de l'identifiant du participant connect?
+    	// R?cup?ration de l'identifiant du participant connecte et de l'entite
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+    	sessionBDE = (BreakdownElement) context.session().getAttribute(PresentationConstantes.KEY_BDE);
     	
     	// R?cup?ration de la liste des activit?s
-    	dbData = ActivityManager.getInstance().getRemainingActivitiesByUser((Integer) sessionUser.getId());  	
+    	dbData = ActivityManager.getInstance().getRemainingActivitiesByUser((Integer) sessionUser.getId(), (Integer) sessionBDE.getId());  	
 
     	// Constitue une liste d'ActivityItems ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();

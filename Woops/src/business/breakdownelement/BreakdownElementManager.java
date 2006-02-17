@@ -1,5 +1,6 @@
 package business.breakdownelement;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 import business.hibernate.PersistentObjectManager;
@@ -7,16 +8,16 @@ import business.hibernate.exception.PersistanceException;
 
 public class BreakdownElementManager extends PersistentObjectManager {
 	
-	/** Instance permettant d'assurer la persistance d'une entit? */
+	/** Instance permettant d'assurer la persistance d'une entité */
 	private BreakdownElementDAO breakdownElementDAO = new BreakdownElementDAO();
 	
-	/** Instance priv?e de la classe */
+	/** Instance privée de la classe */
 	private static BreakdownElementManager breakdownElementManager;
 
 	
 
 	/**
-	 * Impl?mentation du pattern Singleton : constructeur priv?
+	 * Implémentation du pattern Singleton : constructeur privé
 	 */
 	private BreakdownElementManager() {
 	}
@@ -34,21 +35,36 @@ public class BreakdownElementManager extends PersistentObjectManager {
 		return breakdownElementManager;
 	}
 	/**
-	 * Fournit une entit? par rapport ? son identifiant
-	 * @param bdeId identifiant de l'entit?
-	 * @return Entit? correspondante
-	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la r?cup?ration des donn?es
+	 * Fournit une entité par rapport à son identifiant
+	 * @param bdeId identifiant de l'entité
+	 * @return Entité correspondante
+	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public BreakdownElement getBreakDownElementById(Integer bdeId) throws PersistanceException {
 		return breakdownElementDAO.getBreakDownElementById(bdeId);
 	}
 	
 	/**
-	 * Fournit tous les types d'entit?
+	 * Fournit tous les types d'entité
 	 * @return : liste de types
-	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la r?cup?ration des donn?es
+	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public Collection getBreakDownElementKinds() throws PersistanceException {
 		return breakdownElementDAO.getBreakDownElementKinds();
+	}
+	
+	/**
+	 * Fournit toutes les entités sur lesquelles le participant est affecté
+	 * @param userId : identifiant de l'utilisateur
+	 * @return : liste des entités
+	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
+	 */
+	public Collection getBreakDownElementsByUser(Integer userId) throws PersistanceException {
+		return breakdownElementDAO.getBreakDownElementsByUser(userId);
+	}
+	
+	public Serializable affectUsersToBDE(BreakdownElement bde) throws PersistanceException {
+		//TODO dao visibilité
+		return breakdownElementDAO.affectUsersToBDE(bde);
 	}
 }

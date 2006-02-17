@@ -1,10 +1,5 @@
 package business.user;
 
-import java.io.File;
-import java.util.Collection;
-import java.util.List;
-
-import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.PersistanceException;
 
@@ -48,33 +43,12 @@ public class UserManager extends PersistentObjectManager {
 	}	
 	
 	/**
-	 * Retourne la liste des utilisateur d'un projet
-	 * @param projectId l'id du projet
-	 * @return la liste des utilisateur d'un projet
-	 * @throws PersistanceException 
+	 * Fournit tous les participants de l'entité
+	 * @param bdeId : identifiant de l'entité
+	 * @return : liste des participants
+	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
-	public Collection getUsersByProject(Integer projectId) throws PersistanceException {
-		return dao.getUsersByProject(projectId);
-	}
-
-
-	// TESTS //
-	public static void main(String[] args) {
-		
-		File f = new File("/users/iupisi/m1isi23/eclipse/workspace/Woops/src/hibernate.cfg.xml");
-		HibernateSessionFactory.init(f);
-		
-		try {
-			List boubou = UserManager.getInstance().getList("User");
-			if (boubou==null)
-				System.out.println("User doesn't exist !");
-			else
-				System.out.println("It's ok man");
-		}
-		catch (PersistanceException pe) {
-			pe.printStackTrace();
-		}
-	
-	}
-
+	/*public Collection getUsersByBDE(Integer bdeId) throws PersistanceException {
+		return dao.getUsersByBDE(bdeId);
+	}*/
 }

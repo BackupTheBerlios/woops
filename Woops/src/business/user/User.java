@@ -1,6 +1,8 @@
 package business.user;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import business.hibernate.HistorizedObject;
 import business.security.RoleDescriptor;
@@ -23,6 +25,8 @@ public class User extends HistorizedObject implements Principal {
 	
 	/** user role */
 	private RoleDescriptor role = null;
+	
+	private Set bdes = null;
 
 	/**
 	 * @link aggregation
@@ -37,6 +41,7 @@ public class User extends HistorizedObject implements Principal {
 	 */
 	public User() {
 		super();
+		bdes = new HashSet();
 	}
 	
 	public Collection getLinkToActivity() {
@@ -128,5 +133,13 @@ public class User extends HistorizedObject implements Principal {
 		} else {
 			return role.equals(checkForRole);
 		}
+	}
+
+	public Set getBdes() {
+		return bdes;
+	}
+
+	public void setBdes(Set bdes) {
+		this.bdes = bdes;
 	}
 }
