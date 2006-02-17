@@ -20,7 +20,7 @@
 		>
 			<ctrl:columntext 
 				title="table.field.listBreakDownElements.name"
-				property="prefix" 
+				property="name" 
 				width="350"
 				sortable="true"/>
 			
@@ -33,13 +33,13 @@
 			<ctrl:columntext 
 				title="table.field.listBreakDownElements.startDate"
 				property="startDate"
-				width="150"
+				width="300"
 				sortable="true"/>
 				
 			<ctrl:columntext 
 				title="table.field.listBreakDownElements.endDate"
 				property="endDate"
-				width="150"
+				width="300"
 				sortable="true"/>
 				
 			<ctrl:columntext 

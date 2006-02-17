@@ -11,6 +11,7 @@ public class BreakDownElementItem implements DisplayObject
 	private	Integer	id;
 	private String prefix;
 	private String name;
+	private String details;
 	private Date startDate;
 	private Date endDate;
 	private String kind;
@@ -66,5 +67,13 @@ public class BreakDownElementItem implements DisplayObject
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDetails() {
+		return details;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
 	}
 }
