@@ -19,14 +19,14 @@
 		createButton="true"
 		>
 			<ctrl:columntext 
-				title="table.field.listBreakDownElements.name"
-				property="name" 
-				width="350"
-				sortable="true"/>
-			
-			<ctrl:columntext 
 				title="table.field.listBreakDownElements.prefix"
 				property="prefix" 
+				width="350"
+				sortable="true"/>
+
+			<ctrl:columntext 
+				title="table.field.listBreakDownElements.name"
+				property="name" 
 				width="350"
 				sortable="true"/>
 			

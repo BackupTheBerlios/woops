@@ -101,7 +101,7 @@ public class AdminAction  extends WoopsCCAction {
 		adminForm.setDataModelListBreakDownElements(model);
 	
 		// Sauvegarde d'une HashMap stockant la liste des BreakDownElements
-		context.session().setAttribute(PresentationConstantes.KEY_USERS_MAP,breakDownElementsMap);
+		context.session().setAttribute(PresentationConstantes.KEY_BDE_MAP,breakDownElementsMap);
 	}
 	private void loadListUsers(ActionContext context) throws Exception {
 		logger.debug("AdminAction");
