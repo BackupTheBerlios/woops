@@ -21,7 +21,10 @@ import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
-
+import business.breakdownelement.BreakdownElement;
+import business.breakdownelement.BreakdownElementManager;
+import view.admin.breakdownelement.BreakDownElementItem;
+import view.admin.breakdownelement.ListBreakDownElementsModel;
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
 import com.cc.framework.common.SortOrder;
@@ -244,7 +247,7 @@ public class AdminAction  extends WoopsCCAction {
 			
 			//Chercher les activites concernant de l'utilisateur a supprimer
 			//Mise a jour le champs de "UserId" a null de ces activites
-			dbData = ActivityManager.getInstance().getActivitiesByUser(new Integer(Integer.parseInt(id)));
+			dbData = ActivityManager.getInstance().getAllActivitiesByUser(new Integer(Integer.parseInt(id)));
 			Iterator iter = dbData.iterator();
 	    	while (iter.hasNext()) {
 	    		Activity activity = (Activity) iter.next();
