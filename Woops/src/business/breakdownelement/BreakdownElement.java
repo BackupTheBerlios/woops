@@ -1,6 +1,8 @@
 package business.breakdownelement;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import business.hibernate.HistorizedObject;
 
@@ -13,6 +15,7 @@ public class BreakdownElement extends HistorizedObject{
 	private Date 					startDate;
 	private Date 					endDate;
 	private BreakdownElementKind 	kind;
+	private Set						users;
 	
 	public BreakdownElement() {
 		super();
@@ -23,6 +26,7 @@ public class BreakdownElement extends HistorizedObject{
 		this.startDate = null;
 		this.endDate = null;
 		this.kind = null;
+		this.users = new HashSet();
 	}
 
 	public Date getEndDate() {
@@ -80,6 +84,12 @@ public class BreakdownElement extends HistorizedObject{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
+	public Set getUsers() {
+		return users;
+	}
+
+	public void setUsers(Set users) {
+		this.users = users;
+	}	
 }

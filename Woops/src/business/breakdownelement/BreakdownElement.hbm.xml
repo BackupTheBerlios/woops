@@ -59,6 +59,11 @@
 			>
 			<column name="kind" />
 		</many-to-one>
-
+		
+		<set name="users" table="UserBDE" lazy="true">
+      		<key column="bde"/>
+      		<many-to-many class="business.user.User" column="user"/>
+    	</set>
+		
 	</class>	
 </hibernate-mapping>
