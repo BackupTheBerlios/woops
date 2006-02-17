@@ -11,12 +11,15 @@ import javax.servlet.ServletException;
 import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
-import view.activity.ActivityItem;
+import view.admin.breakdownelement.BreakDownElementItem;
+import view.admin.breakdownelement.ListBreakDownElementsModel;
 import view.admin.user.ListUsersModel;
 import view.admin.user.UserItem;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
+import business.breakdownelement.BreakdownElement;
+import business.breakdownelement.BreakdownElementManager;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -286,8 +289,8 @@ public class AdminAction  extends WoopsCCAction {
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER);
 	}
 	
-	public void listBreakDownElements_onDrilldown(ControlActionContext context, String userIdString) throws IOException, ServletException {
-		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,new Integer(userIdString));
+	public void listBreakDownElements_onDrilldown(ControlActionContext context, String userBdeString) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,new Integer(userBdeString));
 		
 		context.forwardByName(PresentationConstantes.FORWARD_DRILLDOWN_BREAKDOWN);
 	}

@@ -22,7 +22,7 @@
 		refreshButton="false" 
 		createButton="true"
 		>
-			<ctrl:columntext 
+			<ctrl:columndrilldown
 				title="table.field.listBreakDownElements.prefix"
 				property="prefix" 
 				width="350"
@@ -71,16 +71,18 @@
 		createButton="true"
 		>
 			<ctrl:columndrilldown
+				title="table.field.listUsers.lastName"
+				property="lastName"
+				width="350"
+				sortable="true"/>
+			
+			<ctrl:columndrilldown
 				title="table.field.listUsers.firstName" 
 				property="firstName" 
 				width="250"
 				sortable="true"/>
 			
-			<ctrl:columntext 
-				title="table.field.listUsers.lastName"
-				property="lastName"
-				width="350"
-				sortable="true"/>
+			
 				
 			<ctrl:columntext   
 				title="table.field.listUsers.login"

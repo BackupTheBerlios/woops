@@ -51,9 +51,9 @@
 	<tr>
 	<td valign="top" width="48%">
 		<ctrl:list 
-			id="bdeList" 
+			id="bdeList"
 			property="bdeList" 
-			title="admin.showSummary.bde"  
+			title="admin.showBdeSummary.users"  
 			rows="5"
 			width="100%"
 			>
