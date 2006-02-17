@@ -15,7 +15,6 @@ import view.common.WoopsCCAction;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;
-import business.breakdownelement.UserBDE;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
