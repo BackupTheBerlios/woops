@@ -7,6 +7,7 @@
 <%@ page import="org.apache.struts.util.MessageResources" %>
 
 <bean:define id="confirmMessageDeleteUser" value="<%=MessageResources.getMessageResources("ApplicationResources").getMessage("table.field.listUsers.deleteConfirmation")%>"/>
+<bean:define id="confirmMessageDeleteBde" value="<%=MessageResources.getMessageResources("ApplicationResources").getMessage("table.field.listBreakDownElements.deleteConfirmation")%>"/>
 
 <html:form action="admin.do">	
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -56,7 +57,7 @@
 
 			<ctrl:columndelete 
 				title="table.field.listBreakDownElements.delete"
-				onclick="return confirm('${confirmMessage}');"
+				onclick="return confirm('${confirmMessageDeleteBde}');"
 				/>
 	</ctrl:list>
 <br>
