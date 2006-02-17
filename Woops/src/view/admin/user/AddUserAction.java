@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionForward;
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
 import business.hibernate.exception.DoublonException;
+import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;

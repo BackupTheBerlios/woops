@@ -11,13 +11,13 @@ import javax.servlet.ServletException;
 import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
-import view.admin.breakdownelement.BreakDownElementItem;
-import view.admin.breakdownelement.ListBreakDownElementsModel;
+import view.activity.ActivityItem;
 import view.admin.user.ListUsersModel;
 import view.admin.user.UserItem;
 import view.common.WoopsCCAction;
-import business.breakdownelement.BreakdownElement;
-import business.breakdownelement.BreakdownElementManager;
+import business.activity.Activity;
+import business.activity.ActivityManager;
+import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
@@ -223,6 +223,55 @@ public class AdminAction  extends WoopsCCAction {
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER);
 	}
 	
+	public void listUsers_onDelete(ControlActionContext context, String id) throws IOException, ServletException {
+		
+		HashMap usersMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_USERS_MAP);
+
+		User user = (User)usersMap.get(new Integer(Integer.parseInt(id)));
+		
+		User userCourant = null;
+		
+		userCourant = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+		
+		if ( ((Integer) userCourant.getId()).compareTo(new Integer(id)) == 0) {
+			context.addGlobalError("errors.admin.deleteCurrentUser");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
+			return;
+		}
+		
+		Collection dbData = null;
+		try {
+			
+			//Chercher les activites concernant de l'utilisateur a supprimer
+			//Mise a jour le champs de "UserId" a null de ces activites
+			dbData = ActivityManager.getInstance().getActivitiesByUser(new Integer(Integer.parseInt(id)));
+			Iterator iter = dbData.iterator();
+	    	while (iter.hasNext()) {
+	    		Activity activity = (Activity) iter.next();
+	    		activity.setUserId(null);
+	    		ActivityManager.getInstance().update(activity);
+	    	}
+	    	
+	    	UserManager.getInstance().delete(user);
+			context.forwardByName(PresentationConstantes.FORWARD_DELETE_USER);
+			
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (PersistanceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ForeignKeyException e) {
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//deleteUser(context, id);
+		//context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.DELETE_MODE);
+		//context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,id);
+		
+		//context.forwardByName(PresentationConstantes.FORWARD_EDIT);
+	}
+	
 	public void listBreakDownElements_onCreate(ControlActionContext context) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.INSERT_MODE);
 		
@@ -245,5 +294,4 @@ public class AdminAction  extends WoopsCCAction {
 		
 		context.forwardByName(PresentationConstantes.FORWARD_DRILLDOWN_USER);
 	}
-
 }
