@@ -58,7 +58,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 	private void setuserParticipationOptions(ActionContext context) throws PersistanceException {
 		Collection userParticipationMgr = null;
 		Collection userParticipationItems = null;
-		UserItem item = null;
+		SwapUserItem item = null;
 		
 		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
 		
@@ -81,10 +81,9 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     	while (iter.hasNext()) {
     		User user = (User)iter.next();
 			
-			item = new UserItem();
+			item = new SwapUserItem();
 			item.setId(user.getId().toString());
-			item.setFirstName(user.getFirstName());
-			item.setLastName(user.getLastName());
+			item.setFirstandLastName(user.getFirstName()+" "+user.getLastName());
 			item.setRole(user.getRole().getName());
 			if (!user.getRole().getCode().equals(PresentationConstantes.ADMIN_ROLE_CODE))
 					userParticipationItems.add(item);
@@ -93,8 +92,8 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		/**
 		 * Convertion la liste d'ActivityItem en tableau
 		 */
-		DisplayObject[] data = new UserItem[userParticipationItems.size()];
-		data =(UserItem[]) userParticipationItems.toArray(data);
+		DisplayObject[] data = new SwapUserItem[userParticipationItems.size()];
+		data =(SwapUserItem[]) userParticipationItems.toArray(data);
 		
 		/**
 		 * Mis ? jour de l'attribut possibleDependancesOptions du Form

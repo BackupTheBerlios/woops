@@ -55,7 +55,7 @@
             <base:options 
             	property="userParticipationOptions"  
             	keyProperty="id" 
-            	labelProperty="firstName"/>
+            	labelProperty="firstandLastName"/>
         
 		</forms:swapselect>
 
