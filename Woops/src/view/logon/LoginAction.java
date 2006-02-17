@@ -1,11 +1,10 @@
 package view.logon;
 
-import java.util.Locale;
-
 import javax.servlet.http.HttpSession;
 
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
+import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
@@ -16,8 +15,8 @@ import com.cc.framework.security.SecurityUtil;
 public class LoginAction extends WoopsCCAction {
 
 	/**
-	 * V?rifie si la classe courant correspond ? l'action 
-	 * permettant ? l'utilisateur de se connecter
+	 * Vérifie si la classe courant correspond à l'action 
+	 * permettant à l'utilisateur de se connecter
 	 * @return <code>true</code> si l'action est la classe LoginAction
 	 */
 	public boolean isLogonAction() {
@@ -39,23 +38,23 @@ public class LoginAction extends WoopsCCAction {
 		    if (!context.hasErrors()) {
 				
 				try {
-					//Controle de la validit? du couple login/mot de passe
+					//Controle de la validité du couple login/mot de passe
 					User user = UserManager.getInstance().isLoginValid(loginForm.getLogin(),loginForm.getPassword());
 					
 					if (user!=null) {
-						
-
-			//context.session().setAttribute(org.apache.struts.Globals.LOCALE_KEY,new Locale("fr","FR"));						
-						
-						
 						/* On enregistre l'utilisateur comme un objet Principal, 
-						ce qui permettra de controller les acc?s de l'utilisateur en fonction de son r?le */ 
+						ce qui permettra de controller les accès de l'utilisateur en fonction de son rôle */ 
 						SecurityUtil.registerPrincipal(context.session(), user);
+						
+						//TODO projet en dur
+						BreakdownElement bde = new BreakdownElement();
+						bde.setId(new Integer(1));
+						context.session().setAttribute(PresentationConstantes.KEY_BDE, bde);
 						
 						//on met en session l'utilisateur
 						httpSession.setAttribute(PresentationConstantes.KEY_USER,user);
 						
-						// L'utilisateur est redirig? en fonction de son r?le
+						// L'utilisateur est redirigé en fonction de son rôle
 						context.forwardByName(user.getRole().getCode());
 					}
 					else {
@@ -72,7 +71,7 @@ public class LoginAction extends WoopsCCAction {
 	        }
 		}
 		else {
-			/* L'utilisateur est d?j? connect? */
+			/* L'utilisateur est déjà connecté */
 			User user = (User) httpSession.getAttribute(PresentationConstantes.KEY_USER);
 			context.forwardByName(user.getRole().getCode());
         }
