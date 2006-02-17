@@ -10,6 +10,8 @@ public class AddBreakdownElementForm extends ActionForm{
 	private String name ;
 	private String details ;
 	private String kindId ;
+	private String bkId;
+	private String mode ;
 	
 	private SimpleListControl kindOptions = new SimpleListControl ();
 	
@@ -76,6 +78,22 @@ public class AddBreakdownElementForm extends ActionForm{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getBkId() {
+		return bkId;
+	}
+
+	public void setBkId(String bkId) {
+		this.bkId = bkId;
+	}
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
 	}
 	
 	

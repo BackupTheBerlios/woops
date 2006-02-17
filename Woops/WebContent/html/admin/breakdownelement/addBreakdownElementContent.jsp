@@ -69,5 +69,8 @@
         </forms:buttonsection>
     
 	</forms:form>
+	
+	<html:hidden property="mode"/>
+	<html:hidden property="bkId"/>
 	    
 </html:form>

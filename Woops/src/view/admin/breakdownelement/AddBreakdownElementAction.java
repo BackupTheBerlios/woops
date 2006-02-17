@@ -2,6 +2,7 @@ package view.admin.breakdownelement;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import view.common.WoopsCCAction;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;
+import business.breakdownelement.UserBDE;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -26,8 +28,30 @@ import com.cc.framework.common.DisplayObject;
 public class AddBreakdownElementAction extends WoopsCCAction {
 
 	public void doExecute(ActionContext context) throws Exception {
+		AddBreakdownElementForm form = (AddBreakdownElementForm) context.form();
+		String mode = (String)context.request().getAttribute(PresentationConstantes.PARAM_MODE);
+		
+		if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
+			String bkId = (String) context.request().getAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID);
+
+			HashMap bkMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_BDE_MAP);
+
+			BreakdownElement bke = (BreakdownElement)bkMap.get(new Integer(Integer.parseInt(bkId)));
+			
+			form.setBkId(bkId);
+			
+			if (bke!=null) {
+				form.setKindId(bke.getKind().getId().toString()) ;
+				form.setDetails(bke.getDetails());
+				form.setName(bke.getName());
+				form.setPrefix(bke.getPrefix());				
+			}
+		} else {
+			mode = PresentationConstantes.INSERT_MODE;
+		}
 		this.setuserParticipationOptions(context);
-		this.setSelect(context) ;				
+		this.setSelect(context) ;
+		form.setMode(mode);
 		context.forwardToInput();
 	}
 
@@ -173,9 +197,17 @@ public class AddBreakdownElementAction extends WoopsCCAction {
         		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));      		
 
     			try {
-    				
+    				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
+    					Integer id = new Integer (Integer.parseInt((String)madForm.getBkId()));
+    					bke.setId(id);
+    					BreakdownElementManager.getInstance().update(bke);
+    					context.addGlobalMessage("admin.msg.info.breakdownelement.modify");
+    				}
+    				else {
     					BreakdownElementManager.getInstance().insert(bke);
     					context.addGlobalMessage("admin.msg.info.breakdownelement.validate");    					
+    				}
+    					
     			}
     			catch (PersistanceException p)
     			{
@@ -203,13 +235,14 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 //            		User user;
 //            		for (int i=0; i<users.length;i++) {
 //            			if (users[i]!= "") {
-//                			userBde = new UserBDE();
+//            				bke.setId(new Integer(1));	
+//            				userBde = new UserBDE();
 //                			user = new User();
 //                			user.setId(new Integer(Integer.parseInt(users[i])));
 //                			userBde.setBde(bke);
 //                			userBde.setUser(user);
 //                    		try {
-//        						UserBDEManager.getInstance().insert(userBde);
+//        						BreakdownElementManager.getInstance().insert(userBde);
 //        					} catch (PersistanceException e) {
 //        						// TODO Auto-generated catch block
 //        						e.printStackTrace();
