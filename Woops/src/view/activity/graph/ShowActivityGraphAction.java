@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
 import org.apache.struts.util.MessageResources;
 
 import view.PresentationConstantes;
@@ -14,6 +13,7 @@ import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
+import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
@@ -23,11 +23,9 @@ import com.cc.framework.adapter.struts.ActionContext;
 
 /**
  * @author Simon REGGIANI
- * ShowActivityGraphAction : permet de voir le graphe des activit?s du projet
+ * ShowActivityGraphAction : permet de voir le graphe des activités du projet
  */
 public class ShowActivityGraphAction extends WoopsCCAction {
-	private static Logger logger = Logger.getLogger(ShowActivityGraphAction.class);    
-
 	/**
 	 * Constructeur vide
 	 *
@@ -48,6 +46,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 		
 		//R?cup?ration de l'identifiant du participant connect?
     	User sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+    	BreakdownElement sessionBDE = (BreakdownElement) context.session().getAttribute(PresentationConstantes.KEY_BDE);
     	
 		
 		try {
@@ -56,8 +55,8 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			gv.addln(gv.start_graph());
             
             UserManager userManager = UserManager.getInstance();
-            
-            ArrayList listUsers = (ArrayList)userManager.getUsersByProject(new Integer(1));
+            //TODO projets
+            ArrayList listUsers = null;//(ArrayList)userManager.getUsersByBDE((Integer)sessionBDE.getId());
             Iterator iterUsers = listUsers.iterator();
             int i = 0;
             while(iterUsers.hasNext()) {
@@ -72,7 +71,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             	gv.addln("\t\tlabel = \""+user.getFirstName()+" "+user.getLastName()+"\";");
             	
 				ActivityManager activityManager = ActivityManager.getInstance();
-				ArrayList listActivities = (ArrayList) activityManager.getAllActivitiesByUser((Integer)user.getId());
+				ArrayList listActivities = (ArrayList) activityManager.getAllActivitiesByUser((Integer)user.getId(), (Integer)sessionBDE.getId());
 				Iterator iterActivities = listActivities.iterator();
 				while(iterActivities.hasNext()){
 					Activity act = (Activity)iterActivities.next();
@@ -114,7 +113,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			
 			
 			String graphRealPath = getServlet().getServletContext().getRealPath("/") + "graph\\";
-			//TODO g?rer les s?parateurs selon l'OS ( windows / unix )
+			//TODO gérer les séparateurs selon l'OS ( windows / unix )
 			
 			GraphViz.setDOT(graphRealPath+"dot.exe");
 			GraphViz.setTEMP_DIR(graphRealPath);
