@@ -1,24 +1,23 @@
 package view.admin.breakdownelement;
 
-import com.cc.framework.common.DisplayObject;
-
-import view.admin.user.UserItem;
 import view.common.WoopsListDataModel;
+
+import com.cc.framework.common.DisplayObject;
 
 public class ListKindModel extends WoopsListDataModel {
 
 	
 	/**
-	 * Constructeur par défaut
+	 * Constructeur par d?faut
 	 */
 	public ListKindModel() {
 		super();
 	}
 	
 	/**
-	 * Constructeur permettant d'initialiser la liste d'activités
-	 * pour le contrôleur c'est à dire les lignes de la liste qui 
-	 * sera affichée au participant
+	 * Constructeur permettant d'initialiser la liste d'activit?s
+	 * pour le contr?leur c'est ? dire les lignes de la liste qui 
+	 * sera affich?e au participant
 	 */
 	public ListKindModel(DisplayObject[] elements) {
 		super(elements);

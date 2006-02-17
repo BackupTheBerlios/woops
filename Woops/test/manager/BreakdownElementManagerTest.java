@@ -3,7 +3,6 @@ package manager;
 import java.util.ArrayList;
 
 import view.PresentationConstantes;
-
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;

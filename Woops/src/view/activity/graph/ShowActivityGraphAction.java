@@ -4,14 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServlet;
-
 import org.apache.log4j.Logger;
 import org.apache.struts.util.MessageResources;
 
 import view.PresentationConstantes;
-import view.activity.performing.ListActivitiesAction;
 import view.common.WoopsCCAction;
 import business.BusinessConstantes;
 import business.activity.Activity;
@@ -27,7 +23,7 @@ import com.cc.framework.adapter.struts.ActionContext;
 
 /**
  * @author Simon REGGIANI
- * ShowActivityGraphAction : permet de voir le graphe des activités du projet
+ * ShowActivityGraphAction : permet de voir le graphe des activit?s du projet
  */
 public class ShowActivityGraphAction extends WoopsCCAction {
 	private static Logger logger = Logger.getLogger(ShowActivityGraphAction.class);    
@@ -118,7 +114,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			
 			
 			String graphRealPath = getServlet().getServletContext().getRealPath("/") + "graph\\";
-			//TODO gérer les séparateurs selon l'OS ( windows / unix )
+			//TODO g?rer les s?parateurs selon l'OS ( windows / unix )
 			
 			GraphViz.setDOT(graphRealPath+"dot.exe");
 			GraphViz.setTEMP_DIR(graphRealPath);

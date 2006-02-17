@@ -2,41 +2,26 @@ package view.admin.breakdownelement;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.struts.action.ActionForward;
-import org.apache.struts.util.MessageResources;
 
-import business.activity.Activity;
-import business.activity.ActivityManager;
+import view.PresentationConstantes;
+import view.admin.user.ListUsersModel;
+import view.admin.user.UserItem;
+import view.common.WoopsCCAction;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;
-import business.breakdownelement.UserBDE;
-import business.breakdownelement.UserBDEManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
-import business.user.UserRole;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
-import com.cc.framework.ui.model.ListDataModel;
-
-import view.PresentationConstantes;
-import view.activity.ActivityItem;
-import view.activity.manage.ManageActivityDependancesForm;
-import view.activity.performing.ListActivitiesModel;
-import view.admin.user.AddUserForm;
-import view.admin.user.ListRoleModel;
-import view.admin.user.ListUsersModel;
-import view.admin.user.RoleItem;
-import view.admin.user.UserItem;
-import view.common.WoopsCCAction;
 
 public class AddBreakdownElementAction extends WoopsCCAction {
 
@@ -176,9 +161,13 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     		if (!context.hasErrors()) {
     			retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
         		String prefix = madForm.getPrefix();
+        		String name = madForm.getName();
+        		String details = madForm.getDetails();
         		BreakdownElement bke = new BreakdownElement ();
         		bke.setId(null);
-        		bke.setName(prefix);
+        		bke.setPrefix(prefix);
+        		bke.setName(name);
+        		bke.setDetails(details);
         		bke.setDateCreation(null);
         		bke.setEndDate(null);
         		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));      		

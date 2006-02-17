@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
+import business.security.Roles;
 
 public class UserDAO extends PersistentObjectDAO {
 
@@ -52,9 +53,9 @@ public class UserDAO extends PersistentObjectDAO {
 	 * @throws PersistanceException 
 	 */
 	public Collection getUsersByProject(Integer projectId) throws PersistanceException {
-		StringBuffer req = new StringBuffer("from User as u ");
-		// TODO Ajouter la clause where et filtrer sur le projet
-		req.append("where u.role.name = 'developer'");
+		StringBuffer req = new StringBuffer("from User as u, UserBDE as ubde ");
+		req.append("where ubde.project.id = "+projectId);
+		req.append("where u.role.name <> '"+Roles.ADMINISTRATOR_ROLE+"'");
 		return executeQuery(req.toString());
 	}
 	

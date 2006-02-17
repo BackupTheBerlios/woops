@@ -21,16 +21,22 @@
 			<ctrl:columntext 
 				title="table.field.listBreakDownElements.prefix"
 				property="prefix" 
-				width="350"
+				width="20"
 				sortable="true"/>
-	
-				<ctrl:columntext 
+			
+			<ctrl:columntext 
+				title="table.field.listBreakDownElements.name"
+				property="name" 
+				width="100"
+				sortable="true"/>
+				
+			<ctrl:columntext 
 				title="table.field.listBreakDownElements.startDate"
 				property="startDate"
 				width="150"
 				sortable="true"/>
 				
-				<ctrl:columntext 
+			<ctrl:columntext 
 				title="table.field.listBreakDownElements.endDate"
 				property="endDate"
 				width="150"

@@ -2,15 +2,11 @@ package view.admin.summary;
 
 import java.util.HashMap;
 
-import business.activity.Activity;
-import business.format.Formatage;
-import business.hibernate.exception.PersistanceException;
+import view.PresentationConstantes;
+import view.common.WoopsCCAction;
 import business.user.User;
 
 import com.cc.framework.adapter.struts.ActionContext;
-
-import view.PresentationConstantes;
-import view.common.WoopsCCAction;
 
 public class ShowUserSummaryAction extends WoopsCCAction {
 

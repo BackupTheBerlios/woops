@@ -14,9 +14,22 @@
     	width="600">
     	
     	<forms:text 
-        	label="admin.addBreakdownElement.name"
+        	label="admin.addBreakdownElement.prefix"
         	property="prefix"
+        	required="false"/>
+        	
+        <forms:text 
+        	label="admin.addBreakdownElement.name"
+        	property="name"
         	required="true"/>
+        	
+        <forms:textarea 
+        	label="admin.addBreakdownElement.details"
+        	property="details"
+        	required="false"
+        	cols="64"
+            rows="3"
+            />
         	
         <forms:select
         	label="admin.addBreakdownElement.kind"
