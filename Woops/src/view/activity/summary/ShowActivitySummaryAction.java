@@ -46,7 +46,11 @@ public class ShowActivitySummaryAction extends WoopsCCAction {
 		HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 		
 		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
-
+		
+		if (activityId == null) {
+			activityId = new Integer(context.request().getParameter(PresentationConstantes.PARAM_ACTIVITY_ID));
+		}
+		
 		Activity activity = (Activity)activitiesMap.get(activityId);
 		
 		form.setActivityId(activityId.toString());
