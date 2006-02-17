@@ -53,13 +53,13 @@
 		<ctrl:list 
 			id="bdeList" 
 			property="bdeList" 
-			title="form.table.predecessors.title"  
+			title="admin.showSummary.bde"  
 			rows="5"
 			width="100%"
 			>
 			
 			<ctrl:columntext
-				title="form.table.predecessors.field.predecessor"
+				title="admin.showSummary.tableBde"
 				property="bde"
 				/>
 		</ctrl:list>

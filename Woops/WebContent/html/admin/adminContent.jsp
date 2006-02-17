@@ -17,7 +17,7 @@
 		property="listBreakDownElements" 
 		title="table.title.listBreakDownElements"
 		width="650" 
-		rows="3" 
+		rows="10" 
 		refreshButton="false" 
 		createButton="true"
 		>
@@ -65,7 +65,7 @@
 		property="listUsers" 
 		title="table.title.listUsers"
 		width="650" 
-		rows="5" 
+		rows="10" 
 		refreshButton="false" 
 		createButton="true"
 		>

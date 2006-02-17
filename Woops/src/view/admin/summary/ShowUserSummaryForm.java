@@ -5,13 +5,16 @@ import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class ShowUserSummaryForm extends FWActionForm{
+	
+	
+	
 	private String userID ;
 	private String firstName ;
 	private String lastName ;
 	private String login ;
 	private String role ;
 	
-	private SimpleListControl	bdeList;	/** liste des bde d'un user */
+	private SimpleListControl	bdeList = new SimpleListControl () ;	/** liste des bde d'un user */
 	
 	public String getFirstName() {
 		return firstName;
