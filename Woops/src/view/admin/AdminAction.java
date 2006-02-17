@@ -82,7 +82,7 @@ public class AdminAction  extends WoopsCCAction {
     		breakDownElementItem.setDetails(breakdownElement.getDetails());
     		breakDownElementItem.setStartDate(breakdownElement.getStartDate());
     		breakDownElementItem.setEndDate(breakdownElement.getEndDate());
-    		breakDownElementItem.setKind(breakdownElement.getKind());
+    		breakDownElementItem.setKind(breakdownElement.getKind().getName());
     		
     		listBreakDownElementsItems.add(breakDownElementItem);
 			// Construction de la hash map stockant la liste des BreakDownElements

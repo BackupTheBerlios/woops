@@ -11,10 +11,9 @@ public class BreakDownElementItem implements DisplayObject
 	private	Integer	id;
 	private String prefix;
 	private String name;
-	private String details;
 	private Date startDate;
 	private Date endDate;
-	private BreakdownElementKind kind;
+	private String kind;
 	
 	public BreakDownElementItem()
 	{
@@ -37,14 +36,6 @@ public class BreakDownElementItem implements DisplayObject
 		this.id = id;
 	}
 
-	public BreakdownElementKind getKind() {
-		return kind;
-	}
-
-	public void setKind(BreakdownElementKind kind) {
-		this.kind = kind;
-	}
-
 	public String getPrefix() {
 		return prefix;
 	}
@@ -61,12 +52,12 @@ public class BreakDownElementItem implements DisplayObject
 		this.startDate = startDate;
 	}
 
-	public String getDetails() {
-		return details;
+	public String getKind() {
+		return kind;
 	}
 
-	public void setDetails(String details) {
-		this.details = details;
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	public String getName() {
@@ -76,6 +67,4 @@ public class BreakDownElementItem implements DisplayObject
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 }
