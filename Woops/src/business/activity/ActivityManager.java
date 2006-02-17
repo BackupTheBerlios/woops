@@ -17,16 +17,16 @@ import business.hibernate.exception.PersistanceException;
 
 public class ActivityManager extends PersistentObjectManager {
 	
-	/** Instance permettant d'assurer la persistance d'une activit? */
+	/** Instance permettant d'assurer la persistance d'une activite */
 	private ActivityDAO activityDAO = new ActivityDAO();
 	
-	/** Instance priv?e de la classe */
+	/** Instance privee de la classe */
 	private static ActivityManager activityManager;
 
 	
 
 	/**
-	 * Impl?mentation du pattern Singleton : constructeur priv?
+	 * Implementation du pattern Singleton : constructeur prive
 	 */
 	private ActivityManager() {
 	}
@@ -44,85 +44,81 @@ public class ActivityManager extends PersistentObjectManager {
 		return activityManager;
 	}
 
-	
+	/**
+	 * Recuperation d'une activite
+	 * @param activityId : identififiant de l'activite 
+	 * @return : activite correspondante
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
+	 */
 	public Activity getActivityById(Integer activityId)
 			throws PersistanceException {
 		return activityDAO.getActivityById(activityId);
 	}
 	
 	/**
-	 * R?cup?ration des activit?s pour lesquelles le participant a la responsabilit?
+	 * R?cup?ration des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
-	 * @return : Liste des activit?s restantes du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 * @param bdeId : identifiant de l'entite
+	 * @return : Liste des activites restantes du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
 	 */
-	public Collection getAllActivitiesByUser(Integer userId)
+	public Collection getAllActivitiesByUser(Integer userId, Integer bdeId)
 			throws PersistanceException {
 		String[] states = new String[3];
 		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
 		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
 		states[2] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
-		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states);
+		Collection list = activityDAO.getActivitiesByUserWithStates(userId, bdeId, states);
 		return list;
 	}
 	
 	/**
-	 * R?cup?ration des activit?s restant à réaliser pour lesquelles le participant a la responsabilit?
+	 * Recuperation des activites restant à realiser pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
-	 * @return : Liste des activit?s restantes du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 * @param bdeId : identifiant de l'entite
+	 * @return : Liste des activites restantes du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getRemainingActivitiesByUser(Integer userId)
+	public Collection getRemainingActivitiesByUser(Integer userId, Integer bdeId)
 			throws PersistanceException {
 		String[] states = new String[2];
 		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
 		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
-		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states);
+		Collection list = activityDAO.getActivitiesByUserWithStates(userId, bdeId, states);
 		return list;
 	}
 	
 	
 	/**
-	 * R?cup?ration des activit?s que le participant a termin?es
+	 * Recuperation des activites que le participant a terminees
 	 * @param userId : identifiant du participant
-	 * @return : historique des activit?s du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 * @param bdeId : identifiant de l'entite
+	 * @return : historique des activites du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getActivitiesHistoryByUser(Integer userId)
+	public Collection getActivitiesHistoryByUser(Integer userId, Integer bdeId)
 			throws PersistanceException {
 		String[] states = new String[1];
 		states[0] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
-		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states);
+		Collection list = activityDAO.getActivitiesByUserWithStates(userId, bdeId, states);
 		return list;
 	}
 	
 	/**
-	 * retourne les activities sans user
-	 * @return
-	 * @throws PersistanceException
+	 * Recuperation des activites libres sur une entite
+	 * @param bdeId : identifiant de l'entite
+	 * @return : liste des activites libres
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getFreeActivities() throws PersistanceException {
-		Collection list = activityDAO.getFreeActivities();
-		return list;
+	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
+		return activityDAO.getFreeActivities(bdeId);
 	}
 	
 	/**
-	 * R?cup?ration des activit?s d'un projet
-	 * @param projectId : identifiant du projet
-	 * @return : Liste des activit?s du projet
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
-	 */
-	public Collection getActivitiesByProject(Integer projectId) throws PersistanceException {
-		Collection list = activityDAO.getActivitiesByProject(projectId);
-		return list;
-	}
-	
-	
-	/**
-	 * 
-	 * @param activityId : l'activit? dont on veut connaitre des d?pendances possibles
-	 * @return la liste des activit? dont peut d?pendre l'activit? pass?e en parametre
-	 * @throws PersistanceException
+	 * Recuperation des activites pouvant etre predecesseurs de l'activite passee en parametre
+	 * @param activityId : l'activite dont on veut connaitre des dependances possibles
+	 * @return : liste des activites dont peut dependre l'activite passee en parametre
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getPossibleActivityPredecessors(Integer activityId)
 			throws PersistanceException {
@@ -131,10 +127,10 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * 
-	 * @param activityId : l'activit? dont on veut connaitre ses pr?d?cesseurs
-	 * @return la liste des activit? dont depend l'activit? pass?e en parametre
-	 * @throws PersistanceException
+	 * Recuperation des predecesseurs d'une activite
+	 * @param activityId : l'activite dont on veut connaitre ses predecesseurs
+	 * @return : liste des activite dont depend l'activite passee en parametre
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getPredecessors(Integer activityId) 
 			throws PersistanceException {
@@ -152,10 +148,10 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * @author Benjamin TALOU
-	 * @param activityId : l'activit? dont on veut connaitre ses pr?d?cesseurs
-	 * @return la liste des activit? dont depend l'activit? pass?e en parametre
-	 * @throws PersistanceException
+	 * Recuperation des successeurs d'une activite
+	 * @param activityId : l'activite dont on veut connaitre ses successeurs
+	 * @return : liste des activites dont depend l'activite passee en parametre
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getSuccessors(Integer activityId) 
 			throws PersistanceException {
@@ -173,10 +169,10 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * 
-	 * @param activityId : l'activit? dont on veut connaitre ses d?pendances entrantes
-	 * @return la liste des s?quence d'activit? dont l'activit? pass?e en parametre et le successeur
-	 * @throws PersistanceException
+	 * Recuperation des dependances pour lesquelles l'activite passee en parametre st successeurs
+	 * @param activityId : l'activite dont on veut connaitre ses dependances entrantes
+	 * @return : liste des des dependances pour lesquelles l'activite passee en parametre est successeur
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getActivitySequencesPredecessors(Integer activityId) 
 			throws PersistanceException {
@@ -185,16 +181,21 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * 
-	 * @param activityId : l'activit? dont on veut connaitre ses d?pendances sortantes
-	 * @return la liste des s?quence d'activit? dont l'activit? pass?e en parametre et le predecesseur
-	 * @throws PersistanceException
+	 * Recuperation des dependances pour lesquelles l'activite passee en parametre est predecesseur
+	 * @param activityId : l'activite dont on veut connaitre ses dependances sortantes
+	 * @return : liste des des dependances pour lesquelles l'activite passee en parametre est predecesseur
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getActivitySequencesSuccessors(Integer activityId) 
 			throws PersistanceException {
 		Collection list = activityDAO.getActivitySequencesSuccessors(activityId);
 		return list;
 	}
+
+	
+	
+	
+	
 	
 	/**
 	 * 
@@ -340,14 +341,14 @@ public class ActivityManager extends PersistentObjectManager {
 	 * @return retourne ? l'utilisateur, l'ensemble de ses activit?s dont il peut changer l'?tat
 	 * @throws PersistanceException 
 	 */
-	public Collection activitiesChangeState(Integer userId) throws PersistanceException {
+	public Collection activitiesChangeState(Integer userId, Integer bdeId) throws PersistanceException {
 		Activity act;
 		
 		// Liste des activites pouvant changer d'?tat
 		Collection listActivitiesChangeState = new ArrayList();
 		
 		// Recuperation des activites de l'utilisateur
-		Collection listActivities = getRemainingActivitiesByUser(userId);
+		Collection listActivities = getRemainingActivitiesByUser(userId, bdeId);
 		
 		// Pour chacune d'entre elles, on v?rifie si elle peut changer d'etat
 		Iterator iter = listActivities.iterator();

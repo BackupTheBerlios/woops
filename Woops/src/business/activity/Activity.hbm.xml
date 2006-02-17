@@ -58,6 +58,13 @@
 			>
 			<column name="state" />
 		</many-to-one>
+		
+		 <property
+			column="bde"
+			name="bdeId"
+			not-null="false"
+			type="integer"
+		 />
 
 	</class>	
 </hibernate-mapping>

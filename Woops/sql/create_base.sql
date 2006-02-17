@@ -37,11 +37,11 @@ CREATE TABLE BreakdownElementKind (
 
 CREATE TABLE BreakdownElement (
        id INT NOT NULL AUTO_INCREMENT
-     , prefix VARCHAR(15)
+     , prefix VARCHAR(15) NOT NULL
      , name VARCHAR(50) NOT NULL
      , details TEXT
-     , startDate TIMESTAMP
-     , endDate TIMESTAMP
+     , startDate DATETIME
+     , endDate DATETIME
      , kind INT NOT NULL
      , UNIQUE UQ_BreakdownElement_name (name)
      , PRIMARY KEY (id)
@@ -83,13 +83,16 @@ CREATE TABLE Activity (
      , endDate DATETIME
      , user INT
      , state VARCHAR(50) NOT NULL
+     , bde INT NOT NULL
      , PRIMARY KEY (id)
      , INDEX (user)
-     , UNIQUE KEY `name` (`name`)
+     , UNIQUE UQ_Activity_bde_name (bde, name)
      , CONSTRAINT FK_Activity_user FOREIGN KEY (user)
                   REFERENCES User (id)
      , CONSTRAINT FK_Activity_state FOREIGN KEY (state)
-                  REFERENCES ActivityState (name)            
+                  REFERENCES ActivityState (name)
+     , CONSTRAINT FK_Activity_bde FOREIGN KEY (bde)
+                  REFERENCES BreakdownElement (id)              
 )ENGINE=InnoDB;
 
 
@@ -123,5 +126,6 @@ INSERT INTO ActivityState(name) VALUES ('inProgress');
 INSERT INTO ActivityState(name) VALUES ('finished');
 INSERT INTO UserRole VALUES ('admin', 'administrator');
 INSERT INTO UserRole VALUES ('dev', 'developer');
-INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('1', 'projet');
+INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('1', 'project');
 INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('2', 'iteration');
+INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('3', 'phase');

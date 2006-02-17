@@ -8,11 +8,12 @@ import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
 public class ActivityDAO extends PersistentObjectDAO {
+	
 	/**
-	 * 
-	 * @param activityId : l'id de l'activit? que l'on veut r?cup?rer
-	 * @return l'activit?
-	 * @throws PersistanceException
+	 * Recuperation d'une activite
+	 * @param activityId : identififiant de l'activite 
+	 * @return : activite correspondante
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
 	 */
 	public Activity getActivityById(Integer activityId) throws PersistanceException {
 		List res = executeQuery("FROM Activity as act WHERE act.id = "+activityId);
@@ -21,106 +22,112 @@ public class ActivityDAO extends PersistentObjectDAO {
 	
 	
 	/**
-	 * R?cup?ration des activit?s pour lesquelles le participant a la responsabilit?
+	 * Recuperation des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
-	 * @return : Liste des activit?s du particpant
+	 * @param bdeId : identifiant de l'entite
+	 * @param states : états des activités
+	 * @return : Liste des activites du particpant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
-	public Collection getActivitiesByUserWithStates(Integer userId, String[] states) throws PersistanceException {
-		// Constitution de la requ?te en tenant compte du participant pass? en param?tre 
+	public Collection getActivitiesByUserWithStates(Integer userId, Integer bdeId, String[] states) throws PersistanceException {
+		// Constitution de la requete en tenant compte du participant et de l'entite passes en parametre 
 		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act WHERE act.userId = " + userId + "  AND ( ");
+		query.append("FROM Activity as act WHERE act.userId = " + userId + " AND act.bdeId = " + bdeId);  
 		
-		// S?lection des ?tats ? prendre en compte
-		for(int i = 0; i < states.length; i++) {
-			query.append("act.state.name='"+ states[i] +"'");
-			if (i != states.length-1) query.append(" OR ");
+		//On précise les etats a prendre en compte
+		if (states.length != 0) {
+			query.append(" AND ( ");
+		
+			// Selection des etats a prendre en compte
+			for(int i = 0; i < states.length; i++) {
+				query.append("act.state.name='"+ states[i] +"'");
+				if (i != states.length - 1) query.append(" OR ");
+			}
+		
+			query.append(" )");
 		}
 		
-		query.append(" )");
-		
-		// R?cup?ration des donn?es
-		List listActivities = executeQuery(query.toString());
-		return listActivities;
+		// Recuperation des donnees
+		return executeQuery(query.toString());
 	}
 	
 	
 	/**
-	 * R?cup?ration des activit?s d'un projet
-	 * @param userId : identifiant du projet
-	 * @return : Liste des activit?s du projet
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 * Recuperation des activites d'une entite
+	 * @param bdeId : identifiant de l'entite
+	 * @return : Liste des activites correspondant au critere de recherche
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getActivitiesByProject(Integer projectId) throws PersistanceException {
-		// Constitution de la requ?te  
-		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity");
-		
-		// R?cup?ration des donn?es
-		List listActivities = executeQuery(query.toString());
-		return listActivities;
+	public Collection getActivitiesByBDE(Integer bdeId) throws PersistanceException {
+		return executeQuery("FROM Activity WHERE bdeId = " + bdeId);
 	}
 	
+	
 	/**
-	 * retourne les activities sans user
-	 * @return
-	 * @throws PersistanceException
+	 * Recuperation des activites libres sur une entite
+	 * @param bdeId : identifiant de l'entite
+	 * @return : liste des activites libres
+	 * @throws PersistanceException 
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getFreeActivities() throws PersistanceException {
-	
+	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
 		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act WHERE act.userId is null");
+		query.append("FROM Activity as act WHERE act.userId is null AND act.bdeId = " + bdeId);
 		
-		// R?cup?ration des donn?es
+		// Recuperation des donnees
 		List listActivities = executeQuery(query.toString());
 		return listActivities;
 	}
 	
+	
 	/**
-	 * @param activityId : l'activit? dont on veut connaitre des pr?d?cesseurs possibles
-	 * @return la liste des activit?s dont peut d?pendre l'activit? pass?e en parametre
-	 * @throws PersistanceException
+	 * Recuperation des activites pouvant etre predecesseurs de l'activite passee en parametre
+	 * @param activityId : l'activite dont on veut connaitre des dependances possibles
+	 * @return : liste des activites dont peut dependre l'activite passee en parametre
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getPossiblePredecessors(Integer activityId) 
 			throws PersistanceException {
 		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act WHERE act.id <> "+activityId);
-		query.append(" AND act.state.name <> '"+BusinessConstantes.ACTIVITY_STATE_FINISHED+"'");
+		
+		query.append("FROM Activity as act WHERE act.id <> " + activityId);
+		query.append(" AND act.state.name <> '" + BusinessConstantes.ACTIVITY_STATE_FINISHED + "'");
+		
 		return executeQuery(query.toString());
 	}
 	
 	
 	/**
-	 * @param activityId : l'activit? dont on veut connaitre ses d?pendances entrantes
-	 * @return la liste des s?quence d'activit? dont l'activit? pass?e en parametre et le successeur
-	 * @throws PersistanceException
+	 * Recuperation des dependances pour lesquelles l'activite passee en parametre st successeurs
+	 * @param activityId : l'activite dont on veut connaitre ses dependances entrantes
+	 * @return : liste des des dependances pour lesquelles l'activite passee en parametre est successeur
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getActivitySequencesPredecessors(Integer activityId) 
 		throws PersistanceException {
-		
 		StringBuffer query = new StringBuffer();
-		query.append("FROM ActivitySequence as actSeq "); 
-		query.append("WHERE actSeq.successor.id = "+activityId);
 		
-		return executeQuery(query.toString());
-			
-	}
-	
-	/**
-	 * @param activityId : l'activit? dont on veut connaitre ses d?pendances sortantes
-	 * @return la liste des s?quence d'activit? dont l'activit? pass?e en parametre et le predecesseur
-	 * @throws PersistanceException
-	 */
-	public Collection getActivitySequencesSuccessors(Integer activityId) 
-		throws PersistanceException {
-		
-		StringBuffer query = new StringBuffer();
 		query.append("FROM ActivitySequence as actSeq "); 
-		query.append("WHERE actSeq.predecessor.id = "+activityId);
+		query.append("WHERE actSeq.successor.id = " + activityId);
 		
 		return executeQuery(query.toString());
 			
 	}
 	
 
+	/**
+	 * Recuperation des dependances pour lesquelles l'activite passee en parametre est predecesseur
+	 * @param activityId : l'activite dont on veut connaitre ses dependances sortantes
+	 * @return : liste des des dependances pour lesquelles l'activite passee en parametre est predecesseur
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 */
+	public Collection getActivitySequencesSuccessors(Integer activityId) 
+		throws PersistanceException {
+		StringBuffer query = new StringBuffer();
+		
+		query.append("FROM ActivitySequence as actSeq "); 
+		query.append("WHERE actSeq.predecessor.id = " + activityId);
+		
+		return executeQuery(query.toString());
+	}
 }

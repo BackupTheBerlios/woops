@@ -10,13 +10,14 @@ import business.hibernate.HistorizedObject;
 
 public class Activity extends HistorizedObject{	
 	private static final long serialVersionUID = -5271834569122025630L; /** Generated Serial ID */
-	private	Integer			id; /** identifiant de l'activit? */
-	private String 			name; /** nom de l'activit? */
-	private	String			details; /** description de l'activit? */
-	private Date			startDate; /** date ? laquelle le participant ? commencer la r?alisation de l'activit? */
-	private Date			endDate; /** date ? laquelle le participant ? terminer la r?alisation de l'activit? */
-	private Integer 		userId; /** Id du participant responsable de la r?alisation de l'activit? */
-	private IActivityState	state; /** Etat actuel de l'activit?
+	private	Integer			id; /** identifiant de l'activite */
+	private String 			name; /** nom de l'activite */
+	private	String			details; /** description de l'activite */
+	private Date			startDate; /** date a laquelle le participant a commence la realisation de l'activite */
+	private Date			endDate; /** date a laquelle le participant a terminer la realisation de l'activite */
+	private Integer 		userId; /** Id du participant responsable de la realisation de l'activite */
+	private IActivityState	state; /** Etat actuel de l'activite */
+	private Integer			bdeId; /** Entite a laquelle appartient l'activite */
 	
 	/**
 	 * Liste des activit?s dont d?pend l'activit?
@@ -186,5 +187,13 @@ public class Activity extends HistorizedObject{
 		ok &= ((Activity)obj).getState().equals(state);
 			
 		return ok;
+	}
+
+	public Integer getBdeId() {
+		return bdeId;
+	}
+
+	public void setBdeId(Integer bdeId) {
+		this.bdeId = bdeId;
 	}
 }
