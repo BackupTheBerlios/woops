@@ -222,6 +222,24 @@ public class AdminAction  extends WoopsCCAction {
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN);
 	}
+
+	public void listBreakDownElements_onDelete(ControlActionContext context, String id) throws IOException, ServletException {
+		HashMap bdesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_BDE_MAP);
+
+		BreakdownElement bde = (BreakdownElement)bdesMap.get(new Integer(Integer.parseInt(id)));
+		
+		try {
+			BreakdownElementManager.getInstance().delete(bde);
+			context.forwardByName(PresentationConstantes.FORWARD_DELETE_BREAKDOWN);
+		} catch (PersistanceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ForeignKeyException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void listUsers_onEdit(ControlActionContext context, String id) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
 		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,id);
