@@ -44,7 +44,7 @@ public interface PresentationConstantes {
 	public static final String STYLE_FOND1="fond1";
 	public static final String STYLE_FOND2="fond2";
 	
-	//constantes de cl?s en session
+	//constantes de cles en session
 	public static final String KEY_FORM="FORM";
 	public static final String KEY_USER="USER";
 	public static final String KEY_OLD_DEPENDANCES_KEYS="OLD_DEPENDANCES_KEYS";
@@ -54,11 +54,12 @@ public interface PresentationConstantes {
 	public static final String KEY_ACTIVITY="ACTIVITY";
 	public static final String KEY_ACTIVITIES_MAP="ACTIVITIES_MAP";
 	public static final String KEY_ROLE_OPTIONS ="ROLE_OPTIONS";
+	public static final String KEY_USER_BDES = "USER_BDES";
 	
 	public static final String LIBELLE_OUI="O";
 	public static final String LIBELLE_NON="N";
 	
-	//Constantes permettant de modifier l'?tat d'une activi?
+	//Constantes permettant de modifier l'etat d'une activite
     public static final String ACTIVITY_START = "start";
     public static final String ACTIVITY_FINISH = "finish";
     public static final String ACTIVITY_AFFECT = "affect";
@@ -84,8 +85,8 @@ public interface PresentationConstantes {
 	public static final String TABLE_BREAKDOWN_KIND = "BreakdownElementKind";
 	
 	public static final String KEY_USERS_MAP="USERS_MAP" ;
-	public static final String KEY_BDE_MAP="BDE_MAP" ;
 	
 	// admin
 	public static final String KEY_USER_ID="USER_ID" ;
+
 }
