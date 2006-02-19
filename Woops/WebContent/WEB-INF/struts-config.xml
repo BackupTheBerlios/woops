@@ -250,6 +250,7 @@
 		processorClass="view.common.WoopsRequestProcessor"/>
 
 	<message-resources parameter="ApplicationResources" />
+	<message-resources parameter="com.cc.framework.FrameworkResources"      key="com.cc.framework.message"/>
 
 </struts-config>
 
