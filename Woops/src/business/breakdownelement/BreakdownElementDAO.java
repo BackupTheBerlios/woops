@@ -42,40 +42,44 @@ public class BreakdownElementDAO extends PersistentObjectDAO{
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public Collection getBreakDownElementsByUser(Integer userId) throws PersistanceException {
-		Session session;
+		Session session = null ;
+		Transaction transaction = null;
+		User user = null;
+		
 		try {
 			session = HibernateSessionFactory.currentSession();
 		
-	    Transaction transaction = session.beginTransaction();
+			transaction = session.beginTransaction();
 
-	    User user = (User) session
-	            .createQuery("SELECT u FROM User u left join fetch u.bdes WHERE u.id = :uid")
-	            .setParameter("uid", userId)
-	            .uniqueResult(); // Eager fetch the collection so we can use it detached
+			user = (User) session
+            	.createQuery("SELECT u FROM User u left join fetch u.bdes WHERE u.id = :uid")
+            	.setParameter("uid", userId)
+            	.uniqueResult(); // La collection peut etre utilisee independamment du projet
 
 	    	transaction.commit();
-	    	return user.getBdes();
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			throw new PersistanceException(e.toString());
+
+		} catch (HibernateException he) {
+			throw new PersistanceException(he.getMessage(),he);
+		} finally {
+			try {
+				if (session!=null && session.isOpen()) HibernateSessionFactory.closeSession();				
+			} catch (HibernateException he) {
+				throw new PersistanceException(he.getMessage(),he);
+			}
 		}
-		
+
+		return user.getBdes();
 	}
 	
+	/**
+	 * Affecte des participants à une entite
+	 * @param bde : entite
+	 * @return : identifiant de l'entite
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de l'affectation
+	 */
 	public Serializable affectUsersToBDE(BreakdownElement bde) throws PersistanceException {
-		Session session;
-		try {
-			session = HibernateSessionFactory.currentSession();
+		update(bde);
 		
-			Transaction transaction = session.beginTransaction();
-
-			session.update(bde); // Reattachment of aPerson
-
-			transaction.commit();
-			return (Integer) bde.getId();
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			throw new PersistanceException(e.toString());
-		}
+		return (Integer) bde.getId();
 	}
 }

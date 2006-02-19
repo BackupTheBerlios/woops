@@ -63,8 +63,13 @@ public class BreakdownElementManager extends PersistentObjectManager {
 		return breakdownElementDAO.getBreakDownElementsByUser(userId);
 	}
 	
+	/**
+	 * Affecte des participants à une entite
+	 * @param bde : entite
+	 * @return : identifiant de l'entite
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de l'affectation
+	 */
 	public Serializable affectUsersToBDE(BreakdownElement bde) throws PersistanceException {
-		//TODO dao visibilité
 		return breakdownElementDAO.affectUsersToBDE(bde);
 	}
 }
