@@ -13,7 +13,6 @@ import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
-import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
@@ -44,19 +43,18 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 
 		ShowActivityGraphForm form = (ShowActivityGraphForm) context.form();
 		
-		//R?cup?ration de l'identifiant du participant connect?
+		//Recuperation de l'identifiant du participant connect?
     	User sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-    	BreakdownElement sessionBDE = (BreakdownElement) context.session().getAttribute(PresentationConstantes.KEY_BDE);
     	
-		
 		try {
 			GraphViz gv = new GraphViz();
 			
 			gv.addln(gv.start_graph());
             
             UserManager userManager = UserManager.getInstance();
-            //TODO projets
-            ArrayList listUsers = null;//(ArrayList)userManager.getUsersByBDE((Integer)sessionBDE.getId());
+
+            ArrayList listUsers = (ArrayList)userManager.getUsersByBDE(sessionUser.getDefaultBDEId());
+            
             Iterator iterUsers = listUsers.iterator();
             int i = 0;
             while(iterUsers.hasNext()) {
@@ -71,7 +69,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             	gv.addln("\t\tlabel = \""+user.getFirstName()+" "+user.getLastName()+"\";");
             	
 				ActivityManager activityManager = ActivityManager.getInstance();
-				ArrayList listActivities = (ArrayList) activityManager.getAllActivitiesByUser((Integer)user.getId(), (Integer)sessionBDE.getId());
+				ArrayList listActivities = (ArrayList) activityManager.getAllActivitiesByUser((Integer)user.getId());
 				Iterator iterActivities = listActivities.iterator();
 				while(iterActivities.hasNext()){
 					Activity act = (Activity)iterActivities.next();

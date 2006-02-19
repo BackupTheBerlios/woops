@@ -64,7 +64,6 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 		Collection listActivitiesItems = null;
 		HistorizedActivityItem activityItem = null;
 		User sessionUser = null;
-		BreakdownElement sessionBDE = null;
 		
 		// Initialisation du form si celui-ci est nul
 		if (context.form()==null) {
@@ -76,8 +75,8 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 
     	// R?cup?ration de l'identifiant du participant connecte et de l'entite
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-    	sessionBDE = (BreakdownElement) context.session().getAttribute(PresentationConstantes.KEY_BDE);
-    	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer)sessionUser.getId(), (Integer)sessionBDE.getId());  	
+    	
+    	dbData = ActivityManager.getInstance().getActivitiesHistoryByUser((Integer)sessionUser.getId(), sessionUser.getDefaultBDEId());  	
     	
     	// Constitue une liste d'ActivityItems ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();
@@ -113,7 +112,7 @@ public class HistorizedActivitiesAction extends WoopsCCAction {
 	}
 	
 	/**
-	 * Cette m?thode est appel?e si le participant clique sur l'icone de tri d'une colonne
+	 * Cette methode est appelee si le participant clique sur l'icone de tri d'une colonne
 	 * @param context	contexte d'execution de la servlet
 	 * @param column	colonne ? trier
 	 * @param direction	direction (ASC, DESC)

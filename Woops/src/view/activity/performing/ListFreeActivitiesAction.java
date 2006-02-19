@@ -15,7 +15,6 @@ import view.activity.ActivityItem;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
-import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -54,8 +53,8 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 	}
 	
 	/**
-	 * Cette m?thode constitue la liste ? partir de la BD
-	 * @param contexte	contexte d'execution de la servlet
+	 * Cette methode constitue la liste a partir de la BD
+	 * @param context	contexte d'execution de la servlet
 	 * @throws Exception	indique qu'une erreur s'est produite pendant le traitement
 	 */
 	private void loadList(ActionContext context) throws Exception {
@@ -64,7 +63,7 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 		Collection dbData = null;
 		Collection listActivitiesItems = null;
 		ActivityItem activityItem = null;
-		BreakdownElement sessionBDE = null;
+		User sessionUser = null;
 		
 		// Initialisation du form si celui-ci est nul
 		if (context.form()==null) {
@@ -74,11 +73,11 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
     	ListFreeActivitiesForm listActivitiesForm = (ListFreeActivitiesForm) context.form();
 
-    	// R?cup?ration de l'entite
-    	sessionBDE = (BreakdownElement) context.session().getAttribute(PresentationConstantes.KEY_BDE);
+    	// Recuperation du participant 
+    	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
     	    	
-    	// R?cup?ration de la liste des activit?s
-    	dbData = ActivityManager.getInstance().getFreeActivities((Integer)sessionBDE.getId());  	
+    	// Recuperation de la liste des activites
+    	dbData = ActivityManager.getInstance().getFreeActivities(sessionUser.getDefaultBDEId());  	
 
     	// Constitue une liste d'ActivityItems ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();
