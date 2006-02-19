@@ -85,6 +85,7 @@ public interface PresentationConstantes {
 	public static final String TABLE_BREAKDOWN_KIND = "BreakdownElementKind";
 	
 	public static final String KEY_USERS_MAP="USERS_MAP" ;
+	public static final String KEY_BDE_MAP="BDE_MAP" ;
 	
 	// admin
 	public static final String KEY_USER_ID="USER_ID" ;
