@@ -56,19 +56,18 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * R?cup?ration des activites pour lesquelles le participant a la responsabilite
+	 * Recuperation des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
-	 * @param bdeId : identifiant de l'entite
 	 * @return : Liste des activites restantes du particpant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
 	 */
-	public Collection getAllActivitiesByUser(Integer userId, Integer bdeId)
+	public Collection getAllActivitiesByUser(Integer userId)
 			throws PersistanceException {
 		String[] states = new String[3];
 		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
 		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
 		states[2] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
-		Collection list = activityDAO.getActivitiesByUserWithStates(userId, bdeId, states);
+		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states);
 		return list;
 	}
 	

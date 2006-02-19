@@ -20,6 +20,34 @@ public class ActivityDAO extends PersistentObjectDAO {
 		return (Activity)res.get(0);
 	}
 	
+	/**
+	 * Recuperation des activites pour lesquelles le participant a la responsabilite
+	 * @param userId : identifiant du participant
+	 * @param states : états des activités
+	 * @return : Liste des activites du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 */
+	public Collection getActivitiesByUserWithStates(Integer userId, String[] states) throws PersistanceException {
+		// Constitution de la requete en tenant compte du participant et de l'entite passes en parametre 
+		StringBuffer query = new StringBuffer();
+		query.append("FROM Activity as act WHERE act.userId = " + userId);  
+		
+		//On precise les etats a prendre en compte
+		if (states.length != 0) {
+			query.append(" AND ( ");
+		
+			// Selection des etats a prendre en compte
+			for(int i = 0; i < states.length; i++) {
+				query.append("act.state.name='"+ states[i] +"'");
+				if (i != states.length - 1) query.append(" OR ");
+			}
+		
+			query.append(" )");
+		}
+		
+		// Recuperation des donnees
+		return executeQuery(query.toString());
+	}
 	
 	/**
 	 * Recuperation des activites pour lesquelles le participant a la responsabilite
@@ -34,7 +62,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 		StringBuffer query = new StringBuffer();
 		query.append("FROM Activity as act WHERE act.userId = " + userId + " AND act.bdeId = " + bdeId);  
 		
-		//On précise les etats a prendre en compte
+		//On precise les etats a prendre en compte
 		if (states.length != 0) {
 			query.append(" AND ( ");
 		
