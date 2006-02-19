@@ -1,7 +1,6 @@
 package business.user;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 import business.hibernate.HistorizedObject;
@@ -23,10 +22,11 @@ public class User extends HistorizedObject implements Principal {
 
 	private String lastName;
 	
-	/** user role */
-	private RoleDescriptor role = null;
+	private Integer defaultBDEId; /** Entite par defaut du participant */
 	
-	private Set bdes = null;
+	private RoleDescriptor role; /** Role de l'utilisateur */
+	
+	private Set bdes;
 
 	/**
 	 * @link aggregation
@@ -41,7 +41,8 @@ public class User extends HistorizedObject implements Principal {
 	 */
 	public User() {
 		super();
-		bdes = new HashSet();
+		this.defaultBDEId = null;
+		this.bdes = null;
 	}
 	
 	public Collection getLinkToActivity() {
@@ -141,5 +142,13 @@ public class User extends HistorizedObject implements Principal {
 
 	public void setBdes(Set bdes) {
 		this.bdes = bdes;
+	}
+
+	public Integer getDefaultBDEId() {
+		return defaultBDEId;
+	}
+
+	public void setDefaultBDEId(Integer defaultBDEId) {
+		this.defaultBDEId = defaultBDEId;
 	}
 }

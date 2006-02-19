@@ -1,5 +1,7 @@
 package business.user;
 
+import java.util.Collection;
+
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.PersistanceException;
 
@@ -30,7 +32,7 @@ public class UserManager extends PersistentObjectManager {
 	
 
 	/**
-	 * Cette methode controle la validit? du couple login/mot de passe
+	 * Cette methode controle la validite du couple login/mot de passe
 	 * @param login
 	 * @param password
 	 * @return
@@ -48,7 +50,7 @@ public class UserManager extends PersistentObjectManager {
 	 * @return : liste des participants
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
-	/*public Collection getUsersByBDE(Integer bdeId) throws PersistanceException {
+	public Collection getUsersByBDE(Integer bdeId) throws PersistanceException {
 		return dao.getUsersByBDE(bdeId);
-	}*/
+	}
 }

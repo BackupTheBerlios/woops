@@ -2,11 +2,11 @@ package business.user;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
-
 import business.breakdownelement.BreakdownElement;
 import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectDAO;
@@ -39,15 +39,13 @@ public class UserDAO extends PersistentObjectDAO {
         req.append("and ");
         req.append("u.password='" + password +"'");
 
-	    ArrayList list = (ArrayList) executeQuery(req.toString());
+	    List list = (ArrayList) executeQuery(req.toString());
 	    
 	
 	    if (list.size()!=0)
 	        user = (User) list.get(0);
 	    
-	    
-	   return user;
-    
+	    return user;
 	}	
 	
 	
@@ -58,24 +56,32 @@ public class UserDAO extends PersistentObjectDAO {
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public Collection getUsersByBDE(Integer bdeId) throws PersistanceException {
-		//return executeQuery("FROM User as u , UserBDE ubde WHERE u.id = ubde.user AND ubde.bde = " + bdeId);
-		Session session;
+		Session session = null ;
+		Transaction transaction = null;
+		BreakdownElement bde = null;
+		
 		try {
 			session = HibernateSessionFactory.currentSession();
 		
-	    Transaction transaction = session.beginTransaction();
+			transaction = session.beginTransaction();
 
-	    BreakdownElement bde = (BreakdownElement) session
-	            .createQuery("SELECT bde FROM BreakdownElement bde left join fetch bde.users WHERE bde.id = :bdeid")
+			bde = (BreakdownElement) session
+	            .createQuery("SELECT bde FROM BreakdownElement bde left join fetch bde.users WHERE bde.id = :bdeId")
 	            .setParameter("bdeId", bdeId)
-	            .uniqueResult(); // Eager fetch the collection so we can use it detached
+	            .uniqueResult(); // La collection peut etre utilisee independamment du projet
 
 	    	transaction.commit();
-	    	return bde.getUsers();
-		} catch (HibernateException e) {
-			// TODO Auto-generated catch block
-			throw new PersistanceException(e.toString());
+
+		} catch (HibernateException he) {
+			throw new PersistanceException(he.getMessage(),he);
+		} finally {
+			try {
+				if (session!=null && session.isOpen()) HibernateSessionFactory.closeSession();				
+			} catch (HibernateException he) {
+				throw new PersistanceException(he.getMessage(),he);
+			}
 		}
-		
+
+    	return bde.getUsers();
 	}
 }
