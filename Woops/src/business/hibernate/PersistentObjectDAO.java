@@ -153,15 +153,13 @@ public class PersistentObjectDAO  {
 	
 	}		
 	
-	protected boolean exist(Class classe, Serializable id) throws PersistanceException {
-		
+	protected PersistentObject load(Class classe, Serializable id) throws PersistanceException {
 		Session session = null ;
 		PersistentObject objet =null;
+		
 		try {
 			session = HibernateSessionFactory.currentSession();
-			objet = (PersistentObject) session.get(classe, id);
-			if (objet != null) return true;
-			return false;
+			objet = (PersistentObject) session.load(classe, id);
 		} catch (HibernateException he) {
 			throw new PersistanceException(he.getMessage(),he);
 		} finally {
@@ -171,6 +169,22 @@ public class PersistentObjectDAO  {
 				throw new PersistanceException(he.getMessage(),he);
 			}
 		}
+
+		return objet;
+	}		
+	
+	/**
+	 * Teste l'existence d'un objet à partir de son identifiant
+	 * @param classe : Classe de l'objet
+	 * @param id : clé primaire
+	 * @return <code> true </code> si l'objet est deja present en BD
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 */
+	protected boolean exist(Class classe, Serializable id) throws PersistanceException {
+		if (get(classe, id) != null) 
+			return true;
+		
+		return false;
 	}	
 	
 	protected List getList(String table) throws PersistanceException {
@@ -178,9 +192,9 @@ public class PersistentObjectDAO  {
 		StringBuffer query = new StringBuffer();
 		query.append("from ");
 		query.append(table);
-		List liste = executeQuery(query.toString());
+		List list = executeQuery(query.toString());
 
-		return liste;
+		return list;
 	
 	}	
 
