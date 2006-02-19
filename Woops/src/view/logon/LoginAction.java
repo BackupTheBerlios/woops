@@ -1,10 +1,11 @@
 package view.logon;
 
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
-import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
@@ -13,7 +14,8 @@ import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.security.SecurityUtil;
 
 public class LoginAction extends WoopsCCAction {
-
+	private Locale locale = Locale.FRENCH /** Locale par défaut pour tous les utilisateurs */;
+	
 	/**
 	 * Vérifie si la classe courant correspond à l'action 
 	 * permettant à l'utilisateur de se connecter
@@ -40,16 +42,14 @@ public class LoginAction extends WoopsCCAction {
 				try {
 					//Controle de la validité du couple login/mot de passe
 					User user = UserManager.getInstance().isLoginValid(loginForm.getLogin(),loginForm.getPassword());
-					
+										
 					if (user!=null) {
 						/* On enregistre l'utilisateur comme un objet Principal, 
 						ce qui permettra de controller les accès de l'utilisateur en fonction de son rôle */ 
 						SecurityUtil.registerPrincipal(context.session(), user);
 						
-						//TODO projet en dur
-						BreakdownElement bde = new BreakdownElement();
-						bde.setId(new Integer(1));
-						context.session().setAttribute(PresentationConstantes.KEY_BDE, bde);
+						// On change la locale de l'utilisateur
+						context.session().setAttribute(org.apache.struts.Globals.LOCALE_KEY, locale);					
 						
 						//on met en session l'utilisateur
 						httpSession.setAttribute(PresentationConstantes.KEY_USER,user);

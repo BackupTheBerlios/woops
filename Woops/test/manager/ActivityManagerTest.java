@@ -43,13 +43,14 @@ public class ActivityManagerTest extends WoopsManagerTest {
 	 */
 	public void testGetActivitiesByUser() {
 		final Integer userId = new Integer(1);
+		final Integer bdeId = new Integer(1);
 		Collection listActivities = null;
 		
 		try {
 			// On s'assure que le participant existe
 			assertTrue(((ActivityManager)mgr).exist(User.class, userId));
 			
-			listActivities = ActivityManager.getInstance().getRemainingActivitiesByUser(userId);
+			listActivities = ActivityManager.getInstance().getRemainingActivitiesByUser(userId, bdeId);
 		
 			// On vérifie que toutes les activités appartiennent au participant voulu
 			Iterator iter = listActivities.iterator();
