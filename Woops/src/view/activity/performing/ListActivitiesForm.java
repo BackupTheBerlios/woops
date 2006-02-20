@@ -41,4 +41,12 @@ public class ListActivitiesForm extends FWActionForm {
 	public void setBDEDataModel(ListDataModel dataModel) {
 		listBDEs.setDataModel(dataModel);
 	}
+	
+	/**
+	 * Modifie l'entite selectionnee par defaut dans la liste
+	 * @param uniqueKey identifiant de l'entite
+	 */
+	public void setBDEDefault(String uniqueKey) {
+		listBDEs.mark(uniqueKey);
+	}
 }

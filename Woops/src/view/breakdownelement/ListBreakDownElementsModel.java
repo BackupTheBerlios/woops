@@ -28,7 +28,7 @@ public class ListBreakDownElementsModel extends WoopsListDataModel {
 	 * @see view.common.WoopsListDataModel#getUniqueKey(int)
 	 */
 	public String getUniqueKey(int index) {
-		return ( (BreakDownElementItem)data[index] ).getId().toString();
+		return ( (BreakdownElementItem)data[index] ).getId().toString();
 	}
 	
 	/**

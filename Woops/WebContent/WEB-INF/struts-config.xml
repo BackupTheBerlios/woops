@@ -7,6 +7,7 @@
    
 		<form-bean name="listActivitiesForm" type="view.activity.performing.ListActivitiesForm" />
 		<form-bean name="listFreeActivitiesForm" type="view.activity.performing.ListFreeActivitiesForm" />
+		<form-bean name="bdeForm" type="view.breakdownelement.BreakdownElementForm" />
 		<form-bean name="manageActivityCreationForm" type="view.activity.manage.ManageActivityCreationForm" />
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manage.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manage.ManageDependancesTypesForm" />
@@ -81,7 +82,18 @@
          	<forward name="action" path="historizedActivities.do"/>
          	<forward name="drillDown" path="/showActivitySummary.do"/>
       	</action>
-            
+      	
+<!-- ================= Changement d'entite ================ -->  
+		<action path="/changeBDE"	 type="view.breakdownelement.ChangeBreakdownElementAction"
+      		name="bdeForm"
+      	 	scope="request"
+      	 	roles="#dev"
+      	 	input="/listActivities.do"
+      	 >
+         	<forward name="error" path="/html/participant/activity/performing/listActivities.jsp" />
+      	</action>   
+           
+           
 <!-- ================= Manage Activity Dependances ================ -->  
       	<action path="/manageActivityDependances"	 type="view.activity.manage.ManageActivityDependancesAction"
       	 	attribute="manageActivityDependancesForm"

@@ -1,4 +1,6 @@
 <%@ taglib uri="/struts-bean" prefix="bean" %>
+<%@ taglib uri="/struts-html" prefix="html" %>
+<%@ taglib uri="/struts-logic" prefix="logic" %>
 <%@ taglib uri="/cc-menu" prefix="menu" %>
 <%@ taglib uri="/cc-controls" prefix="ctrl" %>
 <%@ taglib uri="/cc-base" prefix="base" %>
@@ -16,13 +18,15 @@
 
 <br>
 
-<ctrl:select
-        name="USER"
-        property="defaultBDEId"
-        scope="session"
-        onchange="window.open('listBDEs.do')"
-        >
-        	<base:options name="listActivitiesForm" property="listBDEs" keyProperty="id" labelProperty="label" />
-</ctrl:select>
-		    
-		    
+<logic:notEmpty name="listActivitiesForm" property="listBDEs" scope="session">
+	<html:form action="changeBDE.do">
+	<ctrl:select
+        	name="bdeForm"
+        	property="bdeId"
+        	scope="request"
+        	onchange="submit();"
+        	>
+    	    	<base:options name="listActivitiesForm" property="listBDEs" keyProperty="id" labelProperty="label" />
+	</ctrl:select>
+	</html:form>
+</logic:notEmpty>	    

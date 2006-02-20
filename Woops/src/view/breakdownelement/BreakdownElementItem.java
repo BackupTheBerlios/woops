@@ -2,34 +2,28 @@ package view.breakdownelement;
 
 import java.util.Date;
 
+import business.format.Formatage;
+
 import com.cc.framework.common.DisplayObject;
 
-public class BreakDownElementItem implements DisplayObject {
-	private	Integer	id;
+public class BreakdownElementItem implements DisplayObject {
+	private	String id;
 	private String prefix;
 	private String name;
 	private String details;
-	private Date startDate;
-	private Date endDate;
+	private String startDate;
+	private String endDate;
 	private String kind;
 	
-	public BreakDownElementItem() {
+	public BreakdownElementItem() {
 		super();
 	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	public Integer getId() {
+	
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -41,12 +35,20 @@ public class BreakDownElementItem implements DisplayObject {
 		this.prefix = prefix;
 	}
 
-	public Date getStartDate() {
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date date) {
+		endDate = Formatage.dateToString(date);
+	}
+
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setStartDate(Date date) {
+		startDate = Formatage.dateToString(date);
 	}
 
 	public String getKind() {

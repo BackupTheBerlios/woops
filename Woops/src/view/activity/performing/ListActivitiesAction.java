@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
 import view.activity.ActivityItem;
-import view.breakdownelement.BreakDownElementItem;
+import view.breakdownelement.BreakdownElementItem;
 import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
 import business.BusinessConstantes;
@@ -73,24 +73,17 @@ public class ListActivitiesAction extends WoopsCCAction {
 
 		// Recuperation du participant connecte
     	sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-    	//TODO projet en dur
-    	sessionUser.setDefaultBDEId(new Integer(1));
     	
     	// Recuperation des projets du participant
     	dbData = BreakdownElementManager.getInstance().getBreakDownElementsByUser((Integer)sessionUser.getId());
     	
-    	if (dbData == null) {
+    	if (dbData == null || dbData.isEmpty()) {
     		// Aucun projet pour le participant
     		context.addGlobalMessage("msg.info.breakdownelement.none");
-    	} else if (sessionUser.getDefaultBDEId() == null){
-    		// Le participant n'a aucun projet par défaut
-    		context.addGlobalMessage("msg.info.breakdownelement.default");
-    		// Constitue la liste des projets
-    		this.setListBDEs(context, dbData);
     	} else {
-    		// Constitue la liste des projets
+    		// Constitue la liste des entites
     		this.setListBDEs(context, dbData);
-    		
+   
     		// Recuperation de la liste des activites
     		dbData = ActivityManager.getInstance().getRemainingActivitiesByUser((Integer) sessionUser.getId(), sessionUser.getDefaultBDEId());  	
     		
@@ -107,7 +100,10 @@ public class ListActivitiesAction extends WoopsCCAction {
 	 */
 	private void setListBDEs(ActionContext context, Collection dbData) throws Exception {
 		Collection listBreakdownElementsItems = null;
-		BreakDownElementItem breakdownElementItem = null;
+		BreakdownElementItem breakdownElementItem = null;
+		
+		// Recuperation du participant connecte
+    	User sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 		
 		// Constitue une liste de BreakDownElementItem à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();
@@ -116,22 +112,29 @@ public class ListActivitiesAction extends WoopsCCAction {
     	// Ajoute les entites a la liste
     	while (iter.hasNext()) {
     		BreakdownElement breakdownElement = (BreakdownElement) iter.next();
-    		breakdownElementItem = new BreakDownElementItem();
+    		breakdownElementItem = new BreakdownElementItem();
 			
-    		breakdownElementItem.setId((Integer)breakdownElement.getId());
+    		breakdownElementItem.setId(breakdownElement.getId().toString());
     		breakdownElementItem.setPrefix(breakdownElement.getPrefix());
     		breakdownElementItem.setName(breakdownElement.getName());
     		
     		listBreakdownElementsItems.add(breakdownElementItem);
 		}
-
+    
 		// Conversion de la liste en tableau d'items
-		DisplayObject[] result = new BreakDownElementItem[listBreakdownElementsItems.size()];
+		DisplayObject[] result = new BreakdownElementItem[listBreakdownElementsItems.size()];
 		listBreakdownElementsItems.toArray(result);
+		
+    	if (sessionUser.getDefaultBDEId() == null) {
+    		// Le participant n'a aucun projet par defaut : on prend le premier de la liste
+    		BreakdownElementItem bde = (BreakdownElementItem) result[0];
+    		sessionUser.setDefaultBDEId(new Integer(bde.getId()));
+    	}
 		
 		// Recuperation du form bean necessaire pour fournir les informations a la JSP
     	ListActivitiesForm listActivitiesForm = (ListActivitiesForm) context.form();
     	listActivitiesForm.setBDEDataModel(new ListBreakDownElementsModel(result));
+    	listActivitiesForm.setBDEDefault(sessionUser.getDefaultBDEId().toString()); 	
 	}
 	
 	
