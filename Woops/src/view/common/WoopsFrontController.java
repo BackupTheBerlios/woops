@@ -5,11 +5,10 @@ import javax.servlet.ServletException;
 import org.apache.struts.action.ActionServlet;
 
 import com.cc.framework.ui.painter.PainterFactory;
-import com.cc.framework.ui.painter.def.DefPainterFactory;
 import com.cc.framework.ui.painter.def2.Def2PainterFactory;
 import com.cc.framework.ui.painter.html.HtmlPainterFactory;
   
-  public class WoopsFrontController extends ActionServlet { 
+public class WoopsFrontController extends ActionServlet { 
 	private static final long serialVersionUID = 1L;
 
 	public void init() throws ServletException { 
@@ -18,5 +17,5 @@ import com.cc.framework.ui.painter.html.HtmlPainterFactory;
   	getServletContext().setAttribute( com.cc.framework.Globals.LOCALENAME_KEY, "true");
   	PainterFactory.registerApplicationPainter ( getServletContext (), Def2PainterFactory.instance());
   	PainterFactory.registerApplicationPainter ( getServletContext (), HtmlPainterFactory.instance()); 
-  	} 
-  } 
+  	}
+} 
