@@ -4,6 +4,9 @@ import javax.servlet.http.HttpSession;
 
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
+import business.security.Roles;
+import business.user.User;
+import business.user.UserManager;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.security.SecurityUtil;
@@ -24,7 +27,14 @@ public class LogoutAction extends WoopsCCAction {
 		// Vérifie si la session est valide
 		if (isValidSession(context)) {
 			HttpSession httpSession = context.request().getSession(false);
-			httpSession.removeAttribute(PresentationConstantes.KEY_USER);
+			
+	    	User sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+	    	
+	    	// Met a jour en BD des informations du participant (Projet par defaut)
+	    	if (sessionUser.getRole().equals(Roles.DEVELOPER_ROLE))
+	    		UserManager.getInstance().update(sessionUser);
+			
+	    	httpSession.removeAttribute(PresentationConstantes.KEY_USER);
 		
 			SecurityUtil.unregisterPrincipal(context.session());
 		
