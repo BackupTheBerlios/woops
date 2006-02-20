@@ -11,10 +11,10 @@ import javax.servlet.ServletException;
 import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
-import view.admin.breakdownelement.BreakDownElementItem;
-import view.admin.breakdownelement.ListBreakDownElementsModel;
 import view.admin.user.ListUsersModel;
 import view.admin.user.UserItem;
+import view.breakdownelement.BreakDownElementItem;
+import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
@@ -24,10 +24,7 @@ import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
-import business.breakdownelement.BreakdownElement;
-import business.breakdownelement.BreakdownElementManager;
-import view.admin.breakdownelement.BreakDownElementItem;
-import view.admin.breakdownelement.ListBreakDownElementsModel;
+
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
 import com.cc.framework.common.SortOrder;
@@ -69,11 +66,11 @@ public class AdminAction  extends WoopsCCAction {
 			context.session().setAttribute(context.mapping().getAttribute(), new AdminForm());
 		}
 		
-		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
+		// Récupération du form bean nécessaire pour fournir les informations à la JSP
     	AdminForm adminForm = (AdminForm) context.form();
     	dbData = BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN);
     	
-    	// Constitue une liste de BreakDownElementItem ? partir des donn?es stock?es en BD  
+    	// Constitue une liste de BreakDownElementItem à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();
     	listBreakDownElementsItems = new ArrayList();
     	HashMap breakDownElementsMap = new HashMap();
@@ -99,13 +96,20 @@ public class AdminAction  extends WoopsCCAction {
 		DisplayObject[] result = new BreakDownElementItem[listBreakDownElementsItems.size()];
 		listBreakDownElementsItems.toArray(result);
 		
-		// Cr?ation de la liste initialis?e avec les valeurs ? afficher
+		// Création de la liste initialisée avec les valeurs à afficher
 		ListBreakDownElementsModel model = new ListBreakDownElementsModel(result);
 		adminForm.setDataModelListBreakDownElements(model);
 	
 		// Sauvegarde d'une HashMap stockant la liste des BreakDownElements
 		context.session().setAttribute(PresentationConstantes.KEY_BDE_MAP,breakDownElementsMap);
 	}
+	
+	
+	/**
+	 * 
+	 * @param context
+	 * @throws Exception
+	 */
 	private void loadListUsers(ActionContext context) throws Exception {
 		logger.debug("AdminAction");
 		
@@ -118,13 +122,13 @@ public class AdminAction  extends WoopsCCAction {
 			context.session().setAttribute(context.mapping().getAttribute(), new AdminForm());
 		}
 		
-		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
+		// Récupération du form bean nécessaire pour fournir les informations à la JSP
     	AdminForm adminForm = (AdminForm) context.form();
     	
-    	// R?cup?ration de la liste des utilisateurs
+    	// Récupération de la liste des utilisateurs
     	dbData = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
 
-    	// Constitue une liste d'UserItem ? partir des donn?es stock?es en BD  
+    	// Constitue une liste d'UserItem à partir des données stockées en BD  
     	Iterator iter = dbData.iterator();
     	listUsersItems = new ArrayList();
     	HashMap usersMap = new HashMap();
@@ -147,7 +151,7 @@ public class AdminAction  extends WoopsCCAction {
 		DisplayObject[] result = new UserItem[listUsersItems.size()];
 		listUsersItems.toArray(result);
 		
-		// Cr?ation de la liste initialis?e avec les valeurs ? afficher
+		// Création de la liste initialisée avec les valeurs à afficher
 		ListUsersModel model = new ListUsersModel(result);
 		adminForm.setDataModelUser(model);
 	
@@ -159,7 +163,7 @@ public class AdminAction  extends WoopsCCAction {
 	//          List-Control  Event Handler
     // ------------------------------------------------
 	/**
-	 * Cette m?thode est appel?e lorsque l'utilisateur demande un rafra?chissement de la liste 
+	 * Cette méthode est appelée lorsque l'utilisateur demande un rafraîchissement de la liste 
 	 * @param	context		contexte d'execution de la servlet
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
@@ -172,7 +176,7 @@ public class AdminAction  extends WoopsCCAction {
 		}
 	}
 	/**
-	 * Cette m?thode est appel?e lorsque l'utilisateur demande un rafra?chissement de la liste 
+	 * Cette méthode est appelée lorsque l'utilisateur demande un rafraîchissement de la liste 
 	 * @param	context		contexte d'execution de la servlet
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
@@ -186,32 +190,32 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	
 	/**
-	 * Cette m?thode est appel?e si le participant clique sur l'icone de tri d'une colonne
+	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
 	 * @param context	contexte d'execution de la servlet
-	 * @param column	colonne ? trier
+	 * @param column	colonne à trier
 	 * @param direction	direction (ASC, DESC)
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
 	public void listBreakDownElements_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
-		// R?cup?ration de la liste dans le contexte
+		// Récupération de la liste dans le contexte
 		ListBreakDownElementsModel model = (ListBreakDownElementsModel) context.control().getDataModel();
 		
-		// Effectue le tri sur la colonne demand?e et enregistre les modification au niveau du contexte
+		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
 		model.sortByColumn(column, direction);		
 		context.control().execute(context, column,  direction);
 	}
 	/**
-	 * Cette m?thode est appel?e si le participant clique sur l'icone de tri d'une colonne
+	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
 	 * @param context	contexte d'execution de la servlet
-	 * @param column	colonne ? trier
+	 * @param column	colonne à trier
 	 * @param direction	direction (ASC, DESC)
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
 	public void listUsers_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
-		// R?cup?ration de la liste dans le contexte
+		// Récupération de la liste dans le contexte
 		ListUsersModel model = (ListUsersModel) context.control().getDataModel();
 		
-		// Effectue le tri sur la colonne demand?e et enregistre les modification au niveau du contexte
+		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
 		model.sortByColumn(column, direction);		
 		context.control().execute(context, column,  direction);
 	}

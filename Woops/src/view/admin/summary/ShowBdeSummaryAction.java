@@ -1,26 +1,14 @@
 package view.admin.summary;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
-import view.admin.AdminAction;
 import view.common.WoopsCCAction;
 import business.breakdownelement.BreakdownElement;
-import business.breakdownelement.BreakdownElementManager;
-import business.breakdownelement.UserBDE;
-import business.hibernate.exception.PersistanceException;
-import business.user.User;
-import business.user.UserManager;
 
 import com.cc.framework.adapter.struts.ActionContext;
 
 public class ShowBdeSummaryAction extends WoopsCCAction {
-
-	private static Logger logger = Logger.getLogger(AdminAction.class); 
 	
 	public ShowBdeSummaryAction () {
 		super() ;
