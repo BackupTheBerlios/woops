@@ -9,7 +9,6 @@ import business.BusinessConstantes;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
-import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -204,9 +203,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	    if (!context.hasErrors()) {
 			try {
 				
-				//R?cup?ration de l'identifiant du participant connecte et du projet
+				// Recuperation de l'identifiant du participant connecte et du projet
 		    	User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-		    	BreakdownElement bde = (BreakdownElement) context.session().getAttribute(PresentationConstantes.KEY_BDE);
 		    	
 				// modif => message affiché a l'utilisateur apres ajout ou modification d'une activité
 				// 0 : pas de modif
@@ -228,7 +226,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					activity.setState(new CreatedActivityState());
 					activity.setUserCreation((user.getId().toString()));
 					activity.setDateCreation(new Date());
-					activity.setBdeId((Integer)bde.getId());
+					activity.setBdeId(user.getDefaultBDEId());
 					
 					// La reaffection de l'activité (soit libre (null) soit à un user)
 					activity.setUserId((form.getFreeActivity()!=null)?(null):((Integer) user.getId()));
