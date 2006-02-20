@@ -12,8 +12,12 @@ public class AddBreakdownElementForm extends ActionForm{
 	private String kindId ;
 	private String bkId;
 	private String mode ;
-	
+	/* Liste representant toutes les utilisateurs affectables au projet */
+	private SimpleListControl userParticipationOptions = new SimpleListControl();	
+	/* Liste representant les cles des utilisateurs selectionnes */
+	private String[] usersParticipation = new String[0];	
 	private SimpleListControl kindOptions = new SimpleListControl ();
+	
 	
 	public ListDataModel getKindOptions() {
 		return (ListDataModel) this.kindOptions.getDataModel();
@@ -22,14 +26,6 @@ public class AddBreakdownElementForm extends ActionForm{
 	public void setKindOptions(ListDataModel dataModel) {
 		this.kindOptions.setDataModel(dataModel);
 	}
-
-	
-	/* Liste representant toutes les utilisateurs affectables au projet */
-	private SimpleListControl userParticipationOptions = new SimpleListControl();
-	
-	/* Liste representant les cles des utilisateurs selectionnes */
-	private String[] usersParticipation = new String[0];
-
 
 	public ListDataModel getUserParticipationOptions() {
 		return (ListDataModel) userParticipationOptions.getDataModel();
@@ -95,6 +91,5 @@ public class AddBreakdownElementForm extends ActionForm{
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
-	
-	
+		
 }

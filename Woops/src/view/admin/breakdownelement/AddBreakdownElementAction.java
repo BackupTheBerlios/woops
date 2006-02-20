@@ -3,8 +3,10 @@ package view.admin.breakdownelement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.struts.action.ActionForward;
 
@@ -37,19 +39,21 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 
 			BreakdownElement bke = (BreakdownElement)bkMap.get(new Integer(Integer.parseInt(bkId)));
 			
-			form.setBkId(bkId);
-			
+			form.setBkId(bkId);				
 			if (bke!=null) {
 				form.setKindId(bke.getKind().getId().toString()) ;
 				form.setDetails(bke.getDetails());
 				form.setName(bke.getName());
-				form.setPrefix(bke.getPrefix());				
+				form.setPrefix(bke.getPrefix());
+		
 			}
+			this.setUsersParticipation(context);		
 		} else {
 			mode = PresentationConstantes.INSERT_MODE;
 		}
 		this.setuserParticipationOptions(context);
 		this.setSelect(context) ;
+
 		form.setMode(mode);
 		context.forwardToInput();
 	}
@@ -109,13 +113,13 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		madForm.setUserParticipationOptions(model);
 	}
 	
-        private void setUsersParticipation(ActionContext context) throws PersistanceException {
+	private void setUsersParticipation(ActionContext context) throws PersistanceException {
 		Collection userParticipationMgr = null;
 
 		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
 		
-		userParticipationMgr = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
-		
+		userParticipationMgr = UserManager.getInstance().getUsersByBDE(new Integer(Integer.parseInt(madForm.getBkId())));
+	
 		
 		/**
 		 * Convertit la liste des cl?s de type Integer
@@ -133,7 +137,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		//context.session().setAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS,listStringKeys);
 		
 		/**
-		 * Mis ? jour de l'attribut realDependancesKeys du Form
+		 * Mis ? jour de l'attribut usersParticipation du Form
 		 */
 		madForm.setUsersParticipation(listStringKeys);			
 	}
@@ -193,7 +197,20 @@ public class AddBreakdownElementAction extends WoopsCCAction {
         		bke.setDateCreation(null);
         		bke.setEndDate(null);
         		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));      		
-
+        		String [] usersKeys  = madForm.getUsersParticipation();
+        		Set users = new HashSet();
+        		if (usersKeys != null) {
+            		User user;
+            		for (int i=0; i<usersKeys.length;i++) {
+            			if (usersKeys[i]!= "") {
+            				bke.setId(new Integer(1));            				
+                			user = new User();
+                			user.setId(new Integer(Integer.parseInt(usersKeys[i])));
+                    		users.add(user);        					
+            			}
+            		}
+        		}
+        		bke.setUsers(users);
     			try {
     				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
     					Integer id = new Integer (Integer.parseInt((String)madForm.getBkId()));
@@ -227,30 +244,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     			}
     				System.out.println(e.getMessage());
     			}
-//    			String [] users  = madForm.getUsersParticipation();
-//        		if (users != null) {
-//        			UserBDE userBde;
-//            		User user;
-//            		for (int i=0; i<users.length;i++) {
-//            			if (users[i]!= "") {
-//            				bke.setId(new Integer(1));	
-//            				userBde = new UserBDE();
-//                			user = new User();
-//                			user.setId(new Integer(Integer.parseInt(users[i])));
-//                			userBde.setBde(bke);
-//                			userBde.setUser(user);
-//                    		try {
-//        						BreakdownElementManager.getInstance().insert(userBde);
-//        					} catch (PersistanceException e) {
-//        						// TODO Auto-generated catch block
-//        						e.printStackTrace();
-//        					} catch (DoublonException e) {
-//        						// TODO Auto-generated catch block
-//        						e.printStackTrace();
-//        					}
-//            			}
-//            		}
-//        		}
+    			
     			
     			
             } else {
