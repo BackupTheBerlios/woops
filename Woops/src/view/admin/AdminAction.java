@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import view.PresentationConstantes;
 import view.admin.user.ListUsersModel;
 import view.admin.user.UserItem;
-import view.breakdownelement.BreakDownElementItem;
+import view.breakdownelement.BreakdownElementItem;
 import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
@@ -58,7 +58,7 @@ public class AdminAction  extends WoopsCCAction {
 		logger.debug("AdminAction");
 		Collection dbData = null;
 		Collection listBreakDownElementsItems = null;
-		BreakDownElementItem breakDownElementItem = null;
+		BreakdownElementItem breakDownElementItem = null;
 
 		// Initialisation du form si celui-ci est nul
 		if (context.form()==null) 
@@ -77,9 +77,9 @@ public class AdminAction  extends WoopsCCAction {
     	
     	while (iter.hasNext()) {
     		BreakdownElement breakdownElement = (BreakdownElement) iter.next();
-    		breakDownElementItem = new BreakDownElementItem();
+    		breakDownElementItem = new BreakdownElementItem();
 			
-    		breakDownElementItem.setId((Integer)breakdownElement.getId());
+    		breakDownElementItem.setId(breakdownElement.getId().toString());
     		breakDownElementItem.setPrefix(breakdownElement.getPrefix());
     		breakDownElementItem.setName(breakdownElement.getName());
     		breakDownElementItem.setDetails(breakdownElement.getDetails());
@@ -93,7 +93,7 @@ public class AdminAction  extends WoopsCCAction {
     	}
 
 		// Conversion de la liste en tableau d'items
-		DisplayObject[] result = new BreakDownElementItem[listBreakDownElementsItems.size()];
+		DisplayObject[] result = new BreakdownElementItem[listBreakDownElementsItems.size()];
 		listBreakDownElementsItems.toArray(result);
 		
 		// Création de la liste initialisée avec les valeurs à afficher
