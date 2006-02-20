@@ -9,25 +9,6 @@ DROP TABLE BreakdownElement;
 DROP TABLE BreakdownElementKind;
 
 
-CREATE TABLE UserRole (
-       code VARCHAR(10) NOT NULL
-     , name VARCHAR(30) NOT NULL
-     , PRIMARY KEY (code)
-)ENGINE=InnoDB;
-
-CREATE TABLE User (
-       id INT NOT NULL AUTO_INCREMENT
-     , firstName VARCHAR(50) NOT NULL
-     , lastName VARCHAR(50) NOT NULL
-     , login VARCHAR(20) NOT NULL
-     , password VARCHAR(10) NOT NULL
-     , role VARCHAR(10) NOT NULL
-     , UNIQUE UQ_User_login (login)
-     , PRIMARY KEY (id)
-     , CONSTRAINT FK_User_role FOREIGN KEY (role)
-                  REFERENCES UserRole (code)
-)ENGINE=InnoDB;
-
 CREATE TABLE BreakdownElementKind (
        id INT NOT NULL AUTO_INCREMENT
      , name VARCHAR(15) NOT NULL
@@ -49,6 +30,28 @@ CREATE TABLE BreakdownElement (
      			  REFERENCES BreakdownElementKind (id)
 )ENGINE=InnoDB;
 
+
+CREATE TABLE UserRole (
+       code VARCHAR(10) NOT NULL
+     , name VARCHAR(30) NOT NULL
+     , PRIMARY KEY (code)
+)ENGINE=InnoDB;
+
+CREATE TABLE User (
+       id INT NOT NULL AUTO_INCREMENT
+     , firstName VARCHAR(50) NOT NULL
+     , lastName VARCHAR(50) NOT NULL
+     , login VARCHAR(20) NOT NULL
+     , password VARCHAR(10) NOT NULL
+     , role VARCHAR(10) NOT NULL
+     , defaultBDE INT
+     , UNIQUE UQ_User_login (login)
+     , PRIMARY KEY (id)
+     , CONSTRAINT FK_User_role FOREIGN KEY (role)
+                  REFERENCES UserRole (code)
+     , CONSTRAINT FK_User_defaultBDE FOREIGN KEY (defaultBDE)
+                  REFERENCES BreakdownElement (id)
+)ENGINE=InnoDB;
 
 CREATE TABLE UserBDE (
        id INT NOT NULL AUTO_INCREMENT
