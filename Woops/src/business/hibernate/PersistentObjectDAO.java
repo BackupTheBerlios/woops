@@ -151,27 +151,7 @@ public class PersistentObjectDAO  {
 
 		return objet;
 	
-	}		
-	
-	protected PersistentObject load(Class classe, Serializable id) throws PersistanceException {
-		Session session = null ;
-		PersistentObject objet =null;
-		
-		try {
-			session = HibernateSessionFactory.currentSession();
-			objet = (PersistentObject) session.load(classe, id);
-		} catch (HibernateException he) {
-			throw new PersistanceException(he.getMessage(),he);
-		} finally {
-			try {
-				if (session!=null && session.isOpen()) HibernateSessionFactory.closeSession();				
-			} catch (HibernateException he) {
-				throw new PersistanceException(he.getMessage(),he);
-			}
-		}
-
-		return objet;
-	}		
+	}			
 	
 	/**
 	 * Teste l'existence d'un objet à partir de son identifiant
