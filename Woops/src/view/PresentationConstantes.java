@@ -6,6 +6,8 @@ package view;
  */
 public interface PresentationConstantes {
 	
+	public static final String BASENAME="ApplicationResources";
+	
 	// Forward
 	public static final String FORWARD_SUCCESS="success";
 	public static final String FORWARD_ERROR="error";
