@@ -40,8 +40,8 @@ public class BreakdownElement extends HistorizedObject{
 		return id;
 	}
 
-	public void setId(Object id) {
-		this.id = (Integer)id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public BreakdownElementKind getKind() {
