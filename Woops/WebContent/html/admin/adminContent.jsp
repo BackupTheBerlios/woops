@@ -45,12 +45,16 @@
 				property="endDate"
 				width="300"
 				sortable="true"/>
-				
-			<ctrl:columntext 
+			
+			<ctrl:columnhtml 
+				id="k"
 				title="table.field.listBreakDownElements.kind"
-				property="kind"
 				width="150"
-				sortable="true"/>
+				>
+					<bean:message
+						name="k"
+						property="kind"/>
+			</ctrl:columnhtml> 
 				
 			<ctrl:columnedit 
 				title="table.field.listBreakDownElements.edit"/> 
@@ -82,19 +86,20 @@
 				width="250"
 				sortable="true"/>
 			
-			
-				
 			<ctrl:columntext   
 				title="table.field.listUsers.login"
 				property="login"
 				width="350"
 				sortable="true"/>
 				
-			<ctrl:columntext   
+			<ctrl:columnhtml id="role"
 				title="table.field.listUsers.role"
-				property="role"
 				width="350"
-				sortable="true"/>
+				>
+					<bean:message
+						name="role"
+						property="roleCode"/>
+			</ctrl:columnhtml> 
 			
 			<ctrl:columnedit 
 				title="table.field.listUsers.edit"/> 
