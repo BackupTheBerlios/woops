@@ -21,6 +21,7 @@
 	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />
 	  	<form-bean name="addBreakdownElementForm" type="view.admin.breakdownelement.AddBreakdownElementForm" />  
 	  	<form-bean name="showUserSummaryForm" type="view.admin.summary.ShowUserSummaryForm" />
+	  	<form-bean name="showBdeSummaryForm" type="view.admin.summary.ShowBdeSummaryForm" />
 	</form-beans>
 
 
@@ -242,6 +243,17 @@
          	<forward name="success" path="/html/admin/user/summary/showUserSummary.jsp" />
       		<forward name="previous" path="/admin"/>
       	</action>
+      	
+<!-- ================= Admin / Show User Summary ================ -->  
+		<action path="/showBdeSummary"	 type="view.admin.summary.ShowBdeSummaryAction"
+	  		name="showBdeSummaryForm"
+	  	 	scope="session"
+	  	 	input="/html/admin/breakdownelement/summary/showBdeSummary.jsp"
+	  	 >
+	     	<forward name="error" path="/showBdeSummary.do" />
+	     	<forward name="success" path="/html/admin/breakdownelement/summary/showBdeSummary.jsp" />
+	  		<forward name="previous" path="/admin"/>
+	  	</action>
       	
       	
 <!-- ================= Show Activity Summary To Print ================ -->  
