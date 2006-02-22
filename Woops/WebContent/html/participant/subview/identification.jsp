@@ -21,9 +21,9 @@
 <logic:notEmpty name="listActivitiesForm" property="listBDEs" scope="session">
 	<html:form action="changeBDE.do">
 	<ctrl:select
-        	name="bdeForm"
+        	name="listActivitiesForm"
         	property="bdeId"
-        	scope="request"
+        	scope="session"
         	onchange="submit();"
         	>
     	    	<base:options name="listActivitiesForm" property="listBDEs" keyProperty="id" labelProperty="label" />
