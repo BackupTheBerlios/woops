@@ -227,6 +227,12 @@ public class AdminAction  extends WoopsCCAction {
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN);
 	}
 
+	/**
+	 * Cette méthode est appelée si l'aministeur clique sur l'icone de supprimer un projet
+	 * @param context	contexte d'execution de la servlet
+	 * @param column	id du projet à supprimer
+	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
+	 */
 	public void listBreakDownElements_onDelete(ControlActionContext context, String id) throws IOException, ServletException {
 		HashMap bdesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_BDE_MAP);
 
@@ -251,6 +257,12 @@ public class AdminAction  extends WoopsCCAction {
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER);
 	}
 	
+	/**
+	 * Cette méthode est appelée si l'aministeur clique sur l'icone de supprimer un utilisateur
+	 * @param context	contexte d'execution de la servlet
+	 * @param column	id de l'utilisateur à supprimer
+	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
+	 */
 	public void listUsers_onDelete(ControlActionContext context, String id) throws IOException, ServletException {
 		
 		HashMap usersMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_USERS_MAP);
@@ -261,6 +273,7 @@ public class AdminAction  extends WoopsCCAction {
 		
 		userCourant = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 		
+		//Un utilisateur ne peut supprimer lui-même
 		if ( ((Integer) userCourant.getId()).compareTo(new Integer(id)) == 0) {
 			context.addGlobalError("errors.admin.deleteCurrentUser");
 			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
@@ -270,9 +283,10 @@ public class AdminAction  extends WoopsCCAction {
 		Collection dbData = null;
 		try {
 			
-			//Chercher les activites concernant de l'utilisateur a supprimer
-			//Mise a jour le champs de "UserId" a null de ces activites
+			//Chercher les activites liés avec l'utilisateur à supprimer
+			//Mise a jour le champs de "UserId" à null de ces activites
 			dbData = ActivityManager.getInstance().getAllActivitiesByUser(new Integer(Integer.parseInt(id)));
+			
 			Iterator iter = dbData.iterator();
 	    	while (iter.hasNext()) {
 	    		Activity activity = (Activity) iter.next();
@@ -293,11 +307,6 @@ public class AdminAction  extends WoopsCCAction {
 		// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//deleteUser(context, id);
-		//context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.DELETE_MODE);
-		//context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,id);
-		
-		//context.forwardByName(PresentationConstantes.FORWARD_EDIT);
 	}
 	
 	public void listBreakDownElements_onCreate(ControlActionContext context) throws IOException, ServletException {
