@@ -1,4 +1,8 @@
-package view.admin.breakdownelement;
+package view.breakdownelement;
+
+import org.apache.struts.util.MessageResources;
+
+import view.PresentationConstantes;
 
 import com.cc.framework.common.DisplayObject;
 
@@ -19,5 +23,7 @@ public class KindItem implements DisplayObject {
 		this.name = name;
 	}
 	
-	
+	public String getLabelName() {
+		return MessageResources.getMessageResources(PresentationConstantes.BASENAME).getMessage(name);
+	}
 }

@@ -35,7 +35,7 @@
         	label="admin.addBreakdownElement.kind"
         	property="kindId"
         	>
-        	<base:options property="kindOptions" keyProperty="id" labelProperty="name" />
+        	<base:options property="kindOptions" keyProperty="id" labelProperty="labelName"/>
 		    </forms:select>
           
        <forms:swapselect
@@ -55,7 +55,7 @@
             <base:options 
             	property="userParticipationOptions"  
             	keyProperty="id" 
-            	labelProperty="firstandLastName"/>
+            	labelProperty="name"/>
         
 		</forms:swapselect>
 
