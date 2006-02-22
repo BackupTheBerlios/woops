@@ -14,9 +14,9 @@ public final class SecurityConfig {
 	 */
 	public SecurityConfig() {
 		super();
-		roles.put(Roles.GUEST_ROLE, new UserRole(Roles.GUEST_ROLE, "guest"));
-		roles.put(Roles.ADMINISTRATOR_ROLE, new UserRole(Roles.ADMINISTRATOR_ROLE, "administrator"));
-		roles.put(Roles.DEVELOPER_ROLE, new UserRole(Roles.DEVELOPER_ROLE, "developer"));
+		roles.put(Roles.GUEST_ROLE, new UserRole(Roles.GUEST_ROLE));
+		roles.put(Roles.ADMINISTRATOR_ROLE, new UserRole(Roles.ADMINISTRATOR_ROLE));
+		roles.put(Roles.DEVELOPER_ROLE, new UserRole(Roles.DEVELOPER_ROLE));
 	}
 	
 	/**
@@ -28,13 +28,13 @@ public final class SecurityConfig {
 	public UserRole parseRole(String code) throws IllegalArgumentException {
 		if (code == null) {
 			// Création d'un rôle "Invité"
-			return new UserRole(Roles.GUEST_ROLE, "Guest");
+			return new UserRole(Roles.GUEST_ROLE);
 		}
 
 		String c = code.trim();
 		if ("".equals(c)) {
 			// Création d'un rôle "Invité"
-			return new UserRole(Roles.GUEST_ROLE, "Guest");
+			return new UserRole(Roles.GUEST_ROLE);
 		} else {
 			UserRole role = (UserRole) roles.get(c);
 

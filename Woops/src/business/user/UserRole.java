@@ -4,16 +4,15 @@ import business.security.Permission;
 import business.security.RoleDescriptor;
 
 public class UserRole implements RoleDescriptor, Comparable {
-		
+	/**
+	 * Id du rôle en BD
+	 */	
+	private Integer id;
+	
 	/**
 	 * Nom interne
 	 */
 	private String code;
-
-	/**
-	 * Nom du rôle
-	 */	
-	private String name;
 
 	/**
 	 * Permissions du rôle
@@ -31,12 +30,11 @@ public class UserRole implements RoleDescriptor, Comparable {
 	 * Constructeur
 	 * 
 	 * @param		code code interne
-	 * @param		name nom du rôle
 	 */
-	public UserRole(String code, String name) {
+	public UserRole(String code) {
 		super();
+		/* L'id est fournit par la BD */
 		this.code	= code;
-		this.name	= name;
 	}
 
 	/**
@@ -49,15 +47,6 @@ public class UserRole implements RoleDescriptor, Comparable {
 	}
 
 	/**
-	 * Récupération du nom
-	 * 
-	 * @return		String
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
 	 * Modification du code
 	 * 
 	 * @param		code Le code à modifier
@@ -66,15 +55,7 @@ public class UserRole implements RoleDescriptor, Comparable {
 		this.code = code;
 	}
 
-	/**
-	 * Modification du nom
-	 * 
-	 * @param		name Le nom à modifier
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-		
+	
 	/**
 	 * @see business.security.RoleDescriptor#hasRight(String)
 	 */
@@ -88,7 +69,7 @@ public class UserRole implements RoleDescriptor, Comparable {
 	public int compareTo(Object o) {
 			
 		if (o instanceof UserRole) {
-			return name.compareTo(((UserRole) o).name);
+			return code.compareTo(((UserRole) o).code);
 		}
 		return 0;
 	}
@@ -101,5 +82,13 @@ public class UserRole implements RoleDescriptor, Comparable {
 			return code.equals(obj);
 		}
 		return super.equals(obj);
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

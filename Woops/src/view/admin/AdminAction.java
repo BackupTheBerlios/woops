@@ -12,10 +12,10 @@ import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
 import view.admin.user.ListUsersModel;
-import view.admin.user.UserItem;
 import view.breakdownelement.BreakdownElementItem;
 import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
+import view.user.UserItem;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.breakdownelement.BreakdownElement;
@@ -140,7 +140,7 @@ public class AdminAction  extends WoopsCCAction {
     		userItem.setFirstName(user.getFirstName());
     		userItem.setLastName(user.getLastName());
     		userItem.setLogin(user.getLogin());
-    		userItem.setRole(user.getRole().getName());
+    		userItem.setRole(user.getRole().getCode());
     		
     		listUsersItems.add(userItem);
 			// Construction de la hash map stockant la liste des utilisateurs

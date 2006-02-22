@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import view.PresentationConstantes;
-import view.admin.user.ListUsersModel;
-import view.admin.user.UserItem;
 import view.breakdownelement.BreakdownElementItem;
 import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
@@ -15,7 +13,6 @@ import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementManager;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
-import business.user.UserManager;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.common.DisplayObject;
@@ -39,7 +36,7 @@ public class ShowUserSummaryAction extends WoopsCCAction {
 		form.setFirstName(user.getFirstName());
 		form.setLastName(user.getLastName());
 		form.setLogin(user.getLogin());
-		form.setRole(user.getRole().getName());
+		form.setRole(user.getRole().getCode());
 		
 		this.loadListBde(context, user);
 		context.forwardToInput();

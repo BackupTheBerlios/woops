@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Set;
 
 import business.hibernate.HistorizedObject;
-import business.security.RoleDescriptor;
 
 import com.cc.framework.security.Principal;
 
@@ -24,7 +23,7 @@ public class User extends HistorizedObject implements Principal {
 	
 	private Integer defaultBDEId; /** Entite par defaut du participant */
 	
-	private RoleDescriptor role; /** Role de l'utilisateur */
+	private UserRole role; /** Role de l'utilisateur */
 	
 	private Set bdes;
 
@@ -97,7 +96,7 @@ public class User extends HistorizedObject implements Principal {
 	 * Récupération du rôle
 	 * @return UserRole
 	 */
-	public RoleDescriptor getRole() {
+	public UserRole getRole() {
 		return role;
 	}
 	

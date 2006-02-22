@@ -32,9 +32,9 @@ CREATE TABLE BreakdownElement (
 
 
 CREATE TABLE UserRole (
-       code VARCHAR(10) NOT NULL
-     , name VARCHAR(30) NOT NULL
-     , PRIMARY KEY (code)
+       id INT NOT NULL AUTO_INCREMENT
+     , code VARCHAR(10) NOT NULL
+     , PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 CREATE TABLE User (
@@ -43,12 +43,12 @@ CREATE TABLE User (
      , lastName VARCHAR(50) NOT NULL
      , login VARCHAR(20) NOT NULL
      , password VARCHAR(10) NOT NULL
-     , role VARCHAR(10) NOT NULL
+     , role INT NOT NULL
      , defaultBDE INT
      , UNIQUE UQ_User_login (login)
      , PRIMARY KEY (id)
      , CONSTRAINT FK_User_role FOREIGN KEY (role)
-                  REFERENCES UserRole (code)
+                  REFERENCES UserRole (id)
      , CONSTRAINT FK_User_defaultBDE FOREIGN KEY (defaultBDE)
                   REFERENCES BreakdownElement (id)
 )ENGINE=InnoDB;
@@ -127,8 +127,8 @@ INSERT INTO ActivitySequenceType(name) VALUES ('startToFinish');
 INSERT INTO ActivityState(name) VALUES ('created');
 INSERT INTO ActivityState(name) VALUES ('inProgress');
 INSERT INTO ActivityState(name) VALUES ('finished');
-INSERT INTO UserRole VALUES ('admin', 'administrator');
-INSERT INTO UserRole VALUES ('dev', 'developer');
+INSERT INTO UserRole(code) VALUES ('admin');
+INSERT INTO UserRole(code) VALUES ('dev');
 INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('1', 'project');
 INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('2', 'iteration');
 INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('3', 'phase');

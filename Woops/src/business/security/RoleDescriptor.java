@@ -11,13 +11,6 @@ public interface RoleDescriptor {
 	public boolean hasRight(String right);
 
 	/**
-	 * Retourne le libellé du rôle
-	 *
-	 * @return	Le libellé
-	 */
-	public String getName();
-
-	/**
 	 * Retourne le code interne pour ce rôle
 	 *
 	 * @return	Le code pour le rôle
