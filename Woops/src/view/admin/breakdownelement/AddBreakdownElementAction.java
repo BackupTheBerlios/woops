@@ -13,6 +13,7 @@ import org.apache.struts.action.ActionForward;
 import view.PresentationConstantes;
 import view.admin.user.ListUsersModel;
 import view.common.WoopsCCAction;
+import view.user.UserItem;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;
@@ -60,7 +61,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 	private void setuserParticipationOptions(ActionContext context) throws PersistanceException {
 		Collection userParticipationMgr = null;
 		Collection userParticipationItems = null;
-		SwapUserItem item = null;
+		UserItem item = null;
 		
 		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
 		
@@ -83,10 +84,12 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     	while (iter.hasNext()) {
     		User user = (User)iter.next();
 			
-			item = new SwapUserItem();
+			item = new UserItem();
 			item.setId(user.getId().toString());
-			item.setFirstandLastName(user.getFirstName()+" "+user.getLastName());
-			item.setRole(user.getRole().getName());
+			item.setFirstName(user.getFirstName());
+			item.setLastName(user.getLastName());
+			//TODO
+			item.setRole(user.getRole().getCode());
 			if (!user.getRole().getCode().equals(PresentationConstantes.ADMIN_ROLE_CODE))
 					userParticipationItems.add(item);
 		}
@@ -94,8 +97,8 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		/**
 		 * Convertion la liste d'ActivityItem en tableau
 		 */
-		DisplayObject[] data = new SwapUserItem[userParticipationItems.size()];
-		data =(SwapUserItem[]) userParticipationItems.toArray(data);
+		DisplayObject[] data = new UserItem[userParticipationItems.size()];
+		data =(UserItem[]) userParticipationItems.toArray(data);
 		
 		/**
 		 * Mis ? jour de l'attribut possibleDependancesOptions du Form
