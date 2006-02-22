@@ -69,9 +69,32 @@
 			>
 			
 			<ctrl:columntext
-				title="admin.showSummary.tableBde"
-				property="users"
-				/>
+				title="table.field.listUsers.lastName"
+				property="lastName"
+				width="350"
+				sortable="true"/>
+			
+			<ctrl:columntext
+				title="table.field.listUsers.firstName" 
+				property="firstName" 
+				width="250"
+				sortable="true"/>
+			
+			
+				
+			<ctrl:columntext   
+				title="table.field.listUsers.login"
+				property="login"
+				width="350"
+				sortable="true"/>
+				
+			<ctrl:columntext   
+				title="table.field.listUsers.role"
+				property="role"
+				width="350"
+				sortable="true"/>
+				
+			
 		</ctrl:list>
 		</td>
 	</tr>

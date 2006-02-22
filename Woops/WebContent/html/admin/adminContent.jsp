@@ -28,7 +28,7 @@
 				width="350"
 				sortable="true"/>
 
-			<ctrl:columntext 
+			<ctrl:columndrilldown 
 				title="table.field.listBreakDownElements.name"
 				property="name" 
 				width="350"
