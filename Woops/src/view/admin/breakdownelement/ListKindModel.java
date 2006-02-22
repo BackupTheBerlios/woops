@@ -1,5 +1,6 @@
 package view.admin.breakdownelement;
 
+import view.breakdownelement.KindItem;
 import view.common.WoopsListDataModel;
 
 import com.cc.framework.common.DisplayObject;
@@ -8,16 +9,16 @@ public class ListKindModel extends WoopsListDataModel {
 
 	
 	/**
-	 * Constructeur par d?faut
+	 * Constructeur par defaut
 	 */
 	public ListKindModel() {
 		super();
 	}
 	
 	/**
-	 * Constructeur permettant d'initialiser la liste d'activit?s
-	 * pour le contr?leur c'est ? dire les lignes de la liste qui 
-	 * sera affich?e au participant
+	 * Constructeur permettant d'initialiser la liste d'activites
+	 * pour le controleur c'est a dire les lignes de la liste qui 
+	 * sera affichee au participant
 	 */
 	public ListKindModel(DisplayObject[] elements) {
 		super(elements);

@@ -3,6 +3,7 @@ package view.admin.user;
 import java.util.Arrays;
 
 import view.common.WoopsListDataModel;
+import view.user.UserItem;
 import business.format.StringColumnComparator;
 
 import com.cc.framework.common.DisplayObject;
