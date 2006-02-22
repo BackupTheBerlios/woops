@@ -23,10 +23,10 @@
 		    
 		<forms:select
         	label="admin.addUser.role"
-        	property="roleCode"
+        	property="roleId"
         	>
-        	<base:options property="roleOptions" keyProperty="code" labelProperty="name" />
-		    </forms:select>
+        		<base:options property="roleOptions" keyProperty="id" labelProperty="labelCode"/>
+		</forms:select>
 		    
 		    
         <forms:text 
