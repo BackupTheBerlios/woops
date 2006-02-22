@@ -32,11 +32,11 @@
 	        property="login"          
       	/>
       	
-  		<forms:text
-			label="table.field.listUsers.role"
-	        property="role"          
-      	/>
-       
+  		<forms:html label="table.field.listUsers.role" >
+      		<bean:message
+      			name="showUserSummaryForm"
+				property="roleCode"/>
+       </forms:html>
           	
    	</forms:form>
    
