@@ -10,8 +10,9 @@ import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
+import view.user.AddUserForm;
+import view.user.RoleItem;
 import business.hibernate.exception.DoublonException;
-import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
@@ -20,7 +21,6 @@ import business.user.UserRole;
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
-import com.cc.framework.ui.model.ListDataModel;
 				
 
 public class AddUserAction extends WoopsCCAction {
@@ -50,9 +50,7 @@ public class AddUserAction extends WoopsCCAction {
 				form.setLogin(user.getLogin());
 				form.setPassword(user.getPassword());
 				form.setPassword2(user.getPassword());
-				form.setRoleCode(user.getRole().getCode());
-				
-				
+				form.setRoleId(user.getRole().getId().toString());
 			}		
 		}
 		else {
@@ -84,11 +82,15 @@ public class AddUserAction extends WoopsCCAction {
 		if (!context.hasErrors()) {
 			retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
 			User user = new User();
+			UserRole userRole = new UserRole();
+			
 			user.setFirstName(addUserForm.getFirstName());
 			user.setLastName(addUserForm.getLastName());
 			user.setLogin(addUserForm.getLogin());
 			user.setPassword(addUserForm.getPassword());
-			user.setRole(new UserRole(addUserForm.getRoleCode(),this.getRoleName((ListDataModel)context.session().getAttribute(PresentationConstantes.KEY_ROLE_OPTIONS),addUserForm.getRoleCode())));
+			
+			userRole.setId(new Integer(addUserForm.getRoleId()));
+			user.setRole(userRole);
 			try {
 				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
 					Integer id = new Integer (Integer.parseInt((String)addUserForm.getUserId()));
@@ -130,7 +132,8 @@ public class AddUserAction extends WoopsCCAction {
 	
 	context.forward(retour);
 	}
-	
+
+	//TODO
 	void setSelect (ActionContext context){
 		
 		AddUserForm madForm = (AddUserForm) context.form();
@@ -144,9 +147,9 @@ public class AddUserAction extends WoopsCCAction {
 			while (i.hasNext())
 			{
 				ur = (UserRole)i.next();
-				item = new RoleItem () ;
+				item = new RoleItem ();
+				item.setId(ur.getId().toString());
 				item.setCode(ur.getCode());
-				item.setName(ur.getName());
 				listUserItem.add(item);
 			}
 			DisplayObject[] data = new DisplayObject[listUserItem.size()]; 
@@ -160,16 +163,5 @@ public class AddUserAction extends WoopsCCAction {
 			e.printStackTrace();
 		}
 			
-	}
-	
-	private String getRoleName(ListDataModel l, String code){
-		String retour = null ;
-		for (int i = 0 ; i < l.size() ; i++){
-			if (((RoleItem)l.getElementAt(i)).getCode().equals(code)){
-				retour = ((RoleItem)l.getElementAt(i)).getName() ;
-			}
-		}
-		return retour;
-		
 	}
 }

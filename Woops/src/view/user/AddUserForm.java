@@ -1,4 +1,4 @@
-package view.admin.user;
+package view.user;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,7 +19,7 @@ public class AddUserForm extends ActionForm{
 	private String login ;
 	private String password ;
 	private String password2 ;
-	private String roleCode ;
+	private String roleId ; /** * Role sélectionné pour l'utilisateur */
 	private String mode ;
 	private String userId ;
 	private SimpleListControl roleOptions = new SimpleListControl ();
@@ -94,12 +94,12 @@ public class AddUserForm extends ActionForm{
 		this.roleOptions.setDataModel(dataModel);
 	}
 
-	public String getRoleCode() {
-		return roleCode;
+	public String getRoleId() {
+		return roleId;
 	}
 
-	public void setRoleCode(String roleCode) {
-		this.roleCode = roleCode;
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 
 	public String getMode() {

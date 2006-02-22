@@ -1,4 +1,4 @@
-package view.admin.user;
+package view.user;
 
 
 
@@ -10,7 +10,7 @@ public class UserItem implements DisplayObject{
 	private String firstName;
 	private String lastName;
 	private String login;
-	private String role;
+	private String roleCode;
 
 	public UserItem() {
 		super();
@@ -48,11 +48,15 @@ public class UserItem implements DisplayObject{
 		this.login = login;
 	}
 
-	public String getRole() {
-		return role;
+	public String getRoleCode() {
+		return roleCode;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRole(String roleCode) {
+		this.roleCode = roleCode;
+	}
+	
+	public String getName() {
+		return lastName + " " + firstName;
 	}
 }

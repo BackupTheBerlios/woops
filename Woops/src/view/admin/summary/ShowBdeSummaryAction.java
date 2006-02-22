@@ -6,11 +6,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import view.PresentationConstantes;
-import view.activity.ActivitySequenceItem;
-import view.activity.ActivitySequencesModel;
 import view.admin.user.ListUsersModel;
-import view.admin.user.UserItem;
 import view.common.WoopsCCAction;
+import view.user.UserItem;
 import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -59,7 +57,7 @@ public class ShowBdeSummaryAction extends WoopsCCAction {
 				ui.setFirstName(u.getFirstName());
 				ui.setLastName(u.getLastName());
 				ui.setLogin(u.getLogin());
-				ui.setRole(u.getRole().getName());
+				ui.setRole(u.getRole().getCode());
 				list.add(ui);
 			}
 			DisplayObject[] data = new UserItem[list.size()];

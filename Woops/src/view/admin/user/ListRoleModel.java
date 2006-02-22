@@ -1,6 +1,7 @@
 package view.admin.user;
 
 import view.common.WoopsListDataModel;
+import view.user.RoleItem;
 
 import com.cc.framework.common.DisplayObject;
 
@@ -26,7 +27,7 @@ public class ListRoleModel extends WoopsListDataModel {
 	 * @see view.common.WoopsListDataModel#getUniqueKey(int)
 	 */
 	public String getUniqueKey(int index) {
-		return ((RoleItem)data[index]).getCode();
+		return ((RoleItem)data[index]).getId();
 	}
 
 }
