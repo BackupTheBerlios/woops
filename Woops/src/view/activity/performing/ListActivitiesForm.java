@@ -15,6 +15,8 @@ public class ListActivitiesForm extends FWActionForm {
 	/** * Liste de contrôle des projets que l'on souhaite afficher au participant */ 
 	private SimpleListControl listBDEs = new SimpleListControl();
 	
+	private String bdeId; /** * Entité par défaut */
+	
 	/** Retourne la liste des activités. 
 	 * 	Cet accesseur permet à la JSP d'accéder à la liste
 	 ** @return liste du contrôleur */
@@ -47,6 +49,14 @@ public class ListActivitiesForm extends FWActionForm {
 	 * @param uniqueKey identifiant de l'entite
 	 */
 	public void setBDEDefault(String uniqueKey) {
-		listBDEs.mark(uniqueKey);
+		this.bdeId = uniqueKey;
+	}
+
+	public String getBdeId() {
+		return bdeId;
+	}
+
+	public void setBdeId(String bdeId) {
+		this.bdeId = bdeId;
 	}
 }

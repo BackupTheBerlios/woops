@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
 import view.activity.performing.ListActivitiesAction;
+import view.activity.performing.ListActivitiesForm;
 import view.common.WoopsCCAction;
 import business.user.User;
 
@@ -29,7 +30,7 @@ public class ChangeBreakdownElementAction extends WoopsCCAction {
 	public void doExecute(ActionContext context) throws IOException, ServletException {
 		try {
 			// Recuperation du form bean
-	    	BreakdownElementForm form = (BreakdownElementForm) context.form();
+	    	ListActivitiesForm form = (ListActivitiesForm) context.form();
 	    	// Recuperation de l'entite par defaut
 	    	Integer bdeId = new Integer(form.getBdeId());
 	    	
