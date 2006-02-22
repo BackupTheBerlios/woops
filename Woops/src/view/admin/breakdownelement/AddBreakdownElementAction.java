@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
 import view.admin.user.ListUsersModel;
-import view.admin.user.UserItem;
 import view.common.WoopsCCAction;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
