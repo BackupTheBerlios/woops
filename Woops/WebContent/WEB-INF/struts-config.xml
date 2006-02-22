@@ -204,6 +204,7 @@
         	<forward name="success" path="/admin.do"/>
         	<forward name="editUser" path="/addUser.do"/>
         	<forward name="deleteUser" path="/admin.do"/>
+        	<forward name="drillDownBreakdown" path="/showBdeSummary.do"/>
         	<forward name="drillDownUser" path="/showUserSummary.do"/>
      	    <forward name="editBreakdown" path="/addBreakdownElement.do"/>
      	    <forward name="deleteBreakdown" path="/admin.do"/>
