@@ -1,4 +1,4 @@
-package view.admin.breakdownelement;
+package view.user;
 
 import java.util.Arrays;
 
@@ -11,16 +11,16 @@ import com.cc.framework.common.SortOrder;
 public class ListSwapUsersModel extends WoopsListDataModel {
 
 	/**
-	 * Constructeur par d?faut
+	 * Constructeur par defaut
 	 */
 	public ListSwapUsersModel() {
 		super();
 	}
 	
 	/**
-	 * Constructeur permettant d'initialiser la liste d'activit?s
-	 * pour le contr?leur c'est ? dire les lignes de la liste qui 
-	 * sera affich?e au participant
+	 * Constructeur permettant d'initialiser la liste d'activites
+	 * pour le contreleur c'est a dire les lignes de la liste qui 
+	 * sera affichee au participant
 	 */
 	public ListSwapUsersModel(DisplayObject[] elements) {
 		super(elements);
@@ -30,12 +30,12 @@ public class ListSwapUsersModel extends WoopsListDataModel {
 	 * @see view.common.WoopsListDataModel#getUniqueKey(int)
 	 */
 	public String getUniqueKey(int index) {
-		return ((SwapUserItem)data[index]).getId();
+		return ((UserItem)data[index]).getId();
 	}
 	
 	/**
-	 * Trie la liste ? partir de la colonne selectionn?e  
-	 * @param column		propri?t? qui d?finie la colonne
+	 * Trie la liste a partir de la colonne selectionnee  
+	 * @param column		propriete qui definie la colonne
 	 * @param direction		ordre de tri : ascendant ou descendant
 	 */	
 	public void sortByColumn(String column, SortOrder direction) {
