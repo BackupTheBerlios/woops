@@ -7,7 +7,6 @@
    
 		<form-bean name="listActivitiesForm" type="view.activity.performing.ListActivitiesForm" />
 		<form-bean name="listFreeActivitiesForm" type="view.activity.performing.ListFreeActivitiesForm" />
-		<form-bean name="bdeForm" type="view.breakdownelement.BreakdownElementForm" />
 		<form-bean name="manageActivityCreationForm" type="view.activity.manage.ManageActivityCreationForm" />
 		<form-bean name="manageActivityDependancesForm" type="view.activity.manage.ManageActivityDependancesForm" />
 	  	<form-bean name="manageDependancesTypesForm" type="view.activity.manage.ManageDependancesTypesForm" />
@@ -18,7 +17,7 @@
 	  	<form-bean name="emptyForm" type="view.common.EmptyForm"/>
 	  	
 	  	<form-bean name="adminForm" type="view.admin.AdminForm" />  
-	  	<form-bean name="addUserForm" type="view.admin.user.AddUserForm" />
+	  	<form-bean name="addUserForm" type="view.user.AddUserForm" />
 	  	<form-bean name="addBreakdownElementForm" type="view.admin.breakdownelement.AddBreakdownElementForm" />  
 	  	<form-bean name="showUserSummaryForm" type="view.admin.summary.ShowUserSummaryForm" />
 	  	<form-bean name="showBdeSummaryForm" type="view.admin.summary.ShowBdeSummaryForm" />
@@ -78,7 +77,7 @@
       	 	roles="#dev"
       	 	input="/html/participant/activity/history/historizedActivities.jsp"
       	 >
-         	<forward name="error" path="/html/participant/activity/performing/listActivities.jsp" />
+         	<forward name="error" path="/html/participant/activity/history/historizedActivities.jsp"  />
          	<forward name="success" path="/html/participant/activity/history/historizedActivities.jsp" />
          	<forward name="action" path="historizedActivities.do"/>
          	<forward name="drillDown" path="/showActivitySummary.do"/>
@@ -86,8 +85,8 @@
       	
 <!-- ================= Changement d'entite ================ -->  
 		<action path="/changeBDE"	 type="view.breakdownelement.ChangeBreakdownElementAction"
-      		name="bdeForm"
-      	 	scope="request"
+      		name="listActivitiesForm"
+      	 	scope="session"
       	 	roles="#dev"
       	 	input="/listActivities.do"
       	 >
