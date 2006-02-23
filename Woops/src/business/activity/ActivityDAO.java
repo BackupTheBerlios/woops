@@ -3,6 +3,7 @@ package business.activity;
 import java.util.Collection;
 import java.util.List;
 
+import net.sf.hibernate.Session;
 import business.BusinessConstantes;
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
@@ -28,26 +29,22 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
 	public Collection getActivitiesByUserWithStates(Integer userId, String[] states) throws PersistanceException {
-		// Constitution de la requete en tenant compte du participant et de l'entite passes en parametre 
-		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act WHERE act.userId = " + userId);  
-		
-		//On precise les etats a prendre en compte
-		if (states.length != 0) {
-			query.append(" AND ( ");
-		
-			// Selection des etats a prendre en compte
-			for(int i = 0; i < states.length; i++) {
-				query.append("act.state.name='"+ states[i] +"'");
-				if (i != states.length - 1) query.append(" OR ");
-			}
-		
-			query.append(" )");
-		}
-		
 		// Recuperation des donnees
-		return executeQuery(query.toString());
-	}
+		return executeQuery(this.getQuery(userId, states));
+	}	
+	
+	/**
+	 * Recuperation des activites pour lesquelles le participant a la responsabilite
+	 * @param userId : identifiant du participant
+	 * @param states : états des activités
+	 * @param session : Session permettant d'executer la session
+	 * @return : Liste des activites du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
+	 */
+	public Collection getActivitiesByUserWithStates(Integer userId, String[] states,  Session session) throws PersistanceException {
+		// Recuperation des donnees
+		return executeQuery(this.getQuery(userId, states), session);
+	}	
 	
 	/**
 	 * Recuperation des activites pour lesquelles le participant a la responsabilite
@@ -55,9 +52,36 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * @param bdeId : identifiant de l'entite
 	 * @param states : états des activités
 	 * @return : Liste des activites du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getActivitiesByUserByBDEWithStates(Integer userId, Integer bdeId, String[] states) throws PersistanceException {
+		// Recuperation des donnees
+		return executeQuery(this.getQuery(userId, bdeId, states));
+	}
+	
+	/**
+	 * Recuperation des activites pour lesquelles le participant a la responsabilite
+	 * @param userId : identifiant du participant
+	 * @param bdeId : identifiant de l'entite
+	 * @param states : états des activités
+	 * @param session : Session permettant d'executer la session
+	 * @return : Liste des activites du participant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 */
+	public Collection getActivitiesByUserByBDEWithStates(Integer userId, Integer bdeId, String[] states, Session session) throws PersistanceException {
+		// Recuperation des donnees
+		return executeQuery(this.getQuery(userId, bdeId, states), session);
+	}	
+	
+	/**
+	 * Constitution de la requete pour recuperer les activites pour lesquelles le participant a la responsabilite
+	 * @param userId : identifiant du participant
+	 * @param bdeId : identifiant de l'entite
+	 * @param states : états des activités
+	 * @return : Requete a executer
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 */
+	private String getQuery(Integer userId, Integer bdeId, String[] states) throws PersistanceException {
 		// Constitution de la requete en tenant compte du participant et de l'entite passes en parametre 
 		StringBuffer query = new StringBuffer();
 		query.append("FROM Activity as act WHERE act.userId = " + userId + " AND act.bdeId = " + bdeId);  
@@ -74,9 +98,34 @@ public class ActivityDAO extends PersistentObjectDAO {
 		
 			query.append(" )");
 		}
-		
-		// Recuperation des donnees
-		return executeQuery(query.toString());
+		return query.toString();
+	}
+	
+	/**
+	 * Constitution de la requete pour recuperer les activites pour lesquelles le participant a la responsabilite
+	 * @param userId : identifiant du participant
+	 * @param states : états des activités
+	 * @return : Requete a executer
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 */
+	private String getQuery(Integer userId, String[] states) throws PersistanceException {
+		// Constitution de la requete en tenant compte du participant et de l'entite passes en parametre 
+		StringBuffer query = new StringBuffer();
+		query.append("FROM Activity as act WHERE act.userId = " + userId);  
+	
+		// On precise les etats a prendre en compte
+		if (states.length != 0) {
+			query.append(" AND ( ");
+	
+			// Selection des etats a prendre en compte
+			for(int i = 0; i < states.length; i++) {
+				query.append("act.state.name='"+ states[i] +"'");
+				if (i != states.length - 1) query.append(" OR ");
+			}
+	
+			query.append(" )");
+		}
+		return query.toString();
 	}
 	
 	
@@ -121,7 +170,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 		
 		query.append("FROM Activity as act WHERE act.id <> " + activityId);
 		query.append(" AND act.state.name <> '" + BusinessConstantes.ACTIVITY_STATE_FINISHED + "'");
-		query.append(" AND act.bdeId = "+bdeId);
+		query.append(" AND act.bdeId = " + bdeId);
 		
 		return executeQuery(query.toString());
 	}
