@@ -1,8 +1,8 @@
 package business.user;
 
 import java.util.Collection;
-import java.util.Set;
 
+import net.sf.hibernate.collection.Set;
 import business.hibernate.HistorizedObject;
 
 import com.cc.framework.security.Principal;
@@ -149,5 +149,15 @@ public class User extends HistorizedObject implements Principal {
 
 	public void setDefaultBDEId(Integer defaultBDEId) {
 		this.defaultBDEId = defaultBDEId;
+	}
+	
+	/**
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	public boolean equals(Object obj) {
+		if (obj instanceof User) {
+			return id.equals(((User)obj).getId());
+		}
+		return super.equals(obj);
 	}
 }

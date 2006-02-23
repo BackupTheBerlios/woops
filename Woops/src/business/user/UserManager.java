@@ -1,8 +1,16 @@
 package business.user;
 
 import java.util.Collection;
+import java.util.Iterator;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
+import net.sf.hibernate.exception.GenericJDBCException;
+import business.activity.Activity;
+import business.activity.ActivityManager;
 import business.hibernate.PersistentObjectManager;
+import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 
 public class UserManager extends PersistentObjectManager {
@@ -53,4 +61,54 @@ public class UserManager extends PersistentObjectManager {
 	public Collection getUsersByBDE(Integer bdeId) throws PersistanceException {
 		return dao.getUsersByBDE(bdeId);
 	}
+	
+
+	public void delete(User user) throws PersistanceException, ForeignKeyException {	
+		Session session = null ;
+		Transaction transaction = null;
+		Collection dbData = null;
+		try {
+			// Chercher les activites concernant de l'utilisateur a supprimer
+			// Mise a jour le champs de "UserId" a null de ces activites
+			dbData = ActivityManager.getInstance().getAllActivitiesByUser((Integer)user.getId());
+			
+			session = this.getSession();
+			// Création d'une transaction pour pouvoir annuler l'ensemble des modifications en cas d'erreur
+			transaction = session.beginTransaction();
+			
+			Iterator iter = dbData.iterator();
+	    	while (iter.hasNext()) {
+	    		Activity activity = (Activity) iter.next();
+	    		activity.setUserId(null);
+	    		ActivityManager.getInstance().update(activity, session);
+	    	}
+	    	// Recuperation de l'utilisateur avec la liste des projets
+	    	user = (User) session.load(User.class, (Integer) user.getId());
+
+	    	// Suppression des affectations aux entités, la suppression se repercute sur la BD automatiquement grace ala session en cours
+	    	user.getBdes().clear();
+	    	
+	    	// Suppression de l'utilisateur
+	    	this.delete(user, session);
+			
+	    	// Tout s'est bien passé, on valide la transaction
+			transaction.commit();
+			
+	    } catch (GenericJDBCException se) {
+			this.rollback(transaction);
+	        if (se.getErrorCode()==2292)
+	        	throw new ForeignKeyException(se.getMessage());
+			throw new PersistanceException(se.getMessage(),se);
+	    } catch (HibernateException he) {
+	        this.rollback(transaction);
+	        throw new PersistanceException(he.getMessage(),he);
+		} finally {
+			try {
+				if (session!=null && session.isOpen()) 
+					this.closeSession(session);			
+			} catch (HibernateException he) {
+				throw new PersistanceException(he.getMessage(),he);
+			}
+		}
+	}	
 }
