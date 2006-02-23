@@ -11,7 +11,6 @@ INSERT INTO `UserBDE` (`bde`, `user`) SELECT b.id, u.id FROM `BreakdownElement` 
 INSERT INTO `UserBDE` (`bde`, `user`) SELECT b.id, u.id FROM `BreakdownElement` as b, `User` as u WHERE `prefix`='W' AND `lastName`='Aubry' AND `firstName`='Claude';
 INSERT INTO `UserBDE` (`bde`, `user`) SELECT b.id, u.id FROM `BreakdownElement` as b, `User` as u WHERE `prefix`='T' AND `lastName`='Aubry' AND `firstName`='Claude';
 
-
 INSERT INTO `Activity` (`name`, `details`, `user`, `state`, `bde` ) VALUES  ( 'Analyser le problème', '', 1, 'created', 1 );
 INSERT INTO `Activity` (`name`, `details`, `user`, `state`, `bde` ) VALUES  ( 'Identifier cas d''utilisation', '', 1, 'created', 1 );
 INSERT INTO `Activity` (`name`, `details`, `user`, `state`, `bde` ) VALUES  ( 'Spécifier cas d''utilisation', '', 1, 'created', 1 );
@@ -23,5 +22,6 @@ INSERT INTO `Activity` (`name`, `details`, `user`, `state`, `bde` ) VALUES  ( 'P
 INSERT INTO `Activity` (`name`, `details`, `user`, `state`, `bde` ) VALUES  ( 'Dérouler l''itération', '', 2, 'created', 1 );
 
 INSERT INTO `ActivitySequence` (`predecessor`,`successor`,`linkType`) VALUES ( 1,2,1 );
+
 
 INSERT INTO `Activity` (`name`, `state`, `bde` ) VALUES  ( 'LIBRE COMME L AIR !', 'created', 1 );
