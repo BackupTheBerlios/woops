@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import net.sf.hibernate.Session;
+
 import business.BusinessConstantes;
 import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
@@ -55,7 +57,6 @@ public class ActivityManager extends PersistentObjectManager {
 		return activityDAO.getActivityById(activityId);
 	}
 	
-	
 	/**
 	 * Recuperation des activites d'une entite
 	 * @param bdeId : identifiant de l'entite
@@ -84,6 +85,24 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
+	 * Recuperation des activites pour lesquelles le participant a la responsabilite
+	 * @param userId : identifiant du participant
+	 * @param session : session permettant d'executer la requete
+	 * @return : Liste des activites restantes du particpant
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
+	 */
+	public Collection getAllActivitiesByUser(Integer userId, Session session) throws PersistanceException {
+		String[] states = new String[3];
+		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
+		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
+		states[2] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
+		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states, session);
+		return list;
+	}
+	
+
+	
+	/**
 	 * Recuperation des activites restant à realiser pour lesquelles le participant a la responsabilite sur une entité donnéé
 	 * @param userId : identifiant du participant
 	 * @param bdeId : identifiant de l'entite
@@ -97,6 +116,24 @@ public class ActivityManager extends PersistentObjectManager {
 		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
 		states[2] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
 		Collection list = activityDAO.getActivitiesByUserByBDEWithStates(userId, bdeId, states);
+		return list;
+	}
+	
+	/**
+	 * Recuperation des activites restant à realiser pour lesquelles le participant a la responsabilite sur une entité donnéé
+	 * @param userId : identifiant du participant
+	 * @param bdeId : identifiant de l'entite
+	 * @param session : session permettant d'executer la requete
+	 * @return : Liste des activites du particpant sur l'entité
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 */
+	public Collection getAllActivitiesByUserByBDE(Integer userId, Integer bdeId, Session session)
+			throws PersistanceException {
+		String[] states = new String[3];
+		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
+		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
+		states[2] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
+		Collection list = activityDAO.getActivitiesByUserByBDEWithStates(userId, bdeId, states, session);
 		return list;
 	}
 	
@@ -438,5 +475,4 @@ public class ActivityManager extends PersistentObjectManager {
 	ActivityManager.getInstance().delete(activity);
 	
 	}
-	
 }
