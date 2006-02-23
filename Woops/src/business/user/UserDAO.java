@@ -47,7 +47,26 @@ public class UserDAO extends PersistentObjectDAO {
 	    
 	    return user;
 	}	
-	
+	/**
+	 * permet d'obtenir un particpant a partir de son id
+	 * @param identifiant
+	 * @return User
+	 * @throws PersistanceException
+	 */
+	public User getUser(Integer id) throws PersistanceException {
+		User user = null;
+		
+		StringBuffer req = new StringBuffer("from User as u ") ;
+        req.append("where ");
+        req.append("u.id='" + id +"' ");
+
+	    List list = (ArrayList) executeQuery(req.toString());
+	    
+	    if (list.size()!=0)
+	        user = (User) list.get(0);
+	    
+	    return user;
+	}
 	
 	/**
 	 * Fournit tous les participants de l'entité

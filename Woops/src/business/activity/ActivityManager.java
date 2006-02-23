@@ -69,6 +69,16 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	
 	/**
+	 * Recuperation des activites  sur une entite
+	 * @param bdeId : identifiant de l'entite
+	 * @return : liste des activites 
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 */
+	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
+		return activityDAO.getFreeActivities(bdeId);
+	}
+	
+	/**
 	 * Recuperation des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
 	 * @return : Liste des activites restantes du particpant
@@ -169,15 +179,22 @@ public class ActivityManager extends PersistentObjectManager {
 		return list;
 	}
 	
+
+	
+	
 	/**
-	 * Recuperation des activites libres sur une entite
-	 * @param bdeId : identifiant de l'entite
-	 * @return : liste des activites libres
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 * Recuperation de l'ensemble des activités d'une entité
+	 * @param userId : identifiant 
+	 * @return : Liste des activites 
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
 	 */
-	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
-		return activityDAO.getFreeActivities(bdeId);
+	public Collection getAllActivitiesByBDE(Integer BDEId)
+			throws PersistanceException {
+
+		Collection list = activityDAO.getAllActivitiesByBDE(BDEId);
+		return list;
 	}
+	
 	
 	/**
 	 * Recuperation des activites pouvant etre predecesseurs de l'activite passee en parametre

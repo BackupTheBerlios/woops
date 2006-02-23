@@ -62,6 +62,25 @@ public class UserManager extends PersistentObjectManager {
 		return dao.getUsersByBDE(bdeId);
 	}
 	
+	/**
+	 * Cette méthode permet d'obtenir un participant a partir de son identification
+	 * @param bdeId : identifiant 
+	 * @return : participant
+	 * @throws PersistanceException Indique qu'une erreur s'est déroulée au moment de la récupération des données
+	 */
+	public User getUserById(Integer id){
+		
+		User user = new User();
+		
+		try {
+			user = dao.getUser(id);
+		} catch (PersistanceException e) {
+			user = null;
+		}
+		return user;
+	}
+	
+	
 
 	public void delete(User user) throws PersistanceException, ForeignKeyException {	
 		Session session = null ;
