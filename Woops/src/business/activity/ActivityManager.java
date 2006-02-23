@@ -145,12 +145,13 @@ public class ActivityManager extends PersistentObjectManager {
 	/**
 	 * Recuperation des activites pouvant etre predecesseurs de l'activite passee en parametre
 	 * @param activityId : l'activite dont on veut connaitre des dependances possibles
+	 * @param bdeId : le projet de l'activité
 	 * @return : liste des activites dont peut dependre l'activite passee en parametre
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getPossibleActivityPredecessors(Integer activityId)
+	public Collection getPossibleActivityPredecessors(Integer activityId,Integer bdeId)
 			throws PersistanceException {
-		Collection list = activityDAO.getPossiblePredecessors(activityId);
+		Collection list = activityDAO.getPossiblePredecessors(activityId,bdeId);
 		return list;
 	}
 	

@@ -20,6 +20,7 @@ import business.activity.ActivityManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
+import business.user.User;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;
@@ -88,8 +89,11 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		/* Sauvegarde dans le form */
 		madForm.setActivityId(activityId.toString());
 		
+		//Recuperation de l'identifiant du participant connect?
+    	User sessionUser = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+
 		/* R?cup?ration de la liste des d?pendances possible de l'activit? via le manager */
-		possibleActivityDependancesMgr = ActivityManager.getInstance().getPossibleActivityPredecessors(activityId);  	
+		possibleActivityDependancesMgr = ActivityManager.getInstance().getPossibleActivityPredecessors(activityId,sessionUser.getDefaultBDEId());  	
 		
 		/**
 		 * Conversion de la liste d'Activity retourn?e par getPossibleActivityDependances

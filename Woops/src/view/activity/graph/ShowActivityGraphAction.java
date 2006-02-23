@@ -64,7 +64,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             	gv.addln("\tsubgraph cluster"+i+" {");
             	if ( user.getId().equals(sessionUser.getId()) ) {
             		gv.addln("\t\tstyle=filled;");
-            		gv.addln("\t\tcolor="+PresentationConstantes.COLOR_BKGRD_FOCUS_USER+";");
+            		gv.addln("\t\tcolor="+PresentationConstantes.COLOR_FOCUS_USER_BKGRD+";");
             	}
             		
             	gv.addln("\t\tlabel = \""+user.getFirstName()+" "+user.getLastName()+"\";");
@@ -92,7 +92,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             }
 			
 			ActivitySequenceManager activitySequenceManager = ActivitySequenceManager.getInstance();
-			ArrayList listAllActivitySequences = (ArrayList) activitySequenceManager.getActivitySequencesByBDE(new Integer(1));
+			ArrayList listAllActivitySequences = (ArrayList) activitySequenceManager.getActivitySequencesByBDE(sessionUser.getDefaultBDEId());
 			Iterator iterActivitySequences = listAllActivitySequences.iterator();
 			while(iterActivitySequences.hasNext()){
 				ActivitySequence actSeq = (ActivitySequence)iterActivitySequences.next();
@@ -116,7 +116,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			GraphViz.setDOT(graphRealPath+"dot.exe");
 			GraphViz.setTEMP_DIR(graphRealPath);
 			
-			String imageFile = "graph"+sessionUser.getId().toString()+".jpg";
+			String imageFile = "graph"+sessionUser.getId().toString()+sessionUser.getDefaultBDEId().toString()+".jpg";
 			
 			File out = new File(graphRealPath+imageFile);
 			gv.writeGraphToFile(gv.getGraph(gv.getDotSource()), out);

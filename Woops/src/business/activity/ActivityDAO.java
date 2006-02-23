@@ -87,7 +87,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getAllActivitiesByBDE(Integer bdeId) throws PersistanceException {
-		return executeQuery("FROM Activity WHERE bde = " + bdeId);
+		return executeQuery("FROM Activity as act WHERE act.bdeId = " + bdeId);
 	}
 	
 	
@@ -111,15 +111,17 @@ public class ActivityDAO extends PersistentObjectDAO {
 	/**
 	 * Recuperation des activites pouvant etre predecesseurs de l'activite passee en parametre
 	 * @param activityId : l'activite dont on veut connaitre des dependances possibles
+	 * @param bdeId : le projet de l'activité
 	 * @return : liste des activites dont peut dependre l'activite passee en parametre
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getPossiblePredecessors(Integer activityId) 
+	public Collection getPossiblePredecessors(Integer activityId, Integer bdeId) 
 			throws PersistanceException {
 		StringBuffer query = new StringBuffer();
 		
 		query.append("FROM Activity as act WHERE act.id <> " + activityId);
 		query.append(" AND act.state.name <> '" + BusinessConstantes.ACTIVITY_STATE_FINISHED + "'");
+		query.append(" AND act.bdeId = "+bdeId);
 		
 		return executeQuery(query.toString());
 	}

@@ -51,7 +51,7 @@ public interface PresentationConstantes {
 	public static final String COLOR_ACTIVITY_IN_PROGRESS="orange";
 	public static final String COLOR_ACTIVITY_FINISHED="red";
 	
-	public static final String COLOR_BKGRD_FOCUS_USER="lightgrey";
+	public static final String COLOR_FOCUS_USER_BKGRD="lightgrey";
 	
 	//constantes de cles en session
 	public static final String KEY_FORM="FORM";
