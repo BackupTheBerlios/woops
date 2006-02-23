@@ -10,9 +10,8 @@
 	
 	<a onClick="window.open('showActivitySummaryToPrint.do?activityId=${ requestScope["activityId"]}','' , 'status=yes,scrollbars=yes,resizable=yes,width=500,height=300')">
 	<img border="0" src="images/printer.gif">
-	${ requestScope["activityId"] }
-	
 	</a>
+	
 	<table>
 	
 	<tr>
