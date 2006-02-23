@@ -57,7 +57,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * @return : Liste des activites du particpant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
-	public Collection getActivitiesByUserWithStates(Integer userId, Integer bdeId, String[] states) throws PersistanceException {
+	public Collection getActivitiesByUserByBDEWithStates(Integer userId, Integer bdeId, String[] states) throws PersistanceException {
 		// Constitution de la requete en tenant compte du participant et de l'entite passes en parametre 
 		StringBuffer query = new StringBuffer();
 		query.append("FROM Activity as act WHERE act.userId = " + userId + " AND act.bdeId = " + bdeId);  

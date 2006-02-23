@@ -46,6 +46,13 @@ public interface PresentationConstantes {
 	public static final String STYLE_FOND1="fond1";
 	public static final String STYLE_FOND2="fond2";
 	
+	//constantes relatives aux styles des graphes
+	public static final String COLOR_ACTIVITY_CREATED="green";
+	public static final String COLOR_ACTIVITY_IN_PROGRESS="orange";
+	public static final String COLOR_ACTIVITY_FINISHED="red";
+	
+	public static final String COLOR_BKGRD_FOCUS_USER="lightgrey";
+	
 	//constantes de cles en session
 	public static final String KEY_FORM="FORM";
 	public static final String KEY_USER="USER";

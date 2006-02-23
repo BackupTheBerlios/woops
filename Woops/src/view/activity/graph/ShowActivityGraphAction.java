@@ -2,6 +2,7 @@ package view.activity.graph;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import org.apache.struts.util.MessageResources;
@@ -53,7 +54,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             
             UserManager userManager = UserManager.getInstance();
 
-            ArrayList listUsers = (ArrayList)userManager.getUsersByBDE(sessionUser.getDefaultBDEId());
+            Collection listUsers = userManager.getUsersByBDE(sessionUser.getDefaultBDEId());
             
             Iterator iterUsers = listUsers.iterator();
             int i = 0;
@@ -63,24 +64,24 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             	gv.addln("\tsubgraph cluster"+i+" {");
             	if ( user.getId().equals(sessionUser.getId()) ) {
             		gv.addln("\t\tstyle=filled;");
-            		gv.addln("\t\tcolor=lightgrey;");
+            		gv.addln("\t\tcolor="+PresentationConstantes.COLOR_BKGRD_FOCUS_USER+";");
             	}
             		
             	gv.addln("\t\tlabel = \""+user.getFirstName()+" "+user.getLastName()+"\";");
             	
 				ActivityManager activityManager = ActivityManager.getInstance();
-				ArrayList listActivities = (ArrayList) activityManager.getAllActivitiesByUser((Integer)user.getId());
+				ArrayList listActivities = (ArrayList) activityManager.getAllActivitiesByUserByBDE((Integer)user.getId(),sessionUser.getDefaultBDEId());
 				Iterator iterActivities = listActivities.iterator();
 				while(iterActivities.hasNext()){
 					Activity act = (Activity)iterActivities.next();
 					String label = "label=\""+act.getName()+"\",";
-					String color="color=white,";
+					String color="";
 					if (act.getState().equals(BusinessConstantes.ACTIVITY_STATE_CREATED))
-						color="color=green,";
+						color="color="+PresentationConstantes.COLOR_ACTIVITY_CREATED+",";
 					if (act.getState().equals(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS))
-						color="color=orange,";
+						color="color="+PresentationConstantes.COLOR_ACTIVITY_IN_PROGRESS+",";
 					if (act.getState().equals(BusinessConstantes.ACTIVITY_STATE_FINISHED))
-						color="color=red,";
+						color="color="+PresentationConstantes.COLOR_ACTIVITY_FINISHED+",";
 					String style="style=filled";
 					gv.addln("\t\t"+act.getId().toString()+"["+label+" "+color+" "+style+"];");
 				}
@@ -110,8 +111,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			//logger.debug(gv.getDotSource());
 			
 			
-			String graphRealPath = getServlet().getServletContext().getRealPath("/") + "graph\\";
-			//TODO gérer les séparateurs selon l'OS ( windows / unix )
+			String graphRealPath = getServlet().getServletContext().getRealPath("/") + "graph" + File.separator;
 			
 			GraphViz.setDOT(graphRealPath+"dot.exe");
 			GraphViz.setTEMP_DIR(graphRealPath);

@@ -85,7 +85,7 @@ public class ListActivitiesAction extends WoopsCCAction {
     		this.setListBDEs(context, dbData);
    
     		// Recuperation de la liste des activites
-    		dbData = ActivityManager.getInstance().getRemainingActivitiesByUser((Integer) sessionUser.getId(), sessionUser.getDefaultBDEId());  	
+    		dbData = ActivityManager.getInstance().getRemainingActivitiesByUserByBDE((Integer) sessionUser.getId(), sessionUser.getDefaultBDEId());  	
     		
     		// Constitue la liste des activites
     		this.setListActivities(context, dbData);

@@ -72,18 +72,35 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Recuperation des activites restant à realiser pour lesquelles le participant a la responsabilite
+	 * Recuperation des activites restant à realiser pour lesquelles le participant a la responsabilite sur une entité donnéé
+	 * @param userId : identifiant du participant
+	 * @param bdeId : identifiant de l'entite
+	 * @return : Liste des activites du particpant sur l'entité
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 */
+	public Collection getAllActivitiesByUserByBDE(Integer userId, Integer bdeId)
+			throws PersistanceException {
+		String[] states = new String[3];
+		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
+		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
+		states[2] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
+		Collection list = activityDAO.getActivitiesByUserByBDEWithStates(userId, bdeId, states);
+		return list;
+	}
+	
+	/**
+	 * Recuperation toutes les activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
 	 * @param bdeId : identifiant de l'entite
 	 * @return : Liste des activites restantes du particpant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getRemainingActivitiesByUser(Integer userId, Integer bdeId)
+	public Collection getRemainingActivitiesByUserByBDE(Integer userId, Integer bdeId)
 			throws PersistanceException {
 		String[] states = new String[2];
 		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
 		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
-		Collection list = activityDAO.getActivitiesByUserWithStates(userId, bdeId, states);
+		Collection list = activityDAO.getActivitiesByUserByBDEWithStates(userId, bdeId, states);
 		return list;
 	}
 	
@@ -99,7 +116,7 @@ public class ActivityManager extends PersistentObjectManager {
 			throws PersistanceException {
 		String[] states = new String[1];
 		states[0] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
-		Collection list = activityDAO.getActivitiesByUserWithStates(userId, bdeId, states);
+		Collection list = activityDAO.getActivitiesByUserByBDEWithStates(userId, bdeId, states);
 		return list;
 	}
 	
@@ -347,7 +364,7 @@ public class ActivityManager extends PersistentObjectManager {
 		Collection listActivitiesChangeState = new ArrayList();
 		
 		// Recuperation des activites de l'utilisateur
-		Collection listActivities = getRemainingActivitiesByUser(userId, bdeId);
+		Collection listActivities = getRemainingActivitiesByUserByBDE(userId, bdeId);
 		
 		// Pour chacune d'entre elles, on v?rifie si elle peut changer d'etat
 		Iterator iter = listActivities.iterator();
