@@ -101,3 +101,11 @@ div.contenu{
         font-size: 12px; 
 }
 
+SELECT {
+	 border: 1px #FFFFFF solid ;
+     color:#FFFFFF;
+     background-color:#8B82A2;
+     font-size:10px;
+     font-family:arial;
+}
+
