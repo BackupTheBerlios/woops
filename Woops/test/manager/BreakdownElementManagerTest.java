@@ -18,6 +18,7 @@ public class BreakdownElementManagerTest extends WoopsManagerTest {
 	 */
 	public void testInsertPersistentObject() {
 		BreakdownElement bde = new BreakdownElement();
+		bde.setPrefix("p");
 		bde.setName("projet");
 		bde.setDetails("super projet");
 		BreakdownElementKind bdek = new BreakdownElementKind();
@@ -31,8 +32,6 @@ public class BreakdownElementManagerTest extends WoopsManagerTest {
 			
 			bde.setId(bdeId);
 			BreakdownElementManager.getInstance().delete(bde);
-
-			assertTrue(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assertTrue(false);
@@ -40,24 +39,38 @@ public class BreakdownElementManagerTest extends WoopsManagerTest {
 	}
 
 	public void testGetList() {
-		BreakdownElement bde = new BreakdownElement();
-		bde.setName("projet");
-		bde.setDetails("super projet");
-		BreakdownElementKind bdek = new BreakdownElementKind();
-		bdek.setId(new Integer(1));
-		bde.setKind(bdek);
-		
+
 		try {
-			
-			Integer bdeId = (Integer)BreakdownElementManager.getInstance().insert(bde);
-			assertNotNull(bdeId);
-			
 			ArrayList list = (ArrayList)BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN);
 			assertFalse(list.isEmpty());
 			
-			bde.setId(bdeId);
-			BreakdownElementManager.getInstance().delete(bde);
-			assertTrue(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			assertTrue(false);
+		}
+	}
+	
+	public void testCopyBreakdownElement() {
+		try {
+			// Récupération du projet Test qui a pour id : 1
+			BreakdownElement srcBde = BreakdownElementManager.getInstance().getBreakDownElementByIdWithUsers(new Integer(1));
+			// Verfication que le projet Test existe
+			assertNotNull(srcBde);
+			
+			
+			// création d'un bde copie
+			BreakdownElement destBde = new BreakdownElement();
+			destBde.setPrefix("c");
+			destBde.setName("copie de test");
+			destBde.setDetails("copie de test");
+			destBde.setKind(srcBde.getKind());
+			destBde.setId(BreakdownElementManager.getInstance().copyBreakdownElement(srcBde,destBde));
+			
+			assertNotNull(destBde.getId());
+			
+			
+			// suppression de bde
+			//BreakdownElementManager.getInstance().delete(destBde);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assertTrue(false);

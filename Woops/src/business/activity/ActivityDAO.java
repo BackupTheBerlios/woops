@@ -86,8 +86,8 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * @return : Liste des activites correspondant au critere de recherche
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
-	public Collection getActivitiesByBDE(Integer bdeId) throws PersistanceException {
-		return executeQuery("FROM Activity WHERE bdeId = " + bdeId);
+	public Collection getAllActivitiesByBDE(Integer bdeId) throws PersistanceException {
+		return executeQuery("FROM Activity WHERE bde = " + bdeId);
 	}
 	
 	

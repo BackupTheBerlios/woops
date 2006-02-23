@@ -92,7 +92,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             }
 			
 			ActivitySequenceManager activitySequenceManager = ActivitySequenceManager.getInstance();
-			ArrayList listAllActivitySequences = (ArrayList) activitySequenceManager.getActivitySequencesByProject(new Integer(1));
+			ArrayList listAllActivitySequences = (ArrayList) activitySequenceManager.getActivitySequencesByBDE(new Integer(1));
 			Iterator iterActivitySequences = listAllActivitySequences.iterator();
 			while(iterActivitySequences.hasNext()){
 				ActivitySequence actSeq = (ActivitySequence)iterActivitySequences.next();

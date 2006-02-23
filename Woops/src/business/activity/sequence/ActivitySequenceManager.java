@@ -46,12 +46,12 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 	
 	/**
 	 * R?cup?ration des sequences d'activit?s d'un projet
-	 * @param projectId : identifiant du projet
+	 * @param bdeId : identifiant du projet
 	 * @return : Liste des sequences d'activit?s du projet
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
-	public Collection getActivitySequencesByProject(Integer projectId) throws PersistanceException {
-		Collection list = activitySequenceDAO.getActivitiesByProject(projectId);
+	public Collection getActivitySequencesByBDE(Integer bdeId) throws PersistanceException {
+		Collection list = activitySequenceDAO.getActivitySequencesByBDE(bdeId);
 		return list;
 	}
 }

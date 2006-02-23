@@ -55,6 +55,18 @@ public class ActivityManager extends PersistentObjectManager {
 		return activityDAO.getActivityById(activityId);
 	}
 	
+	
+	/**
+	 * Recuperation des activites d'une entite
+	 * @param bdeId : identifiant de l'entite
+	 * @return : Liste des activites correspondant au critere de recherche
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 */
+	public Collection getAllActivitiesByBDE(Integer bdeId) throws PersistanceException {
+		return activityDAO.getAllActivitiesByBDE(bdeId);
+	}
+	
+	
 	/**
 	 * Recuperation des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
