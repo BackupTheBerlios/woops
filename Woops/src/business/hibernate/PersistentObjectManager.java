@@ -5,6 +5,7 @@ import java.util.List;
 
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
@@ -61,6 +62,18 @@ public class PersistentObjectManager {
     
     public boolean exist(Class classe, Serializable id) throws PersistanceException {
     	return dao.exist(classe, id);
+    }
+    
+    /**
+     * Permet de faire un rollback sur une transaction et de gerer son exception
+     * @param trans
+     */
+    protected void rollback(Transaction trans){
+        try {
+            trans.rollback();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
     }
 
 }
