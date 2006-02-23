@@ -1,13 +1,11 @@
 package business.breakdownelement;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
-
 import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
@@ -69,17 +67,5 @@ public class BreakdownElementDAO extends PersistentObjectDAO{
 		}
 
 		return user.getBdes();
-	}
-	
-	/**
-	 * Affecte des participants à une entite
-	 * @param bde : entite
-	 * @return : identifiant de l'entite
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de l'affectation
-	 */
-	public Serializable affectUsersToBDE(BreakdownElement bde) throws PersistanceException {
-		update(bde);
-		
-		return (Integer) bde.getId();
 	}
 }
