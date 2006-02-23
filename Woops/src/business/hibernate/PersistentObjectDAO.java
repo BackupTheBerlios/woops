@@ -335,6 +335,25 @@ public class PersistentObjectDAO  {
 		return liste;
 	}
 	
+	/**
+	 * Execute a query. 
+	 * @param query a query expressed in Hibernate's query language
+	 * @param session : Session permettant d'executer la requete 
+	 * @return a distinct list of instances (or arrays of instances)
+	 */
+	public List executeQuery(String query, Session session) throws PersistanceException {
+		List list = null;
+
+		try {
+		    list = session.find(query);
+		    session.flush();
+		} catch (HibernateException he) {
+			throw new PersistanceException(he.getMessage(),he);
+		}
+		return list;
+	}
+	
+	
 	
 	/**
 	 * Execute a query with parameters. 
