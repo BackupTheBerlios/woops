@@ -69,7 +69,7 @@ public class ActivityManager extends PersistentObjectManager {
 	
 	
 	/**
-	 * Recuperation des activites  sur une entite
+	 * Recuperation des activites libres sur une entite
 	 * @param bdeId : identifiant de l'entite
 	 * @return : liste des activites 
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
@@ -93,24 +93,6 @@ public class ActivityManager extends PersistentObjectManager {
 		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states);
 		return list;
 	}
-	
-	/**
-	 * Recuperation des activites pour lesquelles le participant a la responsabilite
-	 * @param userId : identifiant du participant
-	 * @param session : session permettant d'executer la requete
-	 * @return : Liste des activites restantes du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
-	 */
-	public Collection getAllActivitiesByUser(Integer userId, Session session) throws PersistanceException {
-		String[] states = new String[3];
-		states[0] = BusinessConstantes.ACTIVITY_STATE_CREATED;
-		states[1] = BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS;
-		states[2] = BusinessConstantes.ACTIVITY_STATE_FINISHED;
-		Collection list = activityDAO.getActivitiesByUserWithStates(userId, states, session);
-		return list;
-	}
-	
-
 	
 	/**
 	 * Recuperation des activites restant à realiser pour lesquelles le participant a la responsabilite sur une entité donnéé
@@ -178,23 +160,6 @@ public class ActivityManager extends PersistentObjectManager {
 		Collection list = activityDAO.getActivitiesByUserByBDEWithStates(userId, bdeId, states);
 		return list;
 	}
-	
-
-	
-	
-	/**
-	 * Recuperation de l'ensemble des activités d'une entité
-	 * @param userId : identifiant 
-	 * @return : Liste des activites 
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
-	 */
-	public Collection getAllActivitiesByBDE(Integer BDEId)
-			throws PersistanceException {
-
-		Collection list = activityDAO.getAllActivitiesByBDE(BDEId);
-		return list;
-	}
-	
 	
 	/**
 	 * Recuperation des activites pouvant etre predecesseurs de l'activite passee en parametre
