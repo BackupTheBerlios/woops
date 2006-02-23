@@ -336,10 +336,10 @@ public class PersistentObjectDAO  {
 	}
 	
 	/**
-	 * Execute a query. 
-	 * @param query a query expressed in Hibernate's query language
+	 * Execution d'une requete avec une session existante
+	 * @param requete exprimee selon le langage Hibernate
 	 * @param session : Session permettant d'executer la requete 
-	 * @return a distinct list of instances (or arrays of instances)
+	 * @return une liste d'instances
 	 */
 	public List executeQuery(String query, Session session) throws PersistanceException {
 		List list = null;
