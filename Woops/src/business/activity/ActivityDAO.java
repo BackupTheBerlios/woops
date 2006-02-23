@@ -36,19 +36,6 @@ public class ActivityDAO extends PersistentObjectDAO {
 	/**
 	 * Recuperation des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
-	 * @param states : états des activités
-	 * @param session : Session permettant d'executer la session
-	 * @return : Liste des activites du particpant
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donn?es
-	 */
-	public Collection getActivitiesByUserWithStates(Integer userId, String[] states,  Session session) throws PersistanceException {
-		// Recuperation des donnees
-		return executeQuery(this.getQuery(userId, states), session);
-	}	
-	
-	/**
-	 * Recuperation des activites pour lesquelles le participant a la responsabilite
-	 * @param userId : identifiant du participant
 	 * @param bdeId : identifiant de l'entite
 	 * @param states : états des activités
 	 * @return : Liste des activites du particpant
