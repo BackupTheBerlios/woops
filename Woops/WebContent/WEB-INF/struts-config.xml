@@ -21,8 +21,6 @@
 	  	<form-bean name="addBreakdownElementForm" type="view.admin.breakdownelement.AddBreakdownElementForm" />  
 	  	<form-bean name="showUserSummaryForm" type="view.admin.summary.ShowUserSummaryForm" />
 	  	<form-bean name="showBdeSummaryForm" type="view.admin.summary.ShowBdeSummaryForm" />
-	  	
-	  	
 	  	<form-bean name="showTeamActivitiesSummaryForm" type="view.activity.summary.ShowTeamActivitiesSummaryForm" />
 	  	
 	  	
@@ -285,7 +283,15 @@
 	  	</action>
       	
       	
-
+<!-- ================= Show Activity Summary To Print ================ -->  
+		<action path="/showActivitySummaryToPrint"	 
+			type="view.activity.summary.ShowActivitySummaryAction"
+      		name="showActivitySummaryForm"
+      	 	scope="request"
+      	 	>
+         	<forward name="error" path="/showActivitySummary.do" />
+         	<forward name="success" path="/html/participant/activity/summary/showActivitySummaryToPrint.jsp" />
+      	</action>
       	
       	
 	</action-mappings>
