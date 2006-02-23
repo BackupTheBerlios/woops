@@ -42,12 +42,12 @@
 	        property="endDate"          
       	/>
       	
-      	<forms:text
-			label="table.field.listBreakDownElements.kind"
-	        property="kind"          
-      	/>
-       
-          	
+       <forms:html label="table.field.listBreakDownElements.kind" >
+      		<bean:message
+      			name="showBdeSummaryForm"
+				property="kind"/>
+       </forms:html>
+         	
    	</forms:form>
    
    	</td>
@@ -87,14 +87,15 @@
 				property="login"
 				width="350"
 				sortable="true"/>
-				
-			<ctrl:columntext   
-				title="table.field.listUsers.role"
-				property="role"
-				width="350"
-				sortable="true"/>
-				
 			
+			<ctrl:columnhtml id="role"
+				title="table.field.listUsers.role"
+				width="150"
+				>
+				<bean:message
+					name="role"
+					property="roleCode"/>
+			</ctrl:columnhtml> 	
 		</ctrl:list>
 		</td>
 	</tr>

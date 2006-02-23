@@ -53,7 +53,7 @@
 		<ctrl:list 
 			id="bdeList"
 			property="bdeList" 
-			title="admin.showBdeSummary.users"  
+			title="table.title.listBreakDownElements"  
 			rows="5"
 			width="100%"
 			>
@@ -82,11 +82,14 @@
 				width="300"
 				sortable="true"/>
 			
-			<ctrl:columntext 
+			<ctrl:columnhtml id="k"
 				title="table.field.listBreakDownElements.kind"
-				property="kind"
 				width="150"
-				sortable="true"/>
+				>
+					<bean:message
+						name="k"
+						property="kind"/>
+			</ctrl:columnhtml> 
 		</ctrl:list>
 		</td>
 	</tr>
