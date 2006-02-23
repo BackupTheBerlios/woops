@@ -16,8 +16,6 @@ import view.breakdownelement.BreakdownElementItem;
 import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
 import view.user.UserItem;
-import business.activity.Activity;
-import business.activity.ActivityManager;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementManager;
 import business.hibernate.exception.ForeignKeyException;
@@ -273,30 +271,16 @@ public class AdminAction  extends WoopsCCAction {
 		
 		userCourant = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 		
-		//Un utilisateur ne peut supprimer lui-même
+		//Un utilisateur ne peut pas supprimer son compte
 		if ( ((Integer) userCourant.getId()).compareTo(new Integer(id)) == 0) {
 			context.addGlobalError("errors.admin.deleteCurrentUser");
 			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 			return;
 		}
-		
-		Collection dbData = null;
+
 		try {
-			
-			//Chercher les activites liés avec l'utilisateur à supprimer
-			//Mise a jour le champs de "UserId" à null de ces activites
-			dbData = ActivityManager.getInstance().getAllActivitiesByUser(new Integer(Integer.parseInt(id)));
-			
-			Iterator iter = dbData.iterator();
-	    	while (iter.hasNext()) {
-	    		Activity activity = (Activity) iter.next();
-	    		activity.setUserId(null);
-	    		ActivityManager.getInstance().update(activity);
-	    	}
-	    	
-	    	UserManager.getInstance().delete(user);
+			UserManager.getInstance().delete(user);
 			context.forwardByName(PresentationConstantes.FORWARD_DELETE_USER);
-			
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
