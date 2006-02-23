@@ -28,5 +28,10 @@
         	id="5"  
         	text="menu.showActivityGraph"      
         	action="showActivityGraph.do"/>
+        	
+        <menu:menuitem   	
+        	id="6"  
+        	text="menu.showTeamActivitiesSummary"      
+        	action="showTeamActivitiesSummary.do"/>
 
 </menu:menu>
