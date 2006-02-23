@@ -1,4 +1,5 @@
 <%@ taglib uri="/struts-html" prefix="html" %>
+<%@ taglib uri="/struts-logic" prefix="logic" %>
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 <%@ taglib uri="/cc-base"    prefix="base" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
@@ -16,7 +17,7 @@
     	<forms:text 
         	label="admin.addBreakdownElement.prefix"
         	property="prefix"
-        	required="false"/>
+        	required="true"/>
         	
         <forms:text 
         	label="admin.addBreakdownElement.name"
@@ -37,27 +38,29 @@
         	>
         	<base:options property="kindOptions" keyProperty="id" labelProperty="labelName"/>
 		    </forms:select>
-          
-       <forms:swapselect
-            property="usersParticipation"
-            label="admin.addBreakdownElement.manageUserParticipation"
-            orientation="horizontal"
-            labelLeft="admin.addBreakdownElement.manageUserParticipation.toAdd"
-            labelRight="admin.addBreakdownElement.manageUserParticipation.added"
-            valign="top"
-            size="10"
-            style="width: 250;"
-            align="center"
-            filter="false"
-            required="false"
-            disabled="false">
-            
-            <base:options 
-            	property="userParticipationOptions"  
-            	keyProperty="id" 
-            	labelProperty="name"/>
-        
-		</forms:swapselect>
+       
+       <logic:notEqual name="addBreakdownElementForm" property="mode" value="copy_mode">
+	       <forms:swapselect
+	            property="usersParticipation"
+	            label="admin.addBreakdownElement.manageUserParticipation"
+	            orientation="horizontal"
+	            labelLeft="admin.addBreakdownElement.manageUserParticipation.toAdd"
+	            labelRight="admin.addBreakdownElement.manageUserParticipation.added"
+	            valign="top"
+	            size="10"
+	            style="width: 250;"
+	            align="center"
+	            filter="false"
+	            required="false"
+	            disabled="false">
+	            
+	            <base:options 
+	            	property="userParticipationOptions"  
+	            	keyProperty="id" 
+	            	labelProperty="name"/>
+	        
+			</forms:swapselect>
+		</logic:notEqual>
 
        	<forms:buttonsection default="btnAdd">  
         	<forms:button

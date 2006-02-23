@@ -18,6 +18,7 @@ import view.common.WoopsCCAction;
 import view.user.UserItem;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementManager;
+import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -219,10 +220,22 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	
 	public void listBreakDownElements_onEdit(ControlActionContext context, String id) throws IOException, ServletException {
-		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
 		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,id);
 		
-		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN);
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN,PresentationConstantes.UPDATE_MODE);
+	}
+	
+	
+	/**
+	 * Cette méthode est appelée si l'aministeur clique sur le lien "copier"
+	 * @param context	contexte d'execution de la servlet
+	 * @param column	id du projet à supprimer
+	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
+	 */
+	public void listBreakDownElements_onCopy(ControlActionContext context, String id) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,id);
+		
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN,PresentationConstantes.COPY_MODE);
 	}
 
 	/**
@@ -248,11 +261,12 @@ public class AdminAction  extends WoopsCCAction {
 		}
 	}
 	
+	
+	
 	public void listUsers_onEdit(ControlActionContext context, String id) throws IOException, ServletException {
-		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
 		context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,id);
 		
-		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER);
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER,PresentationConstantes.UPDATE_MODE);
 	}
 	
 	/**
@@ -294,14 +308,10 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	
 	public void listBreakDownElements_onCreate(ControlActionContext context) throws IOException, ServletException {
-		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.INSERT_MODE);
-		
-		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN);
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN,PresentationConstantes.INSERT_MODE);
 	}
 	public void listUsers_onCreate(ControlActionContext context) throws IOException, ServletException {
-		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.INSERT_MODE);
-		
-		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER);
+		context.forwardByName(PresentationConstantes.FORWARD_EDIT_USER,PresentationConstantes.INSERT_MODE);
 	}
 	
 	public void listBreakDownElements_onDrilldown(ControlActionContext context, String userBdeString) throws IOException, ServletException {

@@ -28,11 +28,11 @@ public class AddUserAction extends WoopsCCAction {
 	public void doExecute(ActionContext context) throws Exception {
 		AddUserForm form = (AddUserForm) context.form();
 		
-		String mode = (String)context.request().getAttribute(PresentationConstantes.PARAM_MODE);
+		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
 		
 		this.setSelect(context) ;
 		
-		if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
+		if (mode.equals(PresentationConstantes.UPDATE_MODE)){
 			
 			String userId = (String) context.request().getAttribute(PresentationConstantes.PARAM_USER_ID);
 
@@ -53,13 +53,6 @@ public class AddUserAction extends WoopsCCAction {
 				form.setRoleId(user.getRole().getId().toString());
 			}		
 		}
-		else {
-			mode = PresentationConstantes.INSERT_MODE;
-			
-			
-//			form.setCaption("form.title.manageActivityCreation.insert");
-//			form.setDisableNext("false");
-		}
 		
 		context.session().setAttribute(PresentationConstantes.KEY_ROLE_OPTIONS,form.getRoleOptions());
 		form.setMode(mode);
@@ -77,10 +70,9 @@ public class AddUserAction extends WoopsCCAction {
 		// controle de la validation du formulaire
 		context.addErrors(addUserForm.validate(context.mapping(),context.request()));
 
-		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
+		String mode = addUserForm.getMode();
 	    
 		if (!context.hasErrors()) {
-			retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
 			User user = new User();
 			UserRole userRole = new UserRole();
 			
@@ -92,41 +84,47 @@ public class AddUserAction extends WoopsCCAction {
 			userRole.setId(new Integer(addUserForm.getRoleId()));
 			user.setRole(userRole);
 			try {
-				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
+				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
 					Integer id = new Integer (Integer.parseInt((String)addUserForm.getUserId()));
 					user.setId(id);
 					UserManager.getInstance().update(user);
 					context.addGlobalMessage("admin.msg.info.user.modify");
 				}
-				else {
+				else if (mode.equals(PresentationConstantes.INSERT_MODE)){
 					UserManager.getInstance().insert(user);
 					context.addGlobalMessage("admin.msg.info.user.validate");
 				}
+				
+				retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
 			}
 			catch (PersistanceException p)
 			{
-				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-					context.addGlobalError("admin.msg.error.user.modify");
+				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
+					context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,addUserForm.getUserId());
+					context.addGlobalError("admin.msg.error.user.modify.global");
 				}
-				else {
-					context.addGlobalError("admin.msg.error.user.insert");
+				else if (mode.equals(PresentationConstantes.INSERT_MODE)){
+					context.addGlobalError("admin.msg.error.user.insert.global");
 				}
-				System.out.println(p.getMessage());
+				
+				retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 			}
 			catch(DoublonException e)
 			{
-				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-					context.addGlobalError("admin.msg.error.user.modify");
+				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
+					context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,addUserForm.getUserId());
+					context.addGlobalError("admin.msg.error.user.modify.doublon");
 				}
-				else {
-					context.addGlobalError("admin.msg.error.user.insert");
+				else if (mode.equals(PresentationConstantes.INSERT_MODE)){
+					context.addGlobalError("admin.msg.error.user.insert.doublon");
+				}
+				
+				retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 			}
-				System.out.println(e.getMessage());
-			}
-	    	
-			
 			
         } else {
+        	if (mode.equals(PresentationConstantes.UPDATE_MODE))
+				context.request().setAttribute(PresentationConstantes.PARAM_USER_ID,addUserForm.getUserId());
         	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
         }
 	

@@ -71,7 +71,7 @@ public class PersistentObjectDAO  {
         return session.save(objet);
     }    
 	
-	public void update(PersistentObject objet) throws PersistanceException {
+	public void update(PersistentObject objet) throws PersistanceException, DoublonException {
 		
         Session session = null ;
         Transaction transaction = null;
@@ -84,9 +84,22 @@ public class PersistentObjectDAO  {
             
             transaction.commit();
 
-        } catch (HibernateException he) {
+        } catch (ConstraintViolationException cve) {
             rollback(transaction);
-			throw new PersistanceException(he.getMessage(),he);
+            
+           // System.out.print(cve.getErrorCode()+"\n\n");
+            
+            // si erreur JDBC 1062 => doublon !
+            // on lève l'erreur adéquate
+            if (cve.getErrorCode()==1062)
+				throw new DoublonException(cve.getMessage());
+            
+            // sinon erreur de persistence
+			throw new PersistanceException(cve.getMessage(),cve);
+			
+		} catch (HibernateException he) {
+		    rollback(transaction);
+            throw new PersistanceException(he.getMessage(),he);
 		} finally {
 			try {
 				if (session!=null && session.isOpen()) 

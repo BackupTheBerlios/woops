@@ -36,7 +36,7 @@ public class PersistentObjectManager {
     }    
   
     
-    public void update(PersistentObject objet) throws PersistanceException {
+    public void update(PersistentObject objet) throws PersistanceException, DoublonException {
         dao.update(objet);
     }
 

@@ -52,19 +52,13 @@ public class BreakdownElementManagerTest extends WoopsManagerTest {
 	
 	public void testCopyBreakdownElement() {
 		try {
-			// Récupération du projet Test qui a pour id : 1
-			BreakdownElement srcBde = BreakdownElementManager.getInstance().getBreakDownElementByIdWithUsers(new Integer(1));
-			// Verfication que le projet Test existe
-			assertNotNull(srcBde);
-			
-			
 			// création d'un bde copie
 			BreakdownElement destBde = new BreakdownElement();
 			destBde.setPrefix("c");
 			destBde.setName("copie de test");
 			destBde.setDetails("copie de test");
-			destBde.setKind(srcBde.getKind());
-			destBde.setId(BreakdownElementManager.getInstance().copyBreakdownElement(srcBde,destBde));
+			destBde.setKind(new BreakdownElementKind(new Integer(1)));
+			destBde.setId(BreakdownElementManager.getInstance().copyBreakdownElement(new Integer(1),destBde));
 			
 			assertNotNull(destBde.getId());
 			

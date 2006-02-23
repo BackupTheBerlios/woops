@@ -1,6 +1,13 @@
 package view.admin.breakdownelement;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+
+import business.format.Controleur;
 
 import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
@@ -91,5 +98,19 @@ public class AddBreakdownElementForm extends ActionForm{
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
+	
+	public ActionErrors validate(ActionMapping mapping,HttpServletRequest request) {
+
+		ActionErrors errors = new ActionErrors();
 		
+		if (Controleur.isVide(name)){
+			errors.add("name", new ActionMessage("errors.champ.obligatoire","name"));
+		}
+		
+		if (Controleur.isVide(prefix)){
+			errors.add("prefix", new ActionMessage("errors.champ.obligatoire","prefix"));
+		}
+		
+		return errors;
+	}
 }

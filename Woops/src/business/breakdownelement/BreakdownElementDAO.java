@@ -8,6 +8,7 @@ import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectDAO;
+import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 

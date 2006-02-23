@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -173,16 +174,17 @@ public class BreakdownElementManager extends PersistentObjectManager {
 	 * @throws PersistanceException
 	 * @throws DoublonException 
 	 */
-	public Serializable copyBreakdownElement(BreakdownElement srcBde, BreakdownElement destBde) throws PersistanceException, DoublonException {
+	public Serializable copyBreakdownElement(Integer srcBdeId, BreakdownElement destBde) throws PersistanceException, DoublonException {
 		// affectation des utilisateurs au nouveau projet
-		destBde.setUsers(srcBde.getUsers());
+		Set users = (Set)UserManager.getInstance().getUsersByBDE(srcBdeId);
+		destBde.setUsers(new HashSet(users));
 		
 		// insertion en bd
 		destBde.setId((Integer)breakdownElementDAO.insert(destBde));
 		
 		// Récupération de toutes les activités du projet source
 		ActivityManager actMngr = ActivityManager.getInstance();
-		Collection listActivities = actMngr.getAllActivitiesByBDE((Integer)srcBde.getId());
+		Collection listActivities = actMngr.getAllActivitiesByBDE(srcBdeId);
 		
 		// On va utiliser une map pour associer les activités sources et destination
 		// pour pouvoir ensuite créer les activity sequences correspondantes
@@ -210,7 +212,7 @@ public class BreakdownElementManager extends PersistentObjectManager {
 		
 		// Récupération de toutes les dépendances du projet source
 		ActivitySequenceManager actSeqMngr = ActivitySequenceManager.getInstance();
-		Collection listActSeq = actSeqMngr.getActivitySequencesByBDE((Integer)srcBde.getId());
+		Collection listActSeq = actSeqMngr.getActivitySequencesByBDE(srcBdeId);
 		
 		// Copie des dépendances
 		Iterator iterActSeq = listActSeq.iterator();

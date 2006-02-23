@@ -3,10 +3,12 @@
 
 <html:form action="showActivityGraph.do">	
 
-	<html:img 
-		src="${showActivityGraphForm.imageFilePath}"
-		width="600"
-		/>
+	<a href="${showActivityGraphForm.imageFilePath}" target="_blank">
+		<html:img 
+			src="${showActivityGraphForm.imageFilePath}"
+			width="600"
+			/>
+	</a>
 
 </html:form>
  

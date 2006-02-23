@@ -21,6 +21,7 @@ public interface PresentationConstantes {
     public static final String FORWARD_DELETE="delete";
     public static final String FORWARD_DELETE_USER="deleteUser";
     public static final String FORWARD_DELETE_BREAKDOWN="deleteBreakdown";
+    public static final String FORWARD_COPY_BREAKDOWN="copy";
     public static final String FORWARD_DRILLDOWN="drillDown";
     public static final String FORWARD_BACK="back"; 
 	public static final String FORWARD_INDEX="index"; 
@@ -77,6 +78,7 @@ public interface PresentationConstantes {
     public static final String INSERT_MODE = "insert_mode";
     public static final String UPDATE_MODE = "update_mode";
     public static final String DELETE_MODE = "delete_mode";
+    public static final String COPY_MODE = "copy_mode";
     
     // Constantes forward pour admin
     public static final String FORWARD_ADMIN="admin";   

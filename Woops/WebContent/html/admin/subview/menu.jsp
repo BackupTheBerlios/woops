@@ -12,12 +12,12 @@
         <menu:menuitem   	
         	id="3"  
         	text="admin.menu.createUser"      
-        	action="addUser.do"/>
+        	action="addUser.do?mode=insert_mode"/>
         	
         <menu:menuitem   	
         	id="3"  
         	text="admin.menu.createBreakdownElement"      
-        	action="addBreakdownElement.do"/>
+        	action="addBreakdownElement.do?mode=insert_mode"/>
      	
 
 </menu:menu>

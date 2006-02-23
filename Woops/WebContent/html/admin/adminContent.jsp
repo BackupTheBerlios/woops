@@ -59,6 +59,14 @@
 			<ctrl:columnedit 
 				title="table.field.listBreakDownElements.edit"/> 
 
+			<ctrl:columnbutton 
+				title="table.field.listBreakDownElements.copy.title" 
+				text="table.field.listBreakDownElements.copy.text" 
+				align="center"
+				command="copy"
+				width="150"
+				/>
+			
 			<ctrl:columndelete 
 				title="table.field.listBreakDownElements.delete"
 				onclick="return confirm('${confirmMessageDeleteBde}');"
