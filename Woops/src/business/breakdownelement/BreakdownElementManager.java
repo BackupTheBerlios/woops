@@ -134,6 +134,13 @@ public class BreakdownElementManager extends PersistentObjectManager {
 						activity.setUserId(null);
 						ActivityManager.getInstance().update(activity, session);
 					}
+			
+					if (user.getDefaultBDEId().intValue() == ((Integer)bde.getId()).intValue()) {
+						// Recuperation de l'utilisateur pour mettre à jour son projet par défaut
+				    	user = (User) session.load(User.class, (Integer) user.getId());
+						// Le défaut est mis à jour en BD
+						user.setDefaultBDEId(null);
+					}
 				}
 			
 				this.update(bde, session);
