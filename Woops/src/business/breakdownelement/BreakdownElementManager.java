@@ -1,19 +1,26 @@
 package business.breakdownelement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
+import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Session;
+import net.sf.hibernate.Transaction;
+import net.sf.hibernate.exception.ConstraintViolationException;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
 import business.activity.state.CreatedActivityState;
+import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
+import business.user.User;
 import business.user.UserManager;
 
 public class BreakdownElementManager extends PersistentObjectManager {
@@ -91,9 +98,70 @@ public class BreakdownElementManager extends PersistentObjectManager {
 	 * @param bde : entite
 	 * @return : identifiant de l'entite
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de l'affectation
+	 * @throws DoublonException 
 	 */
-	public Serializable affectUsersToBDE(BreakdownElement bde) throws PersistanceException {
-		return breakdownElementDAO.affectUsersToBDE(bde);
+	public Serializable affectUsersToBDE(BreakdownElement bde) throws PersistanceException, DoublonException {	
+		if (bde.getId() != null) {
+			Session session = null;
+			Transaction transaction = null;
+			try {
+				// Mode : update
+				// Récupération des participants du projet
+				Collection dbData = UserManager.getInstance().getUsersByBDE((Integer)bde.getId());
+		
+				session = this.getSession();
+				// Création d'une transaction pour pouvoir annuler l'ensemble des modifications en cas d'erreur
+				transaction = session.beginTransaction();
+				
+				// On conserve les participants qui ont été supprimés du projet
+				// Pour effectuer la suppression les 2 formats de liste doivent être identiques
+				// La méthode removeAll fait appelle à la méthode equals de User
+				Collection lastUsers = new ArrayList(dbData);
+				Collection newUsers = new ArrayList(bde.getUsers());
+				lastUsers.removeAll(newUsers);
+
+				// Pour chaque participant on rend ses activités libres
+				Iterator it = lastUsers.iterator();
+				while (it.hasNext()) {
+					User user = (User) it.next();
+					// Recherche les activités concernant de l'utilisateur a supprimer
+					// Mise a jour le champs de "UserId" a null de ces activites
+					dbData = ActivityManager.getInstance().getAllActivitiesByUserByBDE((Integer)user.getId(), (Integer)bde.getId(), session);
+					Iterator iter = dbData.iterator();
+					while (iter.hasNext()) {
+						Activity activity = (Activity) iter.next();
+						activity.setUserId(null);
+						ActivityManager.getInstance().update(activity, session);
+					}
+				}
+			
+				this.update(bde, session);
+				
+		    	// Tout s'est bien passé, on valide la transaction
+				transaction.commit();
+			} catch (ConstraintViolationException cve) {
+	            rollback(transaction);
+	            // si erreur JDBC 1062 => doublon !
+	            // on lève l'erreur adéquate
+	            if (cve.getErrorCode()==1062)
+					throw new DoublonException(cve.getMessage());
+				throw new PersistanceException(cve.getMessage(),cve);
+			} catch (HibernateException he) {
+	            rollback(transaction);
+				throw new PersistanceException(he.getMessage(),he);
+			} finally {
+				try {
+					if (session!=null && session.isOpen()) 
+						HibernateSessionFactory.closeSession();				
+				} catch (HibernateException he) {
+					throw new PersistanceException(he.getMessage(),he);
+				}
+			}
+		} else {
+			// Mode : insert
+			bde.setId(this.insert(bde));
+		}
+		return (Integer) bde.getId();
 	}
 	
 	
