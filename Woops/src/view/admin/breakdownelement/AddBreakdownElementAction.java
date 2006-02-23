@@ -218,11 +218,11 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
     					Integer id = new Integer (Integer.parseInt((String)madForm.getBkId()));
     					bke.setId(id);
-    					BreakdownElementManager.getInstance().update(bke);
+    					BreakdownElementManager.getInstance().affectUsersToBDE(bke);
     					context.addGlobalMessage("admin.msg.info.breakdownelement.modify");
     				}
     				else {
-    					BreakdownElementManager.getInstance().insert(bke);
+    					BreakdownElementManager.getInstance().affectUsersToBDE(bke);
     					context.addGlobalMessage("admin.msg.info.breakdownelement.validate");    					
     				}
     					
