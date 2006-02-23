@@ -2,6 +2,10 @@ package view.activity;
 
 
 
+import java.util.Date;
+
+import business.format.Formatage;
+
 import com.cc.framework.common.DisplayObject;
 
 
@@ -11,9 +15,31 @@ public class ActivityItem implements DisplayObject{
 	private String details;
 	private String state;
 	private String action;
+	private String userLastName;
+	private String userFirstName;
 	private boolean actionEnabled;
 	private boolean deleteEnabled;
+	private String startDate = "";
+	private String endDate = "";
 	
+	
+	
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date date) {
+		endDate = Formatage.dateToString(date);
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date date) {
+		startDate = Formatage.dateToString(date);
+	}
+
 	public ActivityItem() {
 		super();
 	}
@@ -79,5 +105,28 @@ public class ActivityItem implements DisplayObject{
 	public void setDeleteEnabled(boolean deleteEnabled) {
 		this.deleteEnabled = deleteEnabled;
 	}
+
+	public String getUserFirstName() {
+		return userFirstName;
+	}
+
+	public void setUserFirstName(String userFirstName) {
+		this.userFirstName = userFirstName;
+	}
+
+	public String getUserLastName() {
+		return userLastName;
+	}
+
+	public void setUserLastName(String userLastName) {
+		this.userLastName = userLastName;
+	}
+	
+	public String getUserName() {
+		
+		return (getUserLastName()!=null)?(getUserFirstName()+" "+getUserLastName()):("");
+
+	}
+	
 	
 }
