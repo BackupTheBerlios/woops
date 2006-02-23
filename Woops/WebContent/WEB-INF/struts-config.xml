@@ -21,6 +21,11 @@
 	  	<form-bean name="addBreakdownElementForm" type="view.admin.breakdownelement.AddBreakdownElementForm" />  
 	  	<form-bean name="showUserSummaryForm" type="view.admin.summary.ShowUserSummaryForm" />
 	  	<form-bean name="showBdeSummaryForm" type="view.admin.summary.ShowBdeSummaryForm" />
+	  	
+	  	
+	  	<form-bean name="showTeamActivitiesSummaryForm" type="view.activity.summary.ShowTeamActivitiesSummaryForm" />
+	  	
+	  	
 	</form-beans>
 
 
@@ -193,6 +198,33 @@
          	<forward name="edit" path="/manageActivityCreation.do"/>
       	</action>
     	
+<!-- ================= Show Activity Summary To Print ================ -->  
+		<action path="/showActivitySummaryToPrint"	 
+			type="view.activity.summary.ShowActivitySummaryAction"
+      		name="showActivitySummaryForm"
+      	 	scope="request"
+      	 	>
+         	<forward name="error" path="/html/participant/activity/listChangeStateActivities.jsp" />
+         	<forward name="success" path="/html/participant/activity/summary/showActivitySummaryToPrint.jsp" />
+      	</action>
+    	
+    	
+    	
+    	
+ <!-- ================= showTeamActivitiesSummary ================ -->  
+		<action path="/showTeamActivitiesSummary"	 
+			type="view.activity.summary.ShowTeamActivitiesSummaryAction"
+      		name="showTeamActivitiesSummaryForm"
+      	 	scope="session"
+      	 	input="/html/participant/activity/summary/showTeamActivitiesSummary.jsp"
+      	 	>
+      	 	<forward name="error" path="/html/participant/activity/listChangeStateActivities.jsp" />
+         	<forward name="success" path="/html/participant/activity/summary/showTeamActivitiesSummary.jsp" />
+      	</action>	
+    	
+    	
+    	
+    	
      <!-- ================= Admin / admin ================ -->  
       	<action path="/admin"	 type="view.admin.AdminAction"
      		attribute="adminForm"
@@ -253,15 +285,7 @@
 	  	</action>
       	
       	
-<!-- ================= Show Activity Summary To Print ================ -->  
-		<action path="/showActivitySummaryToPrint"	 
-			type="view.activity.summary.ShowActivitySummaryAction"
-      		name="showActivitySummaryForm"
-      	 	scope="request"
-      	 	>
-         	<forward name="error" path="/showActivitySummary.do" />
-         	<forward name="success" path="/html/participant/activity/summary/showActivitySummaryToPrint.jsp" />
-      	</action>
+
       	
       	
 	</action-mappings>
