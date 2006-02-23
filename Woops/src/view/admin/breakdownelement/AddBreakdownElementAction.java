@@ -31,35 +31,42 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 
 	public void doExecute(ActionContext context) throws Exception {
 		AddBreakdownElementForm form = (AddBreakdownElementForm) context.form();
-		String mode = (String)context.request().getAttribute(PresentationConstantes.PARAM_MODE);
+		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
 		
-		if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
+		if (mode.equals(PresentationConstantes.COPY_MODE)){
 			String bkId = (String) context.request().getAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID);
-
-			HashMap bkMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_BDE_MAP);
-
-			BreakdownElement bke = (BreakdownElement)bkMap.get(new Integer(Integer.parseInt(bkId)));
-			
-			form.setBkId(bkId);				
-			if (bke!=null) {
-				form.setKindId(bke.getKind().getId().toString()) ;
-				form.setDetails(bke.getDetails());
-				form.setName(bke.getName());
-				form.setPrefix(bke.getPrefix());
-		
-			}
-			this.setUsersParticipation(context);		
-		} else {
-			mode = PresentationConstantes.INSERT_MODE;
+			form.setBkId(bkId);	
 		}
-		this.setuserParticipationOptions(context);
+		else {
+			if (mode.equals(PresentationConstantes.UPDATE_MODE)){
+				String bkId = (String) context.request().getAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID);
+	
+				HashMap bkMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_BDE_MAP);
+	
+				BreakdownElement bke = (BreakdownElement)bkMap.get(new Integer(Integer.parseInt(bkId)));
+				
+				form.setBkId(bkId);				
+				if (bke!=null) {
+					form.setKindId(bke.getKind().getId().toString()) ;
+					form.setDetails(bke.getDetails());
+					form.setName(bke.getName());
+					form.setPrefix(bke.getPrefix());
+			
+				}
+				this.setUsersParticipation(context);		
+			}
+		
+			// en mode UPDATE et INSERT on remplit le swap select
+			this.setUserParticipationOptions(context);
+			
+		}
+		
 		this.setSelect(context) ;
-
 		form.setMode(mode);
 		context.forwardToInput();
 	}
 
-	private void setuserParticipationOptions(ActionContext context) throws PersistanceException {
+	private void setUserParticipationOptions(ActionContext context) throws PersistanceException {
 		Collection userParticipationMgr = null;
 		Collection userParticipationItems = null;
 		UserItem item = null;
@@ -177,83 +184,101 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 			
 	}
         
-    	public void add_onClick(FormActionContext context) {
-    		ActionForward retour = null;	
+	public void add_onClick(FormActionContext context) {
+		ActionForward retour = null;	
+		
+		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
+
+		// controle de la validation du formulaire
+		context.addErrors(madForm.validate(context.mapping(),context.request()));
+
+		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
+	    
+		if (!context.hasErrors()) {
+    		String prefix = madForm.getPrefix();
+    		String name = madForm.getName();
+    		String details = madForm.getDetails();
+    		BreakdownElement bke = new BreakdownElement ();
+    		bke.setId(null);
+    		bke.setPrefix(prefix);
+    		bke.setName(name);
+    		bke.setDetails(details);
+    		bke.setDateCreation(null);
+    		bke.setEndDate(null);
+    		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));      		
+	    	
+    		if (!mode.equals(PresentationConstantes.COPY_MODE)) {
+    			String [] usersKeys  = madForm.getUsersParticipation();
+	    		Set users = new HashSet();
+	    		if (usersKeys != null) {
+	        		User user;
+	        		for (int i=0; i<usersKeys.length;i++) {
+	        			if (usersKeys[i]!= "") {
+	        				bke.setId(new Integer(1));            				
+	            			user = new User();
+	            			user.setId(new Integer(Integer.parseInt(usersKeys[i])));
+	                		users.add(user);        					
+	        			}
+	        		}
+	    		}
+	    		bke.setUsers(users);
+    		}
     		
-    		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
-
-    		// controle de la validation du formulaire
-    		context.addErrors(madForm.validate(context.mapping(),context.request()));
-
-    		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
-    	    
-    		if (!context.hasErrors()) {
-    			retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
-        		String prefix = madForm.getPrefix();
-        		String name = madForm.getName();
-        		String details = madForm.getDetails();
-        		BreakdownElement bke = new BreakdownElement ();
-        		bke.setId(null);
-        		bke.setPrefix(prefix);
-        		bke.setName(name);
-        		bke.setDetails(details);
-        		bke.setDateCreation(null);
-        		bke.setEndDate(null);
-        		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));      		
-        		String [] usersKeys  = madForm.getUsersParticipation();
-        		Set users = new HashSet();
-        		if (usersKeys != null) {
-            		User user;
-            		for (int i=0; i<usersKeys.length;i++) {
-            			if (usersKeys[i]!= "") {
-            				bke.setId(new Integer(1));            				
-                			user = new User();
-                			user.setId(new Integer(Integer.parseInt(usersKeys[i])));
-                    		users.add(user);        					
-            			}
-            		}
-        		}
-        		bke.setUsers(users);
-    			try {
-    				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					Integer id = new Integer (Integer.parseInt((String)madForm.getBkId()));
-    					bke.setId(id);
-    					BreakdownElementManager.getInstance().affectUsersToBDE(bke);
-    					context.addGlobalMessage("admin.msg.info.breakdownelement.modify");
-    				}
-    				else {
-    					BreakdownElementManager.getInstance().affectUsersToBDE(bke);
-    					context.addGlobalMessage("admin.msg.info.breakdownelement.validate");    					
-    				}
-    					
-    			}
-    			catch (PersistanceException p)
-    			{
-    				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					context.addGlobalError("admin.msg.error.breakdownelement.modify");
-    				}
-    				else {
-    					context.addGlobalError("admin.msg.error.breakdownelement.insert");
-    				}
-    				System.out.println(p.getMessage());
-    			}
-    			catch(DoublonException e)
-    			{
-    				if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
-    					context.addGlobalError("admin.msg.error.breakdownelement.modify");
-    				}
-    				else {
-    					context.addGlobalError("admin.msg.error.breakdownelement.insert");
-    			}
-    				System.out.println(e.getMessage());
-    			}
-    			
-    			
-    			
-            } else {
-            	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
-            }
-    	
-    	context.forward(retour);
-    	}    
+			try {
+				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
+					Integer id = new Integer (Integer.parseInt((String)madForm.getBkId()));
+					bke.setId(id);
+					BreakdownElementManager.getInstance().update(bke);
+					context.addGlobalMessage("admin.msg.info.breakdownelement.modify");
+				}
+				else if (mode.equals(PresentationConstantes.INSERT_MODE)){
+					BreakdownElementManager.getInstance().insert(bke);
+					context.addGlobalMessage("admin.msg.info.breakdownelement.insert");    					
+				}
+				else if (mode.equals(PresentationConstantes.COPY_MODE)){
+					BreakdownElementManager.getInstance().copyBreakdownElement(new Integer(madForm.getBkId()),bke);
+					context.addGlobalMessage("admin.msg.info.breakdownelement.copy");    					
+				}
+				
+				retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
+			}
+			catch (PersistanceException p)
+			{
+				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
+					context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,madForm.getBkId());
+					context.addGlobalError("admin.msg.error.breakdownelement.modify.global");
+				}
+				else if (mode.equals(PresentationConstantes.INSERT_MODE)) {
+					context.addGlobalError("admin.msg.error.breakdownelement.insert.global");
+				}
+				else if (mode.equals(PresentationConstantes.COPY_MODE)) {
+					context.addGlobalError("admin.msg.error.breakdownelement.copy.global");
+				}
+				
+				retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
+			}
+			catch(DoublonException e)
+			{
+				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
+					context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,madForm.getBkId());
+					context.addGlobalError("admin.msg.error.breakdownelement.modify.doublon");
+				}
+				else if (mode.equals(PresentationConstantes.INSERT_MODE)) {
+					context.addGlobalError("admin.msg.error.breakdownelement.insert.doublon");
+				}
+				else if (mode.equals(PresentationConstantes.COPY_MODE)) {
+					context.addGlobalError("admin.msg.error.breakdownelement.copy.doublon");
+				}
+				
+				retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
+			}
+			
+        } else {
+        	if (mode.equals(PresentationConstantes.UPDATE_MODE))
+        		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,madForm.getBkId());
+        	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
+        }
+	
+		context.forward(retour);
+	}    
 }
