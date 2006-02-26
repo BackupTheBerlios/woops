@@ -33,11 +33,13 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		AddBreakdownElementForm form = (AddBreakdownElementForm) context.form();
 		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
 		
+		// Récupération de l'id du projet
 		if (mode.equals(PresentationConstantes.COPY_MODE)){
 			String bkId = (String) context.request().getAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID);
 			form.setBkId(bkId);	
 		}
 		else {
+			// Initilialisation du formulaire
 			if (mode.equals(PresentationConstantes.UPDATE_MODE)){
 				String bkId = (String) context.request().getAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID);
 	
@@ -60,12 +62,17 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 			this.setUserParticipationOptions(context);
 			
 		}
-		
+		// Initilisation de la liste des processus
 		this.setSelect(context) ;
 		form.setMode(mode);
 		context.forwardToInput();
 	}
 
+	/**
+	 * Initilisation de la liste des participants possibles
+	 * @param context : contexte d'execution de la servlet
+	 * @throws PersistanceException
+	 */
 	private void setUserParticipationOptions(ActionContext context) throws PersistanceException {
 		Collection userParticipationMgr = null;
 		Collection userParticipationItems = null;
@@ -73,19 +80,11 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		
 		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
 		
-		/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans la requete*/
-		//Integer projectId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_USER_ID);
-		
-		/* Sauvegarde dans le form */
-		//madForm.setProjectId(projectId.toString());
-		
 		/* R?cup?ration de la liste des utilisateurs */
 		userParticipationMgr = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
 		
-		/**
-		 * Conversion de la liste d'Activity retourn?e par getPossibleActivityDependances
-		 * en liste d'ActivityItem
-		 */
+		/* Conversion de la liste d'Activity retournee par getPossibleActivityDependances
+		 * en liste d'ActivityItem */
     	Iterator iter = userParticipationMgr.iterator();
     	userParticipationItems = new ArrayList();
 
@@ -96,33 +95,28 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 			item.setId(user.getId().toString());
 			item.setFirstName(user.getFirstName());
 			item.setLastName(user.getLastName());
-			//TODO
+			// Code du role de l'utilisateur
 			item.setRole(user.getRole().getCode());
 			if (!user.getRole().getCode().equals(PresentationConstantes.ADMIN_ROLE_CODE))
 					userParticipationItems.add(item);
 		}
 		
-		/**
-		 * Convertion la liste d'ActivityItem en tableau
-		 */
+		/* Convertion la liste d'ActivityItem en tableau */
 		DisplayObject[] data = new UserItem[userParticipationItems.size()];
 		data =(UserItem[]) userParticipationItems.toArray(data);
 		
-		/**
-		 * Mis ? jour de l'attribut possibleDependancesOptions du Form
-		 * en passant par un ListActivitiesModel
-		 */
+		/* Met a jour l'attribut possibleDependancesOptions du Form
+		 * en passant par un ListActivitiesModel */
 		ListUsersModel model = new ListUsersModel(data);
-		
-		
-		/**
-		 * Sauvegarde du model dans la session
-		 */
-		//context.session().setAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS,model);
 		
 		madForm.setUserParticipationOptions(model);
 	}
 	
+	/**
+	 * Initilisation de la liste des participants sur le processus
+	 * @param context : contexte d'execution de la servlet
+	 * @throws PersistanceException
+	 */
 	private void setUsersParticipation(ActionContext context) throws PersistanceException {
 		Collection userParticipationMgr = null;
 
@@ -131,28 +125,22 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		userParticipationMgr = UserManager.getInstance().getUsersByBDE(new Integer(Integer.parseInt(madForm.getBkId())));
 	
 		
-		/**
-		 * Convertit la liste des cl?s de type Integer
-		 * de la liste activityDependancesKeys en tableau de cl?s de type String
-		 */  
+		/* Convertit la liste des cles de type Integer
+		 * de la liste activityDependancesKeys en tableau de cles de type String */  
     	String[] listStringKeys = new String[userParticipationMgr.size()];
 		Iterator iter = userParticipationMgr.iterator();
 		for (int i=0; iter.hasNext(); i++) {
 			listStringKeys[i]=((User)iter.next()).getId().toString();
 		}
-		
-		/**
-		 * Sauvegarde du tableau des anciennes cl?s des activit? depandantes dans la session
-		 */
-		//context.session().setAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS,listStringKeys);
-		
-		/**
-		 * Mis ? jour de l'attribut usersParticipation du Form
-		 */
+
+		/* Met a jour l'attribut l'attribut usersParticipation du Form */
 		madForm.setUsersParticipation(listStringKeys);			
 	}
         
-        
+    /**
+	 * Initilisation de la liste des processus
+	 * @param context : contexte d'execution de la servlet
+     */    
     private void setSelect (ActionContext context){
 		
     	AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
@@ -183,30 +171,33 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		}
 			
 	}
-        
+    
+    /**
+     * Cette méthode permet de prendre en compte l'insertion, la mise à jour ou la copie d'un projet
+	 * @param context : contexte d'execution e la servlet
+     */
 	public void add_onClick(FormActionContext context) {
 		ActionForward retour = null;	
 		
 		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
 
-		// controle de la validation du formulaire
+		// Controle de la validation du formulaire
 		context.addErrors(madForm.validate(context.mapping(),context.request()));
 
 		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
 	    
 		if (!context.hasErrors()) {
+			// Création d'un processus avec les valeurs récupérés dans le formulaire
     		String prefix = madForm.getPrefix();
     		String name = madForm.getName();
     		String details = madForm.getDetails();
     		BreakdownElement bke = new BreakdownElement ();
-    		bke.setId(null);
     		bke.setPrefix(prefix);
     		bke.setName(name);
     		bke.setDetails(details);
-    		bke.setDateCreation(null);
-    		bke.setEndDate(null);
     		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));      		
 	    	
+    		// Recuperation des participants sélectionnés
     		if (!mode.equals(PresentationConstantes.COPY_MODE)) {
     			String [] usersKeys  = madForm.getUsersParticipation();
 	    		Set users = new HashSet();
@@ -214,8 +205,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 	        		User user;
 	        		for (int i=0; i<usersKeys.length;i++) {
 	        			if (usersKeys[i]!= "") {
-	        				bke.setId(new Integer(1));            				
-	            			user = new User();
+	        				user = new User();
 	            			user.setId(new Integer(Integer.parseInt(usersKeys[i])));
 	                		users.add(user);        					
 	        			}
@@ -225,6 +215,8 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     		}
     		
 			try {
+				/* En fonction du mode, on effectue un traitement différent,
+				on différencie un insert d'une modification si l'attribut id est initialisé */ 
 				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
 					Integer id = new Integer (Integer.parseInt((String)madForm.getBkId()));
 					bke.setId(id);
@@ -239,11 +231,10 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 					BreakdownElementManager.getInstance().copyBreakdownElement(new Integer(madForm.getBkId()),bke);
 					context.addGlobalMessage("admin.msg.info.breakdownelement.copy");    					
 				}
-				
+				// Page d'accueil
 				retour = context.mapping().findForward(PresentationConstantes.FORWARD_ADMIN);
-			}
-			catch (PersistanceException p)
-			{
+			
+			} catch (PersistanceException p) {
 				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
 					context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,madForm.getBkId());
 					context.addGlobalError("admin.msg.error.breakdownelement.modify.global");
@@ -257,8 +248,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 				
 				retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
 			}
-			catch(DoublonException e)
-			{
+			catch(DoublonException e) {
 				if (mode.equals(PresentationConstantes.UPDATE_MODE)){
 					context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,madForm.getBkId());
 					context.addGlobalError("admin.msg.error.breakdownelement.modify.doublon");
@@ -274,8 +264,10 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 			}
 			
         } else {
-        	if (mode.equals(PresentationConstantes.UPDATE_MODE))
-        		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,madForm.getBkId());
+        	/* Si le formulaire est incomplet : en cas de mise a jour ou de copie, 
+        	on recharge l'identifiant du processus */ 
+        	if (mode.equals(PresentationConstantes.UPDATE_MODE) || mode.equals(PresentationConstantes.COPY_MODE))
+        		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID, madForm.getBkId());
         	retour = context.mapping().findForward(PresentationConstantes.FORWARD_ERROR);
         }
 	
