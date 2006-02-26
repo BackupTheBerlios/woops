@@ -21,7 +21,7 @@
 		property="listActivities" 
 		title="table.title.showTeamActivitiesSummary" 
 		width="650" 
-		rows="5" 
+		rows="15" 
 		refreshButton="true" 
 		>
 				

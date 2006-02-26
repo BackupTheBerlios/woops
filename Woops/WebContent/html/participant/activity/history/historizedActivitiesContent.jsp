@@ -13,7 +13,7 @@
 		property="listActivities" 
 		title="table.title.listActivities" 
 		width="500" 
-		rows="5" 
+		rows="15" 
 		refreshButton="false" 
 		createButton="false"
 		>

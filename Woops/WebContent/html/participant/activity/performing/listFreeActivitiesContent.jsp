@@ -19,7 +19,7 @@
 		property="listFreeActivities" 
 		title="table.title.listFreeActivities" 
 		width="650" 
-		rows="5" 
+		rows="10" 
 		refreshButton="true" 
 		createButton="true"
 		>
