@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 import business.breakdownelement.BreakdownElement;
@@ -83,12 +84,12 @@ public class UserDAO extends PersistentObjectDAO {
 			session = HibernateSessionFactory.currentSession();
 		
 			transaction = session.beginTransaction();
-
-			bde = (BreakdownElement) session
-	            .createQuery("SELECT bde FROM BreakdownElement bde left join fetch bde.users WHERE bde.id = :bdeId")
-	            .setParameter("bdeId", bdeId)
-	            .uniqueResult(); // La collection peut etre utilisee independamment du projet
-
+			
+			// Récupération du projet avec ses participants 
+			Query query = session.createQuery("SELECT bde FROM BreakdownElement bde left join fetch bde.users WHERE bde.id = :bdeId");
+	        query.setParameter("bdeId", bdeId);
+	        bde = (BreakdownElement) query.uniqueResult();
+	        
 	    	transaction.commit();
 
 		} catch (HibernateException he) {

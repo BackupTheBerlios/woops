@@ -20,7 +20,7 @@ public class UserManager extends PersistentObjectManager {
 	private static UserManager instance;
 	
 	/**
-	 * Singleton -> Constructeur priv?
+	 * Singleton -> Constructeur prive
 	 */
 	private UserManager() {}
 
@@ -53,7 +53,7 @@ public class UserManager extends PersistentObjectManager {
 	}	
 	
 	/**
-	 * Fournit tous les participants de l'entité
+	 * Fournit tous les participants de l'entite
 	 * @param bdeId : identifiant de l'entité
 	 * @return : liste des participants
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
@@ -104,7 +104,9 @@ public class UserManager extends PersistentObjectManager {
 	    	// Recuperation de l'utilisateur avec la liste des projets
 	    	user = (User) session.load(User.class, (Integer) user.getId());
 
-	    	// Suppression des affectations aux entités, la suppression se repercute sur la BD automatiquement grace ala session en cours
+	    	/* Suppression des affectations aux entités,
+	    	l'objet user est persistant donc la suppression 
+	    	se repercute sur la BD automatiquement grace a la session en cours */
 	    	user.getBdes().clear();
 	    	
 	    	// Suppression de l'utilisateur
