@@ -86,7 +86,7 @@
          	<forward name="drillDown" path="/showActivitySummary.do"/>
       	</action>
       	
-<!-- ================= Changement d'entite ================ -->  
+<!-- ================= Changement de processus ================ -->  
 		<action path="/changeBDE"	 type="view.breakdownelement.ChangeBreakdownElementAction"
       		name="listActivitiesForm"
       	 	scope="session"
@@ -183,18 +183,6 @@
         	scope="request"
         	input="/html/logon/loginUser.jsp">
      	</action>   
-
-<!-- ================= List Change State Activities ================ -->  
-		<action path="/listChangeStateActivities"	 type="view.activity.listActivities.ListChangeStateActivitiesAction"
-      		name="listChangeStateActivitiesForm"
-      	 	scope="session"
-      	 	input="/html/participant/activity/listChangeStateActivities.jsp"
-      	 >
-         	<forward name="error" path="/html/participant/activity/listChangeStateActivities.jsp" />
-         	<forward name="success" path="/html/participant/activity/listChangeStateActivities.jsp" />
-         	<forward name="action" path="/listChangeStateActivities.do"/>
-         	<forward name="edit" path="/manageActivityCreation.do"/>
-      	</action>
     	
 <!-- ================= Show Activity Summary To Print ================ -->  
 		<action path="/showActivitySummaryToPrint"	 
@@ -205,9 +193,6 @@
          	<forward name="error" path="/html/participant/activity/listChangeStateActivities.jsp" />
          	<forward name="success" path="/html/participant/activity/summary/showActivitySummaryToPrint.jsp" />
       	</action>
-    	
-    	
-    	
     	
  <!-- ================= showTeamActivitiesSummary ================ -->  
 		<action path="/showTeamActivitiesSummary"	 
