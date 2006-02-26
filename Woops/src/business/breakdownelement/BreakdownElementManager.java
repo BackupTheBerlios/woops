@@ -174,7 +174,7 @@ public class BreakdownElementManager extends PersistentObjectManager {
 	
 	
 	/**
-	 * Copie un projet (particpants et activités) dans un autre.
+	 * Copie un projet (participants et activités) dans un autre.
 	 * @param srcBde : le projet source
 	 * @param destBde : le projet destination (seuls les infos primaires doivent être renseignées) 
 	 * @return : identifiant du projet copié
@@ -182,65 +182,92 @@ public class BreakdownElementManager extends PersistentObjectManager {
 	 * @throws DoublonException 
 	 */
 	public Serializable copyBreakdownElement(Integer srcBdeId, BreakdownElement destBde) throws PersistanceException, DoublonException {
-		// affectation des utilisateurs au nouveau projet
+		// Affectation des utilisateurs au nouveau projet
 		Set users = (Set)UserManager.getInstance().getUsersByBDE(srcBdeId);
+		// On crée une collection de participant a partir des participants du projet source
 		destBde.setUsers(new HashSet(users));
 		
-		// insertion en bd
-		destBde.setId((Integer)breakdownElementDAO.insert(destBde));
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			session = this.getSession();
+			// Création d'une transaction pour pouvoir annuler l'ensemble des modifications en cas d'erreur
+			transaction = session.beginTransaction();
 		
-		// Récupération de toutes les activités du projet source
-		ActivityManager actMngr = ActivityManager.getInstance();
-		Collection listActivities = actMngr.getAllActivitiesByBDE(srcBdeId);
+			destBde.setId((Integer)breakdownElementDAO.insert(destBde, session));
 		
-		// On va utiliser une map pour associer les activités sources et destination
-		// pour pouvoir ensuite créer les activity sequences correspondantes
-		HashMap mapActSrcDest = new HashMap();
+			// Récupération de toutes les activités du projet source
+			ActivityManager actMngr = ActivityManager.getInstance();
+			Collection listActivities = actMngr.getAllActivitiesByBDE(srcBdeId, session);
 		
-		// Copie de ces activités en les mettant libres et dans l'état créée
-		Iterator iterAct = listActivities.iterator();
-		Activity actSrc;
-		Activity actDest;
-		while(iterAct.hasNext()) {
-			// copie
-			actSrc = (Activity)iterAct.next();
-			actDest = (Activity)actSrc.clone();
-			actDest.setUserId(null);
-			actDest.setState(new CreatedActivityState());
-			actDest.setBdeId((Integer)destBde.getId());
+			// On va utiliser une map pour associer les activités sources et destination
+			// pour pouvoir ensuite créer les activity sequences correspondantes
+			HashMap mapActSrcDest = new HashMap();
+		
+			// Copie de ces activités en les mettant libres et dans l'état créée
+			Iterator iterAct = listActivities.iterator();
+			Activity actSrc;
+			Activity actDest;
+			while(iterAct.hasNext()) {
+				// Copie
+				actSrc = (Activity)iterAct.next();
+				actDest = (Activity)actSrc.clone();
+				actDest.setUserId(null);
+				actDest.setState(new CreatedActivityState());
+				actDest.setBdeId((Integer)destBde.getId());
 			
-			// insertion en bd
-			actDest.setId(actMngr.insert(actDest));
+				// Insertion de l'activite
+				actDest.setId(actMngr.insert(actDest, session));
 			
-			// correspondance dans la map
-			mapActSrcDest.put(actSrc.getId(),actDest.getId());
-		}
+				// Correspondance dans la map
+				mapActSrcDest.put(actSrc.getId(),actDest.getId());
+			}
 		
+			// Récupération de toutes les dépendances du projet source
+			ActivitySequenceManager actSeqMngr = ActivitySequenceManager.getInstance();
+			Collection listActSeq = actSeqMngr.getActivitySequencesByBDE(srcBdeId, session);
 		
-		// Récupération de toutes les dépendances du projet source
-		ActivitySequenceManager actSeqMngr = ActivitySequenceManager.getInstance();
-		Collection listActSeq = actSeqMngr.getActivitySequencesByBDE(srcBdeId);
-		
-		// Copie des dépendances
-		Iterator iterActSeq = listActSeq.iterator();
-		ActivitySequence actSeqSrc;
-		ActivitySequence actSeqDest;
-		Activity predecessor = new Activity();
-		Activity successor = new Activity();
-		while(iterActSeq.hasNext()) {
-			// copie
-			actSeqSrc = (ActivitySequence)iterActSeq.next();
-			actSeqDest = (ActivitySequence)actSeqSrc.clone();
+			// Copie des dépendances
+			Iterator iterActSeq = listActSeq.iterator();
+			ActivitySequence actSeqSrc;
+			ActivitySequence actSeqDest;
+			Activity predecessor = new Activity();
+			Activity successor = new Activity();
+			while(iterActSeq.hasNext()) {
+				// Copie
+				actSeqSrc = (ActivitySequence)iterActSeq.next();
+				actSeqDest = (ActivitySequence)actSeqSrc.clone();
 			
-			// correspondances des activités source et destination
-			predecessor.setId((Integer)mapActSrcDest.get(actSeqSrc.getPredecessor().getId()));
-			successor.setId((Integer)mapActSrcDest.get(actSeqSrc.getSuccessor().getId()));
+				// Correspondances des activités source et destination
+				predecessor.setId((Integer)mapActSrcDest.get(actSeqSrc.getPredecessor().getId()));
+				successor.setId((Integer)mapActSrcDest.get(actSeqSrc.getSuccessor().getId()));
 			
-			actSeqDest.setPredecessor(predecessor);
-			actSeqDest.setSuccessor(successor);
+				actSeqDest.setPredecessor(predecessor);
+				actSeqDest.setSuccessor(successor);
 			
-			// insertion en bd
-			actSeqDest.setId(actSeqMngr.insert(actSeqDest));
+				// Insertion en bd des dependances
+				actSeqDest.setId(actSeqMngr.insert(actSeqDest, session));
+			}
+			
+			// Tout s'est bien passé, on valide la transaction
+			transaction.commit();
+		} catch (ConstraintViolationException cve) {
+            rollback(transaction);
+            // si erreur JDBC 1062 => doublon !
+            // on lève l'erreur adéquate
+            if (cve.getErrorCode()==1062)
+				throw new DoublonException(cve.getMessage());
+			throw new PersistanceException(cve.getMessage(),cve);
+		} catch (HibernateException he) {
+		    rollback(transaction);
+            throw new PersistanceException(he.getMessage(),he);
+		} finally {
+			try {
+				if (session!=null && session.isOpen()) 
+					HibernateSessionFactory.closeSession();				
+			} catch (HibernateException he) {
+				throw new PersistanceException(he.getMessage(),he);
+			}
 		}
 		
 		return (Serializable)destBde.getId();

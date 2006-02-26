@@ -126,6 +126,16 @@ public class ActivityDAO extends PersistentObjectDAO {
 		return executeQuery("FROM Activity as act WHERE act.bdeId = " + bdeId);
 	}
 	
+	/**
+	 * Recuperation des activites d'une entite
+	 * @param bdeId : identifiant de l'entite
+	 * @param session : session permettant d'executer la requete
+	 * @return : Liste des activites correspondant au critere de recherche
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
+	 */
+	public Collection getAllActivitiesByBDE(Integer bdeId, Session session) throws PersistanceException {
+		return executeQuery("FROM Activity as act WHERE act.bdeId = " + bdeId, session);
+	}
 	
 	/**
 	 * Recuperation des activites libres sur une entite

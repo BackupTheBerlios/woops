@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.List;
 
 import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectDAO;
-import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 
@@ -50,10 +50,10 @@ public class BreakdownElementDAO extends PersistentObjectDAO{
 		
 			transaction = session.beginTransaction();
 
-			user = (User) session
-            	.createQuery("SELECT u FROM User u left join fetch u.bdes WHERE u.id = :uid")
-            	.setParameter("uid", userId)
-            	.uniqueResult(); // La collection peut etre utilisee independamment du projet
+			// On récupère le participant et la liste de ses projets
+			Query query = session.createQuery("SELECT u FROM User u left join fetch u.bdes WHERE u.id = :uid");
+            query.setParameter("uid", userId);
+            user = (User) query.uniqueResult();
 
 	    	transaction.commit();
 

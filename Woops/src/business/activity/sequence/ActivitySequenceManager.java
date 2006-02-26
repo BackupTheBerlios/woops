@@ -2,6 +2,7 @@ package business.activity.sequence;
 
 import java.util.Collection;
 
+import net.sf.hibernate.Session;
 import business.activity.Activity;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.ForeignKeyException;
@@ -45,13 +46,25 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * R?cup?ration des sequences d'activit?s d'un projet
+	 * Recuperation des sequences d'activites d'un projet
 	 * @param bdeId : identifiant du projet
-	 * @return : Liste des sequences d'activit?s du projet
+	 * @return : Liste des sequences d'activites du projet
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
 	public Collection getActivitySequencesByBDE(Integer bdeId) throws PersistanceException {
 		Collection list = activitySequenceDAO.getActivitySequencesByBDE(bdeId);
+		return list;
+	}
+	
+	/**
+	 * Recuperation des sequences d'activites d'un projet
+	 * @param bdeId : identifiant du projet
+	 * @param session : session permettant d'executer la requete
+	 * @return : Liste des sequences d'activites du projet
+	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
+	 */
+	public Collection getActivitySequencesByBDE(Integer bdeId, Session session) throws PersistanceException {
+		Collection list = activitySequenceDAO.getActivitySequencesByBDE(bdeId, session);
 		return list;
 	}
 }
