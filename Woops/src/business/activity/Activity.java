@@ -18,6 +18,7 @@ public class Activity extends HistorizedObject{
 	private Integer 		userId; /** Id du participant responsable de la realisation de l'activite */
 	private IActivityState	state; /** Etat actuel de l'activite */
 	private Integer			bdeId; /** Entite a laquelle appartient l'activite */
+	private String			onGoing; /** Permet de savoir si la tache est sans fin */
 	
 	/**
 	 * Liste des activit?s dont d?pend l'activit?
@@ -196,4 +197,14 @@ public class Activity extends HistorizedObject{
 	public void setBdeId(Integer bdeId) {
 		this.bdeId = bdeId;
 	}
+
+	public String getOnGoing() {
+		return onGoing;
+	}
+
+	public void setOnGoing(String onGoing) {
+		this.onGoing = onGoing;
+	}
+	
+	
 }

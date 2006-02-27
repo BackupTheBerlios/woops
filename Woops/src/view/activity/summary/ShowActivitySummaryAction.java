@@ -60,6 +60,7 @@ public class ShowActivitySummaryAction extends WoopsCCAction {
 		form.setState(state);
 		form.setStartDate(Formatage.dateToString(activity.getStartDate()));
 		form.setEndDate(Formatage.dateToString(activity.getEndDate()));
+		form.setOnGoing(activity.getOnGoing());
 		
 		try {
 			setPredecessorsList(context);

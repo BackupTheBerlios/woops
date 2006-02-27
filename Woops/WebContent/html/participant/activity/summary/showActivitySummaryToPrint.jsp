@@ -71,6 +71,11 @@ navi1.ExecWB(6, 2);
             property="endDate"          
           	/>    
           	
+        <forms:text
+			label="form.field.activity.onGoing"
+            property="onGoing"          
+          	/>    
+          	
    	</forms:form>
    
    	</td>

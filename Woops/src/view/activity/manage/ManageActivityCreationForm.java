@@ -27,6 +27,8 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private String	disableNext;	/** bool?en indiquant si le bouton next est d?sactiv? */
 	private String  freeActivity; 	/** booleen permettant de créer une activité libre */
 	private String  disableFreeActivityCheckbox;
+	private String  activityOnGoing; 	/** booleen permettant de créer une activité sans fin */
+	private String  disableActivityOnGoingCheckbox;
 	
 	
 	public ManageActivityCreationForm() {
@@ -136,6 +138,27 @@ public class ManageActivityCreationForm extends FWActionForm {
 
 	public void setFreeActivity(String freeActivity) {
 		this.freeActivity = freeActivity;
+	}
+
+
+	public String getActivityOnGoing() {
+		return activityOnGoing;
+	}
+
+
+	public void setActivityOnGoing(String activityOnGoing) {
+		this.activityOnGoing = activityOnGoing;
+	}
+
+
+	public String getDisableActivityOnGoingCheckbox() {
+		return disableActivityOnGoingCheckbox;
+	}
+
+
+	public void setDisableActivityOnGoingCheckbox(
+			String disableActivityOnGoingCheckbox) {
+		this.disableActivityOnGoingCheckbox = disableActivityOnGoingCheckbox;
 	}
 
 

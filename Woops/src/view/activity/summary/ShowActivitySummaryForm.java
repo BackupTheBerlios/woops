@@ -16,6 +16,7 @@ public class ShowActivitySummaryForm extends FWActionForm {
 	private String	state;		/** état de l'activté */
 	private String	startDate;	/** date de début de l'activité */
 	private String	endDate;	/** date de fin de l'activité */
+	private String 	onGoing;	/** tache sans fin */
 	
 	private SimpleListControl	predecessorsList;	/** liste des dépendances entrantes */
 	private SimpleListControl	successorsList;		/** liste des dépendances sortantes */
@@ -156,6 +157,16 @@ public class ShowActivitySummaryForm extends FWActionForm {
 	 */
 	public void setSuccessorsList(ListDataModel model) {
 		this.successorsList.setDataModel(model);
+	}
+
+
+	public String getOnGoing() {
+		return onGoing;
+	}
+
+
+	public void setOnGoing(String onGoing) {
+		this.onGoing = onGoing;
 	}
 
 	

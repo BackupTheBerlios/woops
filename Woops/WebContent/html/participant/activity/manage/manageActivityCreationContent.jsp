@@ -43,6 +43,13 @@
             tooltip="table.tooltip.activity.checkbox.freeActivity"
             disabled="${manageActivityCreationForm.disableFreeActivityCheckbox}"
           />
+          
+          <forms:checkbox  
+            label="form.field.activity.checkbox.activityOnGoing"
+            property="activityOnGoing"
+            tooltip="table.tooltip.activity.checkbox.activityOnGoing"
+            disabled="${manageActivityCreationForm.disableActivityOnGoingCheckbox}"
+          />
 
         
         <forms:buttonsection default="btnNext">

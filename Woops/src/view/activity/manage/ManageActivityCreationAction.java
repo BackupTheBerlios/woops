@@ -64,6 +64,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				
 				System.out.print("inProgress\n\n");
 				form.setDisableFreeActivityCheckbox("true");
+				form.setDisableActivityOnGoingCheckbox("true");
 			}
 			// sinon on affichage le checkbox selon son cas
 			else{
@@ -73,6 +74,14 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					form.setFreeActivity("true");
 				}else{
 					form.setFreeActivity("false");
+				}
+				
+				
+				form.setDisableActivityOnGoingCheckbox("false");
+				if (activity.getOnGoing().equals(PresentationConstantes.YES)){
+					form.setActivityOnGoing("true");
+				}else{
+					form.setActivityOnGoing("false");
 				}
 			}
 			
@@ -228,6 +237,11 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					activity.setDateCreation(new Date());
 					activity.setBdeId(user.getDefaultBDEId());
 					
+					if (form.getActivityOnGoing()!=null)
+						activity.setOnGoing(PresentationConstantes.YES);
+					else
+						activity.setOnGoing(PresentationConstantes.NO);
+					
 					// La reaffection de l'activité (soit libre (null) soit à un user)
 					activity.setUserId((form.getFreeActivity()!=null)?(null):((Integer) user.getId()));
 					
@@ -293,10 +307,13 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					
 
 					
-					/* V?rification que l'utilisateur a bien modifi? quelque chose */
+					/* V?rification que l'utilisateur a bien modifi? quelque chose */					
 					if ( 	modif.intValue()!=0 ||
 							!form.getName().trim().equals(activity.getName()) ||
-							!form.getDetails().equals(activity.getDetails()) ) {
+							!form.getDetails().equals(activity.getDetails()) ||
+							(activity.getOnGoing().equals(PresentationConstantes.YES) && form.getActivityOnGoing()==null) |
+							(activity.getOnGoing().equals(PresentationConstantes.NO) && form.getActivityOnGoing()!=null)
+						) {
 				
 						
 						//R?cup?ration des champs que l'utilisateur a pu entrer
@@ -304,6 +321,11 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 						activity.setName(form.getName().trim());
 						activity.setUserModification((user.getId().toString()));
 						activity.setDateModification(new Date());
+						
+						if (form.getActivityOnGoing()!=null)
+							activity.setOnGoing(PresentationConstantes.YES);
+						else
+							activity.setOnGoing(PresentationConstantes.NO);
 						
 						ActivityManager.getInstance().update(activity);
 						

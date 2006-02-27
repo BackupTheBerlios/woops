@@ -52,6 +52,11 @@
         <forms:text
 			label="form.field.activity.endDate"
             property="endDate"          
+          	/> 
+          	
+        <forms:text
+			label="form.field.activity.onGoing"
+            property="onGoing"          
           	/>    
           	
    	</forms:form>

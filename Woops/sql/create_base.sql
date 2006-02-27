@@ -87,6 +87,7 @@ CREATE TABLE Activity (
      , user INT
      , state VARCHAR(50) NOT NULL
      , bde INT NOT NULL
+     , ongoing VARCHAR(3)
      , PRIMARY KEY (id)
      , INDEX (user)
      , UNIQUE UQ_Activity_bde_name (bde, name)

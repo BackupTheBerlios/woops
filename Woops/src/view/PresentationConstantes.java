@@ -7,6 +7,8 @@ package view;
 public interface PresentationConstantes {
 	
 	public static final String BASENAME="ApplicationResources";
+	public static final String YES="oui";
+	public static final String NO="non";
 	
 	// Forward
 	public static final String FORWARD_SUCCESS="success";
