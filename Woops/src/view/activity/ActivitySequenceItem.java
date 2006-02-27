@@ -13,6 +13,11 @@ public class ActivitySequenceItem implements DisplayObject{
 	private String predecessorState;
 	private String successorState;
 	
+	private String StartToFinishEditable = "true";
+	private Boolean StartToStartEditable = new Boolean(true);
+	private String FinishToStartEditable = "true";
+	private Boolean FinishToFinishEditable = new Boolean(true);
+	
 	/**
 	 * @return Returns the id.
 	 */
@@ -86,7 +91,33 @@ public class ActivitySequenceItem implements DisplayObject{
 		this.successorState = successorState;
 	}
 	
+	public Boolean getFinishToFinishEditable() {
+		return FinishToFinishEditable;
+	}
+	public void setFinishToFinishEditable(Boolean finishToFinishEditable) {
+		FinishToFinishEditable = finishToFinishEditable;
+	}
+	public String getFinishToStartEditable() {
+		return FinishToStartEditable;
+	}
+	public void setFinishToStartEditable(String finishToStartEditable) {
+		FinishToStartEditable = finishToStartEditable;
+	}
+	public String getStartToFinishEditable() {
+		return StartToFinishEditable;
+	}
+	public void setStartToFinishEditable(String startToFinishEditable) {
+		StartToFinishEditable = startToFinishEditable;
+	}
+	public Boolean getStartToStartEditable() {
+		return StartToStartEditable;
+	}
+	public void setStartToStartEditable(Boolean startToStartEditable) {
+		StartToStartEditable = startToStartEditable;
+	}
 	
+
+
 	
 	
 	

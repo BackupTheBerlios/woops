@@ -99,6 +99,12 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 			activitySequenceItem.setId(activitySequence.getId().toString());
 			activitySequenceItem.setPredecessor(activitySequence.getPredecessor().getName());
 			activitySequenceItem.setLinkType(activitySequence.getLinkType().getName());
+			
+			if (activitySequence.getPredecessor().getOnGoing().equals(PresentationConstantes.YES)) {
+				activitySequenceItem.setFinishToFinishEditable(new Boolean(false));
+				activitySequenceItem.setFinishToStartEditable("false");
+			}
+			
 			String state = MessageResources.getMessageResources("ApplicationResources").getMessage(activitySequence.getPredecessor().getState().toString());
 			activitySequenceItem.setPredecessorState(state);
 			activitySequenceItems.add(activitySequenceItem);
