@@ -4,6 +4,8 @@ package view.activity;
 
 import java.util.Date;
 
+import view.PresentationConstantes;
+
 import business.format.Formatage;
 
 import com.cc.framework.common.DisplayObject;
@@ -21,6 +23,7 @@ public class ActivityItem implements DisplayObject{
 	private boolean deleteEnabled;
 	private String startDate = "";
 	private String endDate = "";
+	private String onGoing = PresentationConstantes.NO;
 	
 	
 	
@@ -127,6 +130,15 @@ public class ActivityItem implements DisplayObject{
 		return (getUserLastName()!=null)?(getUserFirstName()+" "+getUserLastName()):("");
 
 	}
+
+	public String getOnGoing() {
+		return onGoing;
+	}
+
+	public void setOnGoing(String onGoing) {
+		this.onGoing = onGoing;
+	}
+	
 	
 	
 }

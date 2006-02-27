@@ -23,8 +23,7 @@
 		refreshButton="true" 
 		createButton="true"
 		>
-		
-
+       		
 			<ctrl:columndrilldown 
 				title="table.field.listActivities.name" 
 				property="name" 

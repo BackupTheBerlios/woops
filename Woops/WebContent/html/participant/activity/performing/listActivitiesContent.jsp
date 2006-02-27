@@ -29,7 +29,7 @@
 		<util:designrule
        		rule="@{bean.actionEnabled == 'false' && bean.state == 'created'}"
        		style="background-color: #FFC4C4;"/>
-       
+       		
        	<util:designrule
        		rule="@{bean.actionEnabled == 'false' && bean.state == 'inProgress'}"
        		style="background-color: #FFC4C4; font-weight: bold;"/>
@@ -41,6 +41,10 @@
    		<util:designrule
    		   	rule="@{bean.actionEnabled == 'true' && bean.state == 'inProgress'}"
        		style="font-weight: bold;"/>
+       		
+       	<util:designrule
+       		rule="@{bean.onGoing == 'oui'}"
+       		style="background-color: #FFFF99;"/>
 
 		<ctrl:columndrilldown 
 			title="table.field.listActivities.name" 

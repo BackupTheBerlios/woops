@@ -58,6 +58,12 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			form.setDetails(activity.getDetails());	
 			
 
+			if (activity.getOnGoing().equals(PresentationConstantes.YES))
+				form.setActivityOnGoing("true");
+			else
+				form.setActivityOnGoing("false");
+			
+			
 			// si activité en cours, on desactive le checkbox
 			
 			if (! activity.getState().equals(BusinessConstantes.ACTIVITY_STATE_CREATED) ){
@@ -75,14 +81,8 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				}else{
 					form.setFreeActivity("false");
 				}
-				
-				
+
 				form.setDisableActivityOnGoingCheckbox("false");
-				if (activity.getOnGoing().equals(PresentationConstantes.YES)){
-					form.setActivityOnGoing("true");
-				}else{
-					form.setActivityOnGoing("false");
-				}
 			}
 			
 			

@@ -172,8 +172,15 @@ public class ListActivitiesAction extends WoopsCCAction {
 			if (state!=null) {
 				if (state.equals(BusinessConstantes.ACTIVITY_STATE_IN_PROGRESS)) 
 					activityItem.setAction(PresentationConstantes.ACTIVITY_START);
-				else 
-					activityItem.setAction(PresentationConstantes.ACTIVITY_FINISH);
+				else {
+					// si l'activite est on going, elle ne peut pas se terminer
+					if (activity.getOnGoing().equals(PresentationConstantes.NO))
+						activityItem.setAction(PresentationConstantes.ACTIVITY_FINISH);
+					else {
+						activityItem.setActionEnabled(false);
+						activityItem.setOnGoing(PresentationConstantes.YES);
+					}
+				}
 			
 				activityItem.setActionEnabled(true);
 			}
