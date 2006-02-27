@@ -167,6 +167,9 @@ public class ListActivitiesAction extends WoopsCCAction {
 			activityItem.setDetails(activity.getDetails());
 			activityItem.setState(activity.getState().toString());
 		
+			if (activity.getOnGoing().equals(PresentationConstantes.YES))
+				activityItem.setOnGoing(PresentationConstantes.YES);
+				
 			// Verifions si les dependances de l'activite lui permettent de changer d'etat
 			state = ActivityManager.getInstance().verifChangeStateActivity(activity);
 			if (state!=null) {

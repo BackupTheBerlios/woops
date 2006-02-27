@@ -23,6 +23,10 @@
 		refreshButton="true" 
 		createButton="true"
 		>
+		
+		    <util:designrule
+       			rule="@{bean.onGoing == 'oui'}"
+       			style="background-color: #FFFF99;"/>
        		
 			<ctrl:columndrilldown 
 				title="table.field.listActivities.name" 
