@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class HistorizedObject implements PersistentObject, Cloneable{
 	private static final long serialVersionUID = -4486169491171535845L; /** Generated Serial ID */
-	protected String userCreation;
+	protected Integer userCreation;
     protected Date dateCreation;
-    protected String userModification;    
+    protected Integer userModification;    
     protected Date dateModification;
     
     
@@ -23,20 +23,20 @@ public class HistorizedObject implements PersistentObject, Cloneable{
     public void setDateModification(Date dateModification) {
         this.dateModification = dateModification;
     }
-    public String getUserCreation() {
-        return userCreation;
-    }
-    public void setUserCreation(String userCreation) {
-        this.userCreation = userCreation;
-    }
-    public String getUserModification() {
-        return userModification;
-    }
-    public void setUserModification(String userModification) {
-        this.userModification = userModification;
-    }    
 
-    public void setId(Object id) {}   
+    public Integer getUserCreation() {
+		return userCreation;
+	}
+	public void setUserCreation(Integer userCreation) {
+		this.userCreation = userCreation;
+	}
+	public Integer getUserModification() {
+		return userModification;
+	}
+	public void setUserModification(Integer userModification) {
+		this.userModification = userModification;
+	}
+	public void setId(Object id) {}   
     public Object getId() {return null;}
 
 

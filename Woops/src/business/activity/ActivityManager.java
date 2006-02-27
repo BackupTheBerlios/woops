@@ -1,19 +1,26 @@
 package business.activity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 
-import net.sf.hibernate.Session;
+import javax.servlet.http.HttpSession;
 
+import net.sf.hibernate.Session;
+import view.PresentationConstantes;
 import business.BusinessConstantes;
 import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
 import business.activity.sequencetype.ActivitySequenceType;
+import business.hibernate.HistorizedObject;
+import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
+import business.user.User;
 
 
 
@@ -466,5 +473,21 @@ public class ActivityManager extends PersistentObjectManager {
 	// ... et on finit par supprimes l'activit?
 	ActivityManager.getInstance().delete(activity);
 	
+	}
+	
+	
+	public Serializable insert(PersistentObject objet, HttpSession httpSession) throws PersistanceException, DoublonException {
+		((HistorizedObject)objet).setUserCreation((Integer) ((User)(httpSession.getAttribute(PresentationConstantes.KEY_USER))).getId());
+		((HistorizedObject)objet).setDateCreation(new Date());
+		
+		return insert(objet);
+	}
+	
+	
+	public void update(PersistentObject objet, HttpSession httpSession) throws PersistanceException, DoublonException {
+		((HistorizedObject)objet).setUserModification((Integer) ((User)(httpSession.getAttribute(PresentationConstantes.KEY_USER))).getId());
+		((HistorizedObject)objet).setDateModification(new Date());
+		
+		update(objet);
 	}
 }

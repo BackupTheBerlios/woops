@@ -172,7 +172,7 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 			activity.setUserId((Integer) ((User) context.session().getAttribute(PresentationConstantes.KEY_USER)).getId());
 			
 			// Met ? jour en BD l'?tat de l'activit? 
-			ActivityManager.getInstance().update(activity);
+			ActivityManager.getInstance().update(activity,context.session());
 			
 			// Informe le participant que sa demande a ?t? prise en compte
 			context.addGlobalMessage("msg.info.activity.affect", activity.getName());

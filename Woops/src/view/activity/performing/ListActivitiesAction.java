@@ -286,7 +286,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 				}
 			} else {
 				// Met ? jour en BD l'?tat de l'activit? 
-				ActivityManager.getInstance().update(activity);
+				ActivityManager.getInstance().update(activity,context.session());
 				// Informe le participant que sa demande a ?t? prise en compte
 				if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());

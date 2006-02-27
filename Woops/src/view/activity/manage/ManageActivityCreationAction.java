@@ -233,8 +233,6 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					activity.setDetails(form.getDetails());
 					activity.setName(form.getName().trim());
 					activity.setState(new CreatedActivityState());
-					activity.setUserCreation((user.getId().toString()));
-					activity.setDateCreation(new Date());
 					activity.setBdeId(user.getDefaultBDEId());
 					
 					if (form.getActivityOnGoing()!=null)
@@ -249,7 +247,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					modif = (activity.getUserId()==null)?(new Integer(2)):(new Integer(1));
 					
 					// on insere l'activité
-					activityId = (Integer)ActivityManager.getInstance().insert(activity);
+					activityId = (Integer)ActivityManager.getInstance().insert(activity,context.session());
 					
 					// R?cup?ration la hashmap pour y rajouter l'activit? 
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);		
@@ -319,15 +317,13 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 						//R?cup?ration des champs que l'utilisateur a pu entrer
 						activity.setDetails(form.getDetails());
 						activity.setName(form.getName().trim());
-						activity.setUserModification((user.getId().toString()));
-						activity.setDateModification(new Date());
 						
 						if (form.getActivityOnGoing()!=null)
 							activity.setOnGoing(PresentationConstantes.YES);
 						else
 							activity.setOnGoing(PresentationConstantes.NO);
 						
-						ActivityManager.getInstance().update(activity);
+						ActivityManager.getInstance().update(activity,context.session());
 						
 						
 						String message = new String("");
