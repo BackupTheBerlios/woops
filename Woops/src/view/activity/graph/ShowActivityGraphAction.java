@@ -162,7 +162,8 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			String graphRealPath = getServlet().getServletContext().getRealPath("/") + "graph" + File.separator;
 			
 			// Parametrage de la classe GraphViz
-			GraphViz.setDOT("/usr/local/bin/dot");
+			GraphViz.setDOT(graphRealPath+"dot.exe");
+			//GraphViz.setDOT("/usr/local/bin/dot");
 			GraphViz.setTEMP_DIR(graphRealPath);
 			
 			// Cr?ation du fichier image : graph + id du user + id du projet
