@@ -3,6 +3,7 @@
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 <%@ taglib uri="/cc-base"    prefix="base" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
+<%@ taglib uri="/cc-controls" prefix="ctrl" %>
 
 <html:form action="addBreakdownElement.do" >
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -22,7 +23,18 @@
         <forms:text 
         	label="admin.addBreakdownElement.name"
         	property="name"
-        	required="true"/>
+        	required="true"/>        	
+        	
+        <forms:calendar 
+        	label="admin.addBreakdownElement.startDate"
+        	property="startDate"
+        	required="true"
+        	maxlength="10" size="8"  format="dd/mm/yyyy"  showformat="right"/>
+        	
+        <forms:calendar 
+        	label="admin.addBreakdownElement.endDate"
+        	property="endDate"
+        	maxlength="10" size="8"  format="dd/mm/yyyy"  showformat="right"/>
         	
         <forms:textarea 
         	label="admin.addBreakdownElement.details"

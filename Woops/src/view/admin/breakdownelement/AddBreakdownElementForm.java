@@ -19,6 +19,8 @@ public class AddBreakdownElementForm extends ActionForm{
 	private String kindId ;
 	private String bkId;
 	private String mode ;
+	private String startDate ;
+	private String endDate ;
 	/* Liste representant toutes les utilisateurs affectables au projet */
 	private SimpleListControl userParticipationOptions = new SimpleListControl();	
 	/* Liste representant les cles des utilisateurs selectionnes */
@@ -111,6 +113,26 @@ public class AddBreakdownElementForm extends ActionForm{
 			errors.add("prefix", new ActionMessage("errors.champ.obligatoire","prefix"));
 		}
 		
+		if (Controleur.isVide(startDate)){
+			errors.add("prefix", new ActionMessage("errors.champ.obligatoire","startDate"));
+		}
+		
 		return errors;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
 }

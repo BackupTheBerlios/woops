@@ -2,6 +2,7 @@ package view.admin.breakdownelement;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -53,11 +54,20 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 					form.setDetails(bke.getDetails());
 					form.setName(bke.getName());
 					form.setPrefix(bke.getPrefix());
-			
+					if (bke.getDateCreation() != null) {
+						form.setStartDate(bke.getDateCreation().toString());					
+					}
+					if (bke.getEndDate() != null) {
+						form.setEndDate(bke.getEndDate().toString());
+					}
 				}
 				this.setUsersParticipation(context);		
 			}
-		
+			else {
+				Date dateDuJour = new Date();
+				form.setStartDate(dateDuJour.getDate()+"/"+dateDuJour.getMonth()+"/"+dateDuJour.getYear());
+			}
+			
 			// en mode UPDATE et INSERT on remplit le swap select
 			this.setUserParticipationOptions(context);
 			
@@ -195,7 +205,12 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     		bke.setPrefix(prefix);
     		bke.setName(name);
     		bke.setDetails(details);
-    		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));      		
+    		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));
+    		bke.setDateCreation(new Date(madForm.getStartDate()));
+    		if (madForm.getEndDate()!=null && madForm.getEndDate()!="") {
+        		bke.setEndDate(new Date(madForm.getEndDate()));
+    		}
+
 	    	
     		// Recuperation des participants sélectionnés
     		if (!mode.equals(PresentationConstantes.COPY_MODE)) {
