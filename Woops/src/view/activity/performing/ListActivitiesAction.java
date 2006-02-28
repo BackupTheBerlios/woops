@@ -273,7 +273,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 		
 		try {
 			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
-			
+			User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 			/* Test si le changement peut ?tre effectu? : ce traitement implique la v?rification 
 			des d?pendances relatives ? l'activit? s?lectionn?e */
 			if (!activity.process()) {
@@ -286,7 +286,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 				}
 			} else {
 				// Met ? jour en BD l'?tat de l'activit? 
-				ActivityManager.getInstance().update(activity,context.session());
+				ActivityManager.getInstance().update(activity,user);
 				// Informe le participant que sa demande a ?t? prise en compte
 				if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());

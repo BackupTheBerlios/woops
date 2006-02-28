@@ -13,10 +13,10 @@ public class ActivitySequenceItem implements DisplayObject{
 	private String predecessorState;
 	private String successorState;
 	
-	private String StartToFinishEditable = "true";
-	private Boolean StartToStartEditable = new Boolean(true);
-	private String FinishToStartEditable = "true";
-	private Boolean FinishToFinishEditable = new Boolean(true);
+	private boolean startToFinishEditable = true;
+	private boolean startToStartEditable = true;
+	private boolean finishToStartEditable = true;
+	private boolean finishToFinishEditable = true;
 	
 	/**
 	 * @return Returns the id.
@@ -90,35 +90,30 @@ public class ActivitySequenceItem implements DisplayObject{
 	public void setSuccessorState(String successorState) {
 		this.successorState = successorState;
 	}
-	
-	public Boolean getFinishToFinishEditable() {
-		return FinishToFinishEditable;
+	public boolean isFinishToFinishEditable() {
+		return finishToFinishEditable;
 	}
-	public void setFinishToFinishEditable(Boolean finishToFinishEditable) {
-		FinishToFinishEditable = finishToFinishEditable;
+	public void setFinishToFinishEditable(boolean finishToFinishEditable) {
+		this.finishToFinishEditable = finishToFinishEditable;
 	}
-	public String getFinishToStartEditable() {
-		return FinishToStartEditable;
+	public boolean isFinishToStartEditable() {
+		return finishToStartEditable;
 	}
-	public void setFinishToStartEditable(String finishToStartEditable) {
-		FinishToStartEditable = finishToStartEditable;
+	public void setFinishToStartEditable(boolean finishToStartEditable) {
+		this.finishToStartEditable = finishToStartEditable;
 	}
-	public String getStartToFinishEditable() {
-		return StartToFinishEditable;
+	public boolean isStartToFinishEditable() {
+		return startToFinishEditable;
 	}
-	public void setStartToFinishEditable(String startToFinishEditable) {
-		StartToFinishEditable = startToFinishEditable;
+	public void setStartToFinishEditable(boolean startToFinishEditable) {
+		this.startToFinishEditable = startToFinishEditable;
 	}
-	public Boolean getStartToStartEditable() {
-		return StartToStartEditable;
+	public boolean isStartToStartEditable() {
+		return startToStartEditable;
 	}
-	public void setStartToStartEditable(Boolean startToStartEditable) {
-		StartToStartEditable = startToStartEditable;
+	public void setStartToStartEditable(boolean startToStartEditable) {
+		this.startToStartEditable = startToStartEditable;
 	}
-	
-
-
-	
 	
 	
 }

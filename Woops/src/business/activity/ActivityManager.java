@@ -6,10 +6,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 
-import javax.servlet.http.HttpSession;
+import view.PresentationConstantes;
 
 import net.sf.hibernate.Session;
-import view.PresentationConstantes;
 import business.BusinessConstantes;
 import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
@@ -294,9 +293,8 @@ public class ActivityManager extends PersistentObjectManager {
 			activitySequenceManager.removeActivitySequence(predecessor,successor);
 		}
 		
-		/* Par defaut, le type des d?pendances sont finsihToStart */
+		
 		ActivitySequenceType linkType = new ActivitySequenceType();
-		linkType.setId(new Integer(1));
 		
 		Iterator dependancesToAddIter = dependancesToAddList.iterator();
 		while(dependancesToAddIter.hasNext())
@@ -305,6 +303,13 @@ public class ActivityManager extends PersistentObjectManager {
 			ActivitySequence newActivitySequence = new ActivitySequence();
 			newActivitySequence.setPredecessor(predecessor);
 			newActivitySequence.setSuccessor(successor);
+			
+			// si le precedesseur est onGoing, on met par défaut le linkType à 3
+			if ((activityManager.getActivityById((Integer) predecessor.getId())).getOnGoing().equals(PresentationConstantes.YES))
+				linkType.setId(new Integer(3));
+			else /* Sinon, par defaut, le type des d?pendances sont finsihToStart */
+				linkType.setId(new Integer(1));
+			
 			newActivitySequence.setLinkType(linkType);
 			activitySequenceManager.insert(newActivitySequence);
 		}
@@ -476,16 +481,16 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	
-	public Serializable insert(PersistentObject objet, HttpSession httpSession) throws PersistanceException, DoublonException {
-		((HistorizedObject)objet).setUserCreation((Integer) ((User)(httpSession.getAttribute(PresentationConstantes.KEY_USER))).getId());
+	public Serializable insert(PersistentObject objet, User user) throws PersistanceException, DoublonException {
+		((HistorizedObject)objet).setUserCreation((Integer) user.getId());
 		((HistorizedObject)objet).setDateCreation(new Date());
 		
 		return insert(objet);
 	}
 	
 	
-	public void update(PersistentObject objet, HttpSession httpSession) throws PersistanceException, DoublonException {
-		((HistorizedObject)objet).setUserModification((Integer) ((User)(httpSession.getAttribute(PresentationConstantes.KEY_USER))).getId());
+	public void update(PersistentObject objet, User user) throws PersistanceException, DoublonException {
+		((HistorizedObject)objet).setUserModification((Integer) user.getId());
 		((HistorizedObject)objet).setDateModification(new Date());
 		
 		update(objet);

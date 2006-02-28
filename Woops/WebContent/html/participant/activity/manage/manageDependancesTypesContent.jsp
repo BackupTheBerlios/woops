@@ -28,10 +28,10 @@
         <ctrl:columntext    title="list.manageDependancesTypes.predecessorState"         property="predecessorState"/>
               
         <ctrl:columngroup title="list.manageDependancesTypes.columngroup.title" align="center">
-			<ctrl:columnradio	title="finishToStart"   property="linkType"   value="finishToStart"		editable="true"/>
-			<ctrl:columnradio	title="finishToFinish"	property="linkType"   value="finishToFinish"    editable="true"/>
-			<ctrl:columnradio	title="startToStart"    property="linkType"   value="startToStart"  	editable="true"/>
-			<ctrl:columnradio	title="startToFinish"   property="linkType"   value="startToFinish"   	editable="true"/>
+			<ctrl:columnradio	title="finishToStart"   property="linkType"   value="finishToStart"		editableProperty="finishToStartEditable"/>
+			<ctrl:columnradio	title="finishToFinish"	property="linkType"   value="finishToFinish"    editableProperty="finishToFinishEditable"/>
+			<ctrl:columnradio	title="startToStart"    property="linkType"   value="startToStart"  	editableProperty="startToStartEditable"/>
+			<ctrl:columnradio	title="startToFinish"   property="linkType"   value="startToFinish"   	editableProperty="startToFinishEditable"/>
 		</ctrl:columngroup>      
                
     </ctrl:list>

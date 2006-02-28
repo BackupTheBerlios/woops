@@ -100,9 +100,16 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 			activitySequenceItem.setPredecessor(activitySequence.getPredecessor().getName());
 			activitySequenceItem.setLinkType(activitySequence.getLinkType().getName());
 			
+			//  si le predecesseur  est onGoing, impossible de mettre liens Finish to X
 			if (activitySequence.getPredecessor().getOnGoing().equals(PresentationConstantes.YES)) {
-				activitySequenceItem.setFinishToFinishEditable(new Boolean(false));
-				activitySequenceItem.setFinishToStartEditable("false");
+				activitySequenceItem.setFinishToFinishEditable(false);
+				activitySequenceItem.setFinishToStartEditable(false);
+			}
+			
+			//  si le successeur  est onGoing, impossible de mettre liens X to Finish
+			if (activitySequence.getSuccessor().getOnGoing().equals(PresentationConstantes.YES)) {
+				activitySequenceItem.setStartToFinishEditable(false);
+				activitySequenceItem.setFinishToFinishEditable(false);
 			}
 			
 			String state = MessageResources.getMessageResources("ApplicationResources").getMessage(activitySequence.getPredecessor().getState().toString());

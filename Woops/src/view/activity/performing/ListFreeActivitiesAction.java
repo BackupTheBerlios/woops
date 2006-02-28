@@ -169,10 +169,11 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
 			
 			// on attribue l'user en session à l'activité
-			activity.setUserId((Integer) ((User) context.session().getAttribute(PresentationConstantes.KEY_USER)).getId());
+			User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
+			activity.setUserId((Integer) user.getId());
 			
 			// Met ? jour en BD l'?tat de l'activit? 
-			ActivityManager.getInstance().update(activity,context.session());
+			ActivityManager.getInstance().update(activity,user);
 			
 			// Informe le participant que sa demande a ?t? prise en compte
 			context.addGlobalMessage("msg.info.activity.affect", activity.getName());

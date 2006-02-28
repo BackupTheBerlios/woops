@@ -1,6 +1,5 @@
 package view.activity.manage;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import view.PresentationConstantes;
@@ -247,7 +246,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					modif = (activity.getUserId()==null)?(new Integer(2)):(new Integer(1));
 					
 					// on insere l'activité
-					activityId = (Integer)ActivityManager.getInstance().insert(activity,context.session());
+					activityId = (Integer)ActivityManager.getInstance().insert(activity,user);
 					
 					// R?cup?ration la hashmap pour y rajouter l'activit? 
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);		
@@ -323,7 +322,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 						else
 							activity.setOnGoing(PresentationConstantes.NO);
 						
-						ActivityManager.getInstance().update(activity,context.session());
+						ActivityManager.getInstance().update(activity,user);
 						
 						
 						String message = new String("");
