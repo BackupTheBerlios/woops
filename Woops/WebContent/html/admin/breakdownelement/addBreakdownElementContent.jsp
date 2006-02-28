@@ -3,7 +3,6 @@
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 <%@ taglib uri="/cc-base"    prefix="base" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
-<%@ taglib uri="/cc-controls" prefix="ctrl" %>
 
 <html:form action="addBreakdownElement.do" >
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
