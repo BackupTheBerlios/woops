@@ -109,6 +109,10 @@ CREATE TABLE ActivitySequence (
      , successor INT NOT NULL
      , predecessor INT NOT NULL
      , linkType INT NOT NULL
+     , datecreation DATE
+     , dateupdate DATE
+     , usercreation INT
+     , userupdate INT
      , UNIQUE UQ_ActivitySequence_successor_predecessor (successor, predecessor)
      , PRIMARY KEY (id)
      , INDEX (linkType)

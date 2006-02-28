@@ -1,12 +1,18 @@
 package business.activity.sequence;
 
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 import net.sf.hibernate.Session;
 import business.activity.Activity;
+import business.hibernate.HistorizedObject;
+import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectManager;
+import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
+import business.user.User;
 
 public class ActivitySequenceManager extends PersistentObjectManager {
 	
@@ -66,5 +72,19 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 	public Collection getActivitySequencesByBDE(Integer bdeId, Session session) throws PersistanceException {
 		Collection list = activitySequenceDAO.getActivitySequencesByBDE(bdeId, session);
 		return list;
+	}
+	
+	public Serializable insert(PersistentObject objet, User user) throws PersistanceException, DoublonException {
+		((HistorizedObject)objet).setUserCreation((Integer) user.getId());
+		((HistorizedObject)objet).setDateCreation(new Date());
+		
+		return insert(objet);
+	}
+	
+	public void update(PersistentObject objet, User user) throws PersistanceException, DoublonException {
+		((HistorizedObject)objet).setUserModification((Integer) user.getId());
+		((HistorizedObject)objet).setDateModification(new Date());
+		
+		update(objet);
 	}
 }

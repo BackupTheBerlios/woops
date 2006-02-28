@@ -227,7 +227,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 				/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans le form 
 				 * (il a ?t? mis ? jour dans la methode pr?c?dente : setPossibleDependancesOptions */
 				
-				ActivityManager.getInstance().saveActivityDependances(activityId,oldDependancesKeysList,newDependancesKeysList);
+				ActivityManager.getInstance().saveActivityDependances(activityId,oldDependancesKeysList,newDependancesKeysList,(User) context.session().getAttribute(PresentationConstantes.KEY_USER));
 				
 				/* R?cup?ration de l'activit? dans la hashmap pour connaitre son nom */
 				HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);

@@ -270,7 +270,7 @@ public class ActivityManager extends PersistentObjectManager {
 	 * @throws DoublonException 
 	 * @throws ForeignKeyException 
 	 */
-	public void saveActivityDependances(Integer activityId, Collection oldDependancesKeysList, Collection newDependancesKeysList)
+	public void saveActivityDependances(Integer activityId, Collection oldDependancesKeysList, Collection newDependancesKeysList, User user)
 	throws PersistanceException, DoublonException, ForeignKeyException {
 		
 		Collection dependancesToAddList = new ArrayList(newDependancesKeysList);
@@ -311,7 +311,7 @@ public class ActivityManager extends PersistentObjectManager {
 				linkType.setId(new Integer(1));
 			
 			newActivitySequence.setLinkType(linkType);
-			activitySequenceManager.insert(newActivitySequence);
+			activitySequenceManager.insert(newActivitySequence,user);
 		}
 		
 	}
