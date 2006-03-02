@@ -1,13 +1,16 @@
 package view.admin.breakdownelement;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import org.apache.struts.action.ActionForward;
 
@@ -54,30 +57,56 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 					form.setDetails(bke.getDetails());
 					form.setName(bke.getName());
 					form.setPrefix(bke.getPrefix());
-					if (bke.getDateCreation() != null) {
-						form.setStartDate(bke.getDateCreation().toString());					
+					
+					Date startDate = bke.getStartDate();
+					if (startDate != null) {						
+						form.setStartDate(getStringFromDate(startDate));					
 					}
-					if (bke.getEndDate() != null) {
-						form.setEndDate(bke.getEndDate().toString());
+					
+					Date dateEnd = bke.getEndDate();
+					if (dateEnd != null) {						
+						form.setEndDate(getStringFromDate(dateEnd));
 					}
 				}
 				this.setUsersParticipation(context);		
 			}
 			else {
 				Date dateDuJour = new Date();
-				form.setStartDate(dateDuJour.getDate()+"/"+dateDuJour.getMonth()+"/"+dateDuJour.getYear());
+				form.setStartDate(getStringFromDate(dateDuJour));
 			}
 			
 			// en mode UPDATE et INSERT on remplit le swap select
 			this.setUserParticipationOptions(context);
 			
-		}
+		}		
 		// Initilisation de la liste des processus
 		this.setSelect(context) ;
 		form.setMode(mode);
 		context.forwardToInput();
 	}
-
+	
+	
+	private String getStringFromDate (Date d) {
+		return d.getDate()+"/"+(d.getMonth()+1)+"/"+(1900+d.getYear());	
+	}
+	
+	
+	private Date getDateFromString (String s) {
+		int year=0 , month=0 , date=0;
+		Calendar cal = Calendar.getInstance(Locale.getDefault());
+		
+		StringTokenizer st = new StringTokenizer (s,"/");
+		
+		date = Integer.parseInt(st.nextToken());
+		month = Integer.parseInt(st.nextToken());
+		year = Integer.parseInt(st.nextToken());
+		cal.clear();
+		cal.set(year,month-1,date);
+		//System.out.println("\nDate : "+getStringFromDate(cal.getTime()));
+		return (Date)cal.getTime().clone();
+	}
+	
+	
 	/**
 	 * Initilisation de la liste des participants possibles
 	 * @param context : contexte d'execution de la servlet
@@ -201,17 +230,19 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     		String prefix = madForm.getPrefix();
     		String name = madForm.getName();
     		String details = madForm.getDetails();
+    		String dateCreation = madForm.getStartDate();
+    		String dateEnd = madForm.getEndDate();
+    		
     		BreakdownElement bke = new BreakdownElement ();
     		bke.setPrefix(prefix);
     		bke.setName(name);
     		bke.setDetails(details);
     		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));
-    		bke.setDateCreation(new Date(madForm.getStartDate()));
-    		if (madForm.getEndDate()!=null && madForm.getEndDate()!="") {
-        		bke.setEndDate(new Date(madForm.getEndDate()));
+    		bke.setStartDate(getDateFromString(dateCreation));
+    		if (madForm.getEndDate()!=null && madForm.getEndDate().length()>0) {
+        		bke.setEndDate(getDateFromString(dateEnd));
     		}
-
-	    	
+    		
     		// Recuperation des participants sélectionnés
     		if (!mode.equals(PresentationConstantes.COPY_MODE)) {
     			String [] usersKeys  = madForm.getUsersParticipation();
