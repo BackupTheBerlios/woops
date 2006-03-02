@@ -144,6 +144,7 @@
         <forward name="finishListFreeActivities" path="/listFreeActivities.do"/>
         <forward name="next" path="/manageActivityDependances.do"/>
         <forward name="previous" path="/listActivities.do"/>
+        <forward name="previousFreeActivity" path="/listFreeActivities.do"/>
      </action>
 
 <!-- ================= Show Activity Summary ================ -->  

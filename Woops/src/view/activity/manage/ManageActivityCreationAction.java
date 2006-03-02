@@ -66,14 +66,11 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			// si activité en cours, on desactive le checkbox
 			
 			if (! activity.getState().equals(BusinessConstantes.ACTIVITY_STATE_CREATED) ){
-				
-				System.out.print("inProgress\n\n");
 				form.setDisableFreeActivityCheckbox("true");
 				form.setDisableActivityOnGoingCheckbox("true");
 			}
 			// sinon on affichage le checkbox selon son cas
 			else{
-				System.out.print("NOT inProgress\n\n");
 				form.setDisableFreeActivityCheckbox("false");
 				if (activity.getUserId()==null){
 					form.setFreeActivity("true");
@@ -170,7 +167,35 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	
 	public void previous_onClick(FormActionContext context) {
 		
-		context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
+	
+		ManageActivityCreationForm form = (ManageActivityCreationForm) context.form();
+		String mode = context.request().getParameter(PresentationConstantes.PARAM_MODE);
+		
+		Integer activityId = null;
+		Activity activity = null;
+		
+		if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
+			
+			activityId = new Integer(form.getActivityId());
+			context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);		
+			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
+			activity = (Activity)activitiesMap.get(activityId);
+			
+			// si il s'agit d'une activité libre on redirige vers la liste des activités libres
+			if (activity.getUserId()==null) {	
+				context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS_FREE_ACTIVITY);	
+			// sinon activité affectée on redirige vers la liste des activités
+			}else{
+				context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
+			}
+		}
+		// si c'est un ajout on redirige toujours vers la liste des activités
+		else{
+			context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
+		}
+		
+			
+
 	}
 	
 	
