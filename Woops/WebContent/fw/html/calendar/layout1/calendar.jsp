@@ -1,4 +1,4 @@
-<%@ taglib uri="/WEB-INF/tlds/cc-utility.tld" prefix="util" %>
+<%@ taglib uri="/cc-utility" prefix="util" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 
