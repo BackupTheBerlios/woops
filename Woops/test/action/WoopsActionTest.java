@@ -23,7 +23,9 @@ public class WoopsActionTest extends MockStrutsTestCase {
 	 */
 	public void setUp() throws Exception {
 		super.setUp();
-		
+	}
+	
+	protected void connect(String login, String password) {
 		/* On precise le contexte /WebContent
 		pour trouver le fichier /WEB-INF/web.xml */
 		setContextDirectory(new File("WebContent"));
@@ -32,8 +34,8 @@ public class WoopsActionTest extends MockStrutsTestCase {
 		setRequestPathInfo("/loginUser");
 		// On constitue le form et on initialise les paramètres
 		loginForm = new LoginForm();
-		loginForm.setLogin("bernard");
-		loginForm.setPassword("bernard");
+		loginForm.setLogin(login);
+		loginForm.setPassword(password);
 		// On fournit l'actionForm à l'action
 		setActionForm(loginForm);
 		
