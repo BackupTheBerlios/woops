@@ -23,6 +23,8 @@
 	  	<form-bean name="showBdeSummaryForm" type="view.admin.summary.ShowBdeSummaryForm" />
 	  	<form-bean name="showTeamActivitiesSummaryForm" type="view.activity.summary.ShowTeamActivitiesSummaryForm" />
 	  	<form-bean name="importFileForm" type="view.admin.importActivities.ImportFileForm" />
+	  	<form-bean name="manageDpeForm" type="view.admin.importActivities.ManageDpeForm" />
+	  	
 	  	<form-bean name="listEventsForm" type="view.activity.event.ListEventsForm" />
 	  	
 	</form-beans>
@@ -287,9 +289,20 @@
 	  	 	scope="session"
 	  	 	input="/html/admin/importActivities/importFile.jsp"
 	  	 >
-	     	<forward name="error" path="/importFile" />
-	     	<forward name="success" path="/importFile" />
-	  		<forward name="previous" path="/importFile"/>
+	     	<forward name="error" path="/importFile.do" />
+	     	<forward name="success" path="/manageDpe.do" />
+	  		<forward name="previous" path="/importFile.do"/>
+	  	</action>
+	  	
+<!-- ================= Admin / ManageDpe ================ -->        	
+      	<action path="/manageDpe"	 type="view.admin.importActivities.ManageDpeAction"
+	  		name="manageDpeForm"
+	  	 	scope="session"
+	  	 	input="/html/admin/importActivities/manageDpe.jsp"
+	  	 >
+	     	<forward name="error" path="/manageDpe.do" />
+	     	<forward name="success" path="/manageDpe.do" />
+	  		<forward name="previous" path="/manageDpe.do"/>
 	  	</action>
       	
 <!-- ================= Show Activity Summary To Print ================ -->  
@@ -301,6 +314,9 @@
          	<forward name="error" path="/showActivitySummary.do" />
          	<forward name="success" path="/html/participant/activity/summary/showActivitySummaryToPrint.jsp" />
       	</action>
+      	
+   	
+
       	
       	
 	</action-mappings>

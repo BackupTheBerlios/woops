@@ -90,7 +90,7 @@ public interface PresentationConstantes {
     public static final String FORWARD_DRILLDOWN_USER="drillDownUser";
     public static final String FORWARD_EDIT_BREAKDOWN = "editBreakdown";
     public static final String FORWARD_DRILLDOWN_BREAKDOWN="drillDownBreakdown";
-    
+    public static final String FILE_IN_SESSION = "fileInSession" ;
     public static final String ADMIN_ROLE_CODE = "admin" ;
     
     // constantes de nom de table
