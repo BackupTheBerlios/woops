@@ -22,8 +22,7 @@
 	  	<form-bean name="showUserSummaryForm" type="view.admin.summary.ShowUserSummaryForm" />
 	  	<form-bean name="showBdeSummaryForm" type="view.admin.summary.ShowBdeSummaryForm" />
 	  	<form-bean name="showTeamActivitiesSummaryForm" type="view.activity.summary.ShowTeamActivitiesSummaryForm" />
-	  	
-	  	
+	  	<form-bean name="importFileForm" type="view.admin.importActivities.ImportFileForm" />
 	</form-beans>
 
 
@@ -268,6 +267,16 @@
 	  		<forward name="previous" path="/admin"/>
 	  	</action>
       	
+<!-- ================= Admin / ImportFile ================ -->        	
+      	<action path="/importFile"	 type="view.admin.importActivities.ImportFileAction"
+	  		name="importFileForm"
+	  	 	scope="session"
+	  	 	input="/html/admin/importActivities/importFile.jsp"
+	  	 >
+	     	<forward name="error" path="/importFile" />
+	     	<forward name="success" path="/importFile" />
+	  		<forward name="previous" path="/importFile"/>
+	  	</action>
       	
 <!-- ================= Show Activity Summary To Print ================ -->  
 		<action path="/showActivitySummaryToPrint"	 
