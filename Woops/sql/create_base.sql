@@ -1,3 +1,4 @@
+DROP TABLE Event;
 DROP TABLE ActivitySequence;
 DROP TABLE Activity;
 DROP TABLE ActivitySequenceType;
@@ -100,7 +101,7 @@ CREATE TABLE Activity (
      , CONSTRAINT FK_Activity_state FOREIGN KEY (state)
                   REFERENCES ActivityState (name)
      , CONSTRAINT FK_Activity_bde FOREIGN KEY (bde)
-                  REFERENCES BreakdownElement (id)              
+                  REFERENCES BreakdownElement (id)
 )ENGINE=InnoDB;
 
 
@@ -124,6 +125,26 @@ CREATE TABLE ActivitySequence (
      , INDEX (predecessor)
      , CONSTRAINT FK_ActivitySequence_predecessor FOREIGN KEY (predecessor)
                   REFERENCES Activity (id)
+)ENGINE=InnoDB;
+
+
+CREATE TABLE Event (
+       id INT NOT NULL AUTO_INCREMENT
+     , name VARCHAR(50) NOT NULL
+     , details TEXT
+     , activity INT NOT NULL
+     , occured VARCHAR(3) DEFAULT 'non'
+     , bde INT NOT NULL
+     , datecreation DATE
+     , dateupdate DATE
+     , usercreation INT
+     , userupdate INT
+     , UNIQUE UQ_Event_bde_name (bde,name)
+     , PRIMARY KEY (id)
+     , CONSTRAINT FK_Event_activity FOREIGN KEY (activity)
+                  REFERENCES Activity (id)
+     , CONSTRAINT FK_Event_bde FOREIGN KEY (bde)
+                  REFERENCES BreakdownElement (id)
 )ENGINE=InnoDB;
 
 

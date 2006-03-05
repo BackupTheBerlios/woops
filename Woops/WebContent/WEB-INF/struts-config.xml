@@ -23,6 +23,8 @@
 	  	<form-bean name="showBdeSummaryForm" type="view.admin.summary.ShowBdeSummaryForm" />
 	  	<form-bean name="showTeamActivitiesSummaryForm" type="view.activity.summary.ShowTeamActivitiesSummaryForm" />
 	  	<form-bean name="importFileForm" type="view.admin.importActivities.ImportFileForm" />
+	  	<form-bean name="listEventsForm" type="view.activity.event.ListEventsForm" />
+	  	
 	</form-beans>
 
 
@@ -205,7 +207,19 @@
          	<forward name="success" path="/html/participant/activity/summary/showTeamActivitiesSummary.jsp" />
       	</action>	
     	
-    	
+
+
+<!-- ================= List Events ================ -->  
+		<action path="/listEvents"	 type="view.activity.event.ListEventsAction"
+      		name="listEventsForm"
+      	 	scope="request"
+      	 	roles="#dev"
+      	 	input="/html/participant/activity/event/listEvents.jsp"
+      	 >
+         	<forward name="error" path="/listEvents.do" />
+         	<forward name="action" path="/listEvents.do"/>
+         	<forward name="edit" path="/manageEvent.do"/>
+      	</action>    	
     	
     	
      <!-- ================= Admin / admin ================ -->  

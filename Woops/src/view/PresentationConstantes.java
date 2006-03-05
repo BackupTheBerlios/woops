@@ -44,6 +44,7 @@ public interface PresentationConstantes {
 	public static final String PARAM_ACTIVITY_ID="activityId";
 	public static final String PARAM_USER_ID="userId";
 	public static final String PARAM_BREAKDOWN_ID="breakdownelementId";
+	public static final String PARAM_EVENT_ID="eventId";
 
 	
 	//constantes relatives aux Styles

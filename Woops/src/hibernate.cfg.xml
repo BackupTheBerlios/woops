@@ -48,6 +48,7 @@ PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
 		<mapping resource="business/activity/state/ActivityState.hbm.xml" />
 		<mapping resource="business/breakdownelement/BreakdownElement.hbm.xml" />
 		<mapping resource="business/breakdownelement/BreakdownElementKind.hbm.xml" />
+		<mapping resource="business/event/Event.hbm.xml" />
 		
 	</session-factory>
 </hibernate-configuration>
