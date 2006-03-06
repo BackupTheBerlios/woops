@@ -1,7 +1,16 @@
 package view.admin.importActivities;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+
+import org.apache.struts.upload.FormFile;
 
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
@@ -29,9 +38,17 @@ public class ImportFileAction extends WoopsCCAction{
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			File f = new File ("../workspace/Woops/test/util/processus.dpe") ;
+			//File f = new File ("../workspace/Woops/test/util/processus.dpe") ;
+			
+			ImportFileForm leForm = (ImportFileForm)context.form() ;
+			FormFile ff = leForm.getPathFile() ;
+			
+			InputStream is;
+			
 			try {
-				List l = ProcessControler.load(f) ;
+				is = ff.getInputStream();
+				BufferedInputStream bis = new BufferedInputStream(is);
+				List l = ProcessControler.load(bis) ;
 				if (l.isEmpty())
 				{
 					context.addGlobalError("admin.manageDpe.emptyList") ;
@@ -46,7 +63,13 @@ public class ImportFileAction extends WoopsCCAction{
 				// TODO Auto-generated catch block
 				context.addGlobalError("admin.manageDpe.fileError") ;
 				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
-			}			
+			}	catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}		
 		}
 	}
 

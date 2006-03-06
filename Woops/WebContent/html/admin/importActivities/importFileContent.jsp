@@ -4,7 +4,7 @@
 <%@ taglib uri="/cc-base"    prefix="base" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
 
-<html:form action="importFile.do"  >
+<html:form action="importFile.do" method="post" enctype="multipart/form-data">
 <forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
 <!-- method="post" enctype="multipart/form-data" -->
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -16,8 +16,7 @@
     	formid="frmImportFile"
     	width="600">
     	
-    <forms:file  label="admin.import.path"  property="pathFile"/>
-    
+    <forms:file label="admin.import.path"  property="pathFile"/>
     
     
     <forms:buttonsection default="btnImport">  

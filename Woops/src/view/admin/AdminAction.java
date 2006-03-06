@@ -237,6 +237,12 @@ public class AdminAction  extends WoopsCCAction {
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT_BREAKDOWN,PresentationConstantes.COPY_MODE);
 	}
+	
+	public void listBreakDownElements_onImport(ControlActionContext context, String id) throws IOException, ServletException {
+		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,id);
+		
+		context.forwardByName(PresentationConstantes.FORWARD_IMPORT);
+	}
 
 	/**
 	 * Cette méthode est appelée si l'aministeur clique sur l'icone de supprimer un projet

@@ -84,6 +84,7 @@ public interface PresentationConstantes {
     public static final String DELETE_MODE = "delete_mode";
     public static final String COPY_MODE = "copy_mode";
     
+    
     // Constantes forward pour admin
     public static final String FORWARD_ADMIN="admin";   
     public static final String FORWARD_EDIT_USER = "editUser";
@@ -92,6 +93,7 @@ public interface PresentationConstantes {
     public static final String FORWARD_DRILLDOWN_BREAKDOWN="drillDownBreakdown";
     public static final String FILE_IN_SESSION = "fileInSession" ;
     public static final String ADMIN_ROLE_CODE = "admin" ;
+    public static final String FORWARD_IMPORT = "import";
     
     // constantes de nom de table
 	public static final String TABLE_USER = "User";

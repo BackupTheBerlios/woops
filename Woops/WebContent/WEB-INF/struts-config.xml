@@ -239,6 +239,7 @@
         	<forward name="drillDownUser" path="/showUserSummary.do"/>
      	    <forward name="editBreakdown" path="/addBreakdownElement.do?mode={0}"/>
      	    <forward name="deleteBreakdown" path="/admin.do"/>
+     	    <forward name="import" path="/importFile.do"/>
      </action>
      
     <!-- ================= Admin / addUser ================ -->  

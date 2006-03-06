@@ -8,19 +8,19 @@ import com.cc.framework.adapter.struts.FWActionForm;
 
 public class ImportFileForm extends FWActionForm{
 	
-	String pathFile ;
+	FormFile pathFile ;
 
 	/**
 	 * @return Returns the pathFile.
 	 */
-	public String getPathFile() {
+	public FormFile getPathFile() {
 		return pathFile;
 	}
 
 	/**
 	 * @param pathFile The pathFile to set.
 	 */
-	public void setPathFile(String pathFile) {
+	public void setPathFile(FormFile pathFile) {
 		this.pathFile = pathFile;
 	}
 	

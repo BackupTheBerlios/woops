@@ -5,7 +5,7 @@
     <reloadable>true</reloadable>
     <redirectLogger>true</redirectLogger>
     <updateXml>true</updateXml>
-    <warLocation>C:\Development Tools\Tomcat 5.5\webapps\Woops.war</warLocation>
+    <warLocation>Z:\workspace\Woops\woops.war</warLocation>
     <extraInfo></extraInfo>
     <webPath>/Woops</webPath>
 </tomcatProjectProperties>

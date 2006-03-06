@@ -67,6 +67,14 @@
 				width="150"
 				/>
 			
+			<ctrl:columnbutton 
+				title="table.field.listBreakDownElements.import.title" 
+				text="table.field.listBreakDownElements.import.text" 
+				align="center"
+				command="import"
+				width="150"
+				/>
+			
 			<ctrl:columndelete 
 				title="table.field.listBreakDownElements.delete"
 				onclick="return confirm('${confirmMessageDeleteBde}');"
