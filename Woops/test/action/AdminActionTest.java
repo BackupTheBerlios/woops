@@ -1,9 +1,14 @@
 package action;
 
 import business.BusinessConstantes;
+import business.hibernate.exception.DoublonException;
+import business.hibernate.exception.PersistanceException;
+import business.user.UserRole;
 import business.user.User;
+import business.user.UserManager;
 
 import com.cc.framework.ui.control.SimpleListControl;
+import com.cc.framework.adapter.struts.ActionContext;
 
 import junit.framework.TestCase;
 import view.PresentationConstantes;
@@ -41,26 +46,75 @@ public class AdminActionTest extends WoopsActionTest {
 		// On vérifie les informations dans le form
 		adminForm = (AdminForm) getActionForm();
 		assertNotNull(adminForm);
-		
-//		// On s'assure que toutes les activites sont terminees
-//		SimpleListControl listActivities = (SimpleListControl) adminForm.getListActivities();
-//		assertNotNull(listActivities);
-//		// On recupere le model de la liste
-//		WoopsListDataModel model = (WoopsListDataModel) listActivities.getDataModel();
-//		for(int i = 0; i < model.size(); i++) {
-//			ActivityItem act = (ActivityItem) model.getElementAt(i);
-//			assertEquals(act.getState(), BusinessConstantes.ACTIVITY_STATE_FINISHED);
-//		}
-		
+				
 		//On s'assure que toutes les BreakDownElements sont terminees
 		SimpleListControl listBreakDownElements = (SimpleListControl) adminForm.getListBreakDownElements();
 		assertNotNull(listBreakDownElements);
 		
-//		On s'assure que toutes les users sont terminees
+		//On s'assure que toutes les users sont terminees
 		SimpleListControl listUsers = (SimpleListControl) adminForm.getListUsers();
 		assertNotNull(listUsers);
 		
+		
 		verifyInputForward();
         verifyNoActionErrors();
+	}
+	
+	public void testSuccessfulDeleteUser() {
+		
+		//On s'assure qu'on est connecte
+//		User currentUser = (User) getSession().getAttribute(PresentationConstantes.KEY_USER);
+//		assertNotNull(currentUser);
+		
+		// on ajoute d'abord un utilisateur "testSuccessfulDeleteUser"
+//		User user = new User();
+//		UserRole userRole = new UserRole();
+//		
+//		user.setFirstName("testSuccessfulDeleteUser");
+//		user.setLastName("testSuccessfulDeleteUser");
+//		user.setLogin("testSuccessfulDeleteUser");
+//		user.setPassword("testSuccessfulDeleteUser");
+//		
+//		userRole.setId(new Integer(1));
+//		user.setRole(userRole);
+//		
+//		try {
+//			UserManager.getInstance().insert(user);
+//		} catch (PersistanceException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (DoublonException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		// on exécute la methode doExecute() pour mettre à jour context
+//		setRequestPathInfo("/admin");
+//		actionPerform();
+//		
+//		// on récupère nouvel adminForm
+//		adminForm = (AdminForm) getActionForm();
+//		
+//		assertNotNull(adminForm);
+//		
+//		String userId = user.getId().toString();
+//		
+//		setRequestPathInfo("/admin");
+//		
+//		setActionForm(adminForm);
+//		
+//		addRequestParameter("ctrl", "listUsers");
+//		addRequestParameter("action", "Delete");
+//		addRequestParameter("param", "1");
+//		System.out.println(request);
+//		
+//		//On execute l'action pour supprimer cet utilisateur "testSuccessfulDeleteUser"
+//		actionPerform();
+		
+		// on vérifier que l'utilisateur "testSuccessfulDeleteUser" n'existe plus
+				
+//		verifyForward(PresentationConstantes.FORWARD_DELETE_USER);
+//		verifyInputForward();
+//		verifyNoActionErrors();
 	}
 }
