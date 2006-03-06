@@ -54,7 +54,7 @@ public class ShowUserSummaryAction extends WoopsCCAction {
 					bdei.setEndDate(b.getEndDate());
 				}
 				if (b.getStartDate() != null){
-					bdei.setEndDate(b.getStartDate());
+					bdei.setStartDate(b.getStartDate());
 				}
 				bdei.setPrefix(b.getPrefix());
 				bdei.setName(b.getName());
