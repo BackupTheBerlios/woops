@@ -28,18 +28,6 @@ public class ImportFileAction extends WoopsCCAction{
 	
 	public void import_onClick(FormActionContext context) {
 		if (!context.hasErrors()){
-		//	ImportFileForm form = (ImportFileForm)context.form();
-			//try {
-//				FormFile fichierDpe = form.getPathFile();
-//				System.out.println("dans le form " + form.getPathFile());
-//				System.out.println("fichier " + fichierDpe);
-				//List test = ProcessControler.load(fichierDpe);
-//			} catch (FileParseException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-			//File f = new File ("../workspace/Woops/test/util/processus.dpe") ;
-			
 			ImportFileForm leForm = (ImportFileForm)context.form() ;
 			FormFile ff = leForm.getPathFile() ;
 			
@@ -56,7 +44,7 @@ public class ImportFileAction extends WoopsCCAction{
 				}
 				else
 				{
-					context.session().setAttribute(PresentationConstantes.FILE_IN_SESSION,l);
+					context.request().setAttribute(PresentationConstantes.FILE_IN_SESSION,l);
 					context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
 				}
 			} catch (FileParseException e) {

@@ -239,7 +239,7 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	
 	public void listBreakDownElements_onImport(ControlActionContext context, String id) throws IOException, ServletException {
-		context.request().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,id);
+		context.session().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,id);
 		
 		context.forwardByName(PresentationConstantes.FORWARD_IMPORT);
 	}

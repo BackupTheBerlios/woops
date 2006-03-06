@@ -1,33 +1,37 @@
 package view.admin.importActivities;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import view.PresentationConstantes;
-import view.admin.importActivities.IAItem.BreakDownElementNameItem;
 import view.admin.importActivities.IAItem.IAItem;
-import view.admin.importActivities.IAItem.ListBdeNModel;
 import view.admin.importActivities.IAItem.ListIAModel;
+import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
+import business.activity.ActivityManager;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementManager;
+import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;
+import com.cc.framework.adapter.struts.FormActionContext;
 import com.cc.framework.common.DisplayObject;
+import com.cc.framework.common.SortOrder;
+import com.cc.framework.ui.control.ControlActionContext;
+import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class ManageDpeAction extends WoopsCCAction{
 
 	public void doExecute(ActionContext context) throws Exception {
+		// recuperation et mise en requete de l'id du bde
+		
+		
 		// recuperation de la liste d'activites
 		ManageDpeForm form = (ManageDpeForm)context.form() ;
-		
-		ListDataModel bdename = this.loadBde(context);
-		form.setListBde(bdename) ;
-		
+				
 		ListDataModel activityname = this.loadAct (context) ;
 		form.setListActivities(activityname) ;
 		context.forwardToInput();
@@ -36,7 +40,7 @@ public class ManageDpeAction extends WoopsCCAction{
 	
 	private ListDataModel loadAct(ActionContext context) {
 		// TODO Auto-generated method stub
-		List listeActivites = (List)context.session().getAttribute(PresentationConstantes.FILE_IN_SESSION) ;
+		List listeActivites = (List)context.request().getAttribute(PresentationConstantes.FILE_IN_SESSION) ;
 		ArrayList listeFinale = new ArrayList () ;
 		IAItem item ;
 		for (int i = 0 ; i < listeActivites.size() ; i++)
@@ -54,31 +58,47 @@ public class ManageDpeAction extends WoopsCCAction{
 		return model;
 	}
 
-	private ListDataModel loadBde (ActionContext context){
-//		 recuperation des bde 
-		List listeBde;
+	public void listActivities_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
+		// Récupération de la liste dans le contexte
+		ListIAModel model = (ListIAModel) context.control().getDataModel();
+		
+		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
+		model.sortByColumn(column, direction);		
+		context.control().execute(context, column,  direction);
+	}
+	
+	public void confirm_onClick(FormActionContext context) {
+		ManageDpeForm form = (ManageDpeForm)context.form() ;
+		SimpleListControl liste = form.getListActivities() ;
+		ListIAModel listeDM = (ListIAModel) liste.getDataModel() ;
+		IAItem item ;
+		Activity activity ;
+		String idString = (String) context.session().getAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID) ;
+		Integer id = Integer.decode(idString) ;
 		try {
-			listeBde = BreakdownElementManager.getInstance().getList("BreakdownElement");
-			ArrayList listBdeName = new ArrayList () ;
-			int indice = 0 ;
-			BreakDownElementNameItem bdeitem ;
-			for (Iterator i = listeBde.iterator() ; i.hasNext() ;) {
-				BreakdownElement bde = (BreakdownElement)i.next() ;
-				bdeitem = new BreakDownElementNameItem () ;
-				bdeitem.setCurrentName(bde.getName());
-				bdeitem.setId(Integer.toString(indice));
-				listBdeName.add(bdeitem);
-			}
-			DisplayObject[] result = new BreakDownElementNameItem[listBdeName.size()];
-			listBdeName.toArray(result);
+			BreakdownElement bde = BreakdownElementManager.getInstance().getBreakDownElementById(id);
 			
-			// Création de la liste initialisée avec les valeurs à afficher
-			ListBdeNModel model = new ListBdeNModel(result);
-			return (model);	
+			for (int i = 0 ; i < listeDM.size() ; i++){
+				item = (IAItem)listeDM.getElementAt(i) ;
+				if (item.getSelectionne()!=null){
+					activity = new Activity();
+					activity.setName(item.getName());
+					activity.setUserId(null);
+					activity.setBdeId(id);
+					ActivityManager.getInstance().insert(activity);
+				}
+			}
+			context.session().removeAttribute(PresentationConstantes.FILE_IN_SESSION);
+			context.addGlobalMessage("admin.manageDpe.confirmation") ;
+			context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
 		} catch (PersistanceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		return null ;
+		} catch (DoublonException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 	}
+	
 }

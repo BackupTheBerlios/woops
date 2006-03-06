@@ -7,7 +7,7 @@ import com.cc.framework.ui.model.ListDataModel;
 public class IAItem implements DisplayObject{
 	String id ;
 	String name ;
-
+	String selectionne ; 
 	
 	/**
 	 * @return Returns the id.
@@ -35,5 +35,13 @@ public class IAItem implements DisplayObject{
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getSelectionne() {
+		return selectionne;
+	}
+
+	public void setSelectionne(String selectionne) {
+		this.selectionne = selectionne;
 	}
 }
