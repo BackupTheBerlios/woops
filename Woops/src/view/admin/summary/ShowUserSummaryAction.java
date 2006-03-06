@@ -45,11 +45,13 @@ public class ShowUserSummaryAction extends WoopsCCAction {
 	public void loadListBde (ActionContext context, User user){
 		ShowUserSummaryForm form = (ShowUserSummaryForm) context.form();
 		try {
+			BreakdownElement b ;
+			BreakdownElementItem bdei ;
 			Collection listBde =  BreakdownElementManager.getInstance().getBreakDownElementsByUser((Integer)user.getId());
 			ArrayList list = new ArrayList () ;
 			for (Iterator i = listBde.iterator() ; i.hasNext() ;){
-				BreakdownElement b = (BreakdownElement)i.next() ;
-				BreakdownElementItem bdei = new BreakdownElementItem ();
+				b = (BreakdownElement)i.next() ;
+				bdei = new BreakdownElementItem ();
 				if (b.getEndDate() != null){
 					bdei.setEndDate(b.getEndDate());
 				}
@@ -58,8 +60,8 @@ public class ShowUserSummaryAction extends WoopsCCAction {
 				}
 				bdei.setPrefix(b.getPrefix());
 				bdei.setName(b.getName());
-				bdei.setKind(b.getKind().getName());
-
+				String kind = b.getKind().getName() ;
+				bdei.setKind(kind);
 				list.add(bdei);
 			}
 			DisplayObject[] data = new BreakdownElementItem[list.size()];

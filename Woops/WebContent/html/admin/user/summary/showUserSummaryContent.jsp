@@ -81,15 +81,12 @@
 				property="endDate"
 				width="300"
 				sortable="true"/>
-			
-			<ctrl:columnhtml id="k"
+			<ctrl:columntext 
 				title="table.field.listBreakDownElements.kind"
+				property="kind"
 				width="150"
-				>
-					<bean:message
-						name="k"
-						property="kind"/>
-			</ctrl:columnhtml> 
+				sortable="true"/>
+			
 		</ctrl:list>
 		</td>
 	</tr>

@@ -85,7 +85,9 @@ public class ManageDpeAction extends WoopsCCAction{
 					activity.setName(item.getName());
 					activity.setUserId(null);
 					activity.setBdeId(id);
+					activity.setOnGoing(PresentationConstantes.NO);
 					ActivityManager.getInstance().insert(activity);
+					
 				}
 			}
 			context.session().removeAttribute(PresentationConstantes.FILE_IN_SESSION);
