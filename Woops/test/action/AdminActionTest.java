@@ -63,58 +63,58 @@ public class AdminActionTest extends WoopsActionTest {
 	public void testSuccessfulDeleteUser() {
 		
 		//On s'assure qu'on est connecte
-//		User currentUser = (User) getSession().getAttribute(PresentationConstantes.KEY_USER);
-//		assertNotNull(currentUser);
+		User currentUser = (User) getSession().getAttribute(PresentationConstantes.KEY_USER);
+		assertNotNull(currentUser);
 		
 		// on ajoute d'abord un utilisateur "testSuccessfulDeleteUser"
-//		User user = new User();
-//		UserRole userRole = new UserRole();
-//		
-//		user.setFirstName("testSuccessfulDeleteUser");
-//		user.setLastName("testSuccessfulDeleteUser");
-//		user.setLogin("testSuccessfulDeleteUser");
-//		user.setPassword("testSuccessfulDeleteUser");
-//		
-//		userRole.setId(new Integer(1));
-//		user.setRole(userRole);
-//		
-//		try {
-//			UserManager.getInstance().insert(user);
-//		} catch (PersistanceException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (DoublonException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		User user = new User();
+		UserRole userRole = new UserRole();
+		
+		user.setFirstName("testSuccessfulDeleteUser");
+		user.setLastName("testSuccessfulDeleteUser");
+		user.setLogin("testSuccessfulDeleteUser");
+		user.setPassword("testSuccessfulDeleteUser");
+		
+		userRole.setId(new Integer(1));
+		user.setRole(userRole);
+		
+		try {
+			user = (User) UserManager.getInstance().insert(user);
+		} catch (PersistanceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DoublonException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		// on exécute la methode doExecute() pour mettre à jour context
 //		setRequestPathInfo("/admin");
 //		actionPerform();
 //		
-//		// on récupère nouvel adminForm
-//		adminForm = (AdminForm) getActionForm();
-//		
-//		assertNotNull(adminForm);
-//		
-//		String userId = user.getId().toString();
-//		
-//		setRequestPathInfo("/admin");
-//		
-//		setActionForm(adminForm);
-//		
-//		addRequestParameter("ctrl", "listUsers");
-//		addRequestParameter("action", "Delete");
-//		addRequestParameter("param", "1");
-//		System.out.println(request);
-//		
-//		//On execute l'action pour supprimer cet utilisateur "testSuccessfulDeleteUser"
-//		actionPerform();
+		// on récupère nouvel adminForm
+		adminForm = (AdminForm) getActionForm();
+		
+		assertNotNull(adminForm);
+		
+		String userId = user.getId().toString();
+		
+		setRequestPathInfo("/admin");
+		
+		setActionForm(adminForm);
+		
+		addRequestParameter("ctrl", "listUsers");
+		addRequestParameter("action", "Delete");
+		addRequestParameter("param", userId);
+		System.out.println(request);
+		
+		//On execute l'action pour supprimer cet utilisateur "testSuccessfulDeleteUser"
+		actionPerform();
 		
 		// on vérifier que l'utilisateur "testSuccessfulDeleteUser" n'existe plus
 				
-//		verifyForward(PresentationConstantes.FORWARD_DELETE_USER);
+		verifyForward(PresentationConstantes.FORWARD_DELETE_USER);
 //		verifyInputForward();
-//		verifyNoActionErrors();
+		verifyNoActionErrors();
 	}
 }
