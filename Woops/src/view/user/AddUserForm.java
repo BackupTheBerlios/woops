@@ -36,10 +36,10 @@ public class AddUserForm extends ActionForm{
 
 		ActionErrors errors = new ActionErrors();
 		if (Controleur.isVide(lastName)){
-			errors.add("lastName",new ActionMessage("errors.champ.obligatoire","lastName"));
+			errors.add("lastName",new ActionMessage("errors.champ.obligatoire","Nom"));
 		}
 		if (Controleur.isVide(firstName)){
-			errors.add("firstName",new ActionMessage("errors.champ.obligatoire","firstName"));
+			errors.add("firstName",new ActionMessage("errors.champ.obligatoire","Prenom"));
 		}
 		if (Controleur.isVide(login)){
 			errors.add("login",new ActionMessage("errors.champ.obligatoire","login"));
