@@ -28,7 +28,7 @@ public class AddBreakdownElementActionTest extends WoopsActionTest {
 	 */
 	public void testCreateBreakdownElement() {
 		setRequestPathInfo("/addBreakdownElement");
-		getSession().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.INSERT_MODE);
+		this.addRequestParameter(PresentationConstantes.PARAM_MODE,PresentationConstantes.INSERT_MODE);
 		//On execute l'action
 		actionPerform();
 		
