@@ -98,11 +98,11 @@ public class AdminActionTest extends WoopsActionTest {
 //		assertNotNull(adminForm);	
 
 		
-//		setRequestPathInfo("/admin");
+		setRequestPathInfo("/admin");
 		
 		setActionForm(adminForm);
 		
-		addRequestParameter("do", "listUsers_onDelete");
+		//addRequestParameter("do", "listUsers_onDelete");
 		addRequestParameter("ctrl", "listUsers");
 		addRequestParameter("action", "Delete");
 		addRequestParameter("param", userId.toString());
@@ -115,5 +115,30 @@ public class AdminActionTest extends WoopsActionTest {
 		verifyForward(PresentationConstantes.FORWARD_DELETE_USER);
 //		verifyInputForward();
 		verifyNoActionErrors();
+	}
+	
+	public void testFaileDeleteUser() {
+		
+		String [] errors = new String[1];
+		errors[0] = "errors.admin.deleteCurrentUser";
+		
+//		On s'assure qu'on est connecte
+		User currentUser = (User) getSession().getAttribute(PresentationConstantes.KEY_USER);
+		assertNotNull(currentUser);
+		
+		setRequestPathInfo("/admin");
+		
+		addRequestParameter("ctrl", "listUsers");
+		addRequestParameter("action", "Delete");
+		addRequestParameter("param", (String) currentUser.getId());
+		
+		actionPerform();
+		
+		verifyForward(PresentationConstantes.FORWARD_ERROR);
+        verifyActionErrors(errors);
+	}
+	
+	public void testSuccessfulDeleteBDE() {
+		
 	}
 }
