@@ -17,7 +17,7 @@ public class Event extends HistorizedObject {
 	private String details;
 	private String occured;	/* "oui" ou "non" */
 	private Integer	bdeId;
-	private Integer activiyId;
+	private Integer activityId;
 	
 	
 	public Object getId() {
@@ -44,11 +44,11 @@ public class Event extends HistorizedObject {
 	public void setOccured(String occured) {
 		this.occured = occured;
 	}
-	public Integer getActiviyId() {
-		return activiyId;
+	public Integer getActivityId() {
+		return activityId;
 	}
-	public void setActiviyId(Integer activiyId) {
-		this.activiyId = activiyId;
+	public void setActivityId(Integer activityId) {
+		this.activityId = activityId;
 	}
 	public Integer getBdeId() {
 		return bdeId;

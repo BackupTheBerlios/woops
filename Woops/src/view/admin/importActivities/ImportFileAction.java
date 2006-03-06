@@ -29,7 +29,7 @@ public class ImportFileAction extends WoopsCCAction{
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			File f = new File ("./workspace/Woops/test/util/processus.dpe") ;
+			File f = new File ("../workspace/Woops/test/util/processus.dpe") ;
 			try {
 				List l = ProcessControler.load(f) ;
 				if (l.isEmpty())

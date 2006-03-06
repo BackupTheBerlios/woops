@@ -91,7 +91,7 @@ public class ListEventsAction extends WoopsCCAction {
 			evtItem.setDetails(evt.getDetails());
 			
 			// Récupération de l'activité dans la hashmap pour avoir son nom
-			activity = (Activity)activitiesMap.get(evt.getActiviyId());
+			activity = (Activity)activitiesMap.get(evt.getActivityId());
 			evtItem.setActivityName(activity.getName());
 			
 			// Ajout de l'EventItem dans l'arrayList
