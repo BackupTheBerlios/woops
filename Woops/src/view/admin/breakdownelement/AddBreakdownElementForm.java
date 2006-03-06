@@ -106,15 +106,15 @@ public class AddBreakdownElementForm extends ActionForm{
 		ActionErrors errors = new ActionErrors();
 		
 		if (Controleur.isVide(name)){
-			errors.add("name", new ActionMessage("errors.champ.obligatoire","name"));
+			errors.add("name", new ActionMessage("errors.champ.obligatoire","Nom"));
 		}
 		
 		if (Controleur.isVide(prefix)){
-			errors.add("prefix", new ActionMessage("errors.champ.obligatoire","prefix"));
+			errors.add("prefix", new ActionMessage("errors.champ.obligatoire","Prefixe"));
 		}
 		
 		if (Controleur.isVide(startDate)){
-			errors.add("prefix", new ActionMessage("errors.champ.obligatoire","startDate"));
+			errors.add("startDate", new ActionMessage("errors.champ.obligatoire","Date de Départ"));
 		}
 		
 		return errors;
