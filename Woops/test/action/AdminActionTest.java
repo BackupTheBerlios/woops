@@ -43,7 +43,7 @@ public class AdminActionTest extends WoopsActionTest {
 		//On execute l'action
 		actionPerform();
 		
-		// On vérifie les informations dans le form
+		// On v?rifie les informations dans le form
 		adminForm = (AdminForm) getActionForm();
 		assertNotNull(adminForm);
 				
@@ -77,9 +77,9 @@ public class AdminActionTest extends WoopsActionTest {
 		
 		userRole.setId(new Integer(1));
 		user.setRole(userRole);
-		
+		Integer userId = null; 
 		try {
-			user = (User) UserManager.getInstance().insert(user);
+			userId = (Integer) UserManager.getInstance().insert(user);
 		} catch (PersistanceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,30 +88,29 @@ public class AdminActionTest extends WoopsActionTest {
 			e.printStackTrace();
 		}
 		
-		// on exécute la methode doExecute() pour mettre à jour context
+		// on ex?cute la methode doExecute() pour mettre ? jour context
 //		setRequestPathInfo("/admin");
 //		actionPerform();
 //		
-		// on récupère nouvel adminForm
-		adminForm = (AdminForm) getActionForm();
+		// on r?cup?re nouvel adminForm
+//		adminForm = (AdminForm) getActionForm();
+//		
+//		assertNotNull(adminForm);	
+
 		
-		assertNotNull(adminForm);
-		
-		String userId = user.getId().toString();
-		
-		setRequestPathInfo("/admin");
+//		setRequestPathInfo("/admin");
 		
 		setActionForm(adminForm);
 		
+		addRequestParameter("do", "listUsers_onDelete");
 		addRequestParameter("ctrl", "listUsers");
 		addRequestParameter("action", "Delete");
-		addRequestParameter("param", userId);
-		System.out.println(request);
-		
+		addRequestParameter("param", userId.toString());
+		System.out.println(this.getRequest().getQueryString());
 		//On execute l'action pour supprimer cet utilisateur "testSuccessfulDeleteUser"
 		actionPerform();
 		
-		// on vérifier que l'utilisateur "testSuccessfulDeleteUser" n'existe plus
+		// on v?rifier que l'utilisateur "testSuccessfulDeleteUser" n'existe plus
 				
 		verifyForward(PresentationConstantes.FORWARD_DELETE_USER);
 //		verifyInputForward();
