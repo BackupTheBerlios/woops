@@ -240,6 +240,7 @@
      	    <forward name="editBreakdown" path="/addBreakdownElement.do?mode={0}"/>
      	    <forward name="deleteBreakdown" path="/admin.do"/>
      	    <forward name="import" path="/importFile.do"/>
+     	    <forward name="finishBde" path="/admin.do"/>     	    
      </action>
      
     <!-- ================= Admin / addUser ================ -->  

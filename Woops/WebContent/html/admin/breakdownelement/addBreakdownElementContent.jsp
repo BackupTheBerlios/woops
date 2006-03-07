@@ -28,12 +28,7 @@
         	label="admin.addBreakdownElement.startDate"
         	property="startDate"
         	required="true"
-        	maxlength="10" size="8"  format="dd/mm/yyyy"  showformat="right"/>
-        	
-        <forms:calendar 
-        	label="admin.addBreakdownElement.endDate"
-        	property="endDate"
-        	maxlength="10" size="8"  format="dd/mm/yyyy"  showformat="right"/>
+        	maxlength="10" size="8"  format="dd/mm/yyyy"  showformat="right"/>    
         	
         <forms:textarea 
         	label="admin.addBreakdownElement.details"

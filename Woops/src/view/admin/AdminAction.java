@@ -244,6 +244,12 @@ public class AdminAction  extends WoopsCCAction {
 		context.forwardByName(PresentationConstantes.FORWARD_IMPORT);
 	}
 
+	public void listBreakDownElements_onFinish(ControlActionContext context, String id) throws IOException, ServletException {
+//		context.session().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,id);
+		
+		context.forwardByName(PresentationConstantes.FORWARD_FINISH_BREAKDOWN);
+	}
+	
 	/**
 	 * Cette méthode est appelée si l'aministeur clique sur l'icone de supprimer un projet
 	 * @param context	contexte d'execution de la servlet

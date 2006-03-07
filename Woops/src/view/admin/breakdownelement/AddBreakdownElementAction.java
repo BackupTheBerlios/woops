@@ -62,11 +62,6 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 					if (startDate != null) {						
 						form.setStartDate(getStringFromDate(startDate));					
 					}
-					
-					Date dateEnd = bke.getEndDate();
-					if (dateEnd != null) {						
-						form.setEndDate(getStringFromDate(dateEnd));
-					}
 				}
 				this.setUsersParticipation(context);		
 			}
@@ -231,17 +226,13 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     		String name = madForm.getName();
     		String details = madForm.getDetails();
     		String dateCreation = madForm.getStartDate();
-    		String dateEnd = madForm.getEndDate();
     		
     		BreakdownElement bke = new BreakdownElement ();
     		bke.setPrefix(prefix);
     		bke.setName(name);
     		bke.setDetails(details);
     		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));
-    		bke.setStartDate(getDateFromString(dateCreation));
-    		if (madForm.getEndDate()!=null && madForm.getEndDate().length()>0) {
-        		bke.setEndDate(getDateFromString(dateEnd));
-    		}
+    		bke.setStartDate(getDateFromString(dateCreation));    		
     		
     		// Recuperation des participants sélectionnés
     		if (!mode.equals(PresentationConstantes.COPY_MODE)) {

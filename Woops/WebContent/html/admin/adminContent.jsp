@@ -74,6 +74,14 @@
 				command="import"
 				width="150"
 				/>
+				
+			<ctrl:columnbutton 
+				title="table.field.listBreakDownElements.finish.title" 
+				text="table.field.listBreakDownElements.finish.text" 
+				align="center"
+				command="finish"
+				width="150"
+				/>
 			
 			<ctrl:columndelete 
 				title="table.field.listBreakDownElements.delete"
