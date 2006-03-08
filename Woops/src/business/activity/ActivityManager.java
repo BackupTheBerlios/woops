@@ -336,6 +336,17 @@ public class ActivityManager extends PersistentObjectManager {
 		return state;
 	}
 	
+	/**
+	 * Recupere les activites qui ne sont pas liees au projet
+	 * On recupere toutes les activites du projet et on verifie avec la liste passee
+	 * en parametre celles qui n'existent pas dans le projet 
+	 * @param listActivities : liste des activites
+	 * @throws PersistanceException 
+	 */
+	public Collection getNewActivities(Integer bdeId, Collection listActivities) throws PersistanceException {
+		listActivities.removeAll(getAllActivitiesByBDE(bdeId));
+		return listActivities;
+	}
 	   
     
     
