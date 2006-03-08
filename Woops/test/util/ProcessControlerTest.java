@@ -3,15 +3,13 @@ package util;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.List;
 
+import junit.framework.TestCase;
 import view.util.ProcessControler;
 
-import junit.framework.TestCase;
-
 public class ProcessControlerTest extends TestCase {
-	private FileInputStream dpe;
+	private File dpe;
 	
 	protected void setUp() throws Exception {
 		super.setUp();
@@ -22,13 +20,14 @@ public class ProcessControlerTest extends TestCase {
 	 */
 	public void testLoad() {
 		try {
-			dpe = new FileInputStream("test/util/processus.dpe");
-			
+			dpe = new File("test/util/processus.dpe");
 			// On s'assure que le fichier existe 
-			//assertTrue(dpe.exists());
-			//assertTrue(dpe.canRead());
+			assertTrue(dpe.exists());
+			assertTrue(dpe.canRead());
 			
-			List listActivities = ProcessControler.load(new BufferedInputStream(dpe));
+			// On créé un flux d'octets
+			FileInputStream fis = new FileInputStream(dpe.getAbsolutePath());
+			List listActivities = ProcessControler.load(new BufferedInputStream(fis));
 			
 			// On verifie que la recuperation s'est bien effectuee
 			assertNotNull(listActivities);
