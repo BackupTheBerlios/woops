@@ -12,6 +12,7 @@ import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.Transaction;
 import net.sf.hibernate.exception.ConstraintViolationException;
+import net.sf.hibernate.exception.GenericJDBCException;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.sequence.ActivitySequence;
@@ -20,6 +21,7 @@ import business.activity.state.CreatedActivityState;
 import business.hibernate.HibernateSessionFactory;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
+import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 import business.user.UserManager;
@@ -52,10 +54,12 @@ public class BreakdownElementManager extends PersistentObjectManager {
 		}
 		return breakdownElementManager;
 	}
+	
+	
 	/**
-	 * Fournit une entité par rapport à son identifiant
-	 * @param bdeId identifiant de l'entité
-	 * @return Entité correspondante
+	 * Fournit un projet par rapport à son identifiant
+	 * @param bdeId identifiant du projet
+	 * @return Projet correspondant
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public BreakdownElement getBreakDownElementById(Integer bdeId) throws PersistanceException {
@@ -63,9 +67,9 @@ public class BreakdownElementManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Fournit une entité par rapport à son identifiant avec les users associés
-	 * @param bdeId identifiant de l'entité
-	 * @return Entité correspondante
+	 * Fournit un projet par rapport à son identifiant avec les participants associés
+	 * @param bdeId identifiant du projet
+	 * @return Projet correspondant
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public BreakdownElement getBreakDownElementByIdWithUsers(Integer bdeId) throws PersistanceException {
@@ -85,14 +89,23 @@ public class BreakdownElementManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Fournit toutes les entités sur lesquelles le participant est affecté
+	 * Fournit tous les projets sur lesquelles le participant est affecté
 	 * @param userId : identifiant de l'utilisateur
-	 * @return : liste des entités
+	 * @return : liste des projets
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public Collection getBreakDownElementsByUser(Integer userId) throws PersistanceException {
 		return breakdownElementDAO.getBreakDownElementsByUser(userId);
 	}
+	
+	
+	
+	
+	
+    /***************************
+	*  Creation d'une session  *
+	***************************/
+	
 	
 	/**
 	 * Affecte des participants à une entite
@@ -190,16 +203,17 @@ public class BreakdownElementManager extends PersistentObjectManager {
 		Session session = null;
 		Transaction transaction = null;
 		try {
+			// Récupération de toutes les activités du projet source
+			ActivityManager actMngr = ActivityManager.getInstance();
+			Collection listActivities = actMngr.getAllActivitiesByBDE(srcBdeId);
+		
 			session = this.getSession();
 			// Création d'une transaction pour pouvoir annuler l'ensemble des modifications en cas d'erreur
 			transaction = session.beginTransaction();
 		
 			destBde.setId((Integer)breakdownElementDAO.insert(destBde, session));
 		
-			// Récupération de toutes les activités du projet source
-			ActivityManager actMngr = ActivityManager.getInstance();
-			Collection listActivities = actMngr.getAllActivitiesByBDE(srcBdeId, session);
-		
+
 			// On va utiliser une map pour associer les activités sources et destination
 			// pour pouvoir ensuite créer les activity sequences correspondantes
 			HashMap mapActSrcDest = new HashMap();
@@ -271,5 +285,81 @@ public class BreakdownElementManager extends PersistentObjectManager {
 		}
 		
 		return (Serializable)destBde.getId();
+	}
+	
+	
+	/**
+	 * Suppression d'un projet
+	 * @param bde : identifiant du projet
+	 * @throws PersistanceException
+	 * @throws ForeignKeyException
+	 */
+	public void delete(BreakdownElement bde) throws PersistanceException, ForeignKeyException {	
+		Session session = null;
+		Transaction transaction = null;
+		try {
+			// Récupération des participants du projet
+			Collection dbDataUser = UserManager.getInstance().getUsersByBDE((Integer)bde.getId());
+			// Recherche les activités du projet a supprimer
+			Collection dbDataActivity = ActivityManager.getInstance().getAllActivitiesByBDE((Integer)bde.getId());
+			// On recupere toutes les activites precedentes
+			
+			
+			session = this.getSession();
+			// Création d'une transaction pour pouvoir annuler l'ensemble des modifications en cas d'erreur
+			transaction = session.beginTransaction();
+			
+			// Pour chaque participant on modifie son projet par défaut si besoin est
+			Iterator it = dbDataUser.iterator();
+			while (it.hasNext()) {
+				User user = (User) it.next();
+		
+				if (user.getDefaultBDEId()!= null && 
+						user.getDefaultBDEId().intValue() == ((Integer)bde.getId()).intValue()) {
+					// Recuperation de l'utilisateur pour mettre à jour son projet par défaut
+			    	user = (User) session.load(User.class, (Integer) user.getId());
+					// Le défaut est mis à jour en BD
+					user.setDefaultBDEId(null);
+				}
+			}
+			
+			
+			// Mise a jour le champs de "BDEId" a null de ces activites
+			Iterator iter = dbDataActivity.iterator();
+			while (iter.hasNext()) {
+				Activity activity = (Activity) iter.next();
+				// On supprime l'activite et toutes ses dependances
+				ActivityManager.getInstance().deleteLinksFromActivity(activity, session);
+			}
+			
+			// Recuperation du projet avec la liste des participants
+	    	bde = (BreakdownElement) session.load(BreakdownElement.class, (Integer) bde.getId());
+
+	    	/* Suppression des affectations aux participants,
+	    	l'objet bde est persistant donc la suppression 
+	    	se repercute sur la BD automatiquement grace a la session en cours */
+	    	bde.getUsers().clear();
+	    	
+	    	// Suppression de l'utilisateur
+	    	this.delete(bde, session);
+					
+	    	// Tout s'est bien passé, on valide la transaction
+			transaction.commit();
+		} catch (GenericJDBCException se) {
+            rollback(transaction);
+            if (se.getErrorCode()==2292)
+                throw new ForeignKeyException(se.getMessage());
+            throw new PersistanceException(se.getMessage(),se);
+        } catch (HibernateException he) {
+            rollback(transaction);
+			throw new PersistanceException(he.getMessage(),he);
+		} finally {
+			try {
+				if (session!=null && session.isOpen()) 
+					HibernateSessionFactory.closeSession();				
+			} catch (HibernateException he) {
+				throw new PersistanceException(he.getMessage(),he);
+			}
+		}
 	}
 }

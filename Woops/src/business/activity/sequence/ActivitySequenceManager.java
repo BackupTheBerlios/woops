@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
+import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import business.activity.Activity;
 import business.hibernate.HistorizedObject;
@@ -42,13 +43,13 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 	}
 
 	
-	public void removeActivitySequence(Activity predecessor, Activity successor) 
-	throws PersistanceException, ForeignKeyException {
+	public void removeActivitySequence(Activity predecessor, Activity successor, Session session) 
+	throws PersistanceException, ForeignKeyException, HibernateException {
 		StringBuffer query = new StringBuffer();
 		query.append("FROM ActivitySequence actSeq");
 		query.append(" WHERE actSeq.successor.id = "+successor.getId().toString());
 		query.append(" AND actSeq.predecessor.id = "+predecessor.getId().toString());
-		activitySequenceDAO.delete(query.toString());
+		activitySequenceDAO.delete(query.toString(), session);
 	}
 	
 	/**
@@ -74,11 +75,11 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 		return list;
 	}
 	
-	public Serializable insert(PersistentObject objet, User user) throws PersistanceException, DoublonException {
+	public Serializable insert(PersistentObject objet, User user, Session session) throws PersistanceException, DoublonException, HibernateException {
 		((HistorizedObject)objet).setUserCreation((Integer) user.getId());
 		((HistorizedObject)objet).setDateCreation(new Date());
 		
-		return insert(objet);
+		return insert(objet, session);
 	}
 	
 	public void update(PersistentObject objet, User user) throws PersistanceException, DoublonException {
