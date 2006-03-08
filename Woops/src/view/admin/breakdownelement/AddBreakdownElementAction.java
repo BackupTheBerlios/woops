@@ -1,16 +1,13 @@
 package view.admin.breakdownelement;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
-import java.util.StringTokenizer;
 
 import org.apache.struts.action.ActionForward;
 
@@ -22,6 +19,7 @@ import view.user.UserItem;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;
+import business.format.Formatage;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -60,14 +58,14 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 					
 					Date startDate = bke.getStartDate();
 					if (startDate != null) {						
-						form.setStartDate(getStringFromDate(startDate));					
+						form.setStartDate(Formatage.dateToString(startDate));					
 					}
 				}
 				this.setUsersParticipation(context);		
 			}
 			else {
 				Date dateDuJour = new Date();
-				form.setStartDate(getStringFromDate(dateDuJour));
+				form.setStartDate(Formatage.dateToString(dateDuJour));
 			}
 			
 			// en mode UPDATE et INSERT on remplit le swap select
@@ -79,28 +77,6 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		form.setMode(mode);
 		context.forwardToInput();
 	}
-	
-	
-	private String getStringFromDate (Date d) {
-		return d.getDate()+"/"+(d.getMonth()+1)+"/"+(1900+d.getYear());	
-	}
-	
-	
-	private Date getDateFromString (String s) {
-		int year=0 , month=0 , date=0;
-		Calendar cal = Calendar.getInstance(Locale.getDefault());
-		
-		StringTokenizer st = new StringTokenizer (s,"/");
-		
-		date = Integer.parseInt(st.nextToken());
-		month = Integer.parseInt(st.nextToken());
-		year = Integer.parseInt(st.nextToken());
-		cal.clear();
-		cal.set(year,month-1,date);
-		//System.out.println("\nDate : "+getStringFromDate(cal.getTime()));
-		return (Date)cal.getTime().clone();
-	}
-	
 	
 	/**
 	 * Initilisation de la liste des participants possibles
@@ -232,7 +208,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     		bke.setName(name);
     		bke.setDetails(details);
     		bke.setKind(new BreakdownElementKind(new Integer(Integer.parseInt(madForm.getKindId()))));
-    		bke.setStartDate(getDateFromString(dateCreation));    		
+    		bke.setStartDate(Formatage.stringToDate(dateCreation));    		
     		
     		// Recuperation des participants sélectionnés
     		if (!mode.equals(PresentationConstantes.COPY_MODE)) {
