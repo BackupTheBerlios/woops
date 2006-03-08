@@ -149,6 +149,8 @@ CREATE TABLE Event (
 )ENGINE=InnoDB;
 
 
+ALTER TABLE Activity 
+ADD CONSTRAINT FK_Activity_event FOREIGN KEY (event) REFERENCES Event (id);
 
 -- Insertions intiales
 INSERT INTO ActivitySequenceType(name) VALUES ('finishToStart');
