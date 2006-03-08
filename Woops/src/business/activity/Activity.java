@@ -179,15 +179,9 @@ public class Activity extends HistorizedObject{
 	
 	
 	public boolean equals(Object obj) {
-		boolean ok = ((Activity)obj).getId().equals(id);
-		
-		ok &= ((Activity)obj).getName().equals(name);
-		ok &= ( ((Activity)obj).getDetails()==null && details==null) || ((Activity)obj).getDetails().equals(details);
-		ok &= ( ((Activity)obj).getStartDate()==null && startDate==null) || ((Activity)obj).getStartDate().equals(startDate);
-		ok &= ( ((Activity)obj).getEndDate()==null && endDate==null) || ((Activity)obj).getEndDate().equals(endDate);
-		ok &= ((Activity)obj).getUserId().equals(userId);
-		ok &= ((Activity)obj).getState().equals(state);
-			
+		boolean ok = ((Activity)obj).getId().equals(id) || 
+			(((Activity)obj).getName().equalsIgnoreCase(name) && 
+			(((Activity)obj).getBdeId() == null || bdeId == null || ((Activity)obj).getBdeId().equals(bdeId)));
 		return ok;
 	}
 
