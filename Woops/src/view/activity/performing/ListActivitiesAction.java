@@ -340,7 +340,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 			activ = ActivityManager.getInstance().getActivityById(activityId);
 			String name = activ.getName();
 			
-			ActivityManager.getInstance().deleteLinksFromActivity(activityId);
+			ActivityManager.getInstance().deleteLinksFromActivity(activ);
 			context.addGlobalMessage("msg.error.activity.delete",name);
 		}
 		catch (ForeignKeyException fke) {

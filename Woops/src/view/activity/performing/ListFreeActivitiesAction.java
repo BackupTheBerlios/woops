@@ -219,8 +219,11 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 		try{
 			
 			Integer activityId = new Integer(activityIdString);
-			ActivityManager.getInstance().deleteLinksFromActivity(activityId);
-
+			Activity activ = ActivityManager.getInstance().getActivityById(activityId);
+			String name = activ.getName();
+			
+			ActivityManager.getInstance().deleteLinksFromActivity(activ);
+			context.addGlobalMessage("msg.error.activity.delete",name);
 		}
 		catch (ForeignKeyException fke) {
 			logger.error(fke);
@@ -228,7 +231,7 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 		}
 		catch (PersistanceException pe) {
 			logger.error(pe);
-			context.addGlobalError("errors.persistance.select");
+			context.addGlobalError("errors.persistance.delete");
 		} 
  		
 		context.forwardByName(PresentationConstantes.FORWARD_ACTION);
