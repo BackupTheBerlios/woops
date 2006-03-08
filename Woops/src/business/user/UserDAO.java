@@ -15,6 +15,12 @@ import business.hibernate.exception.PersistanceException;
 
 public class UserDAO extends PersistentObjectDAO {
 
+	/**
+	 * Recuperation d'un utilisateur a partir de son login
+	 * @param login : login unique pour chaque utilisateur
+	 * @return Utilisateur correspondant au login
+	 * @throws PersistanceException
+	 */
 	public User get(String login) throws PersistanceException {
 		StringBuffer req = new StringBuffer("select u.login from User as u ") ;
         req.append("where ");
@@ -26,9 +32,10 @@ public class UserDAO extends PersistentObjectDAO {
 	}
 
 	/**
-	 * @param login
-	 * @param password
-	 * @return
+	 * Recuperation d'un utilisateur a partir de son login et de son mot de passe
+	 * @param login : login unique pour chaque utilisateur
+	 * @param password : password de l'utilisateur
+	 * @return Utilisateur correspondant aux criteres de recherche
 	 * @throws PersistanceException
 	 */
 	public User getUser(String login, String password) throws PersistanceException {
@@ -48,10 +55,11 @@ public class UserDAO extends PersistentObjectDAO {
 	    
 	    return user;
 	}	
+	
 	/**
-	 * permet d'obtenir un particpant a partir de son id
-	 * @param identifiant
-	 * @return User
+	 * Recuperation d'un utilisateur a partir de son id
+	 * @param id : identifiant de l'utilisateur
+	 * @return Utilisateur correspondant à l'identifiant
 	 * @throws PersistanceException
 	 */
 	public User getUser(Integer id) throws PersistanceException {
@@ -70,8 +78,8 @@ public class UserDAO extends PersistentObjectDAO {
 	}
 	
 	/**
-	 * Fournit tous les participants de l'entité
-	 * @param bdeId : identifiant de l'entité
+	 * Fournit tous les participants d'un projet
+	 * @param bdeId : identifiant d'un projet
 	 * @return : liste des participants
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */

@@ -33,6 +33,13 @@ public class UserManager extends PersistentObjectManager {
 		return instance;
 	}
 	
+	
+	/**
+	 * Recuperation d'un utilisateur a partir de son login
+	 * @param login : login unique pour chaque utilisateur
+	 * @return utilisateur correspondant au login
+	 * @throws PersistanceException
+	 */
 	public User getUser(String login) throws PersistanceException {
 		User user = dao.get(login);		
 		return user;
@@ -41,9 +48,9 @@ public class UserManager extends PersistentObjectManager {
 
 	/**
 	 * Cette methode controle la validite du couple login/mot de passe
-	 * @param login
-	 * @param password
-	 * @return
+	 * @param login : login
+	 * @param password : mot de passe associe
+	 * @return utilisateur correspondant aux criteres de recherche
 	 * @throws PersistanceException
 	 */
 	public User isLoginValid(String login, String password) throws PersistanceException {
@@ -52,15 +59,17 @@ public class UserManager extends PersistentObjectManager {
 		return user;
 	}	
 	
+	
 	/**
-	 * Fournit tous les participants de l'entite
-	 * @param bdeId : identifiant de l'entité
+	 * Fournit tous les participants d'un projet
+	 * @param bdeId : identifiant du projet
 	 * @return : liste des participants
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public Collection getUsersByBDE(Integer bdeId) throws PersistanceException {
 		return dao.getUsersByBDE(bdeId);
 	}
+	
 	
 	/**
 	 * Cette méthode permet d'obtenir un participant a partir de son identification
@@ -81,7 +90,20 @@ public class UserManager extends PersistentObjectManager {
 	}
 	
 	
-
+	
+	
+	
+    /***************************
+	*  Creation d'une session  *
+	***************************/
+	
+	
+	/**
+	 * Suppression d'un utilisateur
+	 * @param user : utilisateur a supprimer
+	 * @throws PersistanceException
+	 * @throws ForeignKeyException
+	 */
 	public void delete(User user) throws PersistanceException, ForeignKeyException {	
 		Session session = null ;
 		Transaction transaction = null;

@@ -25,6 +25,15 @@ public class ActivitySequenceDAO extends PersistentObjectDAO {
 		List listActivitySequences = executeQuery(query.toString());
 		return listActivitySequences;
 	}
+
+	
+	
+	
+	
+	/*********************
+	*  Session en cours  *
+	**********************/
+	
 	
 	/**
 	 * Recuperation des sequences d'activites d'un projet

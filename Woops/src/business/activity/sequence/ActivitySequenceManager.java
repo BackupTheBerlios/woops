@@ -16,19 +16,20 @@ import business.hibernate.exception.PersistanceException;
 import business.user.User;
 
 public class ActivitySequenceManager extends PersistentObjectManager {
-	
-	/** Instance permettant d'assurer la persistance d'une activit? */
+	/** Instance permettant d'assurer la persistance d'une activite */
 	private ActivitySequenceDAO activitySequenceDAO = new ActivitySequenceDAO();
 	
-	/** Instance priv?e de la la classe */
+	/** Instance privee de la la classe */
 	private static ActivitySequenceManager activitySequenceManager;
 
+	
 	/**
-	 * Impl?mentation du pattern Singleton : constructeur priv?
+	 * Implementation du pattern Singleton : constructeur priv?
 	 */
 	private ActivitySequenceManager() {
 	}
 
+	
 	/**
 	 * Fournit l'instance de la classe
 	 * @return ActivityManager : instance de la classe
@@ -42,16 +43,7 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 		return activitySequenceManager;
 	}
 
-	
-	public void removeActivitySequence(Activity predecessor, Activity successor, Session session) 
-	throws PersistanceException, ForeignKeyException, HibernateException {
-		StringBuffer query = new StringBuffer();
-		query.append("FROM ActivitySequence actSeq");
-		query.append(" WHERE actSeq.successor.id = "+successor.getId().toString());
-		query.append(" AND actSeq.predecessor.id = "+predecessor.getId().toString());
-		activitySequenceDAO.delete(query.toString(), session);
-	}
-	
+
 	/**
 	 * Recuperation des sequences d'activites d'un projet
 	 * @param bdeId : identifiant du projet
@@ -62,6 +54,16 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 		Collection list = activitySequenceDAO.getActivitySequencesByBDE(bdeId);
 		return list;
 	}
+	
+
+	
+	
+	
+	
+	/*********************
+	*  Session en cours  *
+	**********************/
+	
 	
 	/**
 	 * Recuperation des sequences d'activites d'un projet
@@ -75,6 +77,34 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 		return list;
 	}
 	
+	
+	/**
+	 * Supprime la dependance entre 2 activites
+	 * @param predecessor : activite predecesseur
+	 * @param successor : activite successeur
+	 * @param session : session en cours
+	 * @throws ForeignKeyException
+	 * @throws HibernateException
+	 * @throws PersistanceException
+	 */
+	public void removeActivitySequence(Activity predecessor, Activity successor, Session session) 
+	throws PersistanceException, ForeignKeyException, HibernateException {
+		StringBuffer query = new StringBuffer();
+		query.append("FROM ActivitySequence actSeq");
+		query.append(" WHERE actSeq.successor.id = "+successor.getId().toString());
+		query.append(" AND actSeq.predecessor.id = "+predecessor.getId().toString());
+		activitySequenceDAO.delete(query.toString(), session);
+	}
+	
+	
+	
+	
+	
+	/****************************
+	*  Manipulation de donnees  *
+	****************************/
+	
+	
 	public Serializable insert(PersistentObject objet, User user, Session session) throws PersistanceException, DoublonException, HibernateException {
 		((HistorizedObject)objet).setUserCreation((Integer) user.getId());
 		((HistorizedObject)objet).setDateCreation(new Date());
@@ -84,6 +114,7 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 	
 	public void update(PersistentObject objet, User user) throws PersistanceException, DoublonException {
 		((HistorizedObject)objet).setUserModification((Integer) user.getId());
+	
 		((HistorizedObject)objet).setDateModification(new Date());
 		
 		update(objet);

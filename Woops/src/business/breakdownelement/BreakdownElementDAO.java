@@ -15,9 +15,9 @@ import business.user.User;
 public class BreakdownElementDAO extends PersistentObjectDAO{
 	
 	/**
-	 * Fournit une entité par rapport à son identifiant
-	 * @param bdeId identifiant de l'entité
-	 * @return Entité correspondante
+	 * Fournit un projet par rapport à son identifiant
+	 * @param bdeId identifiant du projet
+	 * @return Projet correspondant
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public BreakdownElement getBreakDownElementById(Integer bdeId) throws PersistanceException {
@@ -26,7 +26,7 @@ public class BreakdownElementDAO extends PersistentObjectDAO{
 	}
 	
 	/**
-	 * Fournit tous les types d'entité
+	 * Fournit tous les types de projet
 	 * @return : liste de types
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
@@ -35,9 +35,9 @@ public class BreakdownElementDAO extends PersistentObjectDAO{
 	}
 	
 	/**
-	 * Fournit toutes les entités sur lesquelles le participant est affecté
+	 * Fournit tous les projets sur lesquels le participant est affecté
 	 * @param userId : identifiant de l'utilisateur
-	 * @return : liste des entités
+	 * @return : liste des projets
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public Collection getBreakDownElementsByUser(Integer userId) throws PersistanceException {
