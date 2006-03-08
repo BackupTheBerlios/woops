@@ -1,7 +1,7 @@
 /*
- * $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/woops/Repository/Woops/WebContent/fw/global/jscript/common.js,v 1.2 2005/11/23 11:53:01 sregg Exp $
- * $Revision: 1.2 $
- * $Date: 2005/11/23 11:53:01 $
+ * $Header: /home/xubuntu/berlios_backup/github/tmp-cvs/woops/Repository/Woops/WebContent/fw/global/jscript/common.js,v 1.3 2006/03/08 17:39:25 castel Exp $
+ * $Revision: 1.3 $
+ * $Date: 2006/03/08 17:39:25 $
  *
  * ====================================================================
  *
@@ -95,9 +95,13 @@ function popupCalendar(fieldId, locale, formatMask, width, height, template) {
 	var id     = obj.id;
 	var value  = (null != obj.value) ? obj.value : '';
 	var target = '';
-
+	
+	// ----- force the width to 380 ----
+	width = 380;
+	// ---------------------------------
+	
 	if (null == width || '' == width) {
-		width = 350;
+		width = 380;
 	}
 	if (null == height || '' == height) {
 		height = 250;
