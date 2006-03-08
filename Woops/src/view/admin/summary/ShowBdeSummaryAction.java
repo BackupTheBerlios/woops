@@ -66,8 +66,8 @@ public class ShowBdeSummaryAction extends WoopsCCAction {
 			form.setUsersList(new ListUsersModel (data));
 
 		} catch (PersistanceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.select");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 		
 	}

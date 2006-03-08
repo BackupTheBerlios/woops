@@ -70,8 +70,8 @@ public class ShowUserSummaryAction extends WoopsCCAction {
 			form.setBdeList(new ListBreakDownElementsModel(data));
 
 		} catch (PersistanceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.select");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 	}
 
