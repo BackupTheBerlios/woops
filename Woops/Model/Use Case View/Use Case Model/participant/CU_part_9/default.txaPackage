@@ -9,7 +9,7 @@
 	<node uin="ag1roeilpx24kl3j7n2">
 		<property name="$metaclass" value="Note"/>
 		<property name="$name" value="Note1"/>
-		<property name="$note_text" value="Imbriquer une activité dans une autre"/>
+		<property name="$note_text" value="Afficher la liste des activités libres"/>
 		<link uin="ieje0reilpy6jjnsg073">
 			<property name="$metaclass" value="Note Link"/>
 			<participant referencedUin="design:node:::ag1roeilpx24kl3j7n2" role="Client"></participant>

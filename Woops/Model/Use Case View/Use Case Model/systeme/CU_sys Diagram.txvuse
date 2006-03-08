@@ -4,7 +4,7 @@
 <nodeSet  version="1.1">
 	<view uin="V-rqmxokeilp1sqetkz95p">
 		<property name="$metaclass" value="Use Case Diagram"/>
-		<property name="$name" value="system UC diagram"/>
+		<property name="$name" value="CU_sys Diagram"/>
 		<reference referencedUin="design:node:::2aya8eilozowe-k56gty">
 			<property name="bounds" value="15,15,57,102"/>
 			<property name="location_set_by_user" value="true"/>

@@ -4,9 +4,9 @@
 <nodeSet  version="1.1">
 	<view uin="V-rqmxokeilozyjd6mub8m">
 		<property name="$metaclass" value="Use Case Diagram"/>
-		<property name="$name" value="admin UC diagram"/>
+		<property name="$name" value="CU_adm Diagram"/>
 		<reference referencedUin="design:node:::2ck5meiloyyh8120cuu">
-			<property name="bounds" value="15,15,67,89"/>
+			<property name="bounds" value="15,15,66,89"/>
 			<property name="location_set_by_user" value="true"/>
 			<property name="$shortcutReference" value="true"/>
 			<reference referencedUin="design:link:::937xdeiloyyh869n6kn:2ck5meiloyyh8120cuu">
@@ -38,13 +38,43 @@
 			<property name="$shortcutReference" value="true"/>
 		</reference>
 		<reference referencedUin="design:node:::jy1dfeiloywkh-lnivly">
-			<property name="bounds" value="335,74,181,25"/>
+			<property name="bounds" value="335,74,183,25"/>
 			<property name="location_set_by_user" value="true"/>
 			<property name="$shortcutReference" value="true"/>
 			<reference referencedUin="design:link:::jbfm7eiloywkhxqmqn3:jy1dfeiloywkh-lnivly">
 				<property name="sourceAnchor" value="340,91"/>
 				<property name="targetAnchor" value="260,91"/>
 			</reference>
+		</reference>
+		<reference referencedUin="design:node:::hx5hlekjs20g2-zcjhjs">
+			<property name="bounds" value="155,115,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::ixi4dekjs2bz0ai358x">
+			<property name="bounds" value="155,155,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::8pia0ekjs2ori-5uxvet">
+			<property name="bounds" value="155,195,100,23"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::alylxekjs48mde3b0nd">
+			<property name="bounds" value="335,115,193,25"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::1g64yekjs4d0c-mwtc09">
+			<property name="bounds" value="335,155,204,25"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
+		</reference>
+		<reference referencedUin="design:node:::1g64yekjs599d-ejip1y">
+			<property name="bounds" value="335,194,206,25"/>
+			<property name="location_set_by_user" value="true"/>
+			<property name="$shortcutReference" value="true"/>
 		</reference>
 	</view>
 </nodeSet>
