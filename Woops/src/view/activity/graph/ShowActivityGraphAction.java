@@ -109,8 +109,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
             
             //Affichage du cadre ( "cluster" )
         	gv.addln("\tsubgraph cluster"+(i)+" {");
-        	String nameFreeLocalized = "Activit?s libres";
-        	// TODO : traduire le string nameFreeLocalized
+        	String nameFreeLocalized = MessageResources.getMessageResources(PresentationConstantes.BASENAME).getMessage("graph.freeActivity");
         	gv.addln("\t\tlabel = \""+nameFreeLocalized+"\";");
         	
       
@@ -149,7 +148,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 				String successorId = actSeq.getSuccessor().getId().toString();
 				String linkType = actSeq.getLinkType().getName();
 			
-				linkType = MessageResources.getMessageResources("ApplicationResources").getMessage(linkType);
+				linkType = MessageResources.getMessageResources(PresentationConstantes.BASENAME).getMessage(linkType);
 				
 				gv.addln("\t"+predecessorId+" -> "+successorId+"[label=\""+linkType+"\"];");
 			}
@@ -162,7 +161,7 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			String graphRealPath = getServlet().getServletContext().getRealPath("/") + "graph" + File.separator;
 			
 			// Parametrage de la classe GraphViz
-			GraphViz.setDOT(graphRealPath+"dot.exe");
+			GraphViz.setDOT(graphRealPath+"dot");
 			//GraphViz.setDOT("/usr/local/bin/dot");
 			GraphViz.setTEMP_DIR(graphRealPath);
 			

@@ -70,7 +70,7 @@
       	 	roles="#dev"
       	 	input="/html/participant/activity/performing/listFreeActivities.jsp"
       	 >
-         	<forward name="error" path="/html/logon/loginUser.jsp" />
+         	<forward name="error" path="/html/participant/activity/performing/listFreeActivities.jsp" />
          	<forward name="success" path="/html/participant/activity/performing/listFreeActivities.jsp" />
          	<forward name="action" path="/listFreeActivities.do"/>
          	<forward name="edit" path="/manageActivityCreation.do"/>

@@ -3,6 +3,8 @@ package business.activity;
 import java.util.Collection;
 import java.util.List;
 
+import view.PresentationConstantes;
+
 import net.sf.hibernate.Session;
 import business.BusinessConstantes;
 import business.hibernate.PersistentObjectDAO;
@@ -70,7 +72,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 		query.append("FROM Activity as act");
 		query.append(" WHERE act.userId is null");
 		query.append(" AND act.bdeId = " + bdeId);
-		query.append(" AND act.event.occured = 'oui'");
+		query.append(" AND ( (act.event is null) OR (act.event.occured = '"+PresentationConstantes.YES+"') )");
 		
 		// Recuperation des donnees
 		List listActivities = executeQuery(query.toString());
