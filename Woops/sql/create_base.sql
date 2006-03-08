@@ -1,13 +1,14 @@
-DROP TABLE Event;
-DROP TABLE ActivitySequence;
-DROP TABLE Activity;
-DROP TABLE ActivitySequenceType;
-DROP TABLE UserBDE;
-DROP TABLE User;
-DROP TABLE UserRole;
-DROP TABLE ActivityState;
-DROP TABLE BreakdownElement;
-DROP TABLE BreakdownElementKind;
+ALTER TABLE Activity DROP FOREIGN KEY FK_Activity_event;
+DROP TABLE Event CASCADE;
+DROP TABLE ActivitySequence CASCADE;
+DROP TABLE Activity CASCADE;
+DROP TABLE ActivitySequenceType CASCADE;
+DROP TABLE UserBDE CASCADE;
+DROP TABLE User CASCADE;
+DROP TABLE UserRole CASCADE;
+DROP TABLE ActivityState CASCADE;
+DROP TABLE BreakdownElement CASCADE;
+DROP TABLE BreakdownElementKind CASCADE;
 
 
 CREATE TABLE BreakdownElementKind (
