@@ -11,8 +11,6 @@
 <link href="images/css.css" rel="stylesheet" type="text/css">
 
 
-
-
 <%-- Framework Includes --%>
 <util:jsp directive="includes"/>
   

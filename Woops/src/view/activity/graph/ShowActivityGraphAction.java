@@ -161,22 +161,29 @@ public class ShowActivityGraphAction extends WoopsCCAction {
 			String graphRealPath = getServlet().getServletContext().getRealPath("/") + "graph" + File.separator;
 			
 			// Parametrage de la classe GraphViz
-			GraphViz.setDOT(graphRealPath+"dot");
-			//GraphViz.setDOT("/usr/local/bin/dot");
+			GraphViz.setDOT("dot");
 			GraphViz.setTEMP_DIR(graphRealPath);
 			
 			// Cr?ation du fichier image : graph + id du user + id du projet
 			String imageFile = "graph"+sessionUser.getId().toString()+sessionUser.getDefaultBDEId().toString()+".jpg";
 			File out = new File(graphRealPath+imageFile);
 			
-			// G?n?ration du fichier image
-			gv.writeGraphToFile(gv.getGraph(gv.getDotSource()), out);
 			
-			// On met ? jour l'attribut du form qui contient le path de l'image g?n?r?e
-			String graphPath = context.request().getContextPath()+"/graph/";
-			form.setImageFilePath(graphPath+imageFile);
-			
-			context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
+			byte[] imgBytes = gv.getGraph(gv.getDotSource());
+			if ( imgBytes != null ) {
+				gv.writeGraphToFile(imgBytes, out);
+				
+				// On met ? jour l'attribut du form qui contient le path de l'image g?n?r?e
+				String graphPath = context.request().getContextPath()+"/graph/";
+				form.setImageFilePath(graphPath+imageFile);
+				
+				context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
+			}
+			else {
+				form.setImageFilePath("");
+				context.addGlobalError("errors.graph.dotNotInstalled");
+				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
+			}
 		} catch (PersistanceException pe) {
 			context.addGlobalError("errors.persistance.global");
 			context.forwardByName(PresentationConstantes.FORWARD_ERROR);

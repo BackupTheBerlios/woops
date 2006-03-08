@@ -84,7 +84,7 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 		
 		
 		/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans la requete*/
-		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
+		Integer activityId = (Integer)context.session().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
 		/* R?cup?ration des la liste des d?pendances de cette activit? en BD */
 		dependancesListMgr = ActivityManager.getInstance().getActivitySequencesPredecessors(activityId);
@@ -193,6 +193,10 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 			context.addGlobalMessage("msg.info.activity.dependancesTypes.saved",activity.getName());
 		}
 		
+		
+		// Suppression de l'activityId en session
+		context.session().removeAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
+		
 		/** Appel de la page de garde **/
 		
 		// on est obligé de chargé l'activité pour forwarder correctement
@@ -220,11 +224,6 @@ public class ManageDependancesTypesAction extends WoopsCCAction {
 	 */
 	
 	public void previous_onClick(FormActionContext context) {
-		//R?percution de l'attribut
-		ManageDependancesTypesForm form = (ManageDependancesTypesForm) context.form();
-		Integer activityId = new Integer(form.getActivityId());
-		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
-		
 		context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
 	}
 

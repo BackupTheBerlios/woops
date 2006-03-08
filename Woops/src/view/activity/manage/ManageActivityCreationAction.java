@@ -46,7 +46,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		if (mode!=null&&mode.equals(PresentationConstantes.UPDATE_MODE)){
 			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 			
-			Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
+			Integer activityId = (Integer)context.session().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 
 			Activity activity = (Activity)activitiesMap.get(activityId);
 			
@@ -121,6 +121,9 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 	
 	public void finish_onClick(FormActionContext context) {
 		
+		//Suppression de l'activityId en session
+		context.session().removeAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
+		
 		Activity activity = new Activity();
 		activity = saveActivity(context);
 		
@@ -177,7 +180,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
 			
 			activityId = new Integer(form.getActivityId());
-			context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);		
+			context.session().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);		
 			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 			activity = (Activity)activitiesMap.get(activityId);
 			
@@ -220,14 +223,6 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,mode);
 		
 		Integer activityId = null;
-		
-		if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
-			//R?percution de l'attribut activityId
-			activityId = new Integer(form.getActivityId());
-			context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
-		}
-		
-			
 		
 		
 		//controle de la validation du formulaire
@@ -276,7 +271,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					// R?cup?ration la hashmap pour y rajouter l'activit? 
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);		
 					activitiesMap.put(activityId,activity);
-					context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
+					context.session().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
 					
 					
 					String message = new String("");

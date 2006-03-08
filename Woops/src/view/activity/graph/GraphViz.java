@@ -1,4 +1,4 @@
-/*$Id: GraphViz.java,v 1.1 2006/02/15 14:24:43 sregg Exp $*/
+/*$Id: GraphViz.java,v 1.2 2006/03/08 16:04:48 sregg Exp $*/
 /*
  ******************************************************************************
  *                                                                            *
@@ -177,7 +177,9 @@ public class GraphViz
 
          Runtime rt = Runtime.getRuntime();
          String cmd = DOT + " -Tgif "+dot.getAbsolutePath()+" -o"+img.getAbsolutePath();
-         Process p = rt.exec(cmd);
+         String[] env = new String[1];
+         env[0]=System.getProperty("java.library.path");
+         Process p = rt.exec(cmd,env);
          p.waitFor();
 
          FileInputStream in = new FileInputStream(img.getAbsolutePath());

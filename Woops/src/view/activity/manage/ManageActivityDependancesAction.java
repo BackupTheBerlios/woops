@@ -84,7 +84,7 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		ManageActivityDependancesForm madForm = (ManageActivityDependancesForm) context.form();
 		
 		/* Recup?ration de l'id de l'activit? dont on veut g?rer les d?pendances dans la requete*/
-		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
+		Integer activityId = (Integer)context.session().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
 		/* Sauvegarde dans le form */
 		madForm.setActivityId(activityId.toString());
@@ -253,16 +253,6 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 		
 		}
 		
-			
-		
-		/**
-		 * Suppression des attributs de la session
-		 */
-		context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
-		context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
-		
-		//R?percution de l'attribut
-		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
 		
 		return act;	
 	}
@@ -276,7 +266,14 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	
 	public void finish_onClick(FormActionContext context) {
 		
+		//Suppression de l'activityId en session
+		context.session().removeAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
+		/**
+		 * Suppression des attributs de la session
+		 */
+		context.session().removeAttribute(PresentationConstantes.KEY_OLD_DEPENDANCES_KEYS);
+		context.session().removeAttribute(PresentationConstantes.KEY_POSSIBLE_DEPENDANCES_OPTIONS);
 		
 		Activity activity = new Activity();
 		activity = saveDependances(context);
@@ -320,11 +317,6 @@ public class ManageActivityDependancesAction extends WoopsCCAction {
 	 */
 	
 	public void previous_onClick(FormActionContext context) {
-		//R?percution de l'attribut
-		ManageActivityDependancesForm form = (ManageActivityDependancesForm) context.form();
-		Integer activityId = new Integer(form.getActivityId());
-		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,activityId);
-		
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
 		
 		context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);

@@ -312,7 +312,7 @@ public class ListActivitiesAction extends WoopsCCAction {
 	
 	public void listActivities_onEdit(ControlActionContext context, String activityIdString) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
-		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,new Integer(activityIdString));
+		context.session().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,new Integer(activityIdString));
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
 	}
