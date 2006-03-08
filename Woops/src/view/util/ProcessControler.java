@@ -3,6 +3,7 @@ package view.util;
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -24,9 +25,8 @@ public class ProcessControler {
 	 * @return liste des activites du processus
 	 * @throws FileParseException : Indique qu'une erreur s'est en parsant le fichier source
 	 */
-	public static List load (BufferedInputStream bis) throws FileParseException, FileNotFoundException
+	public static Collection load (BufferedInputStream bis) throws FileParseException, FileNotFoundException
 	{
-		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance() ;
 
 		try
@@ -134,6 +134,8 @@ public class ProcessControler {
 			}
 
 			return listActivities;
+		} catch(FileNotFoundException fnfe) {
+			throw new FileNotFoundException();
 		}
 		catch (Exception e) {
 			throw new FileParseException() ;
