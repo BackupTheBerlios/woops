@@ -288,6 +288,7 @@ public class AdminAction  extends WoopsCCAction {
 		
 		try {
 			BreakdownElementManager.getInstance().delete(bde);
+			context.addGlobalMessage("admin.listBde.confirmationDel");
 			context.forwardByName(PresentationConstantes.FORWARD_DELETE_BREAKDOWN);
 		} catch (PersistanceException e) {
 			// TODO Auto-generated catch block
@@ -331,6 +332,7 @@ public class AdminAction  extends WoopsCCAction {
 
 		try {
 			UserManager.getInstance().delete(user);
+			context.addGlobalMessage("admin.listUsers.confirmationDel");
 			context.forwardByName(PresentationConstantes.FORWARD_DELETE_USER);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

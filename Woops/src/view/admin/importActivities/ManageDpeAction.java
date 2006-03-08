@@ -1,6 +1,8 @@
 package view.admin.importActivities;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import view.PresentationConstantes;
@@ -8,6 +10,7 @@ import view.admin.importActivities.IAItem.IAItem;
 import view.admin.importActivities.IAItem.ListIAModel;
 import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
+import view.util.ProcessControler;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.breakdownelement.BreakdownElement;
@@ -39,19 +42,34 @@ public class ManageDpeAction extends WoopsCCAction{
 		List listActivities = (List)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITIES) ;
 		ArrayList list = new ArrayList () ;
 		IAItem item ;
-		for (int i = 0 ; i < listActivities.size() ; i++)
-		{
-			item = new IAItem() ;
-			item.setId(Integer.toString(i));
-			item.setName(((Activity)listActivities.get(i)).getName());
-			list.add(item);
+		String idString = (String) context.session().getAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID) ;
+		Integer id = Integer.decode(idString) ;
+		try {
+			Collection c = ActivityManager.getInstance().getAllActivitiesByBDE(id);
+			Activity a ;
+			for (int i = 0 ; i < listActivities.size() ; i++)
+			{
+				a = (Activity)listActivities.get(i) ;
+				if (!this.existe(c,a.getName())){
+					item = new IAItem() ;
+					item.setId(Integer.toString(i));
+					item.setName(a.getName());
+					list.add(item);
+				}
+				
+			}
+			DisplayObject[] result = new IAItem[list.size()];
+			list.toArray(result);
+			
+			// Création de la liste initialisée avec les valeurs à afficher
+			ListIAModel model = new ListIAModel(result);
+			return model;
+		} catch (PersistanceException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		DisplayObject[] result = new IAItem[list.size()];
-		list.toArray(result);
+		return null;
 		
-		// Création de la liste initialisée avec les valeurs à afficher
-		ListIAModel model = new ListIAModel(result);
-		return model;
 	}
 
 	public void listActivities_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
@@ -62,7 +80,14 @@ public class ManageDpeAction extends WoopsCCAction{
 		model.sortByColumn(column, direction);		
 		context.control().execute(context, column,  direction);
 	}
-	
+	private boolean existe (Collection c, String chaine){
+		boolean trouve = false ;
+		for (Iterator i = c.iterator() ; i.hasNext() && !trouve ; ){
+			Activity a = (Activity)i.next() ;
+			trouve = a.getName().equals(chaine);
+		}
+		return trouve;
+	}
 	public void confirm_onClick(FormActionContext context) {
 		ManageDpeForm form = (ManageDpeForm)context.form() ;
 		SimpleListControl liste = form.getListActivities() ;
