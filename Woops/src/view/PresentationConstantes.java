@@ -46,6 +46,7 @@ public interface PresentationConstantes {
 	public static final String PARAM_USER_ID="userId";
 	public static final String PARAM_BREAKDOWN_ID="breakdownelementId";
 	public static final String PARAM_EVENT_ID="eventId";
+	public static final String PARAM_ACTIVITIES="listactivities";
 
 	
 	//constantes relatives aux Styles
@@ -92,8 +93,7 @@ public interface PresentationConstantes {
     public static final String FORWARD_EDIT_USER = "editUser";
     public static final String FORWARD_DRILLDOWN_USER="drillDownUser";
     public static final String FORWARD_EDIT_BREAKDOWN = "editBreakdown";
-    public static final String FORWARD_DRILLDOWN_BREAKDOWN="drillDownBreakdown";
-    public static final String FILE_IN_SESSION = "fileInSession" ;
+    public static final String FORWARD_DRILLDOWN_BREAKDOWN="drillDownBreakdown";;
     public static final String ADMIN_ROLE_CODE = "admin" ;
     public static final String FORWARD_IMPORT = "import";
     public static final String FORWARD_FINISH_BREAKDOWN="finishBde"; 

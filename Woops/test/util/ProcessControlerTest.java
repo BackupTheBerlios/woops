@@ -3,7 +3,7 @@ package util;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.util.List;
+import java.util.Collection;
 
 import junit.framework.TestCase;
 import view.util.ProcessControler;
@@ -27,7 +27,7 @@ public class ProcessControlerTest extends TestCase {
 			
 			// On créé un flux d'octets
 			FileInputStream fis = new FileInputStream(dpe.getAbsolutePath());
-			List listActivities = ProcessControler.load(new BufferedInputStream(fis));
+			Collection listActivities = ProcessControler.load(new BufferedInputStream(fis));
 			
 			// On verifie que la recuperation s'est bien effectuee
 			assertNotNull(listActivities);
