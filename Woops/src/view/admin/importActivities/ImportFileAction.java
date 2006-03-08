@@ -1,11 +1,7 @@
 package view.admin.importActivities;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -49,7 +45,7 @@ public class ImportFileAction extends WoopsCCAction{
 				}
 			} catch (FileParseException e) {
 				// TODO Auto-generated catch block
-				context.addGlobalError("admin.manageDpe.fileError") ;
+				context.addGlobalError("admin.manageDpe.fileError", ff.getFileName()) ;
 				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 			}	catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
