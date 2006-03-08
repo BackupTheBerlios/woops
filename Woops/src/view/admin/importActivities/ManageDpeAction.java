@@ -26,9 +26,6 @@ import com.cc.framework.ui.model.ListDataModel;
 public class ManageDpeAction extends WoopsCCAction{
 
 	public void doExecute(ActionContext context) throws Exception {
-		// recuperation et mise en requete de l'id du bde
-		
-		
 		// recuperation de la liste d'activites
 		ManageDpeForm form = (ManageDpeForm)context.form() ;
 				
@@ -39,19 +36,18 @@ public class ManageDpeAction extends WoopsCCAction{
 	}
 	
 	private ListDataModel loadAct(ActionContext context) {
-		// TODO Auto-generated method stub
-		List listeActivites = (List)context.request().getAttribute(PresentationConstantes.FILE_IN_SESSION) ;
-		ArrayList listeFinale = new ArrayList () ;
+		List listActivities = (List)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITIES) ;
+		ArrayList list = new ArrayList () ;
 		IAItem item ;
-		for (int i = 0 ; i < listeActivites.size() ; i++)
+		for (int i = 0 ; i < listActivities.size() ; i++)
 		{
 			item = new IAItem() ;
 			item.setId(Integer.toString(i));
-			item.setName(((Activity)listeActivites.get(i)).getName());
-			listeFinale.add(item);
+			item.setName(((Activity)listActivities.get(i)).getName());
+			list.add(item);
 		}
-		DisplayObject[] result = new IAItem[listeFinale.size()];
-		listeFinale.toArray(result);
+		DisplayObject[] result = new IAItem[list.size()];
+		list.toArray(result);
 		
 		// Création de la liste initialisée avec les valeurs à afficher
 		ListIAModel model = new ListIAModel(result);
@@ -90,7 +86,6 @@ public class ManageDpeAction extends WoopsCCAction{
 					
 				}
 			}
-			context.session().removeAttribute(PresentationConstantes.FILE_IN_SESSION);
 			context.addGlobalMessage("admin.manageDpe.confirmation") ;
 			context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
 		} catch (PersistanceException e) {
