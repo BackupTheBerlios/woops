@@ -3,6 +3,7 @@ package view.admin;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -16,6 +17,9 @@ import view.breakdownelement.BreakdownElementItem;
 import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
 import view.user.UserItem;
+import business.BusinessConstantes;
+import business.activity.Activity;
+import business.activity.ActivityManager;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementManager;
 import business.hibernate.exception.DoublonException;
@@ -65,11 +69,11 @@ public class AdminAction  extends WoopsCCAction {
 			context.session().setAttribute(context.mapping().getAttribute(), new AdminForm());
 		}
 		
-		// Récupération du form bean nécessaire pour fournir les informations à la JSP
+		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
     	AdminForm adminForm = (AdminForm) context.form();
     	dbData = BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN);
     	
-    	// Constitue une liste de BreakDownElementItem à partir des données stockées en BD  
+    	// Constitue une liste de BreakDownElementItem ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();
     	listBreakDownElementsItems = new ArrayList();
     	HashMap breakDownElementsMap = new HashMap();
@@ -95,7 +99,7 @@ public class AdminAction  extends WoopsCCAction {
 		DisplayObject[] result = new BreakdownElementItem[listBreakDownElementsItems.size()];
 		listBreakDownElementsItems.toArray(result);
 		
-		// Création de la liste initialisée avec les valeurs à afficher
+		// Cr?ation de la liste initialis?e avec les valeurs ? afficher
 		ListBreakDownElementsModel model = new ListBreakDownElementsModel(result);
 		adminForm.setDataModelListBreakDownElements(model);
 	
@@ -121,13 +125,13 @@ public class AdminAction  extends WoopsCCAction {
 			context.session().setAttribute(context.mapping().getAttribute(), new AdminForm());
 		}
 		
-		// Récupération du form bean nécessaire pour fournir les informations à la JSP
+		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
     	AdminForm adminForm = (AdminForm) context.form();
     	
-    	// Récupération de la liste des utilisateurs
+    	// R?cup?ration de la liste des utilisateurs
     	dbData = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
 
-    	// Constitue une liste d'UserItem à partir des données stockées en BD  
+    	// Constitue une liste d'UserItem ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();
     	listUsersItems = new ArrayList();
     	HashMap usersMap = new HashMap();
@@ -150,7 +154,7 @@ public class AdminAction  extends WoopsCCAction {
 		DisplayObject[] result = new UserItem[listUsersItems.size()];
 		listUsersItems.toArray(result);
 		
-		// Création de la liste initialisée avec les valeurs à afficher
+		// Cr?ation de la liste initialis?e avec les valeurs ? afficher
 		ListUsersModel model = new ListUsersModel(result);
 		adminForm.setDataModelUser(model);
 	
@@ -162,7 +166,7 @@ public class AdminAction  extends WoopsCCAction {
 	//          List-Control  Event Handler
     // ------------------------------------------------
 	/**
-	 * Cette méthode est appelée lorsque l'utilisateur demande un rafraîchissement de la liste 
+	 * Cette m?thode est appel?e lorsque l'utilisateur demande un rafra?chissement de la liste 
 	 * @param	context		contexte d'execution de la servlet
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
@@ -175,7 +179,7 @@ public class AdminAction  extends WoopsCCAction {
 		}
 	}
 	/**
-	 * Cette méthode est appelée lorsque l'utilisateur demande un rafraîchissement de la liste 
+	 * Cette m?thode est appel?e lorsque l'utilisateur demande un rafra?chissement de la liste 
 	 * @param	context		contexte d'execution de la servlet
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
@@ -189,32 +193,32 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	
 	/**
-	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
+	 * Cette m?thode est appel?e si le participant clique sur l'icone de tri d'une colonne
 	 * @param context	contexte d'execution de la servlet
-	 * @param column	colonne à trier
+	 * @param column	colonne ? trier
 	 * @param direction	direction (ASC, DESC)
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
 	public void listBreakDownElements_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
-		// Récupération de la liste dans le contexte
+		// R?cup?ration de la liste dans le contexte
 		ListBreakDownElementsModel model = (ListBreakDownElementsModel) context.control().getDataModel();
 		
-		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
+		// Effectue le tri sur la colonne demand?e et enregistre les modification au niveau du contexte
 		model.sortByColumn(column, direction);		
 		context.control().execute(context, column,  direction);
 	}
 	/**
-	 * Cette méthode est appelée si le participant clique sur l'icone de tri d'une colonne
+	 * Cette m?thode est appel?e si le participant clique sur l'icone de tri d'une colonne
 	 * @param context	contexte d'execution de la servlet
-	 * @param column	colonne à trier
+	 * @param column	colonne ? trier
 	 * @param direction	direction (ASC, DESC)
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
 	public void listUsers_onSort(ControlActionContext context, String column, SortOrder direction) throws Exception {
-		// Récupération de la liste dans le contexte
+		// R?cup?ration de la liste dans le contexte
 		ListUsersModel model = (ListUsersModel) context.control().getDataModel();
 		
-		// Effectue le tri sur la colonne demandée et enregistre les modification au niveau du contexte
+		// Effectue le tri sur la colonne demand?e et enregistre les modification au niveau du contexte
 		model.sortByColumn(column, direction);		
 		context.control().execute(context, column,  direction);
 	}
@@ -227,9 +231,9 @@ public class AdminAction  extends WoopsCCAction {
 	
 	
 	/**
-	 * Cette méthode est appelée si l'aministeur clique sur le lien "copier"
+	 * Cette m?thode est appel?e si l'aministeur clique sur le lien "copier"
 	 * @param context	contexte d'execution de la servlet
-	 * @param column	id du projet à supprimer
+	 * @param column	id du projet ? supprimer
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
 	public void listBreakDownElements_onCopy(ControlActionContext context, String id) throws IOException, ServletException {
@@ -245,15 +249,36 @@ public class AdminAction  extends WoopsCCAction {
 	}
 
 	public void listBreakDownElements_onFinish(ControlActionContext context, String id) throws IOException, ServletException {
-//		context.session().setAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID,id);
-		
+		try {
+			BreakdownElement bde = BreakdownElementManager.getInstance().getBreakDownElementById(
+					new Integer(Integer.parseInt(id)));
+			if (bde.getEndDate()!=null) {
+				bde.setEndDate(new Date());
+				 try {
+					BreakdownElementManager.getInstance().update(bde);
+				} catch (DoublonException e) {				
+					e.printStackTrace();
+				}			 
+				Collection activities = ActivityManager.getInstance().getAllActivitiesByBDE(new Integer(Integer.parseInt(id)));
+				for(Iterator i = activities.iterator() ; i.hasNext();){
+					Activity a = ((Activity) i.next());
+					if (a.getOnGoing().equals(BusinessConstantes.OUI)) {
+						a.process();
+					}
+				}
+			}			
+		} catch (NumberFormatException e) {			
+			e.printStackTrace();
+		} catch (PersistanceException e) {			
+			e.printStackTrace();
+		}
 		context.forwardByName(PresentationConstantes.FORWARD_FINISH_BREAKDOWN);
 	}
 	
 	/**
-	 * Cette méthode est appelée si l'aministeur clique sur l'icone de supprimer un projet
+	 * Cette m?thode est appel?e si l'aministeur clique sur l'icone de supprimer un projet
 	 * @param context	contexte d'execution de la servlet
-	 * @param column	id du projet à supprimer
+	 * @param column	id du projet ? supprimer
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
 	public void listBreakDownElements_onDelete(ControlActionContext context, String id) throws IOException, ServletException {
@@ -282,9 +307,9 @@ public class AdminAction  extends WoopsCCAction {
 	}
 	
 	/**
-	 * Cette méthode est appelée si l'aministeur clique sur l'icone de supprimer un utilisateur
+	 * Cette m?thode est appel?e si l'aministeur clique sur l'icone de supprimer un utilisateur
 	 * @param context	contexte d'execution de la servlet
-	 * @param column	id de l'utilisateur à supprimer
+	 * @param column	id de l'utilisateur ? supprimer
 	 * @throws	Exception	Indique qu'une erreur s'est produite pendant le traitement
 	 */
 	public void listUsers_onDelete(ControlActionContext context, String id) throws IOException, ServletException {
