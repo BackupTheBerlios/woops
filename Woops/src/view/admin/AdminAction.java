@@ -176,6 +176,7 @@ public class AdminAction  extends WoopsCCAction {
 		} catch (Throwable t) {
 			logger.error(t);
 			ctx.addGlobalError("errors.global");
+			ctx.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 	}
 	/**
@@ -189,6 +190,7 @@ public class AdminAction  extends WoopsCCAction {
 		} catch (Throwable t) {
 			logger.error(t);
 			ctx.addGlobalError("errors.global");
+			ctx.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 	}
 	
@@ -257,7 +259,8 @@ public class AdminAction  extends WoopsCCAction {
 				 try {
 					BreakdownElementManager.getInstance().update(bde);
 				} catch (DoublonException e) {				
-					e.printStackTrace();
+					context.addGlobalError("errors.persistance.doublon");
+					context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 				}			 
 				Collection activities = ActivityManager.getInstance().getAllActivitiesByBDE(new Integer(Integer.parseInt(id)));
 				for(Iterator i = activities.iterator() ; i.hasNext();){
@@ -268,9 +271,11 @@ public class AdminAction  extends WoopsCCAction {
 				}
 			}			
 		} catch (NumberFormatException e) {			
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.global");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		} catch (PersistanceException e) {			
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.global");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 		context.forwardByName(PresentationConstantes.FORWARD_FINISH_BREAKDOWN);
 	}
@@ -291,11 +296,11 @@ public class AdminAction  extends WoopsCCAction {
 			context.addGlobalMessage("admin.listBde.confirmationDel");
 			context.forwardByName(PresentationConstantes.FORWARD_DELETE_BREAKDOWN);
 		} catch (PersistanceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.delete");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		} catch (ForeignKeyException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.delete");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 	}
 	
@@ -335,14 +340,14 @@ public class AdminAction  extends WoopsCCAction {
 			context.addGlobalMessage("admin.listUsers.confirmationDel");
 			context.forwardByName(PresentationConstantes.FORWARD_DELETE_USER);
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.delete");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		} catch (PersistanceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.delete");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		} catch (ForeignKeyException e) {
-		// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.delete");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 	}
 	
