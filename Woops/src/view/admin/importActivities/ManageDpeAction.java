@@ -65,8 +65,8 @@ public class ManageDpeAction extends WoopsCCAction{
 			ListIAModel model = new ListIAModel(result);
 			return model;
 		} catch (PersistanceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.select");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		}
 		return null;
 		
@@ -114,11 +114,11 @@ public class ManageDpeAction extends WoopsCCAction{
 			context.addGlobalMessage("admin.manageDpe.confirmation") ;
 			context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
 		} catch (PersistanceException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.globals");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		} catch (DoublonException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			context.addGlobalError("errors.persistance.doublon");
+			context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		} 
 		
 	}
