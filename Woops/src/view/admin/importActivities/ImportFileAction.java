@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.struts.upload.FormFile;
@@ -12,6 +13,8 @@ import view.PresentationConstantes;
 import view.common.WoopsCCAction;
 import view.util.FileParseException;
 import view.util.ProcessControler;
+import business.activity.ActivityManager;
+import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;
@@ -32,28 +35,27 @@ public class ImportFileAction extends WoopsCCAction{
 			try {
 				is = ff.getInputStream();
 				BufferedInputStream bis = new BufferedInputStream(is);
-				List l = ProcessControler.load(bis) ;
-				if (l.isEmpty())
+				Collection list = ProcessControler.load(bis) ;
+				if (list.isEmpty())
 				{
 					context.addGlobalError("admin.manageDpe.emptyList") ;
 					context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 				}
 				else
 				{
-					context.request().setAttribute(PresentationConstantes.FILE_IN_SESSION,l);
+					context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITIES, list);
 					context.forwardByName(PresentationConstantes.FORWARD_SUCCESS);
 				}
-			} catch (FileParseException e) {
-				// TODO Auto-generated catch block
-				context.addGlobalError("admin.manageDpe.fileError", ff.getFileName()) ;
+			} catch (FileNotFoundException fnfe) {
+				context.addGlobalError("error.file.find", ff.getFileName()) ;
 				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
-			}	catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}		
+				context.addGlobalError("error.file.read", ff.getFileName()) ;
+				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
+			} catch (FileParseException e) {
+				context.addGlobalError("error.file.parse", ff.getFileName()) ;
+				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
+			}
 		}
 	}
 
