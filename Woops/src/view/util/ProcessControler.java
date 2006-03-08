@@ -1,22 +1,18 @@
 package view.util;
 
-import java.io.BufferedInputStream ;
-import java.io.File ;
-import java.io.FileInputStream ;
-import java.io.FileNotFoundException ;
-import java.io.IOException ;
-import java.util.ArrayList ;
+import java.io.BufferedInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder ;
-import javax.xml.parsers.DocumentBuilderFactory ;
-import javax.xml.parsers.ParserConfigurationException ;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.w3c.dom.Document ;
-import org.w3c.dom.Node ;
-import org.w3c.dom.NodeList ;
-import org.xml.sax.SAXException ;
-import org.xml.sax.SAXParseException ;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 import business.activity.Activity;
 
@@ -139,16 +135,7 @@ public class ProcessControler {
 
 			return listActivities;
 		}
-		catch (ParserConfigurationException eDBF)
-		{
-			throw new FileParseException() ;
-		}
-		catch (SAXException eDB)
-		{
-			throw new FileParseException() ;
-		}
-		catch (IOException eDB)
-		{
+		catch (Exception e) {
 			throw new FileParseException() ;
 		}
 	}
