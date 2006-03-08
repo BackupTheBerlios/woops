@@ -5,6 +5,7 @@ import java.util.Date;
 
 import business.activity.state.CreatedActivityState;
 import business.activity.state.IActivityState;
+import business.event.Event;
 import business.hibernate.HistorizedObject;
 
 
@@ -19,7 +20,7 @@ public class Activity extends HistorizedObject{
 	private IActivityState	state; /** Etat actuel de l'activite */
 	private Integer			bdeId; /** Entite a laquelle appartient l'activite */
 	private String			onGoing; /** Permet de savoir si la tache est sans fin */
-	
+	private Event			event; /** Evenement associé à la tache */
 	/**
 	 * Liste des activit?s dont d?pend l'activit?
 	 * @associates business.activity.sequence.ActivitySequence
@@ -204,6 +205,14 @@ public class Activity extends HistorizedObject{
 
 	public void setOnGoing(String onGoing) {
 		this.onGoing = onGoing;
+	}
+
+	public Event getEvent() {
+		return event;
+	}
+
+	public void setEvent(Event event) {
+		this.event = event;
 	}
 	
 	

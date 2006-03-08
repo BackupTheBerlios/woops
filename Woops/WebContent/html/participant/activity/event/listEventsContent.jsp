@@ -2,9 +2,8 @@
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 <%@ taglib uri="/struts-bean" prefix="bean" %>
 <%@ taglib uri="/struts-html" prefix="html" %>
-<%@ taglib uri="/struts-logic" prefix="logic" %>
-<%@ taglib uri="/cc-utility"  prefix="util" %>
 <%@ page import="org.apache.struts.util.MessageResources" %>
+<%@ page import="view.PresentationConstantes" %>
 
 <bean:define id="basename" value="<%=PresentationConstantes.BASENAME%>" scope="page" type="java.lang.String" />
 <bean:define id="confirmMessage" value="<%=MessageResources.getMessageResources(basename).getMessage("table.field.listActivities.deleteConfirmation")%>"/>
@@ -22,8 +21,7 @@
 		title="table.title.listEventsNotOccured" 
 		width="650" 
 		rows="10" 
-		refreshButton="true" 
-		createButton="true"
+		refreshButton="true"
 		>
 	
 		<ctrl:columntext
@@ -32,7 +30,7 @@
 			/>
 		
 		<ctrl:columntext
-			title="table.field.listEvents.name"
+			title="table.field.listEvents.details"
 			property="details"
 			/>
 			
@@ -61,4 +59,31 @@
 	
 	</ctrl:list>
 
+	<br/>
+
+	<ctrl:list 
+		id="listEventsOccured" 
+		property="listEventsOccured" 
+		title="table.title.listEventsOccured" 
+		width="650" 
+		rows="10" 
+		refreshButton="true"
+		>
+	
+		<ctrl:columntext
+			title="table.field.listEvents.name"
+			property="name"
+			/>
+		
+		<ctrl:columntext
+			title="table.field.listEvents.details"
+			property="details"
+			/>
+			
+		<ctrl:columntext
+			title="table.field.listEvents.activityName"
+			property="activityName"
+			/>
+			
+	</ctrl:list>
 </html:form>

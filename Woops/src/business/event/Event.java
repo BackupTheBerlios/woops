@@ -3,6 +3,7 @@
  */
 package business.event;
 
+import business.activity.Activity;
 import business.hibernate.HistorizedObject;
 
 /**
@@ -17,7 +18,7 @@ public class Event extends HistorizedObject {
 	private String details;
 	private String occured;	/* "oui" ou "non" */
 	private Integer	bdeId;
-	private Integer activityId;
+	private Activity activity;
 	
 	
 	public Object getId() {
@@ -44,11 +45,11 @@ public class Event extends HistorizedObject {
 	public void setOccured(String occured) {
 		this.occured = occured;
 	}
-	public Integer getActivityId() {
-		return activityId;
+	public Activity getActivity() {
+		return activity;
 	}
-	public void setActivityId(Integer activityId) {
-		this.activityId = activityId;
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 	public Integer getBdeId() {
 		return bdeId;

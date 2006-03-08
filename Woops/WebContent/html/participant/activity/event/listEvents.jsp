@@ -14,7 +14,7 @@
     <template:put  name="menu"  	content="$/participant/subview/menu.jsp"/>
     
     <logic:notEmpty name="listActivitiesForm" property="listBDEs" scope="session">
-    	<template:put  name="contents"  content="$/participant/activity/event/listEventContent.jsp"/>
+    	<template:put  name="contents"  content="$/participant/activity/event/listEventsContent.jsp"/>
     </logic:notEmpty>
     <logic:empty name="listActivitiesForm" property="listBDEs" scope="session">
     	<template:put  name="contents"  content="$/message.jsp"/>

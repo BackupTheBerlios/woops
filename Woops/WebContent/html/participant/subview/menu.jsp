@@ -21,16 +21,21 @@
         	
         <menu:menuitem   	
         	id="4"  
-        	text="table.title.listFreeActivities"      
+        	text="menu.listFreeActivities"      
         	action="listFreeActivities.do"/>
-        	
+        
         <menu:menuitem   	
         	id="5"  
+        	text="menu.listEvents"      
+        	action="listEvents.do"/>
+        	
+        <menu:menuitem   	
+        	id="6"  
         	text="menu.showActivityGraph"      
         	action="showActivityGraph.do"/>
         	
         <menu:menuitem   	
-        	id="6"  
+        	id="7"  
         	text="menu.showTeamActivitiesSummary"      
         	action="showTeamActivitiesSummary.do"/>
 

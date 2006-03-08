@@ -44,12 +44,10 @@
 			type="integer"
 		 />
 		 
-		 <property
-			column="activity"
-			name="activityId"
-			not-null="true"
-			type="integer"
-		 />
+		 <one-to-one
+			class="business.activity.Activity"
+			name="activity"
+		/>
 		
 		<!-- Historisation des modifications -->
 		<property column="datecreation" name="dateCreation" not-null="false" type="date"/>

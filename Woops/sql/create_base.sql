@@ -89,6 +89,7 @@ CREATE TABLE Activity (
      , state VARCHAR(50) NOT NULL
      , bde INT NOT NULL
      , ongoing VARCHAR(3)
+     , event INT
      , datecreation DATE
      , dateupdate DATE
      , usercreation INT

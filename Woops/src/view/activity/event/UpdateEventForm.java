@@ -11,7 +11,7 @@ import com.cc.framework.ui.model.ListDataModel;
  * @author Simon REGGIANI
  *
  */
-public class ManageEventForm extends FWActionForm {
+public class UpdateEventForm extends FWActionForm {
 	private static final long serialVersionUID = 6090433996487352208L;
 
 	private String eventId;

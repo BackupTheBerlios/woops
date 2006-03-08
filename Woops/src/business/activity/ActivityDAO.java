@@ -67,7 +67,10 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 */
 	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
 		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act WHERE act.userId is null AND act.bdeId = " + bdeId);
+		query.append("FROM Activity as act");
+		query.append(" WHERE act.userId is null");
+		query.append(" AND act.bdeId = " + bdeId);
+		query.append(" AND act.event.occured = 'oui'");
 		
 		// Recuperation des donnees
 		List listActivities = executeQuery(query.toString());

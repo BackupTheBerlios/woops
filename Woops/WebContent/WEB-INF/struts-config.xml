@@ -26,6 +26,8 @@
 	  	<form-bean name="manageDpeForm" type="view.admin.importActivities.ManageDpeForm" />
 	  	
 	  	<form-bean name="listEventsForm" type="view.activity.event.ListEventsForm" />
+	  	<form-bean name="updateEventForm" type="view.activity.event.UpdateEventForm" />
+	  	
 	  	
 	</form-beans>
 
@@ -218,13 +220,26 @@
       	 	roles="#dev"
       	 	input="/html/participant/activity/event/listEvents.jsp"
       	 >
-         	<forward name="error" path="/listEvents.do" />
-         	<forward name="action" path="/listEvents.do"/>
-         	<forward name="edit" path="/manageEvent.do"/>
+         	<forward name="error" path="/html/participant/activity/event/listEvents.jsp" />
+         	<forward name="edit" path="/updateEvent.do"/>
+         	<forward name="delete" path="/listEvents.do"/>
+         	<forward name="signal" path="/listFreeActivities.do"/>
       	</action>    	
     	
-    	
-     <!-- ================= Admin / admin ================ -->  
+<!-- ================= Update Event ================ -->  
+		<action path="/updateEvent"	 type="view.activity.event.UpdateEventAction"
+      		name="updateEventForm"
+      	 	scope="request"
+      	 	roles="#dev"
+      	 	input="/html/participant/activity/event/updateEvent.jsp"
+      	 >
+         	<forward name="error" path="/html/participant/activity/event/updateEvent.jsp" />
+         	<forward name="finish" path="/listEvents.do"/>
+      	</action>   	
+      	
+      	
+      	
+<!-- ================= Admin / admin ================ -->  
       	<action path="/admin"	 type="view.admin.AdminAction"
      		attribute="adminForm"
         	name="adminForm"

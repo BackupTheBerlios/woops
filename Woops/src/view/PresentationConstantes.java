@@ -28,6 +28,7 @@ public interface PresentationConstantes {
     public static final String FORWARD_BACK="back"; 
 	public static final String FORWARD_INDEX="index"; 
 	public static final String FORWARD_NOSESSION="nosession";
+	public static final String FORWARD_SIGNAL="signal";
 	
 	
     public static final String FORWARD_NEXT="next"; 
@@ -67,6 +68,7 @@ public interface PresentationConstantes {
 	public static final String KEY_DEPENDANCES_LIST_MNGR = "KEY_DEPENDANCES_LIST_MNGR";
 	public static final String KEY_ACTIVITY="ACTIVITY";
 	public static final String KEY_ACTIVITIES_MAP="ACTIVITIES_MAP";
+	public static final String KEY_EVENTS_MAP="EVENTS_MAP";
 	public static final String KEY_ROLE_OPTIONS ="ROLE_OPTIONS";
 	public static final String KEY_USER_BDES = "USER_BDES";
 	

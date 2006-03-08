@@ -12,14 +12,14 @@ import com.cc.framework.ui.model.ListDataModel;
  *
  */
 public class ListEventsForm extends FWActionForm {
-	private SimpleListControl listEventsNotOccured;
-	private SimpleListControl listEventsOccured;
+	private SimpleListControl listEventsNotOccured = new SimpleListControl();
+	private SimpleListControl listEventsOccured = new SimpleListControl();
 
 	/**
 	 * @return Returns the dataModel of listEventsNotOccured.
 	 */
-	public ListDataModel getListEventsNotOccured() {
-		return (ListDataModel)listEventsNotOccured.getDataModel();
+	public SimpleListControl getListEventsNotOccured() {
+		return listEventsNotOccured;
 	}
 
 	/**
@@ -32,8 +32,8 @@ public class ListEventsForm extends FWActionForm {
 	/**
 	 * @return Returns the dataModel of listEventsOccured.
 	 */
-	public ListDataModel getListEventsOccured() {
-		return (ListDataModel)listEventsOccured.getDataModel();
+	public SimpleListControl getListEventsOccured() {
+		return listEventsOccured;
 	}
 
 	/**

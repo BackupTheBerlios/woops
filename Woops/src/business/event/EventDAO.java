@@ -23,7 +23,7 @@ public class EventDAO extends PersistentObjectDAO {
 	 */
 	public Collection getEventsByBde(Integer bdeId, boolean occured) throws PersistanceException {
 		String query = 	"FROM Event evt" +
-						" WHERE evt.bde = " + bdeId +
+						" WHERE evt.bdeId = " + bdeId +
 						" AND evt.occured = '" + (occured?"oui":"non") + "'";
 		return executeQuery(query);
 	}
