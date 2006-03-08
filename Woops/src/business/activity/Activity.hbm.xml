@@ -77,7 +77,11 @@
 		<one-to-one
 			class="business.event.Event"
 			name="event"
+			property-ref="activity"
+			cascade="all"
 		/>
+		
+
 		 
 		<!-- Historisation des modifications -->
 		<property column="datecreation" name="dateCreation" not-null="false" type="date"/>

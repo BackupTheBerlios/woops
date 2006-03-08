@@ -78,6 +78,10 @@ public class ShowActivitySummaryAction extends WoopsCCAction {
 		ShowActivitySummaryForm form = (ShowActivitySummaryForm) context.form();
 		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 		
+		if (activityId == null) {
+			activityId = new Integer(context.request().getParameter(PresentationConstantes.PARAM_ACTIVITY_ID));
+		}
+		
 		// R?cup?ration de la liste des pr?d?cesseurs de l'activit?
 		Collection predecessorsListMngr = ActivityManager.getInstance().getActivitySequencesPredecessors(activityId);
 	
@@ -108,6 +112,10 @@ public class ShowActivitySummaryAction extends WoopsCCAction {
 	public void setSuccessorsList(ActionContext context) throws PersistanceException {
 		ShowActivitySummaryForm form = (ShowActivitySummaryForm) context.form();
 		Integer activityId = (Integer)context.request().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
+		
+		if (activityId == null) {
+			activityId = new Integer(context.request().getParameter(PresentationConstantes.PARAM_ACTIVITY_ID));
+		}
 		
 		// R?cup?ration de la liste des successeurs de l'activit?
 		Collection successorsListMngr = ActivityManager.getInstance().getActivitySequencesSuccessors(activityId);

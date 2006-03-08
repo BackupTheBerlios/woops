@@ -13,5 +13,10 @@ public class ActivitySequencesModel extends WoopsListDataModel {
 	public String getUniqueKey(int index) {
 		return ((ActivitySequenceItem)data[index]).getId();
 	}
+	
+	public ActivitySequenceItem[] getData(){
+	
+		return (ActivitySequenceItem[]) data;
+	}
 
 }

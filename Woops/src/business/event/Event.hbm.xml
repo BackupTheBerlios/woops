@@ -33,7 +33,7 @@
 		 <property
 			column="occured"
 			name="occured"
-			not-null="true"
+			not-null="false"
 			type="string"
 		 />
 		 
@@ -44,10 +44,14 @@
 			type="integer"
 		 />
 		 
-		 <one-to-one
+
+		 <many-to-one
+		 	cascade="all"
 			class="business.activity.Activity"
+			column="activity"
 			name="activity"
-		/>
+			unique="true"
+		 />
 		
 		<!-- Historisation des modifications -->
 		<property column="datecreation" name="dateCreation" not-null="false" type="date"/>

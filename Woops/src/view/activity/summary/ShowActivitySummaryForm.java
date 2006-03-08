@@ -1,5 +1,11 @@
 package view.activity.summary;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import view.activity.ActivitySequenceItem;
+import view.activity.ActivitySequencesModel;
+
 import com.cc.framework.adapter.struts.FWActionForm;
 import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
@@ -20,6 +26,10 @@ public class ShowActivitySummaryForm extends FWActionForm {
 	
 	private SimpleListControl	predecessorsList;	/** liste des dépendances entrantes */
 	private SimpleListControl	successorsList;		/** liste des dépendances sortantes */
+	
+	
+	private Collection collecPredecessorList;
+	private Collection collecSuccessorsList;
 	
 	public ShowActivitySummaryForm() {
 		super();
@@ -152,6 +162,8 @@ public class ShowActivitySummaryForm extends FWActionForm {
 	}
 
 
+
+
 	/**
 	 * @param model The model to set to successorsList.
 	 */
@@ -168,6 +180,31 @@ public class ShowActivitySummaryForm extends FWActionForm {
 	public void setOnGoing(String onGoing) {
 		this.onGoing = onGoing;
 	}
+
+
+	public Collection getCollecPredecessorList() {
+		ActivitySequencesModel model = (ActivitySequencesModel)predecessorsList.getDataModel();
+		Collection col = new ArrayList();
+		int i ;
+		for(i=0;i<model.size();i++){
+			col.add(model.getElementAt(i)); 
+		}
+		return col;
+	}
+
+
+	public Collection getCollecSuccessorsList() {
+		ActivitySequencesModel model = (ActivitySequencesModel)successorsList.getDataModel();
+		Collection col = new ArrayList();
+		int i ;
+		for(i=0;i<model.size();i++){
+			col.add(model.getElementAt(i)); 
+		}
+		return col;
+	}
+	
+	
+
 
 	
 }

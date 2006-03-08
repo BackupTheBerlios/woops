@@ -5,8 +5,37 @@
 <%@ taglib uri="/cc-utility" prefix="util" %>
 <%@ taglib uri="/struts-bean" prefix="bean" %>
 <%@ taglib uri="/cc-controls" prefix="ctrl" %>
+<%@ page import="view.PresentationConstantes" %>
 
 
+<script language="Javascript">
+
+function ManageControl(tabControleur, tabControle, Masquer) {
+
+
+
+ for(var i = 0; i < tabControle.length; i++){
+  Controle =  tabControle[i];
+  
+      for(var j = 0; j < tabControleur.length; j++){
+		Controleur = tabControleur[j];
+		var objControleur = document.getElementById(Controleur);
+		
+   
+	var objControle = document.getElementById(Controle);
+		if (Masquer=='1')
+			objControle.style.visibility=(objControleur.checked==true)?'visible':'hidden';
+		else
+			objControle.disabled=(objControleur.checked==true)?false:true;
+		}
+}
+
+return true;
+}
+
+
+
+</script>
 
 <html:form action="manageActivityCreation.do">
 
@@ -37,13 +66,6 @@
           />
             
 
-         <forms:checkbox  
-            label="form.field.activity.checkbox.freeActivity"
-            property="freeActivity"
-            tooltip="table.tooltip.activity.checkbox.freeActivity"
-            disabled="${manageActivityCreationForm.disableFreeActivityCheckbox}"
-          />
-          
           <forms:checkbox  
             label="form.field.activity.checkbox.activityOnGoing"
             property="activityOnGoing"
@@ -51,6 +73,50 @@
             disabled="${manageActivityCreationForm.disableActivityOnGoingCheckbox}"
           />
 
+
+         <forms:checkbox  
+         	styleId="ch2"
+            label="form.field.activity.checkbox.freeActivity"
+            property="freeActivity"
+            tooltip="table.tooltip.activity.checkbox.freeActivity"
+            disabled="${manageActivityCreationForm.disableFreeActivityCheckbox}"
+            onclick="ManageControl(new Array('ch2'), new Array('ch1'), '0'); document.getElementById('ch1').checked=false;document.getElementById('inp1').disabled=true;document.getElementById('inp2').disabled=true;"
+    	/>
+
+
+<logic:equal name="manageActivityCreationForm" property="mode" value="<%=PresentationConstantes.INSERT_MODE%>">
+
+         <forms:checkbox  
+         	styleId="ch1"
+            label="form.field.activity.checkbox.event"
+            property="event"
+            tooltip="table.tooltip.activity.checkbox.event"
+            disabled="${manageActivityCreationForm.disableEventCheckbox}"
+            onclick="ManageControl(new Array('ch1'), new Array('inp1','inp2'), '0');"
+            
+            disabled="true"
+          />
+          
+          
+		 <forms:text  
+		 styleId="inp1"      
+		 label="form.field.activity.checkbox.eventName"         
+		 property="eventName"     
+		 maxlength="50"  
+		 disabled="true"
+		 />
+		 
+		 
+		 <forms:text    
+		 styleId="inp2"     
+		 label="form.field.activity.checkbox.eventDetails"         
+		 property="eventDetails"     
+		 maxlength="50" 
+		 disabled="true"
+		 />
+		 
+</logic:equal>
+        
         
         <forms:buttonsection default="btnNext">
         

@@ -8,6 +8,8 @@ import business.BusinessConstantes;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
+import business.event.Event;
+import business.event.EventManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -79,6 +81,10 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				}
 
 				form.setDisableActivityOnGoingCheckbox("false");
+				
+				// on supprime l'acces a la modification de l'événement
+				form.setDisableEventCheckbox("true");
+				
 			}
 			
 			
@@ -259,14 +265,36 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					else
 						activity.setOnGoing(PresentationConstantes.NO);
 					
+					
+
+					
 					// La reaffection de l'activité (soit libre (null) soit à un user)
 					activity.setUserId((form.getFreeActivity()!=null)?(null):((Integer) user.getId()));
 					
 					
 					modif = (activity.getUserId()==null)?(new Integer(2)):(new Integer(1));
 					
+					
 					// on insere l'activité
 					activityId = (Integer)ActivityManager.getInstance().insert(activity,user);
+					activity.setId(activityId);
+					
+					if (form.getEvent() != null){
+						
+						// creation de l'event
+						Event e = new Event();
+						e.setDetails(form.getEventName());
+						e.setName(form.getEventDetails());
+						e.setActivity(activity);
+						e.setBdeId(user.getDefaultBDEId());
+						e.setId(EventManager.getInstance().insert(e));
+						
+						
+						activity.setEvent(e);
+						
+						ActivityManager.getInstance().update(activity);
+					}
+					
 					
 					// R?cup?ration la hashmap pour y rajouter l'activit? 
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);		

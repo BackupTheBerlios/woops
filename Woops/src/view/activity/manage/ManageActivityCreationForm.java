@@ -29,7 +29,12 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private String  disableFreeActivityCheckbox;
 	private String  activityOnGoing; 	/** booleen permettant de créer une activité sans fin */
 	private String  disableActivityOnGoingCheckbox;
+	private String  event;
+	private String  disableEventCheckbox;
+	private String  eventDetails;
+	private String  eventName;
 	
+
 	
 	public ManageActivityCreationForm() {
 		super();
@@ -159,6 +164,46 @@ public class ManageActivityCreationForm extends FWActionForm {
 	public void setDisableActivityOnGoingCheckbox(
 			String disableActivityOnGoingCheckbox) {
 		this.disableActivityOnGoingCheckbox = disableActivityOnGoingCheckbox;
+	}
+
+
+	public String getDisableEventCheckbox() {
+		return disableEventCheckbox;
+	}
+
+
+	public void setDisableEventCheckbox(String disableEventCheckbox) {
+		this.disableEventCheckbox = disableEventCheckbox;
+	}
+
+
+	public String getEvent() {
+		return event;
+	}
+
+
+	public void setEvent(String event) {
+		this.event = event;
+	}
+
+
+	public String getEventName() {
+		return eventName;
+	}
+
+
+	public String getEventDetails() {
+		return eventDetails;
+	}
+
+
+	public void setEventDetails(String eventDetails) {
+		this.eventDetails = eventDetails;
+	}
+
+
+	public void setEventName(String eventName) {
+		this.eventName = eventName;
 	}
 
 

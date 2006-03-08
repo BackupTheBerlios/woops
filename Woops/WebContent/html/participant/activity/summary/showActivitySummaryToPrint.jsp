@@ -1,17 +1,71 @@
 <%@ taglib uri="/cc-controls" prefix="ctrl" %> 
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 <%@ taglib uri="/struts-bean" prefix="bean" %>
+<%@ taglib uri="/struts-logic" prefix="logic" %>
 <%@ taglib uri="/struts-html" prefix="html" %>
 <%@ taglib uri="/cc-template" prefix="template" %>
 <%@ taglib uri="/cc-utility" prefix="util" %>
 
+<html>
 
-<html:form action="showActivitySummary.do">	
-	
+<head>
+<title>WOOPS</title>
+<meta http-equiv="Content-Type" content="text/html;">
+<util:base/>
+
+
+<style>
 		
+		
+		body  {
+			line-height: 1,9em;
+			font-family:verdana, sans, serif; 
+			color:#024B67;
+			font-size: 10px; 
+			margin: 0px 0px 0px 0px;
+			text-decoration: none;
+		}
+		
+		TABLE{
+			color:#024B67;
+			line-height: 1em;
+			font-family:verdana, sans, serif; 
+			font-size: 10px; 
+			margin: 0px 0px 0px 0px;
+			text-decoration: none;
+		}
+		
+		TABLE.tab{	
+			border: 1px black solid ;
+
+		}
+		
+		TR{
+		}
+		
+		TR.header{
+			background: #CAC0D6;
+		}
+		    
+		
+		A {
+			text-decoration: none;
+		    color:#024B67;
+			}
+		A:hover {
+			color:#685973;
+		}	
+
+			
+</style>
+
+
+
+
+
 <script language="javascript">
 <!--
-function imprimer(){
+function print_js(){
 if (navigator.appName == "Netscape") {
 window.print() ;
 }
@@ -23,140 +77,160 @@ navi1.ExecWB(6, 2);
 }
 // -->
 </script>
-<a class=i href="javascript:imprimer();">
+
+
+</head>
+
+
+
+
+	<body>	
+	
+	
+	
+<a class=i href="javascript:print_js();">
 <img border="0" src="images/printer.gif">
 </a>
 
 
-	<table border="0">
-	
-	<tr>
-	<td colspan="3">	
-	
-	<forms:form 
-		type="display" 
-	    name="showActivitySummaryForm" 
-	    caption="form.title.showActivitySummary" 
-	    formid="frmShowActivitySummary" 
-	    width="550"
-	    >
-   
-    
-		<forms:text        
-			label="form.field.activity.name"         
-		 	property="name"        
-		 	/>
- 
-       	<forms:text
-			label="form.field.activity.details"
-            property="details"          
-          	/>
-          
-        <forms:html
-            label="form.field.activity.state"
-			>
+
+
+<center>
+<table>
+<tr><td>
+
+<table class="tab" >
+
+<tr class="header">
+<td width="200" colspan="2">
+<bean:message key="form.field.activity.name" />
+</td>
+
+</tr>
+
+
+<tr >
+<td width="200">
+<bean:message key="form.field.activity.name" />
+</td>
+<td>
+<bean:write name="showActivitySummaryForm" property="name"/>
+</td>
+</tr>
+
+<tr>
+<td>
+<bean:message key="form.field.activity.details" />
+</td>
+<td>
+<bean:write name="showActivitySummaryForm" property="details"/>
+</td>
+</tr>
+
+<tr>
+<td>
+<bean:message key="form.field.activity.state" />
+</td>
+<td>
+
     		<bean:message 
     			name="showActivitySummaryForm"
     			property="state"
     			/>
-    	</forms:html>
-          
-        <forms:text
-			label="form.field.activity.startDate"
-            property="startDate"          
-          	/>
-        
-        <forms:text
-			label="form.field.activity.endDate"
-            property="endDate"          
-          	/>    
-          	
-        <forms:text
-			label="form.field.activity.onGoing"
-            property="onGoing"          
-          	/>    
-          	
-   	</forms:form>
    
-   	</td>
-   	</tr>
-   
-   	<tr height="20">
-   	<td colspan="3"></td>
-   	</tr>
-   
-	<tr>
-		<td valign="top" width="48%">
-		<ctrl:list 
-			id="predecessorsList" 
-			property="predecessorsList" 
-			title="form.table.predecessors.title"  
-			rows="5"
-			width="100%"
-			>
-			
-			<ctrl:columntext
-				title="form.table.predecessors.field.predecessor"
-				property="predecessor"
-				/>
-			
-			<ctrl:columnhtml id="activitySequence"
-				title="form.table.predecessors.field.predecessorState"
-				>
-					<bean:message
-						name="activitySequence"
-						property="predecessorState"/>
-			</ctrl:columnhtml> 
-			
-			<ctrl:columnhtml id="activitySequence"
-				title="form.table.succ_pred.field.linkType"
-				>
-					<bean:message
-						name="activitySequence"
-						property="linkType"/>
-			</ctrl:columnhtml> 
-		</ctrl:list>
-		</td>
+</td>
+</tr>
+
+<tr>
+<td>
+<bean:message key="form.field.activity.startDate" />
+</td>
+<td>
+
+<bean:write name="showActivitySummaryForm" property="startDate"/>
+
+</td>
+</tr>
+
+<tr>
+<td>
+<bean:message key="form.field.activity.endDate" />
+</td>
+<td>
+<bean:write name="showActivitySummaryForm" property="endDate"/>
+</td>
+</tr>
+
+<tr>
+<td>
+<bean:message key="form.field.activity.onGoing" />
+</td>
+<td>
+<bean:write name="showActivitySummaryForm" property="onGoing"/>
+</td>
+</tr>
+
+</table>
+
+	<br>
 	
-		<td width="4%"></td>
+<table >
+
+<tr>
+<td width="200" valign="top">
+
+	<table  class="tab">
 	
-		<td valign="top" align="right"  width="48%">
-		<ctrl:list 
-			id="successorsList" 
-			property="successorsList" 
-			title="form.table.successors.title"  
-			rows="5"
-			width="100%"
-			>
-			
-			<ctrl:columntext
-				title="form.table.successors.field.successor"
-				property="successor"
-				/>
-			
-			<ctrl:columnhtml id="activitySequence"
-				title="form.table.successors.field.successorState"
-				>
-					<bean:message
-						name="activitySequence"
-						property="successorState"/>
-			</ctrl:columnhtml> 
-			
-			<ctrl:columnhtml id="activitySequence"
-				title="form.table.succ_pred.field.linkType"
-				>
-					<bean:message
-						name="activitySequence"
-						property="linkType"/>
-			</ctrl:columnhtml> 	
-		</ctrl:list>
-		</td>
+	<tr class="header"><td>
+		<bean:message key="form.table.predecessors.field.predecessor" />
+	</td></tr>
+	
+	
+	<logic:iterate id="item" name="showActivitySummaryForm" property="collecPredecessorList">
+	<tr><td>
+		<bean:write name="item" property="predecessor" filter="true"/>
+	</td></tr>
+	</logic:iterate>
+	
+	</table>
+	
+</td>
+
+<td width="200" valign="top">
+
+	<table  class="tab">
+	
+	<tr class="header">
+	
+	<td>
+	<bean:message key="form.table.successors.field.successor" />
+	</td>
 	
 	</tr>
 	
+	
+	<logic:iterate id="item" name="showActivitySummaryForm" property="collecSuccessorsList">
+		<tr><td>
+		<bean:write name="item" property="predecessor" filter="true"/>
+		</td></tr>
+	</logic:iterate>
+	
+	
+
 	</table>
-		
-</html:form>
+
+</td>
+</tr>
+
+</table>	
+</td></tr>
+</table>
+</center>		
+
+
+
+</body>
+</html>
  
 
   
