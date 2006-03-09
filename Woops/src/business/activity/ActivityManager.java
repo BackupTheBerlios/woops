@@ -442,10 +442,15 @@ public class ActivityManager extends PersistentObjectManager {
     	Session session = null ;
 		Transaction transaction = null;
 		try {
+			activityDAO.deleteActivity((Integer) activity.getId());
+			
+			activityDAO.delete(activity);
+			
+			
 			// Listes des predecesseurs et des successeurs
-			Collection predecessorsList = null ;
+			/*Collection predecessorsList = null ;
 			Collection successorsList	= null ;
-
+			
 			// On recupere toutes les activites precedentes
 			predecessorsList = ActivityManager.getInstance().getPredecessors((Integer)activity.getId());
 			// On recupere les sequences des dependances suivantes
@@ -464,15 +469,15 @@ public class ActivityManager extends PersistentObjectManager {
 			throw new PersistanceException(se.getMessage(),se);
 		} catch (HibernateException he) {
             rollback(transaction);
-            throw new PersistanceException(he.getMessage(),he);
-		} finally {
-			try {
-				if (session!=null && session.isOpen()) 
-					HibernateSessionFactory.closeSession();				
-			} catch (HibernateException he) {
-				throw new PersistanceException(he.getMessage(),he);
-			}
+            throw new PersistanceException(he.getMessage(),he); */
+		} catch (PersistanceException he) {
+            //rollback(transaction);
+            throw new PersistanceException(he.getMessage(),he); 
 		}
+		catch (ForeignKeyException fe) {
+        //rollback(transaction);
+        throw new ForeignKeyException(fe.getMessage(),fe); 
+	}
     }
     
 	

@@ -8,6 +8,7 @@ import view.PresentationConstantes;
 import net.sf.hibernate.Session;
 import business.BusinessConstantes;
 import business.hibernate.PersistentObjectDAO;
+import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
 
 public class ActivityDAO extends PersistentObjectDAO {
@@ -267,6 +268,24 @@ public class ActivityDAO extends PersistentObjectDAO {
 			query.append(" )");
 		}
 		return query.toString();
+	}
+	
+	
+	/**
+	 * Supprimme une acitivté et toutes ses dépendances
+	 * @param activityId
+	 * @return
+	 * @throws PersistanceException
+	 * @throws ForeignKeyException 
+	 */	
+	public boolean deleteActivity(Integer activityId) throws PersistanceException, ForeignKeyException {
+		StringBuffer req = new StringBuffer("FROM "+BusinessConstantes.TABLE_ACTIVITYSEQUENCE);
+        req.append(" where predecessor = "+activityId);
+        req.append(" or successor = "+activityId);
+      		
+        delete(req.toString());
+	    
+	    return true;
 	}
 	
 }

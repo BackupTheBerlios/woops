@@ -21,7 +21,10 @@ INSERT INTO `Activity` (`name`, `details`, `user`, `state`, `bde`, `ongoing` ) V
 INSERT INTO `Activity` (`name`, `details`, `user`, `state`, `bde`, `ongoing` ) VALUES  ( 'Programmer les tests developpeur', '', 1, 'created', 1, 'non' );
 INSERT INTO `Activity` (`name`, `details`, `user`, `state`, `bde`, `ongoing` ) VALUES  ( 'Derouler l''iteration', '', 2, 'created', 1, 'oui' );
 
-INSERT INTO `ActivitySequence` (`predecessor`,`successor`,`linkType`) VALUES ( 1,2,1 );
+INSERT INTO `ActivitySequence` (`predecessor`,`successor`,`linkType`) VALUES ( 2,3,1 );
+INSERT INTO `ActivitySequence` (`predecessor`,`successor`,`linkType`) VALUES ( 2,4,1 );
+INSERT INTO `ActivitySequence` (`predecessor`,`successor`,`linkType`) VALUES ( 5,2,1 );
+INSERT INTO `ActivitySequence` (`predecessor`,`successor`,`linkType`) VALUES ( 6,2,1 );
 
 
 INSERT INTO `Activity` (`name`, `state`, `bde`, `ongoing` ) VALUES  ( 'Programmer les tests unitaires !', 'created', 1, 'oui' );

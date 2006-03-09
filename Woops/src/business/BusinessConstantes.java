@@ -15,4 +15,6 @@ public interface BusinessConstantes {
     public static final String ACTIVITY_STATE_FINISHED = "finished";
     
     public static final String DATE_FORMAT = "dd/MM/yyyy HH:mm";
+    
+    public static final String TABLE_ACTIVITYSEQUENCE = "ActivitySequence";
 }
