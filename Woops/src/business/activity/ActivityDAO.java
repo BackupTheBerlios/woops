@@ -27,7 +27,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	/**
 	 * Recuperation des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
-	 * @param states : ?tats des activit?s
+	 * @param states : etats des activites
 	 * @return : Liste des activites du particpant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
@@ -40,7 +40,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * Recuperation des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
 	 * @param bdeId : identifiant de l'entite
-	 * @param states : ?tats des activit?s
+	 * @param states : etats des activites
 	 * @return : Liste des activites du particpant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
@@ -69,12 +69,11 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 */
 	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
 		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act");
+		query.append("FROM Activity as act left join fetch act.event as event");
 		query.append(" WHERE act.userId is null");
 		query.append(" AND act.bdeId = " + bdeId);
-		query.append(" AND ( (act.event is null) OR (act.event.occured = '"+PresentationConstantes.YES+"') )");
+		query.append(" AND (event is null OR (act.event.occured = '"+PresentationConstantes.YES+"') )");
 		
-	
 		// Recuperation des donnees
 		List listActivities = executeQuery(query.toString());
 		return listActivities;
@@ -84,7 +83,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	/**
 	 * Recuperation des activites pouvant etre predecesseurs de l'activite passee en parametre
 	 * @param activityId : l'activite dont on veut connaitre des dependances possibles
-	 * @param bdeId : le projet de l'activit?
+	 * @param bdeId : le projet de l'activite
 	 * @return : liste des activites dont peut dependre l'activite passee en parametre
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
@@ -159,7 +158,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * Recuperation des activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
 	 * @param bdeId : identifiant de l'entite
-	 * @param states : ?tats des activit?s
+	 * @param states : etats des activites
 	 * @param session : Session permettant d'executer la session
 	 * @return : Liste des activites du participant
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
@@ -219,7 +218,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 * Constitution de la requete pour recuperer les activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
 	 * @param bdeId : identifiant de l'entite
-	 * @param states : ?tats des activit?s
+	 * @param states : etats des activites
 	 * @return : Requete a executer
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
@@ -246,7 +245,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	/**
 	 * Constitution de la requete pour recuperer les activites pour lesquelles le participant a la responsabilite
 	 * @param userId : identifiant du participant
-	 * @param states : ?tats des activit?s
+	 * @param states : etats des activites
 	 * @return : Requete a executer
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la r?cup?ration des donn?es
 	 */
