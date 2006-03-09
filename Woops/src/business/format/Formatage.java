@@ -1,12 +1,13 @@
 package business.format;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.StringTokenizer;
 
 import business.BusinessConstantes;
 
@@ -17,24 +18,19 @@ public class Formatage {
 	 * @param String date 
 	 * @return Date date
 	 */
-	public static Date stringToDate(String d) {
-	    Date date = null;
-	    
-	    if (!Controleur.isVide(d) 
-	            && Controleur.isInteger(d.replaceAll("/","")) 
-	            && (d.replaceAll("/","")).length()<=8) {
-	    
-		    SimpleDateFormat dateFormat = new SimpleDateFormat(BusinessConstantes.DATE_FORMAT);		
-			try {	
-			    if (d.indexOf("/")<=0)
-			        d = d.substring(0,2) + "/" + d.substring(2,4) + "/" + d.substring(4);
-			    dateFormat.setLenient(false);
-				date = dateFormat.parse(d);            
-	        } catch (ParseException e) {
-	        } catch (IndexOutOfBoundsException e) {	            
-	        }
-	    }
-		return date;
+	public static Date stringToDate (String s) {
+		int year=0 , month=0 , date=0;
+		Calendar cal = Calendar.getInstance(Locale.getDefault());
+		
+		StringTokenizer st = new StringTokenizer (s,"/");
+		
+		date = Integer.parseInt(st.nextToken());
+		month = Integer.parseInt(st.nextToken());
+		year = Integer.parseInt(st.nextToken());
+		cal.clear();
+		cal.set(year,month-1,date);
+		//System.out.println("\nDate : "+getStringFromDate(cal.getTime()));
+		return (Date)cal.getTime().clone();
 	}
 
 	/**
