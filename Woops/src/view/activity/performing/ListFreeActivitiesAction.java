@@ -168,7 +168,7 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 		try {
 			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
 			
-			// on attribue l'user en session à l'activité
+			// on attribue l'user en session ? l'activit?
 			User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 			activity.setUserId((Integer) user.getId());
 			
@@ -194,7 +194,7 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
 	
 	public void listFreeActivities_onEdit(ControlActionContext context, String activityIdString) throws IOException, ServletException {
 		context.request().setAttribute(PresentationConstantes.PARAM_MODE,PresentationConstantes.UPDATE_MODE);
-		context.request().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,new Integer(activityIdString));
+		context.session().setAttribute(PresentationConstantes.PARAM_ACTIVITY_ID,new Integer(activityIdString));
 		
 		context.forwardByName(PresentationConstantes.FORWARD_EDIT);
 	}

@@ -20,7 +20,7 @@ public class Activity extends HistorizedObject{
 	private IActivityState	state; /** Etat actuel de l'activite */
 	private Integer			bdeId; /** Entite a laquelle appartient l'activite */
 	private String			onGoing; /** Permet de savoir si la tache est sans fin */
-	private Event			event; /** Evenement associé à la tache */
+	private Event			event; /** Evenement associ? ? la tache */
 	/**
 	 * Liste des activit?s dont d?pend l'activit?
 	 * @associates business.activity.sequence.ActivitySequence
@@ -43,6 +43,7 @@ public class Activity extends HistorizedObject{
 		this.endDate = null;
 		this.userId = null;
 		this.state = new CreatedActivityState();
+		this.event = null;
 	}
 	
 	/**

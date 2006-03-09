@@ -78,7 +78,6 @@
 			class="business.event.Event"
 			name="event"
 			property-ref="activity"
-			cascade="all"
 		/>
 		
 

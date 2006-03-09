@@ -65,7 +65,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 				form.setActivityOnGoing("false");
 			
 			
-			// si activité en cours, on desactive le checkbox
+			// si activit? en cours, on desactive le checkbox
 			
 			if (! activity.getState().equals(BusinessConstantes.ACTIVITY_STATE_CREATED) ){
 				form.setDisableFreeActivityCheckbox("true");
@@ -82,7 +82,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 
 				form.setDisableActivityOnGoingCheckbox("false");
 				
-				// on supprime l'acces a la modification de l'événement
+				// on supprime l'acces a la modification de l'?v?nement
 				form.setDisableEventCheckbox("true");
 				
 			}
@@ -136,7 +136,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		if(activity!=null){
 			
 			// on forwarde selon le cas
-			// on ne forwarde pas si l'objet n'a pas été crée
+			// on ne forwarde pas si l'objet n'a pas ?t? cr?e
 			
 			if (activity.getId()!=null)
 				
@@ -190,15 +190,15 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 			activity = (Activity)activitiesMap.get(activityId);
 			
-			// si il s'agit d'une activité libre on redirige vers la liste des activités libres
+			// si il s'agit d'une activit? libre on redirige vers la liste des activit?s libres
 			if (activity.getUserId()==null) {	
 				context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS_FREE_ACTIVITY);	
-			// sinon activité affectée on redirige vers la liste des activités
+			// sinon activit? affect?e on redirige vers la liste des activit?s
 			}else{
 				context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
 			}
 		}
-		// si c'est un ajout on redirige toujours vers la liste des activités
+		// si c'est un ajout on redirige toujours vers la liste des activit?s
 		else{
 			context.forwardByName(PresentationConstantes.FORWARD_PREVIOUS);
 		}
@@ -217,7 +217,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		
 
 		
-		// activité retournée
+		// activit? retourn?e
 		Activity act = new Activity();
 		
 		ManageActivityCreationForm form = (ManageActivityCreationForm) context.form();
@@ -234,18 +234,21 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		//controle de la validation du formulaire
 		context.addErrors(form.validate(context.mapping(),context.request()));
 		
+		//flag pour savoir quel insert ( tache ou event ) qui a g?n?r? la doublon exception
+		int flag=0;
+		
 	    if (!context.hasErrors()) {
 			try {
 				
 				// Recuperation de l'identifiant du participant connecte et du projet
 		    	User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
 		    	
-				// modif => message affiché a l'utilisateur apres ajout ou modification d'une activité
+				// modif => message affich? a l'utilisateur apres ajout ou modification d'une activit?
 				// 0 : pas de modif
-				// 1 : l'utilisateur courant affecté
+				// 1 : l'utilisateur courant affect?
 				// 2 : la tache est libre
-		    	// 3 : affectation à l'utilisateur lors de la modification
-		    	// 4 : liberation de l'activité lors de la modification
+		    	// 3 : affectation ? l'utilisateur lors de la modification
+		    	// 4 : liberation de l'activit? lors de la modification
 		    	
 		    	Integer modif = new Integer(0);
 	
@@ -268,15 +271,16 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					
 
 					
-					// La reaffection de l'activité (soit libre (null) soit à un user)
+					// La reaffection de l'activit? (soit libre (null) soit ? un user)
 					activity.setUserId((form.getFreeActivity()!=null)?(null):((Integer) user.getId()));
 					
 					
 					modif = (activity.getUserId()==null)?(new Integer(2)):(new Integer(1));
 					
 					
-					// on insere l'activité
+					// on insere l'activit?
 					activityId = (Integer)ActivityManager.getInstance().insert(activity,user);
+					flag++;
 					activity.setId(activityId);
 					
 					if (form.getEvent() != null){
@@ -287,12 +291,12 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 						e.setName(form.getEventDetails());
 						e.setActivity(activity);
 						e.setBdeId(user.getDefaultBDEId());
+						e.setOccured(PresentationConstantes.NO);
 						e.setId(EventManager.getInstance().insert(e));
-						
-						
-						activity.setEvent(e);
-						
-						ActivityManager.getInstance().update(activity);
+
+						// Gere par le mapping hibernate
+						//activity.setEvent(e);
+						//ActivityManager.getInstance().update(activity);
 					}
 					
 					
@@ -331,13 +335,13 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					Activity activity = (Activity)activitiesMap.get(activityId);
 							
 					
-					// on prend l'etat de l'utlisateur associé AVANT la possible réaffection
+					// on prend l'etat de l'utlisateur associ? AVANT la possible r?affection
 					Integer idbefore = activity.getUserId();
 					
-					// La reaffection de l'activité (soit libre (null) soit à un user)
+					// La reaffection de l'activit? (soit libre (null) soit ? un user)
 					activity.setUserId((form.getFreeActivity()!=null)?(null):((Integer) user.getId()));
 					
-					// on prend l'etat de l'utlisateur associé APRES la possible réaffection
+					// on prend l'etat de l'utlisateur associ? APRES la possible r?affection
 					Integer idafter = activity.getUserId();
 					
 				
@@ -409,7 +413,10 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			} catch (PersistanceException pe) {
                 context.addGlobalError("errors.persistance.global");
 			} catch (DoublonException de) {
-                context.addGlobalError("errors.persistance.doublon",form.getName());
+				if ( flag == 0 )
+					context.addGlobalError("errors.persistance.doublon",form.getName());
+				else if ( flag == 1 )
+					context.addGlobalError("errors.persistance.doublon",form.getEventName());	
 			}	
         } else {
         	context.forwardByName(PresentationConstantes.FORWARD_ERROR);

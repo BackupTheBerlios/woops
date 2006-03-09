@@ -46,11 +46,9 @@
 		 
 
 		 <many-to-one
-		 	cascade="all"
 			class="business.activity.Activity"
 			column="activity"
 			name="activity"
-			unique="true"
 		 />
 		
 		<!-- Historisation des modifications -->

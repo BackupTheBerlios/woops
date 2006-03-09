@@ -5,6 +5,8 @@ package business.event;
 
 import java.util.Collection;
 
+import view.PresentationConstantes;
+
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.PersistanceException;
 
@@ -15,16 +17,16 @@ import business.hibernate.exception.PersistanceException;
 public class EventDAO extends PersistentObjectDAO {
 	
 	/**
-	 * Permet de récupérer la liste des evenements pour un projet (passés ou non)
+	 * Permet de r?cup?rer la liste des evenements pour un projet (pass?s ou non)
 	 * @param bdeId : l'id du projet
-	 * @param occured : boolean indiquant si on veut récupérer les evenements passés ou non
+	 * @param occured : boolean indiquant si on veut r?cup?rer les evenements pass?s ou non
 	 * @return la liste
 	 * @throws PersistanceException 
 	 */
 	public Collection getEventsByBde(Integer bdeId, boolean occured) throws PersistanceException {
 		String query = 	"FROM Event evt" +
 						" WHERE evt.bdeId = " + bdeId +
-						" AND evt.occured = '" + (occured?"oui":"non") + "'";
+						" AND evt.occured = '" + (occured?PresentationConstantes.YES:PresentationConstantes.NO) + "'";
 		return executeQuery(query);
 	}
 }

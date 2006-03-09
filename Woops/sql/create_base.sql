@@ -1,4 +1,3 @@
-ALTER TABLE Activity DROP FOREIGN KEY FK_Activity_event;
 DROP TABLE Event CASCADE;
 DROP TABLE ActivitySequence CASCADE;
 DROP TABLE Activity CASCADE;
@@ -90,7 +89,6 @@ CREATE TABLE Activity (
      , state VARCHAR(50) NOT NULL
      , bde INT NOT NULL
      , ongoing VARCHAR(3)
-     , event INT
      , datecreation DATE
      , dateupdate DATE
      , usercreation INT
@@ -148,10 +146,6 @@ CREATE TABLE Event (
      , CONSTRAINT FK_Event_bde FOREIGN KEY (bde)
                   REFERENCES BreakdownElement (id)
 )ENGINE=InnoDB;
-
-
-ALTER TABLE Activity 
-ADD CONSTRAINT FK_Activity_event FOREIGN KEY (event) REFERENCES Event (id);
 
 -- Insertions intiales
 INSERT INTO ActivitySequenceType(name) VALUES ('finishToStart');
