@@ -18,19 +18,18 @@
 		
 		
 		body  {
-			line-height: 1,9em;
 			font-family:verdana, sans, serif; 
 			color:#024B67;
-			font-size: 10px; 
+			font-size: 12px; 
 			margin: 0px 0px 0px 0px;
 			text-decoration: none;
 		}
 		
 		TABLE{
 			color:#024B67;
-			line-height: 1em;
+
 			font-family:verdana, sans, serif; 
-			font-size: 10px; 
+			font-size: 12px; 
 			margin: 0px 0px 0px 0px;
 			text-decoration: none;
 		}
@@ -102,7 +101,7 @@ navi1.ExecWB(6, 2);
 <table class="tab" >
 
 <tr class="header">
-<td width="200" colspan="2">
+<td width="300" colspan="2">
 <bean:message key="form.field.activity.name" />
 </td>
 
@@ -110,7 +109,7 @@ navi1.ExecWB(6, 2);
 
 
 <tr >
-<td width="200">
+<td width="300">
 <bean:message key="form.field.activity.name" />
 </td>
 <td>
@@ -181,15 +180,28 @@ navi1.ExecWB(6, 2);
 
 	<table  class="tab">
 	
-	<tr class="header"><td>
+	<tr class="header">
+	
+	<td>
 		<bean:message key="form.table.predecessors.field.predecessor" />
-	</td></tr>
+	</td>
+	
+	<td>
+	<bean:message key="form.field.activity.state" />
+	</td>
+	
+	</tr>
 	
 	
 	<logic:iterate id="item" name="showActivitySummaryForm" property="collecPredecessorList">
-	<tr><td>
+	<tr>
+	<td>
 		<bean:write name="item" property="predecessor" filter="true"/>
-	</td></tr>
+	</td>
+	<td>
+		<bean:message name="item" property="predecessorState"/>
+	</td>
+	</tr>
 	</logic:iterate>
 	
 	</table>
@@ -206,13 +218,23 @@ navi1.ExecWB(6, 2);
 	<bean:message key="form.table.successors.field.successor" />
 	</td>
 	
+	<td>
+	<bean:message key="form.field.activity.state" />
+	</td>
+
+	
 	</tr>
 	
 	
-	<logic:iterate id="item" name="showActivitySummaryForm" property="collecSuccessorsList">
-		<tr><td>
-		<bean:write name="item" property="predecessor" filter="true"/>
-		</td></tr>
+	<logic:iterate id="item" name="showActivitySummaryForm" property="collecSuccessorList">
+		<tr>
+		<td>
+			<bean:write name="item" property="successor" filter="true"/>
+		</td>
+		<td>
+			<bean:message name="item" property="successorState"/>
+		</td>
+		</tr>
 	</logic:iterate>
 	
 	

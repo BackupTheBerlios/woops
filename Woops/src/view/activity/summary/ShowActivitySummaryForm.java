@@ -19,17 +19,16 @@ public class ShowActivitySummaryForm extends FWActionForm {
 	private	String	activityId; /** identifiant de l'activit? */
 	private String 	name; 		/** nom de l'activit? */
 	private	String	details; 	/** description de l'activit? */
-	private String	state;		/** état de l'activté */
-	private String	startDate;	/** date de début de l'activité */
-	private String	endDate;	/** date de fin de l'activité */
+	private String	state;		/** ?tat de l'activt? */
+	private String	startDate;	/** date de d?but de l'activit? */
+	private String	endDate;	/** date de fin de l'activit? */
 	private String 	onGoing;	/** tache sans fin */
 	
-	private SimpleListControl	predecessorsList;	/** liste des dépendances entrantes */
-	private SimpleListControl	successorsList;		/** liste des dépendances sortantes */
+	private SimpleListControl	predecessorsList;	/** liste des d?pendances entrantes */
+	private SimpleListControl	successorsList;		/** liste des d?pendances sortantes */
 	
 	
-	private Collection collecPredecessorList;
-	private Collection collecSuccessorsList;
+	
 	
 	public ShowActivitySummaryForm() {
 		super();
@@ -193,7 +192,7 @@ public class ShowActivitySummaryForm extends FWActionForm {
 	}
 
 
-	public Collection getCollecSuccessorsList() {
+	public Collection getCollecSuccessorList() {
 		ActivitySequencesModel model = (ActivitySequencesModel)successorsList.getDataModel();
 		Collection col = new ArrayList();
 		int i ;
