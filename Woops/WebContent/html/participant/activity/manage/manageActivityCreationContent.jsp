@@ -37,6 +37,9 @@ return true;
 
 </script>
 
+<!-- solution sale (deuxieme body) pour resoudre un probleme (bug CC ? ): disable la description d'un evenement par defaut --> 
+<body onload="document.getElementById('ta1').disabled=true;">
+
 <html:form action="manageActivityCreation.do">
 
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -74,14 +77,17 @@ return true;
           />
 
 
+
+
          <forms:checkbox  
          	styleId="ch2"
             label="form.field.activity.checkbox.freeActivity"
             property="freeActivity"
             tooltip="table.tooltip.activity.checkbox.freeActivity"
             disabled="${manageActivityCreationForm.disableFreeActivityCheckbox}"
-            onclick="ManageControl(new Array('ch2'), new Array('ch1'), '0'); document.getElementById('ch1').checked=false;document.getElementById('inp1').disabled=true;document.getElementById('inp2').disabled=true;"
+            onclick="ManageControl(new Array('ch2'), new Array('ch1'), '0'); document.getElementById('ch1').checked=false;document.getElementById('inp1').disabled=true;document.getElementById('ta1').disabled=true;"
     	/>
+
 
 
 <logic:equal name="manageActivityCreationForm" property="mode" value="<%=PresentationConstantes.INSERT_MODE%>">
@@ -92,8 +98,7 @@ return true;
             property="event"
             tooltip="table.tooltip.activity.checkbox.event"
             disabled="${manageActivityCreationForm.disableEventCheckbox}"
-            onclick="ManageControl(new Array('ch1'), new Array('inp1','inp2'), '0');"
-            
+            onclick="ManageControl(new Array('ch1'), new Array('inp1','ta1'), '0');"
             disabled="true"
           />
           
@@ -107,13 +112,14 @@ return true;
 		 />
 		 
 		 
-		 <forms:textarea    
-		 styleId="inp2"     
+
+		 <forms:textarea  
+		 styleId="ta1"     
 		 label="form.field.activity.checkbox.eventDetails"         
 		 property="eventDetails"     
 		 cols="64"
          rows="3"  
-		 disabled="true"
+         readonly="false"
 		 />
 		 
 
@@ -151,3 +157,6 @@ return true;
     <html:hidden property="mode"/>
     
 </html:form>
+
+
+</body>
