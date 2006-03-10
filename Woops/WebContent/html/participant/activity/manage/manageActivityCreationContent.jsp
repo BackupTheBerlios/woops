@@ -107,13 +107,16 @@ return true;
 		 />
 		 
 		 
-		 <forms:text    
+		 <forms:textarea    
 		 styleId="inp2"     
 		 label="form.field.activity.checkbox.eventDetails"         
 		 property="eventDetails"     
-		 maxlength="50" 
+		 cols="64"
+         rows="3"  
 		 disabled="true"
 		 />
+		 
+
 		 
 </logic:equal>
         

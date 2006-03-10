@@ -25,9 +25,9 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private String	tooltipFinish;			/**	libell? du bouton finish (en rfonction du mode) */
 	private String 	tooltipNext;			/** libell? du bouton next (en rfonction du mode) */
 	private String	disableNext;	/** bool?en indiquant si le bouton next est d?sactiv? */
-	private String  freeActivity; 	/** booleen permettant de créer une activité libre */
+	private String  freeActivity; 	/** booleen permettant de cr?er une activit? libre */
 	private String  disableFreeActivityCheckbox;
-	private String  activityOnGoing; 	/** booleen permettant de créer une activité sans fin */
+	private String  activityOnGoing; 	/** booleen permettant de cr?er une activit? sans fin */
 	private String  disableActivityOnGoingCheckbox;
 	private String  event;
 	private String  disableEventCheckbox;
@@ -130,6 +130,10 @@ public class ManageActivityCreationForm extends FWActionForm {
 			
 			if (Controleur.isVide(name)){
 				errors.add("name", new ActionMessage("errors.champ.obligatoire","name"));
+			}
+			
+			if (Controleur.isVide(eventName)){
+				errors.add("eventName", new ActionMessage("errors.champ.obligatoire","eventName"));
 			}
 			
 			return errors;

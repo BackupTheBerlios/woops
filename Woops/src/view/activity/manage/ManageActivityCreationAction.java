@@ -287,16 +287,13 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 						
 						// creation de l'event
 						Event e = new Event();
-						e.setDetails(form.getEventName());
-						e.setName(form.getEventDetails());
+						e.setName(form.getEventName());
+						e.setDetails(form.getEventDetails());
 						e.setActivity(activity);
 						e.setBdeId(user.getDefaultBDEId());
 						e.setOccured(PresentationConstantes.NO);
 						e.setId(EventManager.getInstance().insert(e));
 
-						// Gere par le mapping hibernate
-						//activity.setEvent(e);
-						//ActivityManager.getInstance().update(activity);
 					}
 					
 					
