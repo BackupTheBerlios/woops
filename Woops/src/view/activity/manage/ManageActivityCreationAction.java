@@ -330,6 +330,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 
 				}
 				else if (mode.equals(PresentationConstantes.UPDATE_MODE)) {
+					activityId = (Integer)context.session().getAttribute(PresentationConstantes.PARAM_ACTIVITY_ID);
 					
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);
 					Activity activity = (Activity)activitiesMap.get(activityId);
