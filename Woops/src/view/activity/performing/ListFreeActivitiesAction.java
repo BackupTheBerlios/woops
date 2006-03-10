@@ -94,6 +94,12 @@ public class ListFreeActivitiesAction extends WoopsCCAction {
     		
     		if (activity.getOnGoing().equals(PresentationConstantes.YES))
 				activityItem.setOnGoing(PresentationConstantes.YES);
+    		
+    		if ( activity.getEvent() == null || activity.getEvent().getOccured().equals(PresentationConstantes.YES) )
+    			activityItem.setAffectEnabled(true);
+    		else 
+    			activityItem.setAffectEnabled(false);
+    			
    
     		activityItem.setAction(PresentationConstantes.ACTIVITY_AFFECT);
     		

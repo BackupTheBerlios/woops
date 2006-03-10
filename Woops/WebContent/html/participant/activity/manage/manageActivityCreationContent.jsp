@@ -97,6 +97,8 @@ return true;
             label="form.field.activity.checkbox.event"
             property="event"
             tooltip="table.tooltip.activity.checkbox.event"
+            onclick="ManageControl(new Array('ch1'), new Array('inp1','inp2'), '0');"
+            
             disabled="${manageActivityCreationForm.disableEventCheckbox}"
             onclick="ManageControl(new Array('ch1'), new Array('inp1','ta1'), '0');"
             disabled="true"
@@ -155,6 +157,9 @@ return true;
     
     <html:hidden property="activityId"/>
     <html:hidden property="mode"/>
+    <html:hidden property="disableEventCheckbox"/>
+    <html:hidden property="disableActivityOnGoingCheckbox"/>
+    <html:hidden property="disableFreeActivityCheckbox"/>
     
 </html:form>
 

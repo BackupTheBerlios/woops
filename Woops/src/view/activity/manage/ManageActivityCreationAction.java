@@ -9,7 +9,6 @@ import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.state.CreatedActivityState;
 import business.event.Event;
-import business.event.EventManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
@@ -110,6 +109,9 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			form.setTooltipFinish("form.tooltip.manageActivityCreation.finish.insert");
 			form.setTooltipNext("form.tooltip.manageActivityCreation.next.insert");
 			form.setDisableNext("false");
+			form.setDisableEventCheckbox("false");
+			form.setDisableActivityOnGoingCheckbox("false");
+			form.setDisableFreeActivityCheckbox("false");
 		}
 		
 		form.setMode(mode);
@@ -234,9 +236,6 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 		//controle de la validation du formulaire
 		context.addErrors(form.validate(context.mapping(),context.request()));
 		
-		//flag pour savoir quel insert ( tache ou event ) qui a g?n?r? la doublon exception
-		int flag=0;
-		
 	    if (!context.hasErrors()) {
 			try {
 				
@@ -278,24 +277,29 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					modif = (activity.getUserId()==null)?(new Integer(2)):(new Integer(1));
 					
 					
-					// on insere l'activit?
-					activityId = (Integer)ActivityManager.getInstance().insert(activity,user);
-					flag++;
-					activity.setId(activityId);
-					
+					Event e = null;
 					if (form.getEvent() != null){
 						
-						// creation de l'event
-						Event e = new Event();
-						e.setName(form.getEventName());
-						e.setDetails(form.getEventDetails());
-						e.setActivity(activity);
-						e.setBdeId(user.getDefaultBDEId());
-						e.setOccured(PresentationConstantes.NO);
-						e.setId(EventManager.getInstance().insert(e));
 
+							// creation de l'event
+							e = new Event();
+							e.setName(form.getEventName());
+							e.setDetails(form.getEventDetails());
+							e.setBdeId(user.getDefaultBDEId());
+							e.setOccured(PresentationConstantes.NO);
+						
+							//on insere l'activit? avec l'evenement
+							activityId = (Integer)ActivityManager.getInstance().insertActivityWithEvent(activity,e);
+					
+						
+					}
+					else {
+						// on insere l'activit? seule
+						activityId = (Integer)ActivityManager.getInstance().insert(activity,user);
+						
 					}
 					
+					activity.setId(activityId);
 					
 					// R?cup?ration la hashmap pour y rajouter l'activit? 
 					HashMap activitiesMap = (HashMap)context.session().getAttribute(PresentationConstantes.KEY_ACTIVITIES_MAP);		
@@ -411,10 +415,12 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 			} catch (PersistanceException pe) {
                 context.addGlobalError("errors.persistance.global");
 			} catch (DoublonException de) {
-				if ( flag == 0 )
+				if ( de.getAppMessage().equals("activity") )
 					context.addGlobalError("errors.persistance.doublon",form.getName());
-				else if ( flag == 1 )
+				else if ( de.getAppMessage().equals("event") )
 					context.addGlobalError("errors.persistance.doublon",form.getEventName());	
+				else
+					context.addGlobalError("errors.persistance.doublon",form.getName());
 			}	
         } else {
         	context.forwardByName(PresentationConstantes.FORWARD_ERROR);

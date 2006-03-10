@@ -3,8 +3,6 @@ package business.activity;
 import java.util.Collection;
 import java.util.List;
 
-import view.PresentationConstantes;
-
 import net.sf.hibernate.Session;
 import business.BusinessConstantes;
 import business.hibernate.PersistentObjectDAO;
@@ -70,10 +68,9 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 */
 	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
 		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act left join fetch act.event as event");
+		query.append("FROM Activity as act");
 		query.append(" WHERE act.userId is null");
 		query.append(" AND act.bdeId = " + bdeId);
-		query.append(" AND (event is null OR (act.event.occured = '"+PresentationConstantes.YES+"') )");
 		
 		// Recuperation des donnees
 		List listActivities = executeQuery(query.toString());
@@ -272,7 +269,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	
 	
 	/**
-	 * Supprimme une acitivté et toutes ses dépendances
+	 * Supprimme une acitivt? et toutes ses d?pendances
 	 * @param activityId
 	 * @return
 	 * @throws PersistanceException

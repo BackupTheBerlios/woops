@@ -31,7 +31,7 @@ public class PersistentObjectManager {
         return dao.insert(objet);
     }
     
-    public Serializable insert(PersistentObject objet, Session session) throws HibernateException  {
+    public Serializable insert(PersistentObject objet, Session session) throws PersistanceException, DoublonException   {
         return dao.insert(objet,session);
     }    
   

@@ -2,11 +2,6 @@
 <%@ taglib uri="/cc-forms"    prefix="forms" %>
 <%@ taglib uri="/struts-bean" prefix="bean" %>
 <%@ taglib uri="/struts-html" prefix="html" %>
-<%@ page import="org.apache.struts.util.MessageResources" %>
-<%@ page import="view.PresentationConstantes" %>
-
-<bean:define id="basename" value="<%=PresentationConstantes.BASENAME%>" scope="page" type="java.lang.String" />
-<bean:define id="confirmMessage" value="<%=MessageResources.getMessageResources(basename).getMessage("table.field.listActivities.deleteConfirmation")%>"/>
 
 
 <forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
@@ -44,11 +39,6 @@
 			tooltip="table.tooltip.listEventsNotOccured.edit"
 			/> 
 
-		<ctrl:columndelete 
-			title="table.field.listEventsNotOccured.delete"
-			onclick="return confirm('${confirmMessage}');"
-			tooltip="table.tooltip.listEventsNotOccured.delete"
-			/> 
 		
 		<ctrl:columnbutton 
 			title="table.field.listEventsNotOccured.signalOccurence" 

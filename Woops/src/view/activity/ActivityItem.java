@@ -24,6 +24,7 @@ public class ActivityItem implements DisplayObject{
 	private String startDate = "";
 	private String endDate = "";
 	private String onGoing = PresentationConstantes.NO;
+	private boolean affectEnabled;
 	
 	
 	
@@ -138,6 +139,16 @@ public class ActivityItem implements DisplayObject{
 	public void setOnGoing(String onGoing) {
 		this.onGoing = onGoing;
 	}
+
+	public boolean isAffectEnabled() {
+		return affectEnabled;
+	}
+
+	public void setAffectEnabled(boolean affectEnabled) {
+		this.affectEnabled = affectEnabled;
+	}
+
+
 	
 	
 	

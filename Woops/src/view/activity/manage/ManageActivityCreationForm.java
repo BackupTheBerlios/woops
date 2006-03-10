@@ -28,9 +28,9 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private String  freeActivity; 	/** booleen permettant de cr?er une activit? libre */
 	private String  disableFreeActivityCheckbox;
 	private String  activityOnGoing; 	/** booleen permettant de cr?er une activit? sans fin */
-	private String  disableActivityOnGoingCheckbox;
-	private String  event;
-	private String  disableEventCheckbox;
+	private String  disableActivityOnGoingCheckbox;	/** permet de savoir si le checkbox OnGoing est d?sactiv? */
+	private String  event;	
+	private String  disableEventCheckbox; /** permet de savoir si la checkbox event est desactivee */
 	private String  eventDetails;
 	private String  eventName;
 	
@@ -132,7 +132,7 @@ public class ManageActivityCreationForm extends FWActionForm {
 				errors.add("name", new ActionMessage("errors.champ.obligatoire","name"));
 			}
 			
-			if (Controleur.isVide(eventName)){
+			if (event.equals("on") && Controleur.isVide(eventName)){
 				errors.add("eventName", new ActionMessage("errors.champ.obligatoire","eventName"));
 			}
 			

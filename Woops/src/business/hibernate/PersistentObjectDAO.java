@@ -45,7 +45,7 @@ public class PersistentObjectDAO  {
            // System.out.print(cve.getErrorCode()+"\n\n");
             
             // si erreur JDBC 1062 => doublon !
-            // on lève l'erreur adéquate
+            // on l?ve l'erreur ad?quate
             if (cve.getErrorCode()==1062)
 				throw new DoublonException(cve.getMessage());
             
@@ -67,8 +67,23 @@ public class PersistentObjectDAO  {
 		return id;
 	}
 	
-	public Serializable insert(PersistentObject objet, Session session) throws HibernateException {
-        return session.save(objet);
+	public Serializable insert(PersistentObject objet, Session session) throws PersistanceException, DoublonException {
+		Serializable id = null;
+        
+        try {
+            id = session.save(objet);
+		} catch (ConstraintViolationException cve) {
+            if (cve.getErrorCode()==1062)
+				throw new DoublonException(cve.getMessage());
+            
+            // sinon erreur de persistence
+			throw new PersistanceException(cve.getMessage(),cve);
+			
+		} catch (HibernateException e) {
+			throw new PersistanceException(e.getMessage(),e);
+		}
+		
+		return id;
     }    
 	
 	public void update(PersistentObject objet) throws PersistanceException, DoublonException {
@@ -90,7 +105,7 @@ public class PersistentObjectDAO  {
            // System.out.print(cve.getErrorCode()+"\n\n");
             
             // si erreur JDBC 1062 => doublon !
-            // on lève l'erreur adéquate
+            // on l?ve l'erreur ad?quate
             if (cve.getErrorCode()==1062)
 				throw new DoublonException(cve.getMessage());
             
@@ -167,9 +182,9 @@ public class PersistentObjectDAO  {
 	}			
 	
 	/**
-	 * Teste l'existence d'un objet à partir de son identifiant
+	 * Teste l'existence d'un objet ? partir de son identifiant
 	 * @param classe : Classe de l'objet
-	 * @param id : clé primaire
+	 * @param id : cl? primaire
 	 * @return <code> true </code> si l'objet est deja present en BD
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */

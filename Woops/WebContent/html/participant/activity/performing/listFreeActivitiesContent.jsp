@@ -27,6 +27,10 @@
 		    <util:designrule
        			rule="@{bean.onGoing == 'oui'}"
        			style="background-color: #FFFF99;"/>
+       			
+       		<util:designrule
+       			rule="@{bean.affectEnabled == false}"
+       			style="background-color: #FFC4C4;"/>
        		
 			<ctrl:columndrilldown 
 				title="table.field.listActivities.name" 
@@ -61,7 +65,9 @@
 					text="@{bean.action}" 
 					align="center"
 					command="change"
-					width="150">
+					width="150"
+					property="affectEnabled"
+					>
 			</ctrl:columnbutton>
 
 			
