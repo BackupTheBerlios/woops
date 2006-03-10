@@ -15,7 +15,11 @@
     	caption="admin.import.title"
     	formid="frmImportFile"
     	width="600">
-    	
+   <br>
+   <forms:form  type="info"  caption="admin.importFile.info"  formid="frmInfo"  width="600">
+    <forms:msg  severity="information"  message="admin.importFile.message"/>
+</forms:form>
+    <br>
     <forms:file label="admin.import.path"  property="pathFile"/>
     
     
