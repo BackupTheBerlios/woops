@@ -5,7 +5,7 @@
 <template:insert base="/html" template="$/template.jsp">
 
     <template:put  name="title"  direct="true">
-    	<util:resource key="page.title.listActivities"/>
+    	<util:resource key="page.title.listHistorizedActivities"/>
     </template:put>
 	<template:put  name="menuHaut"  content="$/participant/subview/identification.jsp" />
     <template:put  name="menu"  	content="$/participant/subview/menu.jsp"/>

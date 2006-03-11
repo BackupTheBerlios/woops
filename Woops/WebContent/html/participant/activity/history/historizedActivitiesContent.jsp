@@ -11,7 +11,7 @@
 	<ctrl:list 
 		id="list" 
 		property="listActivities" 
-		title="table.title.listActivities" 
+		title="table.title.listHistorizedActivities" 
 		width="500" 
 		rows="15" 
 		refreshButton="false" 
