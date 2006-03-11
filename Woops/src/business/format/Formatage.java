@@ -9,8 +9,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.StringTokenizer;
 
-import business.BusinessConstantes;
-
 
 public class Formatage {
 	/**
@@ -66,10 +64,10 @@ public class Formatage {
 	 * @param Date date 
 	 * @return String date
 	 */
-	public static String dateToString(Date date) {
+	public static String dateToString(Date date, String format) {
 	
 		String result = "";
-		SimpleDateFormat dateFormat = new SimpleDateFormat(BusinessConstantes.DATE_FORMAT);
+		SimpleDateFormat dateFormat = new SimpleDateFormat(format);
 
 		if (date != null) {
 			result = dateFormat.format(date);
