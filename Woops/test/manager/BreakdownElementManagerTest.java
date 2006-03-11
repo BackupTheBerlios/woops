@@ -2,7 +2,7 @@ package manager;
 
 import java.util.ArrayList;
 
-import view.PresentationConstantes;
+import business.BusinessConstantes;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;
@@ -41,7 +41,7 @@ public class BreakdownElementManagerTest extends WoopsManagerTest {
 	public void testGetList() {
 
 		try {
-			ArrayList list = (ArrayList)BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN);
+			ArrayList list = (ArrayList)BreakdownElementManager.getInstance().getList(BusinessConstantes.TABLE_BREAKDOWN);
 			assertFalse(list.isEmpty());
 			
 		} catch (Exception e) {
