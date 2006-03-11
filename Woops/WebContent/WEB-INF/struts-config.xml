@@ -317,7 +317,7 @@
 	  	 	scope="session"
 	  	 	input="/html/admin/importActivities/manageDpe.jsp"
 	  	 >
-	     	<forward name="error" path="/manageDpe.do" />
+	     	<forward name="error" path="/admin.do" />
 	     	<forward name="success" path="/admin.do" />
 	  		<forward name="previous" path="/manageDpe.do"/>
 	  	</action>
