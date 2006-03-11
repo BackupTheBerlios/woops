@@ -15,8 +15,6 @@ import business.BusinessConstantes;
 import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
 import business.activity.sequencetype.ActivitySequenceType;
-import business.event.Event;
-import business.event.EventManager;
 import business.hibernate.HibernateSessionFactory;
 import business.hibernate.HistorizedObject;
 import business.hibernate.PersistentObject;
@@ -105,10 +103,10 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Recuperation des activites restant ? realiser pour lesquelles le participant a la responsabilite sur une entit? donn??
+	 * Recuperation des activites restant à realiser pour lesquelles le participant a la responsabilite sur une entité donnéé
 	 * @param userId : identifiant du participant
 	 * @param bdeId : identifiant de l'entite
-	 * @return : Liste des activites du particpant sur l'entit?
+	 * @return : Liste des activites du particpant sur l'entité
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getAllActivitiesByUserByBDE(Integer userId, Integer bdeId)
@@ -122,11 +120,11 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Recuperation des activites restant ? realiser pour lesquelles le participant a la responsabilite sur une entit? donn??
+	 * Recuperation des activites restant à realiser pour lesquelles le participant a la responsabilite sur une entité donnéé
 	 * @param userId : identifiant du participant
 	 * @param bdeId : identifiant de l'entite
 	 * @param session : session permettant d'executer la requete
-	 * @return : Liste des activites du particpant sur l'entit?
+	 * @return : Liste des activites du particpant sur l'entité
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
 	public Collection getAllActivitiesByUserByBDE(Integer userId, Integer bdeId, Session session)
@@ -174,7 +172,7 @@ public class ActivityManager extends PersistentObjectManager {
 	/**
 	 * Recuperation des activites pouvant etre predecesseurs de l'activite passee en parametre
 	 * @param activityId : l'activite dont on veut connaitre des dependances possibles
-	 * @param bdeId : le projet de l'activit?
+	 * @param bdeId : le projet de l'activité
 	 * @return : liste des activites dont peut dependre l'activite passee en parametre
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
@@ -387,12 +385,12 @@ public class ActivityManager extends PersistentObjectManager {
 			session = HibernateSessionFactory.currentSession();
 			transaction = session.beginTransaction();
 		
-			// Suppression des d?pendances
+			// Suppression des dépendances
 			Iterator dependancesToRemoveIter = dependancesToRemoveList.iterator();
 			while(dependancesToRemoveIter.hasNext())
 			{
 				predecessor.setId(dependancesToRemoveIter.next());
-				activitySequenceManager.removeActivitySequence(predecessor, successor, session);
+				activitySequenceManager.removeActivityDependances(predecessor, successor, session);
 			}
 			
 			
@@ -405,7 +403,7 @@ public class ActivityManager extends PersistentObjectManager {
 				newActivitySequence.setPredecessor(predecessor);
 				newActivitySequence.setSuccessor(successor);
 				
-				// si le precedesseur est onGoing, on met par d?faut le linkType ? 3
+				// si le precedesseur est onGoing, on met par défaut le linkType à 3
 				if ((activityManager.getActivityById((Integer) predecessor.getId(), session)).getOnGoing().equals(PresentationConstantes.YES))
 					linkType.setId(new Integer(3));
 				else /* Sinon, par defaut, le type des dependances sont finsihToStart */
@@ -443,43 +441,26 @@ public class ActivityManager extends PersistentObjectManager {
     public void deleteLinksFromActivity(Activity activity) throws PersistanceException, ForeignKeyException {
     	Session session = null ;
 		Transaction transaction = null;
-		try {
-			activityDAO.deleteActivity((Integer) activity.getId());
-			
-			activityDAO.delete(activity);
-			
-			
-			// Listes des predecesseurs et des successeurs
-			/*Collection predecessorsList = null ;
-			Collection successorsList	= null ;
-			
-			// On recupere toutes les activites precedentes
-			predecessorsList = ActivityManager.getInstance().getPredecessors((Integer)activity.getId());
-			// On recupere les sequences des dependances suivantes
-			successorsList = ActivityManager.getInstance().getSuccessors((Integer)activity.getId());
 		
+		try {
 			session = HibernateSessionFactory.currentSession();
             transaction = session.beginTransaction();
 
-            this.deleteLinks(activity, predecessorsList, successorsList, session);
-			
+            this.deleteLinks(activity, session);
+            
 			transaction.commit();
         } catch (GenericJDBCException se) {
             rollback(transaction);
             if (se.getErrorCode()==2292)
 				throw new ForeignKeyException(se.getMessage());
 			throw new PersistanceException(se.getMessage(),se);
-		} catch (HibernateException he) {
+		} catch (ForeignKeyException fe) {
+			rollback(transaction);
+			throw new ForeignKeyException(fe.getMessage(),fe); 
+		} catch (Exception e) {
             rollback(transaction);
-            throw new PersistanceException(he.getMessage(),he); */
-		} catch (PersistanceException he) {
-            //rollback(transaction);
-            throw new PersistanceException(he.getMessage(),he); 
+            throw new PersistanceException(e.getMessage(),e);
 		}
-		catch (ForeignKeyException fe) {
-        //rollback(transaction);
-        throw new ForeignKeyException(fe.getMessage(),fe); 
-	}
     }
     
 	
@@ -544,6 +525,7 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	
+	
 	/*********************
 	*  Session en cours  *
 	**********************/
@@ -562,26 +544,9 @@ public class ActivityManager extends PersistentObjectManager {
 	}
 	
 	
-	/**
-	 * Suppression d'une activite avec ses dependances
-	 * @param activity : activite a supprimer
-	 * @throws PersistanceException
-	 * @throws ForeignKeyException
-	 * @throws HibernateException 
-	 */
-    public void deleteLinksFromActivity(Activity activity, Session session) throws PersistanceException, ForeignKeyException, HibernateException {
-			// Listes des predecesseurs et des successeurs
-			Collection predecessorsList = null ;
-			Collection successorsList	= null ;
-
-			// On recupere toutes les activites precedentes
-			predecessorsList = ActivityManager.getInstance().getPredecessors((Integer)activity.getId(), session);
-			// On recupere les sequences des dependances suivantes
-			successorsList = ActivityManager.getInstance().getSuccessors((Integer)activity.getId(), session);
-		
-            this.deleteLinks(activity, predecessorsList, successorsList, session);
-    }
-	
+	public void delete(PersistentObject activity, Session session) throws HibernateException, ForeignKeyException{
+		activityDAO.delete(activity, session);
+	}	
 	
 	
 	
@@ -591,79 +556,19 @@ public class ActivityManager extends PersistentObjectManager {
 	 * 
 	 * On supprime TOUS les liens relatifs a l'activite
 	 * 
-	 * @param activity : activite ? supprimer (suppression en cascade)
-	 * @param predecessorsList : liste des predecesseurs
-	 * @param successorsList : liste des successeurs
+	 * @param activity : activite à supprimer (suppression en cascade)
 	 * @param session : session en cours
 	 * @throws PersistanceException, ForeignKeyException, HibernateException
 	 */
-	public void deleteLinks(Activity activity, Collection predecessorsList, Collection successorsList, Session  session) throws PersistanceException, ForeignKeyException, HibernateException {
-		// On supprime les liens avec predecesseurs via un iterateur
-		Iterator iter = predecessorsList.iterator();
-		while (iter.hasNext()) {
-			Activity pred = (Activity) iter.next();
-		
-			// appel a une methode du manager de activitySequence
-			ActivitySequenceManager.getInstance().removeActivitySequence(pred, activity, session);
-		}
-	
-
-		// Puis on supprime les liens avec les successeurs		
-		iter = successorsList.iterator();
-		while (iter.hasNext()) {
-			Activity succ = (Activity) iter.next();
-			ActivitySequenceManager.getInstance().removeActivitySequence(activity, succ, session);
-		}
+	public void deleteLinks(Activity activity, Session  session) throws PersistanceException, ForeignKeyException, HibernateException {
+		// On supprime toutes les dépendances de l'activite
+		ActivitySequenceManager.getInstance().removeActivityDependances(activity, session);
 
 		// On finit par supprimer l'activite
-		ActivityManager.getInstance().delete(activity, session);
+		delete(activity, session);
 	}
 	
-	/**
-	 * Recuperation des predecesseurs d'une activite
-	 * @param activityId : l'activite dont on veut connaitre ses predecesseurs
-	 * @param session : session en cours
-	 * @return : liste des activite dont depend l'activite passee en parametre
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
-	 */
-	public Collection getPredecessors(Integer activityId, Session session) 
-			throws PersistanceException {
-		Collection listActivitySequences = activityDAO.getActivitySequencesPredecessors(activityId, session);
-		
-		Collection listPredecessors = new ArrayList();
-		Iterator iter = listActivitySequences.iterator();
-		
-		while(iter.hasNext())
-		{
-			listPredecessors.add(((ActivitySequence)iter.next()).getPredecessor());
-		}
-		
-		return listPredecessors;
-	}
-	
-	/**
-	 * Recuperation des successeurs d'une activite
-	 * @param activityId : l'activite dont on veut connaitre ses successeurs
-     * @param session : session en cours
-	 * @return : liste des activites dont depend l'activite passee en parametre
-	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
-	 */
-	public Collection getSuccessors(Integer activityId, Session session) 
-			throws PersistanceException {
-		Collection listActivitySequences = activityDAO.getActivitySequencesSuccessors(activityId, session);
-		
-		Collection listSuccessor = new ArrayList();
-		Iterator iter = listActivitySequences.iterator();
-		
-		while(iter.hasNext())
-		{
-			listSuccessor.add(((ActivitySequence)iter.next()).getSuccessor());
-		}
-		
-		return listSuccessor;
-	}
-	
-	
+
 	
 	
 	
