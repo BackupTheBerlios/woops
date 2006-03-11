@@ -15,6 +15,13 @@ public interface BusinessConstantes {
     public static final String ACTIVITY_STATE_FINISHED = "finished";
     
     public static final String DATE_FORMAT = "dd/MM/yyyy HH:mm";
+    public static final String DATE_FORMAT_BDE = "dd/MM/yyyy";
     
-    public static final String TABLE_ACTIVITYSEQUENCE = "ActivitySequence";
+    // constantes de nom de table
+	public static final String TABLE_USER = "User";
+	public static final String TABLE_USERROLE = "UserRole" ;
+	public static final String TABLE_BREAKDOWN = "BreakdownElement";
+	public static final String TABLE_BREAKDOWN_KIND = "BreakdownElementKind";
+	public static final String TABLE_ACTIVITY = "Activity";
+	public static final String TABLE_ACTIVITY_SEQUENCE = "ActivitySequence";
 }
