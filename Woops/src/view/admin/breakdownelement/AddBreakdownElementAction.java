@@ -16,6 +16,7 @@ import view.admin.user.ListUsersModel;
 import view.breakdownelement.KindItem;
 import view.common.WoopsCCAction;
 import view.user.UserItem;
+import business.BusinessConstantes;
 import business.breakdownelement.BreakdownElement;
 import business.breakdownelement.BreakdownElementKind;
 import business.breakdownelement.BreakdownElementManager;
@@ -58,14 +59,14 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 					
 					Date startDate = bke.getStartDate();
 					if (startDate != null) {						
-						form.setStartDate(Formatage.dateToString(startDate));					
+						form.setStartDate(Formatage.dateToString(startDate, BusinessConstantes.DATE_FORMAT_BDE));					
 					}
 				}
 				this.setUsersParticipation(context);		
 			}
 			else {
 				Date dateDuJour = new Date();
-				form.setStartDate(Formatage.dateToString(dateDuJour));
+				form.setStartDate(Formatage.dateToString(dateDuJour, BusinessConstantes.DATE_FORMAT_BDE));
 			}
 			
 			// en mode UPDATE et INSERT on remplit le swap select
@@ -91,7 +92,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
 		AddBreakdownElementForm madForm = (AddBreakdownElementForm) context.form();
 		
 		/* R?cup?ration de la liste des utilisateurs */
-		userParticipationMgr = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
+		userParticipationMgr = UserManager.getInstance().getList(BusinessConstantes.TABLE_USER);
 		
 		/* Conversion de la liste d'Activity retournee par getPossibleActivityDependances
 		 * en liste d'ActivityItem */
@@ -157,7 +158,7 @@ public class AddBreakdownElementAction extends WoopsCCAction {
     	KindItem item = null;
 		
 		try {
-			List kinds = BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN_KIND);
+			List kinds = BreakdownElementManager.getInstance().getList(BusinessConstantes.TABLE_BREAKDOWN_KIND);
 			Collection listKindItem = new ArrayList () ;
 			Iterator i = kinds.iterator() ;
 			BreakdownElementKind ur ;

@@ -71,7 +71,7 @@ public class AdminAction  extends WoopsCCAction {
 		
 		// R?cup?ration du form bean n?cessaire pour fournir les informations ? la JSP
     	AdminForm adminForm = (AdminForm) context.form();
-    	dbData = BreakdownElementManager.getInstance().getList(PresentationConstantes.TABLE_BREAKDOWN);
+    	dbData = BreakdownElementManager.getInstance().getList(BusinessConstantes.TABLE_BREAKDOWN);
     	
     	// Constitue une liste de BreakDownElementItem ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();
@@ -129,7 +129,7 @@ public class AdminAction  extends WoopsCCAction {
     	AdminForm adminForm = (AdminForm) context.form();
     	
     	// R?cup?ration de la liste des utilisateurs
-    	dbData = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
+    	dbData = UserManager.getInstance().getList(BusinessConstantes.TABLE_USER);
 
     	// Constitue une liste d'UserItem ? partir des donn?es stock?es en BD  
     	Iterator iter = dbData.iterator();

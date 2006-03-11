@@ -2,6 +2,7 @@ package view.breakdownelement;
 
 import java.util.Date;
 
+import business.BusinessConstantes;
 import business.format.Formatage;
 
 import com.cc.framework.common.DisplayObject;
@@ -40,7 +41,7 @@ public class BreakdownElementItem implements DisplayObject {
 	}
 
 	public void setEndDate(Date date) {
-		endDate = Formatage.dateToString(date);
+		endDate = Formatage.dateToString(date, BusinessConstantes.DATE_FORMAT_BDE);
 	}
 
 	public String getStartDate() {
@@ -48,7 +49,7 @@ public class BreakdownElementItem implements DisplayObject {
 	}
 
 	public void setStartDate(Date date) {
-		startDate = Formatage.dateToString(date);
+		startDate = Formatage.dateToString(date, BusinessConstantes.DATE_FORMAT_BDE );
 	}
 
 	public String getKind() {

@@ -9,6 +9,7 @@ import view.PresentationConstantes;
 import view.activity.ActivitySequenceItem;
 import view.activity.ActivitySequencesModel;
 import view.common.WoopsCCAction;
+import business.BusinessConstantes;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.activity.sequence.ActivitySequence;
@@ -58,8 +59,8 @@ public class ShowActivitySummaryAction extends WoopsCCAction {
 		form.setDetails(activity.getDetails());
 		String state = activity.getState().toString();
 		form.setState(state);
-		form.setStartDate(Formatage.dateToString(activity.getStartDate()));
-		form.setEndDate(Formatage.dateToString(activity.getEndDate()));
+		form.setStartDate(Formatage.dateToString(activity.getStartDate(), BusinessConstantes.DATE_FORMAT));
+		form.setEndDate(Formatage.dateToString(activity.getEndDate(), BusinessConstantes.DATE_FORMAT));
 		form.setOnGoing(activity.getOnGoing());
 		
 		try {
