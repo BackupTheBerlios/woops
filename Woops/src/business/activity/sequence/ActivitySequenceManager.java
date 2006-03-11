@@ -79,22 +79,29 @@ public class ActivitySequenceManager extends PersistentObjectManager {
 	
 	
 	/**
-	 * Supprime la dependance entre 2 activites
-	 * @param predecessor : activite predecesseur
-	 * @param successor : activite successeur
+	 * Suppression des dependances d'une activite
+	 * @param activity : activite pour laquelle on supprime les dependances
 	 * @param session : session en cours
-	 * @throws ForeignKeyException
 	 * @throws HibernateException
-	 * @throws PersistanceException
+	 * @throws ForeignKeyException
 	 */
-	public void removeActivitySequence(Activity predecessor, Activity successor, Session session) 
-	throws PersistanceException, ForeignKeyException, HibernateException {
-		StringBuffer query = new StringBuffer();
-		query.append("FROM ActivitySequence actSeq");
-		query.append(" WHERE actSeq.successor.id = "+successor.getId().toString());
-		query.append(" AND actSeq.predecessor.id = "+predecessor.getId().toString());
-		activitySequenceDAO.delete(query.toString(), session);
+	public void removeActivityDependances(Activity activity, Session session) throws HibernateException, ForeignKeyException {
+		activitySequenceDAO.removeActivityDependances(activity, session);
 	}
+	
+	
+	/**
+	 * Suppression d'une dependance entre deux activites
+	 * @param activity : activite pour laquelle on supprime les dependances
+	 * @param session : session en cours
+	 * @throws HibernateException
+	 * @throws ForeignKeyException
+	 * @throws PersistanceException 
+	 */
+	public void removeActivityDependances(Activity predecessor, Activity successor, Session session) throws HibernateException, ForeignKeyException, PersistanceException {
+		activitySequenceDAO.removeActivityDependances(predecessor, successor, session);
+	}
+	
 	
 	
 	
