@@ -45,7 +45,7 @@ public class PersistentObjectDAO  {
            // System.out.print(cve.getErrorCode()+"\n\n");
             
             // si erreur JDBC 1062 => doublon !
-            // on l?ve l'erreur ad?quate
+            // on lève l'erreur adéquate
             if (cve.getErrorCode()==1062)
 				throw new DoublonException(cve.getMessage());
             
@@ -105,7 +105,7 @@ public class PersistentObjectDAO  {
            // System.out.print(cve.getErrorCode()+"\n\n");
             
             // si erreur JDBC 1062 => doublon !
-            // on l?ve l'erreur ad?quate
+            // on lève l'erreur adéquate
             if (cve.getErrorCode()==1062)
 				throw new DoublonException(cve.getMessage());
             
@@ -182,9 +182,9 @@ public class PersistentObjectDAO  {
 	}			
 	
 	/**
-	 * Teste l'existence d'un objet ? partir de son identifiant
+	 * Teste l'existence d'un objet à partir de son identifiant
 	 * @param classe : Classe de l'objet
-	 * @param id : cl? primaire
+	 * @param id : clé primaire
 	 * @return <code> true </code> si l'objet est deja present en BD
 	 * @throws PersistanceException : Indique qu'une erreur s'est produite au moment de la recuperation des donnees
 	 */
@@ -299,13 +299,20 @@ public class PersistentObjectDAO  {
     
     
     /**
-     * 
-     * @param requete
-     * @param session
+     * Supprime un element de la BD en utilisant une requete SQL
+     * @param request : requete permettant la suppression d'un ou plusieurs objets
+     * @param session : session en cours
+     * @throws ForeignKeyException 
      * @throws PersistanceException
      */
-    public void delete(String requete, Session session) throws HibernateException{
-        session.delete(requete);
+    public void delete(String request, Session session) throws HibernateException, ForeignKeyException{
+    	 try {
+    	    	session.delete(request);
+         } catch (GenericJDBCException se) {
+             if (se.getErrorCode()==2292)
+                 throw new ForeignKeyException(se.getMessage());
+             throw new HibernateException(se.getMessage(),se);
+         }
     }    
     
     
