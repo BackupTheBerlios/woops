@@ -3,8 +3,13 @@ package business.activity;
 import java.util.Collection;
 import java.util.List;
 
+import view.PresentationConstantes;
+
+import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
+import net.sf.hibernate.exception.GenericJDBCException;
 import business.BusinessConstantes;
+import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectDAO;
 import business.hibernate.exception.ForeignKeyException;
 import business.hibernate.exception.PersistanceException;
@@ -68,9 +73,10 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 */
 	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
 		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act");
+		query.append("FROM Activity as act left join fetch act.event as ev");
 		query.append(" WHERE act.userId is null");
 		query.append(" AND act.bdeId = " + bdeId);
+		query.append(" AND (ev is null OR (ev.occured = '"+PresentationConstantes.YES+"') )");
 		
 		// Recuperation des donnees
 		List listActivities = executeQuery(query.toString());
@@ -204,7 +210,28 @@ public class ActivityDAO extends PersistentObjectDAO {
 	}
 	
 	
+	/**
+	 * Suppression d'une activite a partir d'une requête.
+	 * Permet de forcer la suppression meme si l'objet est utilise dans la session
+	 * @param activity : activite a supprimer
+	 * @param session : session en cours
+	 * @throws ForeignKeyException
+	 * @throws HibernateException 
+	 */
+	public void delete(PersistentObject activity, Session session) throws HibernateException, ForeignKeyException{
+        try {
+        	StringBuffer req = new StringBuffer("FROM "+ BusinessConstantes.TABLE_ACTIVITY);
+            req.append(" where id = "+ (Integer)activity.getId());
+            delete(req.toString(), session);
+        } catch (GenericJDBCException se) {
+            if (se.getErrorCode()==2292)
+                throw new ForeignKeyException(se.getMessage());
+            throw new HibernateException(se.getMessage(),se);
+        }
+	}
+
 	
+
 	
 	
 	/*********************
@@ -265,24 +292,5 @@ public class ActivityDAO extends PersistentObjectDAO {
 			query.append(" )");
 		}
 		return query.toString();
-	}
-	
-	
-	/**
-	 * Supprimme une acitivt? et toutes ses d?pendances
-	 * @param activityId
-	 * @return
-	 * @throws PersistanceException
-	 * @throws ForeignKeyException 
-	 */	
-	public boolean deleteActivity(Integer activityId) throws PersistanceException, ForeignKeyException {
-		StringBuffer req = new StringBuffer("FROM "+BusinessConstantes.TABLE_ACTIVITYSEQUENCE);
-        req.append(" where predecessor = "+activityId);
-        req.append(" or successor = "+activityId);
-      		
-        delete(req.toString());
-	    
-	    return true;
-	}
-	
+	}	
 }
