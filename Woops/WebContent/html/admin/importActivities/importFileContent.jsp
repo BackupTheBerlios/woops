@@ -20,7 +20,7 @@
     <forms:msg  severity="information"  message="admin.importFile.message"/>
 </forms:form>
     <br>
-    <forms:file label="admin.import.path"  property="pathFile"/>
+    <forms:file label="admin.import.path"  property="pathFile" size="50" />
     
     
     <forms:buttonsection default="btnImport">  

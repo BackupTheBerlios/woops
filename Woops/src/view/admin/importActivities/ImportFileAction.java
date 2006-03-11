@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
-import java.util.List;
 
 import org.apache.struts.upload.FormFile;
 
@@ -13,8 +12,6 @@ import view.PresentationConstantes;
 import view.common.WoopsCCAction;
 import view.util.FileParseException;
 import view.util.ProcessControler;
-import business.activity.ActivityManager;
-import business.hibernate.exception.PersistanceException;
 
 import com.cc.framework.adapter.struts.ActionContext;
 import com.cc.framework.adapter.struts.FormActionContext;

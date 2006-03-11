@@ -8,9 +8,8 @@ import java.util.List;
 import view.PresentationConstantes;
 import view.admin.importActivities.IAItem.IAItem;
 import view.admin.importActivities.IAItem.ListIAModel;
-import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
-import view.util.ProcessControler;
+import view.util.StringOperation;
 import business.activity.Activity;
 import business.activity.ActivityManager;
 import business.breakdownelement.BreakdownElement;
@@ -84,7 +83,9 @@ public class ManageDpeAction extends WoopsCCAction{
 		boolean trouve = false ;
 		for (Iterator i = c.iterator() ; i.hasNext() && !trouve ; ){
 			Activity a = (Activity)i.next() ;
-			trouve = a.getName().equals(chaine);
+			String chaine1 = StringOperation.sansAccent(a.getName()) ;
+			String chaine2 = StringOperation.sansAccent(chaine) ;
+			trouve = chaine1.equals(chaine2);
 		}
 		return trouve;
 	}
