@@ -98,14 +98,6 @@ public interface PresentationConstantes {
     public static final String FORWARD_IMPORT = "import";
     public static final String FORWARD_FINISH_BREAKDOWN="finishBde"; 
     
-    // constantes de nom de table
-	public static final String TABLE_USER = "User";
-	public static final String TABLE_USERROLE = "UserRole" ;
-	public static final String TABLE_BREAKDOWN = "BreakdownElement";
-	public static final String TABLE_BREAKDOWN_KIND = "BreakdownElementKind";
-	public static final String TABLE_ACTIVITY = "Activity";
-	public static final String TABLE_ACTIVITY_SEQUENCE = "ActivitySequence";
-	
 	public static final String KEY_USERS_MAP="USERS_MAP" ;
 	public static final String KEY_BDE_MAP="BDE_MAP" ;
 	
