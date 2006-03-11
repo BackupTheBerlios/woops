@@ -5,7 +5,7 @@
 <%@ taglib uri="/cc-utility" prefix="util" %>
 
 <html:form action="importFile.do" method="post" enctype="multipart/form-data">
-<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
+
 <!-- method="post" enctype="multipart/form-data" -->
 	<forms:message formid="frmError" caption="msg.error" severity="error" width="350"/>
 	<forms:message formid="frmInfo" caption="msg.info" severity="information" width="350"/>
