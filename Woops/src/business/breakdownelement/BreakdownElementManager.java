@@ -329,7 +329,7 @@ public class BreakdownElementManager extends PersistentObjectManager {
 			while (iter.hasNext()) {
 				Activity activity = (Activity) iter.next();
 				// On supprime l'activite et toutes ses dependances
-				ActivityManager.getInstance().deleteLinksFromActivity(activity, session);
+				ActivityManager.getInstance().deleteLinks(activity, session);
 			}
 			
 			// Recuperation du projet avec la liste des participants
