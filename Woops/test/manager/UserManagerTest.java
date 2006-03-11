@@ -1,10 +1,9 @@
 package manager;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import junit.framework.TestCase;
-import view.PresentationConstantes;
+import business.BusinessConstantes;
 import business.user.User;
 import business.user.UserManager;
 import business.user.UserRole;
@@ -70,7 +69,7 @@ public class UserManagerTest extends TestCase {
 		try {
 			
 			UserManager.getInstance().insert(user);
-			
+			//TODO Vérifier que le user a été inséré puis le supprimer pour que le test soit toujours valable
 			assertTrue(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +87,7 @@ public class UserManagerTest extends TestCase {
 			UserManager.getInstance().getUser("nico");
 			user.setPassword("nico7");
 			UserManager.getInstance().update(user);
-			
+			//TODO Vérifier en BD les modifs
 			assertTrue(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,11 +100,8 @@ public class UserManagerTest extends TestCase {
 	 */
 	public void testGetList() {
 		try {
-			Collection coll = new ArrayList();
-			
-			coll = UserManager.getInstance().getList(PresentationConstantes.TABLE_USER);
-			
-			assertTrue(true);
+			Collection coll = UserManager.getInstance().getList(BusinessConstantes.TABLE_USER);
+			assertNotNull(coll);
 		} catch (Exception e) {
 			e.printStackTrace();
 			assertTrue(false);
