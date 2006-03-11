@@ -15,6 +15,8 @@ import business.BusinessConstantes;
 import business.activity.sequence.ActivitySequence;
 import business.activity.sequence.ActivitySequenceManager;
 import business.activity.sequencetype.ActivitySequenceType;
+import business.event.Event;
+import business.event.EventManager;
 import business.hibernate.HibernateSessionFactory;
 import business.hibernate.HistorizedObject;
 import business.hibernate.PersistentObject;
@@ -464,7 +466,7 @@ public class ActivityManager extends PersistentObjectManager {
     }
     
 	
-	public Integer insertActivityWithEvent(Activity act,Event evt) throws PersistanceException, DoublonException {
+	public Integer insertActivityWithEvent(Activity act, Event evt) throws PersistanceException, DoublonException {
 		Session session = null ;
 		Transaction transaction = null;
 		Integer activityId = null;
