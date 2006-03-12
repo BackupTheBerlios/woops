@@ -254,7 +254,7 @@ public class AdminAction  extends WoopsCCAction {
 		try {
 			BreakdownElement bde = BreakdownElementManager.getInstance().getBreakDownElementById(
 					new Integer(Integer.parseInt(id)));
-			if (bde.getEndDate()!=null) {
+			if (bde.getEndDate()==null) {
 				bde.setEndDate(new Date());
 				 try {
 					BreakdownElementManager.getInstance().update(bde);
