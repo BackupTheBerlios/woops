@@ -278,7 +278,7 @@ public class ManageActivityCreationAction extends WoopsCCAction {
 					
 					
 					Event e = null;
-					if (form.getEvent() != null){
+					if (form.getEvent().equals("on")){
 						
 
 							// creation de l'event

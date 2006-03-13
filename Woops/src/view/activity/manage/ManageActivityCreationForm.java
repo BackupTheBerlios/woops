@@ -29,7 +29,7 @@ public class ManageActivityCreationForm extends FWActionForm {
 	private String  disableFreeActivityCheckbox;
 	private String  activityOnGoing; 	/** booleen permettant de cr?er une activit? sans fin */
 	private String  disableActivityOnGoingCheckbox;	/** permet de savoir si le checkbox OnGoing est d?sactiv? */
-	private String  event;	
+	private String  event="off";	
 	private String  disableEventCheckbox; /** permet de savoir si la checkbox event est desactivee */
 	private String  eventDetails;
 	private String  eventName;

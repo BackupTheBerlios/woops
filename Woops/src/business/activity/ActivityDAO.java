@@ -73,10 +73,9 @@ public class ActivityDAO extends PersistentObjectDAO {
 	 */
 	public Collection getFreeActivities(Integer bdeId) throws PersistanceException {
 		StringBuffer query = new StringBuffer();
-		query.append("FROM Activity as act left join fetch act.event as ev");
+		query.append("FROM Activity as act");
 		query.append(" WHERE act.userId is null");
 		query.append(" AND act.bdeId = " + bdeId);
-		query.append(" AND (ev is null OR (ev.occured = '"+PresentationConstantes.YES+"') )");
 		
 		// Recuperation des donnees
 		List listActivities = executeQuery(query.toString());
@@ -211,7 +210,7 @@ public class ActivityDAO extends PersistentObjectDAO {
 	
 	
 	/**
-	 * Suppression d'une activite a partir d'une requête.
+	 * Suppression d'une activite a partir d'une requ?te.
 	 * Permet de forcer la suppression meme si l'objet est utilise dans la session
 	 * @param activity : activite a supprimer
 	 * @param session : session en cours
