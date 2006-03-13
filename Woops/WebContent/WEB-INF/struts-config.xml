@@ -72,7 +72,7 @@
       	 >
          	<forward name="error" path="/html/participant/activity/performing/listFreeActivities.jsp" />
          	<forward name="success" path="/html/participant/activity/performing/listFreeActivities.jsp" />
-         	<forward name="action" path="/listFreeActivities.do"/>
+         	<forward name="action" path="/listActivities.do"/>
          	<forward name="edit" path="/manageActivityCreation.do"/>
          	<forward name="drillDown" path="/showActivitySummary.do"/>
       	</action>
