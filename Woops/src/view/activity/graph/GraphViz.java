@@ -1,4 +1,4 @@
-/*$Id: GraphViz.java,v 1.2 2006/03/08 16:04:48 sregg Exp $*/
+/*$Id: GraphViz.java,v 1.3 2006/03/14 22:48:31 audige Exp $*/
 /*
  ******************************************************************************
  *                                                                            *
@@ -172,15 +172,15 @@ public class GraphViz
       byte[] img_stream = null;
 
       try {
-         img = File.createTempFile("graph_", ".gif", new File(this.TEMP_DIR));
-         String temp = img.getAbsolutePath();
+         img = File.createTempFile("graph_", ".gif", new File(TEMP_DIR));
 
          Runtime rt = Runtime.getRuntime();
-         String cmd = DOT + " -Tgif "+dot.getAbsolutePath()+" -o"+img.getAbsolutePath();
+         String cmd = DOT + " -Tgif \""+dot.getAbsolutePath()+"\" -o \""+img.getAbsolutePath()+"\"";
          String[] env = new String[1];
          env[0]=System.getProperty("java.library.path");
          Process p = rt.exec(cmd,env);
          p.waitFor();
+         
 
          FileInputStream in = new FileInputStream(img.getAbsolutePath());
          img_stream = new byte[in.available()];
@@ -192,7 +192,7 @@ public class GraphViz
             System.err.println("Warning: "+img.getAbsolutePath()+" could not be deleted!");
       }
       catch (java.io.IOException ioe) {
-         System.err.println("Error:    in I/O processing of tempfile in dir "+this.TEMP_DIR+"\n");
+         System.err.println("Error:    in I/O processing of tempfile in dir "+TEMP_DIR+"\n");
          System.err.println("       or in calling external command");
          ioe.printStackTrace();
       }
@@ -214,7 +214,7 @@ public class GraphViz
    {
       File temp;
       try {
-         temp = File.createTempFile("graph_", ".dot.tmp", new File(this.TEMP_DIR));
+         temp = File.createTempFile("graph_", ".dot.tmp", new File(TEMP_DIR));
          FileWriter fout = new FileWriter(temp);
          fout.write(str);
          fout.close();
