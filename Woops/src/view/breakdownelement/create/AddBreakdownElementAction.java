@@ -1,4 +1,4 @@
-package view.admin.breakdownelement;
+package view.breakdownelement.create;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,9 +12,10 @@ import java.util.Set;
 import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
-import view.admin.user.ListUsersModel;
 import view.breakdownelement.KindItem;
+import view.breakdownelement.ListKindModel;
 import view.common.WoopsCCAction;
+import view.user.ListUsersModel;
 import view.user.UserItem;
 import business.BusinessConstantes;
 import business.breakdownelement.BreakdownElement;

@@ -1,8 +1,6 @@
-package view.admin.importActivities.IAItem;
+package view.breakdownelement.importactivities;
 
 import com.cc.framework.common.DisplayObject;
-import com.cc.framework.ui.control.SimpleListControl;
-import com.cc.framework.ui.model.ListDataModel;
 
 public class IAItem implements DisplayObject{
 	String id ;

@@ -15,7 +15,6 @@ import view.activity.performing.ListActivitiesForm;
 import view.common.WoopsCCAction;
 import business.activity.Activity;
 import business.activity.ActivityManager;
-import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;
 

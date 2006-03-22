@@ -12,6 +12,7 @@ import com.cc.framework.ui.model.ListDataModel;
  *
  */
 public class ListEventsForm extends FWActionForm {
+	private static final long serialVersionUID = -1784602049701215496L; /** Generated Serial ID */
 	private SimpleListControl listEventsNotOccured = new SimpleListControl();
 	private SimpleListControl listEventsOccured = new SimpleListControl();
 

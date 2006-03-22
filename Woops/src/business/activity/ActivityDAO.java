@@ -3,8 +3,6 @@ package business.activity;
 import java.util.Collection;
 import java.util.List;
 
-import view.PresentationConstantes;
-
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.exception.GenericJDBCException;

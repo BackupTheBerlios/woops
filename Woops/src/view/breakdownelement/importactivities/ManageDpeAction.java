@@ -1,4 +1,4 @@
-package view.admin.importActivities;
+package view.breakdownelement.importactivities;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,14 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import view.PresentationConstantes;
-import view.admin.importActivities.IAItem.IAItem;
-import view.admin.importActivities.IAItem.ListIAModel;
 import view.common.WoopsCCAction;
 import view.util.StringOperation;
 import business.activity.Activity;
 import business.activity.ActivityManager;
-import business.breakdownelement.BreakdownElement;
-import business.breakdownelement.BreakdownElementManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 
@@ -98,8 +94,6 @@ public class ManageDpeAction extends WoopsCCAction{
 		String idString = (String) context.session().getAttribute(PresentationConstantes.PARAM_BREAKDOWN_ID) ;
 		Integer id = Integer.decode(idString) ;
 		try {
-			BreakdownElement bde = BreakdownElementManager.getInstance().getBreakDownElementById(id);
-			
 			for (int i = 0 ; i < listeDM.size() ; i++){
 				item = (IAItem)listeDM.getElementAt(i) ;
 				if (item.getSelectionne()!=null){

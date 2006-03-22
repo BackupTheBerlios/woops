@@ -6,12 +6,10 @@ package business.event;
 import java.io.Serializable;
 import java.util.Collection;
 
-import business.hibernate.HistorizedObject;
 import business.hibernate.PersistentObject;
 import business.hibernate.PersistentObjectManager;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
-import business.user.User;
 
 /**
  * @author Simon REGGIANI

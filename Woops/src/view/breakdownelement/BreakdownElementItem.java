@@ -15,6 +15,7 @@ public class BreakdownElementItem implements DisplayObject {
 	private String startDate;
 	private String endDate;
 	private String kind;
+	private boolean finished;
 	
 	public BreakdownElementItem() {
 		super();
@@ -79,4 +80,17 @@ public class BreakdownElementItem implements DisplayObject {
 	public String getLabel() {
 		return prefix + " : " + name;
 	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+	
+	public boolean isNotFinished() {
+		return !finished;
+	}
+
 }

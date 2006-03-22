@@ -1,10 +1,11 @@
-package view.admin.summary;
+package view.breakdownelement.summary;
 
 import com.cc.framework.adapter.struts.FWActionForm;
 import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class ShowBdeSummaryForm extends FWActionForm{
+	private static final long serialVersionUID = 7530202138513542655L;  /** Generated Serial ID */
 	private String prefix ;
 	private String name ;
 	private String details ;

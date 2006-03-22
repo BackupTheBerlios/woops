@@ -1,4 +1,4 @@
-package view.admin.summary;
+package view.breakdownelement.summary;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import view.PresentationConstantes;
-import view.admin.user.ListUsersModel;
 import view.common.WoopsCCAction;
+import view.user.ListUsersModel;
 import view.user.UserItem;
 import business.breakdownelement.BreakdownElement;
 import business.hibernate.exception.PersistanceException;

@@ -1,7 +1,6 @@
-package view.admin.user;
+package view.user;
 
 import view.common.WoopsListDataModel;
-import view.user.RoleItem;
 
 import com.cc.framework.common.DisplayObject;
 

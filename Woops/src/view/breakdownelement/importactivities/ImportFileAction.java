@@ -1,4 +1,4 @@
-package view.admin.importActivities;
+package view.breakdownelement.importactivities;
 
 import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;

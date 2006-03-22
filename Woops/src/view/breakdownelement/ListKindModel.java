@@ -1,6 +1,5 @@
-package view.admin.breakdownelement;
+package view.breakdownelement;
 
-import view.breakdownelement.KindItem;
 import view.common.WoopsListDataModel;
 
 import com.cc.framework.common.DisplayObject;

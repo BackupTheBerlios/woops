@@ -40,7 +40,7 @@ public class BreakdownElementDAO extends PersistentObjectDAO{
 	 * @return : liste des projets
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
-	public Collection getBreakDownElementsByUser(Integer userId) throws PersistanceException {
+	public Collection getAllBreakDownElementsByUser(Integer userId) throws PersistanceException {
 		Session session = null ;
 		Transaction transaction = null;
 		User user = null;

@@ -3,7 +3,6 @@ package view.activity.summary;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import view.activity.ActivitySequenceItem;
 import view.activity.ActivitySequencesModel;
 
 import com.cc.framework.adapter.struts.FWActionForm;

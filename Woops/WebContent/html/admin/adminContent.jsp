@@ -55,17 +55,14 @@
 						name="k"
 						property="kind"/>
 			</ctrl:columnhtml> 
-				
-			<ctrl:columnedit 
-				title="table.field.listBreakDownElements.edit"/> 
-
+			
 			<ctrl:columnbutton 
 				title="table.field.listBreakDownElements.copy.title" 
 				text="table.field.listBreakDownElements.copy.text" 
 				align="center"
 				command="copy"
 				width="150"
-				/>
+			/>
 			
 			<ctrl:columnbutton 
 				title="table.field.listBreakDownElements.import.title" 
@@ -73,6 +70,7 @@
 				align="center"
 				command="import"
 				width="150"
+				property="notFinished"
 				/>
 				
 			<ctrl:columnbutton 
@@ -81,7 +79,12 @@
 				align="center"
 				command="finish"
 				width="150"
+				property="notFinished"
 				/>
+			
+			<ctrl:columnedit 
+				title="table.field.listBreakDownElements.edit"
+				property="notFinished"/> 
 			
 			<ctrl:columndelete 
 				title="table.field.listBreakDownElements.delete"
@@ -126,7 +129,8 @@
 			</ctrl:columnhtml> 
 			
 			<ctrl:columnedit 
-				title="table.field.listUsers.edit"/> 
+				title="table.field.listUsers.edit"
+				/> 
 
 			<ctrl:columndelete 
 				title="table.field.listUsers.delete"

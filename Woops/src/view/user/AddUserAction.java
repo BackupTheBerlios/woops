@@ -1,4 +1,4 @@
-package view.admin.user;
+package view.user;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,8 +10,6 @@ import org.apache.struts.action.ActionForward;
 
 import view.PresentationConstantes;
 import view.common.WoopsCCAction;
-import view.user.AddUserForm;
-import view.user.RoleItem;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
 import business.user.User;

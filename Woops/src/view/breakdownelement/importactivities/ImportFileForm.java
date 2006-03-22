@@ -1,4 +1,4 @@
-package view.admin.importActivities;
+package view.breakdownelement.importactivities;
 
 
 
@@ -7,7 +7,7 @@ import org.apache.struts.upload.FormFile;
 import com.cc.framework.adapter.struts.FWActionForm;
 
 public class ImportFileForm extends FWActionForm{
-	
+	private static final long serialVersionUID = -7930706333637591529L; /** Generated Serial ID */
 	FormFile pathFile ;
 
 	/**

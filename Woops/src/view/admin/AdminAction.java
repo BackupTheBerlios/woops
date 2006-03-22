@@ -12,10 +12,10 @@ import javax.servlet.ServletException;
 import org.apache.log4j.Logger;
 
 import view.PresentationConstantes;
-import view.admin.user.ListUsersModel;
 import view.breakdownelement.BreakdownElementItem;
 import view.breakdownelement.ListBreakDownElementsModel;
 import view.common.WoopsCCAction;
+import view.user.ListUsersModel;
 import view.user.UserItem;
 import business.BusinessConstantes;
 import business.activity.Activity;
@@ -90,6 +90,12 @@ public class AdminAction  extends WoopsCCAction {
     		breakDownElementItem.setEndDate(breakdownElement.getEndDate());
     		breakDownElementItem.setKind(breakdownElement.getKind().getName());
     		
+    		if (breakdownElement.getEndDate() != null) {
+    			// Le projet est finie dons certaines options seront inaccessibles
+    			breakDownElementItem.setFinished(true);
+    		} else {
+    			breakDownElementItem.setFinished(false);
+    		}
     		listBreakDownElementsItems.add(breakDownElementItem);
 			// Construction de la hash map stockant la liste des BreakDownElements
     		breakDownElementsMap.put(breakdownElement.getId(),breakdownElement);
@@ -250,26 +256,37 @@ public class AdminAction  extends WoopsCCAction {
 		context.forwardByName(PresentationConstantes.FORWARD_IMPORT);
 	}
 
+	/**
+	 * Terminer un projet
+	 * @param context
+	 * @param id : identifiant du projet
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	public void listBreakDownElements_onFinish(ControlActionContext context, String id) throws IOException, ServletException {
 		try {
 			BreakdownElement bde = BreakdownElementManager.getInstance().getBreakDownElementById(
 					new Integer(Integer.parseInt(id)));
 			if (bde.getEndDate()==null) {
 				bde.setEndDate(new Date());
-				 try {
-					BreakdownElementManager.getInstance().update(bde);
-				} catch (DoublonException e) {				
-					context.addGlobalError("errors.persistance.doublon");
-					context.forwardByName(PresentationConstantes.FORWARD_ERROR);
-				}			 
+				
+				// On met à jour le projet
+				BreakdownElementManager.getInstance().update(bde);
+				
+				// On termine toutes les activités sans fin
 				Collection activities = ActivityManager.getInstance().getAllActivitiesByBDE(new Integer(Integer.parseInt(id)));
 				for(Iterator i = activities.iterator() ; i.hasNext();){
 					Activity a = ((Activity) i.next());
 					if (a.getOnGoing().equals(BusinessConstantes.OUI)) {
 						a.process();
+						// Met a jour en BD l'etat de l'activite 
+						ActivityManager.getInstance().update(a);
 					}
 				}
-			}			
+			}
+		} catch (DoublonException e) {				
+				context.addGlobalError("errors.persistance.doublon");
+				context.forwardByName(PresentationConstantes.FORWARD_ERROR);
 		} catch (NumberFormatException e) {			
 			context.addGlobalError("errors.persistance.global");
 			context.forwardByName(PresentationConstantes.FORWARD_ERROR);

@@ -1,4 +1,4 @@
-package view.admin.summary;
+package view.breakdownelement.summary;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -47,7 +47,7 @@ public class ShowUserSummaryAction extends WoopsCCAction {
 		try {
 			BreakdownElement b ;
 			BreakdownElementItem bdei ;
-			Collection listBde =  BreakdownElementManager.getInstance().getBreakDownElementsByUser((Integer)user.getId());
+			Collection listBde =  BreakdownElementManager.getInstance().getAllBreakDownElementsByUser((Integer)user.getId());
 			ArrayList list = new ArrayList () ;
 			for (Iterator i = listBde.iterator() ; i.hasNext() ;){
 				b = (BreakdownElement)i.next() ;

@@ -1,21 +1,14 @@
 package action;
 
-import business.BusinessConstantes;
+import view.PresentationConstantes;
+import view.admin.AdminForm;
 import business.hibernate.exception.DoublonException;
 import business.hibernate.exception.PersistanceException;
-import business.user.UserRole;
 import business.user.User;
 import business.user.UserManager;
+import business.user.UserRole;
 
 import com.cc.framework.ui.control.SimpleListControl;
-import com.cc.framework.adapter.struts.ActionContext;
-
-import junit.framework.TestCase;
-import view.PresentationConstantes;
-import view.activity.ActivityItem;
-import view.activity.performing.ListActivitiesForm;
-import view.admin.AdminForm;
-import view.common.WoopsListDataModel;
 
 public class AdminActionTest extends WoopsActionTest {
 	

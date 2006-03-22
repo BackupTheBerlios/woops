@@ -1,4 +1,4 @@
-package view.admin.breakdownelement;
+package view.breakdownelement.create;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,6 +13,7 @@ import com.cc.framework.ui.control.SimpleListControl;
 import com.cc.framework.ui.model.ListDataModel;
 
 public class AddBreakdownElementForm extends ActionForm{
+	private static final long serialVersionUID = -3106613575264437257L;  /** Generated Serial ID */
 	private String prefix ;
 	private String name ;
 	private String details ;

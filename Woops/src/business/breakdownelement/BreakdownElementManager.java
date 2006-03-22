@@ -89,15 +89,34 @@ public class BreakdownElementManager extends PersistentObjectManager {
 	}
 	
 	/**
-	 * Fournit tous les projets sur lesquelles le participant est affecté
+	 * Fournit tous les projets sur lesquels le participant est affecté
+	 * @param userId : identifiant de l'utilisateur
+	 * @return : liste des projets
+	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
+	 */
+	public Collection getAllBreakDownElementsByUser(Integer userId) throws PersistanceException {
+		return breakdownElementDAO.getAllBreakDownElementsByUser(userId);
+	}
+	
+	/**
+	 * Fournit tous les projets non terminés sur lesquels le participant est affecté
 	 * @param userId : identifiant de l'utilisateur
 	 * @return : liste des projets
 	 * @throws PersistanceException Indique qu'une erreur s'est au moment de la récupération des données
 	 */
 	public Collection getBreakDownElementsByUser(Integer userId) throws PersistanceException {
-		return breakdownElementDAO.getBreakDownElementsByUser(userId);
+		Collection list = breakdownElementDAO.getAllBreakDownElementsByUser(userId);
+		Collection listBdes = new ArrayList();
+		
+		Iterator iter = list.iterator();
+		while(iter.hasNext()) {
+			BreakdownElement bde = (BreakdownElement) iter.next();
+			if (bde.getEndDate() == null) {
+				listBdes.add(bde);
+			}
+		}
+		return listBdes;
 	}
-	
 	
 	
 	
@@ -199,6 +218,7 @@ public class BreakdownElementManager extends PersistentObjectManager {
 		Set users = (Set)UserManager.getInstance().getUsersByBDE(srcBdeId);
 		// On crée une collection de participant a partir des participants du projet source
 		destBde.setUsers(new HashSet(users));
+		destBde.setEndDate(null);
 		
 		Session session = null;
 		Transaction transaction = null;

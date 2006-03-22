@@ -1,26 +1,28 @@
-package view.admin.importActivities.IAItem;
+package view.user;
 
 import java.util.Arrays;
 
+import view.common.WoopsListDataModel;
 import business.format.StringColumnComparator;
 
 import com.cc.framework.common.DisplayObject;
 import com.cc.framework.common.SortOrder;
 
-import view.breakdownelement.BreakdownElementItem;
-import view.common.WoopsListDataModel;
+public class ListUsersModel extends WoopsListDataModel {
 
-public class ListIAModel extends WoopsListDataModel{
-	public ListIAModel() {
+	/**
+	 * Constructeur par défaut
+	 */
+	public ListUsersModel() {
 		super();
 	}
 	
 	/**
-	 * Constructeur permettant d'initialiser la liste des projets
+	 * Constructeur permettant d'initialiser la liste d'activités
 	 * pour le contrôleur c'est à dire les lignes de la liste qui 
 	 * sera affichée au participant
 	 */
-	public ListIAModel(DisplayObject[] elements) {
+	public ListUsersModel(DisplayObject[] elements) {
 		super(elements);
 	}
 	
@@ -28,7 +30,7 @@ public class ListIAModel extends WoopsListDataModel{
 	 * @see view.common.WoopsListDataModel#getUniqueKey(int)
 	 */
 	public String getUniqueKey(int index) {
-		return ( (IAItem)data[index] ).getId();
+		return ((UserItem)data[index]).getId();
 	}
 	
 	/**
@@ -39,4 +41,7 @@ public class ListIAModel extends WoopsListDataModel{
 	public void sortByColumn(String column, SortOrder direction) {
 		Arrays.sort(data, new StringColumnComparator(column, direction));
 	}
+	
+	
+
 }

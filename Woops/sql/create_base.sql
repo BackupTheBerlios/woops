@@ -157,6 +157,5 @@ INSERT INTO ActivityState(name) VALUES ('inProgress');
 INSERT INTO ActivityState(name) VALUES ('finished');
 INSERT INTO UserRole(code) VALUES ('admin');
 INSERT INTO UserRole(code) VALUES ('dev');
-INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('1', 'project');
-INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('2', 'iteration');
-INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('3', 'phase');
+INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('1', 'iteration');
+INSERT INTO BreakdownElementKind ( `id` , `name` ) VALUES ('2', 'phase');

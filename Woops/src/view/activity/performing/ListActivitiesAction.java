@@ -274,10 +274,10 @@ public class ListActivitiesAction extends WoopsCCAction {
 		try {
 			Activity activity = ActivityManager.getInstance().getActivityWithDependances(activityId);
 			User user = (User) context.session().getAttribute(PresentationConstantes.KEY_USER);
-			/* Test si le changement peut ?tre effectu? : ce traitement implique la v?rification 
-			des d?pendances relatives ? l'activit? s?lectionn?e */
+			/* Test si le changement peut etre effectue : ce traitement implique la v?rification 
+			des dependances relatives a l'activite selectionnee */
 			if (!activity.process()) {
-				/* Informe l'utilisateur : le message affich? au participant est fonction de l'action
+				/* Informe l'utilisateur : le message affiche au participant est fonction de l'action
 				qu'il avait demand?e */
 				if (activity.getState() instanceof CreatedActivityState) {
 					context.addGlobalError("msg.error.activity.change.state.created", activity.getName());
@@ -285,9 +285,9 @@ public class ListActivitiesAction extends WoopsCCAction {
 					context.addGlobalError("msg.error.activity.change.state.inprogress", activity.getName());
 				}
 			} else {
-				// Met ? jour en BD l'?tat de l'activit? 
-				ActivityManager.getInstance().update(activity,user);
-				// Informe le participant que sa demande a ?t? prise en compte
+				// Met a jour en BD l'etat de l'activite 
+				ActivityManager.getInstance().update(activity, user);
+				// Informe le participant que sa demande a ete prise en compte
 				if (activity.getState() instanceof InProgressActivityState) {
 					context.addGlobalMessage("msg.info.activity.change.state.inprogress", activity.getName());
 				} else if (activity.getState() instanceof FinishedActivityState) {
