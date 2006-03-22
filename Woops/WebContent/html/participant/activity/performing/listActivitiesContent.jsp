@@ -28,23 +28,21 @@
 	
 		<util:designrule
        		rule="@{bean.actionEnabled == 'false' && bean.state == 'created'}"
-       		style="background-color: #FFC4C4;"/>
+       		styleId="blockedTask"/>
        		
        	<util:designrule
        		rule="@{bean.actionEnabled == 'false' && bean.state == 'inProgress'}"
-       		style="background-color: #FFC4C4; font-weight: bold;"/>
+       		styleId="blockedTask"/>
        
-   		<util:designrule
-      		rule="@{bean.actionEnabled == 'true' && bean.state == 'created'}"
-       		style=""/>
+
        
    		<util:designrule
    		   	rule="@{bean.actionEnabled == 'true' && bean.state == 'inProgress'}"
-       		style="font-weight: bold;"/>
+       		styleId="inProgressTask"/>
        		
        	<util:designrule
        		rule="@{bean.onGoing == 'oui'}"
-       		style="background-color: #FFFF99;"/>
+       		styleId="onGoingTask"/>
 
 		<ctrl:columndrilldown 
 			title="table.field.listActivities.name" 
@@ -87,3 +85,6 @@
 	</ctrl:list>
 
 </html:form>
+
+<jsp:include page="../../../caption.jsp" />
+

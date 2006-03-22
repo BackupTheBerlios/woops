@@ -26,11 +26,11 @@
 		
 		    <util:designrule
        			rule="@{bean.onGoing == 'oui'}"
-       			style="background-color: #FFFF99;"/>
+       			styleId="onGoingTask" />
        			
        		<util:designrule
        			rule="@{bean.affectEnabled == false}"
-       			style="background-color: #FFC4C4;"/>
+       			styleId="blockedTask"/>
        		
 			<ctrl:columndrilldown 
 				title="table.field.listActivities.name" 
@@ -75,5 +75,5 @@
 	
 </html:form>
  
-
+<jsp:include page="../../../caption.jsp" />
   

@@ -25,22 +25,18 @@
 		refreshButton="true" 
 		>
 				
-
-   		<util:designrule
-      		rule="@{bean.state == 'created'}"
-       		style=""/>
        
    		<util:designrule
    		   	rule="@{bean.state == 'inProgress'}"
-       		style="font-weight: bold;"/>
+       		styleId="inProgressTask"/>
        		
        	<util:designrule
    		   	rule="@{bean.state == 'finished'}"
-       		style="background-color: #FFC4C4;"/>
+       		styleId="finishedTask"/>
 
        	<util:designrule
    		   	rule="@{bean.userLastName == null}"
-       		style="background-color: #C5DFBF;"/>
+       		styleId="freeTask"/>
 
 
 		<ctrl:columnhtml 
@@ -92,3 +88,6 @@
 
 
 </html:form>
+
+
+<jsp:include page="../../../caption.jsp" />

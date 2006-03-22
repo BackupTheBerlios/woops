@@ -64,8 +64,6 @@ Table.Table_spacer_top {
 }
 
 
-
-
 div{
 		margin : 0px 10px 0px 10px;
 }
@@ -108,4 +106,30 @@ SELECT {
      font-size:10px;
      font-family:arial;
 }
+
+
+#inProgressTask{
+	font-weight : bold;
+}
+
+#freeTask{
+	background-color:#D2E0C9;
+}
+
+#onGoingTask{
+	background-color:#FFFFA4;
+}
+
+#finishedTask{
+	background-color:#D0DEE6;
+}
+
+#blockedTask{
+	background-color:#FFA4A4;
+}
+
+#evenmentTask{
+	background-color:#FFDCB9;
+}
+
 
