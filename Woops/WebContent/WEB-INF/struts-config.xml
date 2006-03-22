@@ -142,7 +142,8 @@
     	attribute="manageActivityCreationForm"
         name="manageActivityCreationForm"
 		validate="false"      
-        scope="request">
+        scope="request"
+        roles="#dev">
         <forward name="success" path="/html/participant/activity/manage/manageActivityCreation.jsp" />
         <forward name="error" path="/manageActivityCreation.do" />
         <forward name="finish" path="/listActivities.do"/>
@@ -156,6 +157,7 @@
 		<action path="/showActivitySummary"	 type="view.activity.summary.ShowActivitySummaryAction"
       		name="showActivitySummaryForm"
       	 	scope="session"
+      	 	roles="#dev"
       	 >
          	<forward name="error" path="/showActivitySummary.do" />
          	<forward name="success" path="/html/participant/activity/summary/showActivitySummary.jsp" />
@@ -166,6 +168,7 @@
 		<action path="/showActivityGraph"	 type="view.activity.graph.ShowActivityGraphAction"
       		name="showActivityGraphForm"
       	 	scope="request"
+      	 	roles="#dev"
       	 >
          	<forward name="error" path="/html/participant/activity/graph/showActivityGraph.jsp" />
          	<forward name="success" path="/html/participant/activity/graph/showActivityGraph.jsp" />
@@ -195,6 +198,7 @@
 			type="view.activity.summary.ShowActivitySummaryAction"
       		name="showActivitySummaryForm"
       	 	scope="request"
+      	 	roles="#dev"
       	 	>
          	<forward name="error" path="/html/participant/activity/listChangeStateActivities.jsp" />
          	<forward name="success" path="/html/participant/activity/summary/showActivitySummaryToPrint.jsp" />
@@ -206,6 +210,7 @@
       		name="showTeamActivitiesSummaryForm"
       	 	scope="session"
       	 	input="/html/participant/activity/summary/showTeamActivitiesSummary.jsp"
+      	 	roles="#dev"
       	 	>
       	 	<forward name="error" path="/html/participant/activity/listChangeStateActivities.jsp" />
          	<forward name="success" path="/html/participant/activity/summary/showTeamActivitiesSummary.jsp" />
@@ -245,6 +250,7 @@
         	name="adminForm"
 			validate="false"
         	scope="session"
+        	roles="#admin"
         	input="/html/admin/admin.jsp">
         	<forward name="error" path="/admin.do" />
         	<forward name="success" path="/admin.do"/>
@@ -264,6 +270,7 @@
     	name="addUserForm"
 		validate="false"      
     	scope="request"
+    	roles="#admin"
     	input="/html/admin/user/addUser.jsp">
     	<forward name="error" path="/addUser.do" />
  	</action>  
@@ -274,6 +281,7 @@
     	name="addBreakdownElementForm"
 		validate="false"      
     	scope="request"
+    	roles="#admin"
     	input="/html/admin/breakdownelement/addBreakdownElement.jsp">
     	<forward name="error" path="/addBreakdownElement.do" />
  	</action>    
@@ -282,6 +290,7 @@
 		<action path="/showUserSummary"	 type="view.admin.summary.ShowUserSummaryAction"
       		name="showUserSummaryForm"
       	 	scope="session"
+      	 	roles="#admin"
       	 	input="/html/admin/user/summary/showUserSummary.jsp"
       	 >
          	<forward name="error" path="/showUserSummary.do" />
@@ -293,6 +302,7 @@
 		<action path="/showBdeSummary"	 type="view.admin.summary.ShowBdeSummaryAction"
 	  		name="showBdeSummaryForm"
 	  	 	scope="session"
+	  	 	roles="#admin"
 	  	 	input="/html/admin/breakdownelement/summary/showBdeSummary.jsp"
 	  	 >
 	     	<forward name="error" path="/showBdeSummary.do" />
@@ -304,6 +314,7 @@
       	<action path="/importFile"	 type="view.admin.importActivities.ImportFileAction"
 	  		name="importFileForm"
 	  	 	scope="session"
+	  	 	roles="#admin"
 	  	 	input="/html/admin/importActivities/importFile.jsp"
 	  	 >
 	     	<forward name="error" path="/importFile.do" />
@@ -315,6 +326,7 @@
       	<action path="/manageDpe"	 type="view.admin.importActivities.ManageDpeAction"
 	  		name="manageDpeForm"
 	  	 	scope="session"
+	  	 	roles="#admin"
 	  	 	input="/html/admin/importActivities/manageDpe.jsp"
 	  	 >
 	     	<forward name="error" path="/admin.do" />
@@ -327,14 +339,11 @@
 			type="view.activity.summary.ShowActivitySummaryAction"
       		name="showActivitySummaryForm"
       	 	scope="request"
+      	 	roles="#admin"
       	 	>
          	<forward name="error" path="/showActivitySummary.do" />
          	<forward name="success" path="/html/participant/activity/summary/showActivitySummaryToPrint.jsp" />
       	</action>
-      	
-   	
-
-      	
       	
 	</action-mappings>
 
