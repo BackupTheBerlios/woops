@@ -51,7 +51,7 @@ return true;
     name="manageActivityCreationForm" 
     caption="${manageActivityCreationForm.caption}" 
     formid="frmActivityCreation" 
-    width="550">
+    width="650">
     
     
 		 <forms:text        

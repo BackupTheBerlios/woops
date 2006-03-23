@@ -11,7 +11,7 @@
 	
 	<br>
 	
-    <forms:form type="edit" name="manageActivityDependancesForm" caption="form.title.manageActivityDependances" formid="frmActivityDependances" width="550">
+    <forms:form type="edit" name="manageActivityDependancesForm" caption="form.title.manageActivityDependances" formid="frmActivityDependances" width="650">
 
         <forms:swapselect
             property="realDependancesKeys"

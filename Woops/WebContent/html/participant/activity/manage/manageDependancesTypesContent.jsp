@@ -12,7 +12,7 @@
 	
 	<br>
 	
-	<table>
+	<table width="350">
 	
 	<tr>
     

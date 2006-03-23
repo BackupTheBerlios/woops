@@ -12,7 +12,7 @@
 		id="list" 
 		property="listActivities" 
 		title="table.title.listHistorizedActivities" 
-		width="500" 
+		width="650" 
 		rows="15" 
 		refreshButton="false" 
 		createButton="false"
