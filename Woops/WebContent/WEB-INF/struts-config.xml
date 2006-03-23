@@ -18,12 +18,12 @@
 	  	
 	  	<form-bean name="adminForm" type="view.admin.AdminForm" />  
 	  	<form-bean name="addUserForm" type="view.user.AddUserForm" />
-	  	<form-bean name="addBreakdownElementForm" type="view.admin.breakdownelement.AddBreakdownElementForm" />  
-	  	<form-bean name="showUserSummaryForm" type="view.admin.summary.ShowUserSummaryForm" />
-	  	<form-bean name="showBdeSummaryForm" type="view.admin.summary.ShowBdeSummaryForm" />
+	  	<form-bean name="addBreakdownElementForm" type="view.breakdownelement.create.AddBreakdownElementForm" />  
+	  	<form-bean name="showUserSummaryForm" type="view.user.summary.ShowUserSummaryForm" />
+	  	<form-bean name="showBdeSummaryForm" type="view.breakdownelement.summary.ShowBdeSummaryForm" />
 	  	<form-bean name="showTeamActivitiesSummaryForm" type="view.activity.summary.ShowTeamActivitiesSummaryForm" />
-	  	<form-bean name="importFileForm" type="view.admin.importActivities.ImportFileForm" />
-	  	<form-bean name="manageDpeForm" type="view.admin.importActivities.ManageDpeForm" />
+	  	<form-bean name="importFileForm" type="view.breakdownelement.importactivities.ImportFileForm" />
+	  	<form-bean name="manageDpeForm" type="view.breakdownelement.importactivities.ManageDpeForm" />
 	  	
 	  	<form-bean name="listEventsForm" type="view.activity.event.ListEventsForm" />
 	  	<form-bean name="updateEventForm" type="view.activity.event.UpdateEventForm" />
@@ -265,7 +265,7 @@
      </action>
      
     <!-- ================= Admin / addUser ================ -->  
-  	<action path="/addUser"	 type="view.admin.user.AddUserAction"
+  	<action path="/addUser"	 type="view.user.AddUserAction"
  		attribute="addUserForm"
     	name="addUserForm"
 		validate="false"      
@@ -276,7 +276,7 @@
  	</action>  
  	
  	<!-- ================= Admin / addBreakdownElement ================ -->  
-  	<action path="/addBreakdownElement"	 type="view.admin.breakdownelement.AddBreakdownElementAction"
+  	<action path="/addBreakdownElement"	 type="view.breakdownelement.create.AddBreakdownElementAction"
  		attribute="addBreakdownElementForm"
     	name="addBreakdownElementForm"
 		validate="false"      
@@ -287,7 +287,7 @@
  	</action>    
 
 <!-- ================= Admin / Show User Summary ================ -->  
-		<action path="/showUserSummary"	 type="view.admin.summary.ShowUserSummaryAction"
+		<action path="/showUserSummary"	 type="view.user.summary.ShowUserSummaryAction"
       		name="showUserSummaryForm"
       	 	scope="session"
       	 	roles="#admin"
@@ -298,8 +298,8 @@
       		<forward name="previous" path="/admin"/>
       	</action>
       	
-<!-- ================= Admin / Show User Summary ================ -->  
-		<action path="/showBdeSummary"	 type="view.admin.summary.ShowBdeSummaryAction"
+<!-- ================= Admin / Show BDE Summary ================ -->  
+		<action path="/showBdeSummary"	 type="view.breakdownelement.summary.ShowBdeSummaryAction"
 	  		name="showBdeSummaryForm"
 	  	 	scope="session"
 	  	 	roles="#admin"
@@ -311,7 +311,7 @@
 	  	</action>
       	
 <!-- ================= Admin / ImportFile ================ -->        	
-      	<action path="/importFile"	 type="view.admin.importActivities.ImportFileAction"
+      	<action path="/importFile"	 type="view.breakdownelement.importactivities.ImportFileAction"
 	  		name="importFileForm"
 	  	 	scope="session"
 	  	 	roles="#admin"
@@ -323,7 +323,7 @@
 	  	</action>
 	  	
 <!-- ================= Admin / ManageDpe ================ -->        	
-      	<action path="/manageDpe"	 type="view.admin.importActivities.ManageDpeAction"
+      	<action path="/manageDpe"	 type="view.breakdownelement.importactivities.ManageDpeAction"
 	  		name="manageDpeForm"
 	  	 	scope="session"
 	  	 	roles="#admin"

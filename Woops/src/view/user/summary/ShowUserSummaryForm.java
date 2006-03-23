@@ -1,4 +1,4 @@
-package view.breakdownelement.summary;
+package view.user.summary;
 
 import com.cc.framework.adapter.struts.FWActionForm;
 import com.cc.framework.ui.control.SimpleListControl;

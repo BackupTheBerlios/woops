@@ -1,4 +1,4 @@
-package view.breakdownelement.summary;
+package view.user.summary;
 
 import java.util.ArrayList;
 import java.util.Collection;
